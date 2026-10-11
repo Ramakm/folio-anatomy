@@ -18,7 +18,15 @@ A diagram tells the reader that parts exist. A plate shows those parts working. 
 
 ## Install
 
-Clone into your personal skills folder:
+One command, with the [`skills`](https://github.com/vercel-labs/skills) CLI:
+
+```bash
+npx skills add Ramakm/folio-anatomy -g -a claude-code
+```
+
+`-g` installs it for you in every project (`~/.claude/skills/folio`). Leave out `-g` to install it only into the current project (`.claude/skills/folio`). `-a claude-code` sets it up for Claude Code only. The CLI needs a recent Node.js.
+
+Or clone into your personal skills folder:
 
 ```bash
 git clone https://github.com/Ramakm/folio-anatomy.git ~/.claude/skills/folio
