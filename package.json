@@ -1,0 +1,16 @@
+{
+  "name": "folio-anatomy",
+  "version": "0.1.0",
+  "description": "A Claude skill that explains a technical idea as a museum exhibition plate: an invented instrument drawn as a live, engraved isometric figure.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Ramakrushna Mohapatra (techwith.ram)",
+  "scripts": {
+    "build": "node scripts/build.mjs examples/attention dist/attention.html",
+    "capture": "node scripts/capture.mjs dist/attention.html shots",
+    "new": "node scripts/new-plate.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.56.0"
+  }
+}

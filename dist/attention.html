@@ -1,0 +1,1184 @@
+<title>Folio Plate I: Attention</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a museum exhibition wall. One mounted plate, a catalogue key beside it, then wall texts below. */
+:root {
+  --ground: #E5E1DA; --paper: #F5F2ED; --ink: #1F1C18; --ink-2: #554F46; --ink-3: #857E73; --rule: #C8C1B5; --accent: #C9381D; --accent-soft: rgba(201,56,29,.12);
+  --top: #FCFAF6; --s3: #ECE7DF; --s2: #DED8CE; --s1: #CFC8BB; --s0: #BCB4A6; --cyl: #E6E1D8; --line: #2B2722; --lo: #7A7266; --faint: #B3AB9D;
+  --hatch: #3F3932; --hatch-op: .5; --glass: #DDE4E3; --glass-line: #5D6A6B; --face: #FFFDF8; --brass: #DCD1BB;
+  --fluid: #C9381D; --fluid-2: #DF6A50; --fluid-3: #D24B2F; --fluid-top: #EE9078; --fluid-deep: #8E2412; --shut: #8A8276;
+  --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
+  --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
+  --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
+  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
+  --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
+  --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
+  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; margin: 0; padding-inline: clamp(16px, 4vw, 56px); padding-block: 0 64px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1240px; margin: 0 auto; }
+.mono { font-family: var(--mono); font-feature-settings: "zero" 0; }
+.label { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Masthead */
+.mast { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-block: 22px 18px; border-bottom: 1px solid var(--rule); }
+.mast .mark { font-family: var(--display); font-size: 22px; letter-spacing: .32em; text-transform: uppercase; font-weight: 500; justify-self: center; }
+.mast .r { justify-self: end; text-align: right; }
+
+/* Title block */
+.title { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: 24px 64px; align-items: end; padding-block: 52px 36px; }
+.title h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 7.4vw, 104px); line-height: .94; letter-spacing: -.02em; margin: 14px 0 0; text-wrap: balance; }
+.title h1 em { font-style: italic; color: var(--accent); }
+.title p { margin: 0; color: var(--ink-2); font-size: 17px; max-width: 46ch; }
+.title .cat { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.title .cat dt { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.title .cat dd { margin: 0; font-family: var(--mono); font-size: 12.5px; }
+
+/* The plate */
+.exhibit { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: start; }
+.plate { background: var(--paper); position: relative; padding: 18px 18px 14px; outline: 1px solid var(--rule); outline-offset: -9px; }
+.plate .corners { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 6px 10px 0; }
+.plate .corners.b { padding: 0 10px 6px; align-items: end; }
+.plate .tl { font-family: var(--display); font-style: italic; font-size: 19px; }
+.plate .tr { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); text-align: right; align-self: center; }
+.plate .bl { font-family: var(--mono); font-size: 11px; color: var(--ink-3); max-width: 46ch; }
+.plate .br { font-family: var(--mono); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+.plate .br b { color: var(--accent); font-weight: 500; }
+.fig { position: relative; }
+#plate { display: block; cursor: default; }
+#plate:focus-visible { outline-offset: -4px; }
+#plate-svg { width: 100%; height: auto; display: block; }
+
+/* Figure tones */
+#plate-svg .f { stroke: var(--line); stroke-width: .55; stroke-linejoin: round; }
+#plate-svg .t-top { fill: var(--top); } #plate-svg .t-s3 { fill: var(--s3); } #plate-svg .t-s2 { fill: var(--s2); }
+#plate-svg .t-s1 { fill: var(--s1); } #plate-svg .t-s0 { fill: var(--s0); } #plate-svg .t-cyl { fill: var(--cyl); }
+#plate-svg .t-face { fill: var(--face); }
+#plate-svg .hatch { fill: none; stroke: var(--hatch); stroke-width: .42; opacity: var(--hatch-op); }
+#plate-svg .ln { fill: none; stroke-width: .5; stroke-linecap: round; }
+#plate-svg .ln.lo, #plate-svg .ln-lo { stroke: var(--lo); } #plate-svg .ln.mid { stroke: var(--line); stroke-width: .6; }
+#plate-svg .ln.hi { stroke: var(--line); stroke-width: 1.3; } #plate-svg .ln.faint { stroke: var(--faint); }
+#plate-svg .ln.zero { stroke: var(--accent); stroke-width: .9; }
+#plate-svg .ln-lo { stroke-width: .4; }
+#plate-svg .dot, #plate-svg .hub { fill: var(--line); }
+#plate-svg .glint { fill: var(--top); opacity: .9; }
+#plate-svg .brass .f { fill: var(--brass); }
+#plate-svg .engr { fill: var(--ink); font-family: var(--mono); letter-spacing: .06em; }
+#plate-svg .engr.lo { fill: var(--ink-3); } #plate-svg .engr.tok { font-family: var(--body); font-weight: 600; letter-spacing: .02em; }
+#plate-svg .glass-back { fill: var(--glass); opacity: .55; stroke: var(--glass-line); stroke-width: .35; }
+#plate-svg .glass-front { fill: var(--glass); fill-opacity: .14; stroke: var(--glass-line); stroke-width: .6; }
+#plate-svg .glass-rim { fill: none; stroke: var(--glass-line); stroke-width: .6; }
+#plate-svg .glass-lip { fill: var(--glass); fill-opacity: .35; stroke: var(--glass-line); stroke-width: .5; }
+#plate-svg .ln.grad { stroke: var(--glass-line); stroke-width: .45; }
+#plate-svg .ln.glint-line { stroke: var(--top); stroke-width: 1.4; opacity: .8; }
+#plate-svg .fluid { fill: var(--fluid); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .fluid-top { fill: var(--fluid-top); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .fluidg .hatch { stroke: var(--fluid-deep); opacity: .55; }
+#plate-svg .t-fluid { fill: var(--fluid); } #plate-svg .t-fluid-top { fill: var(--fluid-top); } #plate-svg .t-fluid-2 { fill: var(--fluid-2); } #plate-svg .t-fluid-3 { fill: var(--fluid-3); }
+#plate-svg .stratum .f { stroke: var(--fluid-deep); }
+#plate-svg .t-shut { fill: var(--shut); }
+#plate-svg .shutter .t-cyl { fill: var(--s1); }
+#plate-svg .needle { fill: var(--accent); stroke: var(--fluid-deep); stroke-width: .3; }
+#plate-svg .pin circle { fill: var(--ink); stroke: var(--paper); stroke-width: 1.4; transition: fill .2s; }
+#plate-svg .pin text { fill: var(--paper); font-family: var(--mono); font-size: 8.4px; font-weight: 500; }
+#plate-svg .pin.on circle { fill: var(--accent); }
+#plate-svg .hit { fill: transparent; cursor: pointer; }
+#plate-svg .hit:hover { fill: var(--accent-soft); }
+#plate-svg [data-part].lit .f { stroke: var(--accent); stroke-width: 1; }
+
+/* The key */
+.key { background: var(--paper); padding: 20px 20px 16px; }
+.key h2, .controls h2 { font-family: var(--display); font-weight: 500; font-style: italic; font-size: 22px; margin: 0 0 4px; }
+.key ol { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 2px; }
+.key li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 7px 4px; border-top: 1px solid var(--rule); cursor: default; border-radius: 2px; }
+.key li:hover, .key li.on { background: var(--accent-soft); }
+.num { display: inline-grid; place-items: center; width: 19px; height: 19px; border-radius: 50%; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 10.5px; font-weight: 500; line-height: 1; }
+.key li.on .num { background: var(--accent); }
+.key b { font-weight: 600; font-size: 14px; display: block; line-height: 1.3; }
+.key span.d { font-size: 13px; color: var(--ink-2); line-height: 1.4; display: block; }
+.key code { font-family: var(--mono); font-size: 11.5px; color: var(--ink); }
+.controls { margin-top: 18px; background: var(--paper); padding: 20px; display: grid; gap: 16px; }
+.ctl .label { display: flex; justify-content: space-between; margin-bottom: 7px; }
+.seg { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); }
+.seg.tok { grid-template-columns: repeat(4, 1fr); }
+.seg button { font: 500 12px/1 var(--mono); padding: 9px 2px; background: none; border: 0; border-left: 1px solid var(--rule); color: var(--ink-2); cursor: pointer; }
+.seg.tok button:nth-child(4n+1) { border-left: 0; } .seg.tok button:nth-child(n+5) { border-top: 1px solid var(--rule); }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg button:hover:not([aria-pressed="true"]) { background: var(--accent-soft); color: var(--ink); }
+.headname { font-size: 13px; color: var(--ink-2); margin-top: 7px; min-height: 2.8em; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13.5px; }
+.toggle button { font: 500 12px/1 var(--mono); padding: 8px 12px; border: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; min-width: 92px; }
+.toggle button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* Wall texts */
+section.wall { margin-top: 84px; }
+.sechead { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px 40px; padding-top: 14px; border-top: 1px solid var(--ink); margin-bottom: 30px; }
+.sechead .label { padding-top: 10px; }
+.sechead h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.sechead p { grid-column: 2; margin: 0; color: var(--ink-2); max-width: 64ch; }
+.stages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-left: 1px solid var(--rule); }
+.stage { padding: 4px 22px 8px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.stage .rn { font-family: var(--display); font-style: italic; font-size: 34px; line-height: 1; color: var(--accent); }
+.stage h3 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+.stage .eq { font-family: var(--display); font-size: 21px; padding: 10px 0; border-block: 1px solid var(--rule); white-space: nowrap; overflow-x: auto; }
+.stage .eq i { font-style: italic; }
+.stage p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.stage .live { font-family: var(--mono); font-size: 12px; color: var(--ink); background: var(--paper); padding: 10px 12px; font-variant-numeric: tabular-nums; line-height: 1.6; }
+.stage .live b { color: var(--accent); font-weight: 500; }
+.inl { display: inline-grid; width: 16px; height: 16px; font-size: 9.5px; vertical-align: 1px; }
+
+/* Ledger */
+.ledger-wrap { overflow-x: auto; background: var(--paper); padding: 8px 20px 18px; }
+.qline { font-family: var(--mono); font-size: 12px; padding: 12px 0 14px; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--ink-2); }
+table.ledger { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; min-width: 760px; }
+.ledger th { font-weight: 500; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); text-align: right; padding: 12px 10px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.ledger th:nth-child(-n+3), .ledger td:nth-child(-n+3) { text-align: left; }
+.ledger td { padding: 7px 10px; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
+.ledger td.tok { font-family: var(--body); font-weight: 600; font-size: 14px; }
+.ledger tr.q td { background: var(--accent-soft); }
+.ledger tr.mask td { color: var(--ink-3); }
+.ledger tr.mask td.w { background-image: repeating-linear-gradient(135deg, transparent 0 4px, var(--rule) 4px 5px); }
+.ledger tr { cursor: pointer; }
+.strip { display: inline-grid; grid-template-columns: repeat(8, 11px); gap: 2px; vertical-align: middle; }
+.strip i { height: 11px; border: 1px solid var(--rule); display: block; }
+.bar { display: grid; grid-template-columns: 1fr 50px; gap: 10px; align-items: center; min-width: 170px; }
+.bar span { height: 7px; background: var(--rule); position: relative; display: block; }
+.bar span i { position: absolute; inset: 0 auto 0 0; background: var(--accent); display: block; }
+
+/* Matrix */
+.matrix-wrap { display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr); gap: 32px 48px; align-items: start; }
+.matrix { display: grid; grid-template-columns: 74px repeat(8, 44px); gap: 3px; font-family: var(--mono); font-size: 11px; overflow-x: auto; background: var(--paper); padding: 18px; }
+.matrix .ch { writing-mode: vertical-rl; transform: rotate(180deg); text-align: left; color: var(--ink-3); padding-top: 4px; height: 64px; font-family: var(--body); font-weight: 600; font-size: 12px; }
+.matrix .rh { text-align: right; padding-right: 8px; align-self: center; font-family: var(--body); font-weight: 600; font-size: 12.5px; cursor: pointer; }
+.matrix button { height: 44px; border: 1px solid var(--rule); background: var(--paper); position: relative; padding: 0; font: 500 10px/1 var(--mono); color: var(--ink); cursor: pointer; font-variant-numeric: tabular-nums; }
+.matrix button .fill { position: absolute; inset: 0; background: var(--accent); }
+.matrix button span { position: relative; }
+.matrix button.dark { color: #fff; }
+.matrix button.mask { background-image: repeating-linear-gradient(135deg, transparent 0 4px, var(--rule) 4px 5px); color: transparent; }
+.matrix button.row { outline: 1.5px solid var(--ink); outline-offset: 0; z-index: 1; }
+.matrix-notes p { margin: 0 0 14px; color: var(--ink-2); max-width: 52ch; }
+.matrix-notes h3 { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 24px; margin: 0 0 10px; }
+.heads { display: grid; gap: 0; margin-top: 18px; border-top: 1px solid var(--rule); }
+.heads button { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; text-align: left; padding: 11px 6px; border: 0; border-bottom: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; font: inherit; align-items: baseline; }
+.heads button .rn { font-family: var(--display); font-style: italic; font-size: 19px; color: var(--ink-3); }
+.heads button b { font-weight: 600; font-size: 14.5px; } .heads button small { display: block; color: var(--ink-2); font-size: 13px; }
+.heads button .h { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+.heads button[aria-pressed="true"] { background: var(--paper); } .heads button[aria-pressed="true"] .rn { color: var(--accent); }
+
+/* Notes and colophon */
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 40px; }
+.notes div { border-top: 1px solid var(--rule); padding-top: 14px; }
+.notes h3 { font-size: 14.5px; font-weight: 600; margin: 0 0 6px; }
+.notes p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+footer { margin-top: 84px; padding-top: 16px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; gap: 16px; font-size: 13px; color: var(--ink-3); }
+footer .mark { font-family: var(--display); letter-spacing: .32em; text-transform: uppercase; color: var(--ink); }
+
+@media (max-width: 1080px) {
+  .exhibit { grid-template-columns: minmax(0, 1fr); }
+  .side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .controls { margin-top: 0; }
+  .stages { grid-template-columns: repeat(2, minmax(0, 1fr)); border-left: 0; }
+  .stage { border-right: 0; border-top: 1px solid var(--rule); padding: 18px 18px 22px 0; }
+  .matrix-wrap { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .mast { grid-template-columns: 1fr auto; } .mast .c { display: none; }
+  .title { grid-template-columns: minmax(0, 1fr); padding-block: 32px 24px; }
+  .side { grid-template-columns: minmax(0, 1fr); }
+  .plate { padding: 10px 6px 8px; outline-offset: -5px; }
+  .plate .bl { display: none; } .plate .corners.b { grid-template-columns: 1fr; }
+  .stages { grid-template-columns: minmax(0, 1fr); }
+  .sechead { grid-template-columns: minmax(0, 1fr); gap: 8px; } .sechead p { grid-column: 1; } .sechead .label { padding-top: 0; }
+  .notes { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .matrix { grid-template-columns: 56px repeat(8, minmax(26px, 1fr)); padding: 10px; gap: 2px; }
+  .matrix button { height: 32px; font-size: 0; }
+  footer { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <span class="label">Machine learning series</span>
+    <span class="mark c">Folio</span>
+    <span class="label r">Plate I</span>
+  </header>
+
+  <div class="title">
+    <div>
+      <span class="label">Plate I · Scaled dot-product attention</span>
+      <h1>Attention, as an <em>assay bench</em>.</h1>
+    </div>
+    <div>
+      <p>A query probe reads every key on the bench. A sealed reservoir holds exactly one unit of attention and pours it out by the softmax. The output settles into a core sample whose strata are the weights.</p>
+      <dl class="cat">
+        <dt>Object</dt><dd>Assay bench, eight stations</dd>
+        <dt>Idea</dt><dd>softmax(QKᵀ / √d<sub>k</sub>) V</dd>
+        <dt>Model</dt><dd>One head · d<sub>model</sub> 11 · d<sub>k</sub> 8</dd>
+        <dt>Catalogue</dt><dd>FOL-001 · October 2026</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="exhibit">
+    <figure class="plate" style="margin:0">
+      <div class="corners"><span class="tl">Pl. I</span><span class="tr">The assay of a query</span></div>
+      <div class="fig" id="plate" tabindex="0" role="img" aria-label="An isometric assay bench that computes attention. Use the arrow keys to move the query, 1 to 4 to change head, square brackets for temperature, M for the mask.">
+        <svg id="plate-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+      </div>
+      <div class="corners b">
+        <span class="bl">Click a column to make it the query · ← → step · 1 to 4 head · [ ] temperature · M mask</span>
+        <span class="br" id="readout" aria-live="polite"></span>
+      </div>
+    </figure>
+
+    <aside class="side">
+      <div class="key">
+        <span class="label">Key to the plate</span>
+        <h2>Parts and what they compute</h2>
+        <ol id="key">
+          <li data-pin="1" data-part="carriage"><span class="num">1</span><span><b>Query carriage</b><span class="d">Rides the rail to the word doing the looking. Carries <code>q = x W<sub>Q</sub></code>.</span></span></li>
+          <li data-pin="2"><span class="num">2</span><span><b>Key dials</b><span class="d">One per word. The needle reads <code>q·k / √d<sub>k</sub></code>; the red tick is zero.</span></span></li>
+          <li data-pin="3"><span class="num">3</span><span><b>Glass columns</b><span class="d">The fluid each word receives. Its height is the weight <code>a<sub>j</sub></code>, graduated in tenths.</span></span></li>
+          <li data-pin="4" data-part="reservoir"><span class="num">4</span><span><b>Unit reservoir</b><span class="d">Holds one unit, sealed. Softmax can only share it out, so the columns always sum to 1.</span></span></li>
+          <li data-pin="5"><span class="num">5</span><span><b>Stopcocks and shutters</b><span class="d">The causal mask. Words after the query are shut off and capped.</span></span></li>
+          <li data-pin="6"><span class="num">6</span><span><b>Core-sample tray</b><span class="d">The output <code>Σ a<sub>j</sub> v<sub>j</sub></code>, laid down in word order. Stratum length is weight.</span></span></li>
+          <li data-pin="7"><span class="num">7</span><span><b>Head selector</b><span class="d">Four heads, four learned habits. Same words, different <code>W<sub>Q</sub>, W<sub>K</sub></code>.</span></span></li>
+          <li data-pin="8"><span class="num">8</span><span><b>Temperature knob</b><span class="d">Divides every score before softmax. Low pours into one column, high spreads it.</span></span></li>
+          <li data-pin="9"><span class="num">9</span><span><b>Mask lever</b><span class="d">Causal (decoder) or open (encoder) attention.</span></span></li>
+        </ol>
+      </div>
+
+      <div class="controls">
+        <h2>At the bench</h2>
+        <div class="ctl">
+          <div class="label"><span>Query</span><span id="qname"></span></div>
+          <div class="seg tok" id="qseg" role="group" aria-label="Query word"></div>
+        </div>
+        <div class="ctl">
+          <div class="label"><span>Head</span><span id="hname"></span></div>
+          <div class="seg" id="hseg" role="group" aria-label="Attention head"></div>
+          <div class="headname" id="hdesc"></div>
+        </div>
+        <div class="ctl">
+          <div class="label"><label for="temp">Temperature</label><span id="tval" class="mono"></span></div>
+          <input id="temp" type="range" min="-2" max="2" step="0.01" value="0">
+        </div>
+        <div class="toggle"><span>Causal mask</span><button id="mask" aria-pressed="true">Causal</button></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text I</span>
+      <h2>Reading the plate, left to right</h2>
+      <p>The bench does the four steps of attention in the order the formula writes them. Every number below is read from the same model that moves the needles and pours the fluid, so they change together.</p>
+    </div>
+    <div class="stages">
+      <div class="stage"><span class="rn">i.</span><h3>Compare</h3><div class="eq"><i>s<sub>j</sub></i> = <i>q</i> · <i>k<sub>j</sub></i></div>
+        <p>The carriage <span class="num inl">1</span> holds the query. Each key dial <span class="num inl">2</span> measures how far its word's key points the same way.</p><div class="live" id="L1"></div></div>
+      <div class="stage"><span class="rn">ii.</span><h3>Scale</h3><div class="eq"><i>s<sub>j</sub></i> / √<i>d<sub>k</sub></i> &nbsp;=&nbsp; <i>s<sub>j</sub></i> / 2.83</div>
+        <p>A dot product of eight terms grows with the dimension. Dividing by √8 keeps the dials on their scale, so softmax does not saturate.</p><div class="live" id="L2"></div></div>
+      <div class="stage"><span class="rn">iii.</span><h3>Normalise</h3><div class="eq">a<sub>j</sub> = e<sup><i>z<sub>j</sub></i></sup> / Σ e<sup><i>z</i></sup></div>
+        <p>The reservoir <span class="num inl">4</span> holds one unit. Open stopcocks <span class="num inl">5</span> share it in proportion to e<sup>z</sup>; shut ones get nothing.</p><div class="live" id="L3"></div></div>
+      <div class="stage"><span class="rn">iv.</span><h3>Blend</h3><div class="eq"><i>o</i> = Σ a<sub>j</sub> <i>v<sub>j</sub></i></div>
+        <p>The tray <span class="num inl">6</span> lays the fluid down word by word. The output is mostly the longest stratum, with a trace of the rest.</p><div class="live" id="L4"></div></div>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text II</span>
+      <h2>The specimen ledger</h2>
+      <p>The full working for the current query. Each key is an eight-cell strip: red cells push a score up, grey cells push it down. Click a row to make that word the query.</p>
+    </div>
+    <div class="ledger-wrap">
+      <div class="qline" id="qline"></div>
+      <table class="ledger">
+        <thead><tr><th>j</th><th>Word</th><th>Key k<sub>j</sub></th><th>q·k</th><th>÷ √8</th><th>÷ T</th><th>e<sup>z</sup></th><th>Weight a<sub>j</sub></th></tr></thead>
+        <tbody id="ledger"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text III</span>
+      <h2>Every query at once</h2>
+      <p>The plate shows one row of the attention matrix. Here is the whole matrix for the current head: rows are the word looking, columns the word looked at. The hatched triangle is the mask.</p>
+    </div>
+    <div class="matrix-wrap">
+      <div class="matrix" id="matrix" role="grid" aria-label="Attention matrix"></div>
+      <div class="matrix-notes">
+        <h3>Four heads, four habits</h3>
+        <p>A transformer layer runs many heads side by side on the same words. Each learns its own projections, so each pours the same unit of attention to different places. The heads here are set by hand to show patterns that have been found in trained models.</p>
+        <div class="heads" id="heads"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text IV</span>
+      <h2>About this specimen</h2>
+    </div>
+    <div class="notes">
+      <div><h3>What is exact</h3><p>The arithmetic. Each word is an 11-number vector (bias, five word-class features, four positional features). Each head multiplies it by its own W<sub>Q</sub> and W<sub>K</sub> to get eight-number queries and keys, and the plate runs softmax(qKᵀ/√8 / T) on them, live.</p></div>
+      <div><h3>What is set by hand</h3><p>The weights. A trained model learns W<sub>Q</sub> and W<sub>K</sub> from data; these were written to reproduce four documented behaviours: coreference, previous-token heads, attention sinks on the first token, and a verb lookup.</p></div>
+      <div><h3>What is left out</h3><p>Value vectors are shown as strata, not numbers. A real layer also has many heads in parallel, an output projection, residual connections and layer normalisation. The plate is one head, one row at a time.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <span><span class="mark">Folio</span> &nbsp;Plate I, drawn by Claude with the Folio skill. Set in Bodoni Moda, Hanken Grotesk and IBM Plex Mono.</span>
+    <span class="mono">techwith.ram</span>
+  </footer>
+</div>
+
+<script>
+/* Folio kit: an orthographic isometric camera and engraved solids, drawn as SVG strings.
+   World units: x along the bench, y toward the viewer, z up. No dependencies. */
+(function (root) {
+  "use strict";
+  const D = Math.PI / 180;
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const mul = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const len = (a) => Math.hypot(a[0], a[1], a[2]);
+  const norm = (a) => mul(a, 1 / (len(a) || 1));
+  const f = (n) => (Math.round(n * 100) / 100).toString();
+
+  /* The light comes from the upper left, slightly in front. Tones are chosen by facing. */
+  const LIGHT = norm([-0.55, 0.35, 0.78]);
+
+  function camera(o = {}) {
+    const az = o.az ?? -24, el = o.el ?? 30, k = o.k ?? 1, ox = o.ox ?? 0, oy = o.oy ?? 0;
+    const a = az * D, e = el * D;
+    const ca = Math.cos(a), sa = Math.sin(a), ce = Math.cos(e), se = Math.sin(e);
+    return {
+      az, el, k, ox, oy,
+      view: [-sa * ce, ca * ce, se],
+      p(x, y, z) {
+        if (Array.isArray(x)) [x, y, z] = x;
+        const u = x * ca + y * sa, w = -x * sa + y * ca;
+        return [ox + k * u, oy + k * (w * se - z * ce)];
+      },
+      depth(x, y, z) {
+        if (Array.isArray(x)) [x, y, z] = x;
+        return -x * sa * ce + y * ca * ce + z * se;
+      },
+    };
+  }
+
+  /* Fit a camera so that the given world points fill W x H with padding. */
+  function fit(o, pts, W, H, pad = 24) {
+    const c = camera({ ...o, k: 1, ox: 0, oy: 0 });
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const p of pts) {
+      const [x, y] = c.p(p);
+      x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+    }
+    const k = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0));
+    return camera({ ...o, k, ox: W / 2 - k * (x0 + x1) / 2, oy: H / 2 - k * (y0 + y1) / 2 });
+  }
+
+  const path = (pts, close = true) =>
+    "M" + pts.map((q) => f(q[0]) + " " + f(q[1])).join("L") + (close ? "Z" : "");
+
+  function toneOf(n) {
+    if (n[2] > 0.9) return "top";
+    if (n[2] < -0.9) return "s0";
+    const d = dot(n, LIGHT);
+    return d < -0.25 ? "s0" : d < 0 ? "s1" : d < 0.25 ? "s2" : "s3";
+  }
+
+  const attrs = (o) => {
+    let s = "";
+    if (o.id) s += ` id="${o.id}"`;
+    if (o.part) s += ` data-part="${o.part}"`;
+    return s;
+  };
+
+  /* A box from (x,y,z) with size (w,d,h). Draws only the faces turned to the viewer,
+     shaded by facing, with an optional engraved hatch on the darkest side and an inset
+     groove on the top. */
+  function box(cam, x, y, z, w, d, h, o = {}) {
+    const P = (a, b, c) => cam.p(a, b, c);
+    const X = x + w, Y = y + d, Z = z + h;
+    const faces = [
+      { n: [0, 0, 1], q: [[x, y, Z], [X, y, Z], [X, Y, Z], [x, Y, Z]] },
+      { n: [0, 1, 0], q: [[x, Y, z], [X, Y, z], [X, Y, Z], [x, Y, Z]] },
+      { n: [0, -1, 0], q: [[x, y, z], [X, y, z], [X, y, Z], [x, y, Z]] },
+      { n: [1, 0, 0], q: [[X, y, z], [X, Y, z], [X, Y, Z], [X, y, Z]] },
+      { n: [-1, 0, 0], q: [[x, y, z], [x, Y, z], [x, Y, Z], [x, y, Z]] },
+    ];
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    let darkest = null;
+    for (const fc of faces) {
+      if (dot(fc.n, cam.view) <= 1e-6) continue;
+      const t = o.tone && fc.n[2] < 0.9 ? o.tone : toneOf(fc.n);
+      s += `<path class="f t-${fc.n[2] > 0.9 ? (o.topTone || "top") : t}" d="${path(fc.q.map((v) => P(...v)))}"/>`;
+      if (fc.n[2] < 0.9 && (!darkest || dot(fc.n, LIGHT) < dot(darkest.n, LIGHT))) darkest = fc;
+    }
+    if (o.hatch && darkest && h > 2) {
+      const sp = o.hatch === true ? 3 : o.hatch;
+      const n = darkest.n, along = n[0] !== 0 ? [0, 1, 0] : [1, 0, 0];
+      const L = n[0] !== 0 ? d : w, base = darkest.q[0];
+      let lines = "";
+      for (let t = sp; t < L - sp * 0.5; t += sp) {
+        const a = add(base, mul(along, t));
+        lines += `M${f(P(...a)[0])} ${f(P(...a)[1])}L${f(P(a[0], a[1], Z)[0])} ${f(P(a[0], a[1], Z)[1])}`;
+      }
+      s += `<path class="hatch" d="${lines}"/>`;
+    }
+    if (o.groove) {
+      const g = o.groove;
+      s += `<path class="ln faint" d="${path([[x + g, y + g, Z], [X - g, y + g, Z], [X - g, Y - g, Z], [x + g, Y - g, Z]].map((v) => P(...v)))}"/>`;
+    }
+    return s + "</g>";
+  }
+
+  function basis(axis) {
+    const n = norm(axis);
+    const t = Math.abs(n[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];
+    const u = norm(cross(n, t));
+    const v = cross(n, u);
+    return [n, u, v];
+  }
+  const ringPt = (c, u, v, r, t) => add(c, add(mul(u, r * Math.cos(t)), mul(v, r * Math.sin(t))));
+
+  /* A round bar from p0 to p1 of radius r: a post, a rail, a pipe, a knob or a drum.
+     The side is engraved with hatch lines whose density follows the shade, so a
+     curved body reads as turned metal instead of a staircase of flat tones. */
+  function rod(cam, p0, p1, r, o = {}) {
+    const N = o.seg || 44;
+    const [n, u, v] = basis(sub(p1, p0));
+    const V = cam.view;
+    const phi = Math.atan2(dot(v, V), dot(u, V));
+    const t0 = phi - Math.PI / 2, t1 = phi + Math.PI / 2;
+    const side = [];
+    for (let i = 0; i <= N; i++) side.push(cam.p(ringPt(p0, u, v, r, t0 + (t1 - t0) * i / N)));
+    for (let i = N; i >= 0; i--) side.push(cam.p(ringPt(p1, u, v, r, t0 + (t1 - t0) * i / N)));
+    const capC = dot(n, V) > 0 ? p1 : p0;
+    const cap = [];
+    for (let i = 0; i < N * 2; i++) cap.push(cam.p(ringPt(capC, u, v, r, (i / (N * 2)) * Math.PI * 2)));
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    s += `<path class="f ${o.sideCls || "t-cyl"}" d="${path(side)}"/>`;
+    if (o.hatch !== false) {
+      const K = 90; let acc = 0, lines = "";
+      const dens = o.density ?? 1;
+      for (let i = 1; i < K; i++) {
+        const t = t0 + (t1 - t0) * i / K;
+        const m = add(mul(u, Math.cos(t)), mul(v, Math.sin(t)));
+        const dark = Math.pow(Math.max(0, 1 - (dot(m, LIGHT) + 1) / 1.6), 1.7);
+        acc += dark * dens * (r * cam.k) / 14;
+        if (acc >= 1) {
+          acc -= 1;
+          const a = cam.p(ringPt(p0, u, v, r, t)), b = cam.p(ringPt(p1, u, v, r, t));
+          lines += `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`;
+        }
+      }
+      if (lines) s += `<path class="hatch" d="${lines}"/>`;
+    }
+    if (o.knurl) {
+      let lines = "";
+      for (let i = 0; i < o.knurl; i++) {
+        const t = t0 + (t1 - t0) * (i + 0.5) / o.knurl;
+        const a = cam.p(ringPt(p0, u, v, r, t)), b = cam.p(ringPt(p1, u, v, r, t));
+        lines += `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`;
+      }
+      s += `<path class="ln lo" d="${lines}"/>`;
+    }
+    if (o.cap !== false) s += `<path class="f ${o.capCls || "t-top"}" d="${path(cap)}"/>`;
+    return s + "</g>";
+  }
+
+  /* A vertical drum standing on the floor plane. */
+  const drum = (cam, cx, cy, z, r, h, o) => rod(cam, [cx, cy, z], [cx, cy, z + h], r, o);
+
+  /* A ball: in an orthographic camera it projects to a circle. */
+  function ball(cam, c, r, o = {}) {
+    const [x, y] = cam.p(c);
+    const R = r * cam.k;
+    const hx = x - R * 0.35, hy = y - R * 0.4;
+    return `<g class="sol ${o.cls || ""}"${attrs(o)}><circle class="f t-cyl" cx="${f(x)}" cy="${f(y)}" r="${f(R)}"/>` +
+      `<path class="hatch" d="M${f(x + R * 0.15)} ${f(y + R * 0.92)}A${f(R)} ${f(R)} 0 0 0 ${f(x + R * 0.92)} ${f(y + R * 0.2)}"/>` +
+      `<circle class="glint" cx="${f(hx)}" cy="${f(hy)}" r="${f(R * 0.18)}"/></g>`;
+  }
+
+  /* A circle lying on a horizontal plane, as a closed path. */
+  function ringPath(cam, cx, cy, z, r, N = 48) {
+    const pts = [];
+    for (let i = 0; i < N; i++) { const t = (i / N) * Math.PI * 2; pts.push(cam.p(cx + r * Math.cos(t), cy + r * Math.sin(t), z)); }
+    return path(pts);
+  }
+
+  /* An arc on a horizontal plane, angles in degrees measured in world xy. */
+  function arcPath(cam, cx, cy, z, r, a0, a1, N = 32) {
+    const pts = [];
+    for (let i = 0; i <= N; i++) { const t = (a0 + (a1 - a0) * i / N) * D; pts.push(cam.p(cx + r * Math.cos(t), cy + r * Math.sin(t), z)); }
+    return path(pts, false);
+  }
+
+  /* Radial ticks on a horizontal plane. */
+  function radialTicks(cam, cx, cy, z, r0, r1, angles) {
+    let s = "";
+    for (const a of angles) {
+      const t = a * D;
+      const p = cam.p(cx + r0 * Math.cos(t), cy + r0 * Math.sin(t), z);
+      const q = cam.p(cx + r1 * Math.cos(t), cy + r1 * Math.sin(t), z);
+      s += `M${f(p[0])} ${f(p[1])}L${f(q[0])} ${f(q[1])}`;
+    }
+    return s;
+  }
+
+  function line(cam, a, b) {
+    const p = cam.p(a), q = cam.p(b);
+    return `M${f(p[0])} ${f(p[1])}L${f(q[0])} ${f(q[1])}`;
+  }
+
+  /* Text engraved in a plane: ax is the world direction of the baseline, ay the world
+     direction of "down" on the glyphs. Size is in world units. */
+  function faceText(cam, origin, ax, ay, str, size, o = {}) {
+    const p0 = cam.p(origin);
+    const px = cam.p(add(origin, ax)), py = cam.p(add(origin, ay));
+    const a = (px[0] - p0[0]), b = (px[1] - p0[1]), c = (py[0] - p0[0]), d = (py[1] - p0[1]);
+    const esc = String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    return `<text class="${o.cls || "engr"}" text-anchor="${o.anchor || "middle"}" font-size="${size}" transform="matrix(${f(a)} ${f(b)} ${f(c)} ${f(d)} ${f(p0[0])} ${f(p0[1])})">${esc}</text>`;
+  }
+
+  /* A specimen pin: a small numbered disc set on a part, never a leader line. */
+  function pin(cam, at, num, o = {}) {
+    const [x, y] = cam.p(at);
+    return `<g class="pin" data-pin="${num}" tabindex="-1"><circle cx="${f(x)}" cy="${f(y)}" r="7.2"/>` +
+      `<text x="${f(x)}" y="${f(y + 2.9)}" text-anchor="middle">${num}</text></g>`;
+  }
+
+  /* A screw head on a horizontal plane: a ring and a slot. */
+  function screw(cam, cx, cy, z, r = 2.2) {
+    const a = cam.p(cx - r * 0.7, cy - r * 0.2, z), b = cam.p(cx + r * 0.7, cy + r * 0.2, z);
+    return `<path class="f t-s3 ln-lo" d="${ringPath(cam, cx, cy, z, r, 20)}"/><path class="ln lo" d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}"/>`;
+  }
+
+  root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, LIGHT };
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+/* The true model behind Plate I. One attention head of a toy transformer, d_model = 11, d_k = 8.
+   Every number the plate shows (dial needles, fluid levels, strata, ledger, matrix) is read from here. */
+(function (root) {
+  "use strict";
+  const TOKENS = [
+    { w: "The", bos: 1, fn: 1 },
+    { w: "cat", noun: 1, anim: 1 },
+    { w: "sat", verb: 1 },
+    { w: "on", fn: 1 },
+    { w: "the", fn: 1 },
+    { w: "mat", noun: 1 },
+    { w: "because", fn: 1 },
+    { w: "it", pron: 1 },
+  ];
+  const W1 = 1.1, W2 = 0.35; // two positional frequencies, in radians per token
+  const FEATS = ["1", "bos", "noun", "anim", "pron", "verb", "fn", "cos ω₁i", "sin ω₁i", "cos ω₂i", "sin ω₂i"];
+  const F = Object.fromEntries(FEATS.map((n, i) => [n, i]));
+  const DM = FEATS.length, DK = 8;
+
+  const x = TOKENS.map((t, i) => {
+    const v = new Array(DM).fill(0);
+    v[F["1"]] = 1;
+    for (const k of ["bos", "noun", "anim", "pron", "verb", "fn"]) v[F[k]] = t[k] || 0;
+    v[F["cos ω₁i"]] = Math.cos(W1 * i); v[F["sin ω₁i"]] = Math.sin(W1 * i);
+    v[F["cos ω₂i"]] = Math.cos(W2 * i); v[F["sin ω₂i"]] = Math.sin(W2 * i);
+    return v;
+  });
+
+  /* Sparse weight matrices: [feature, column, value]. */
+  const rot = (b, w, c0, fc, fs) => [
+    [fc, c0, b * Math.cos(w)], [fs, c0, b * Math.sin(w)],
+    [fs, c0 + 1, b * Math.cos(w)], [fc, c0 + 1, -b * Math.sin(w)],
+  ];
+  const HEADS = [
+    {
+      id: "I", name: "Coreference", short: "a pronoun looks for the animate noun it stands for",
+      Q: [[F.pron, 0, 3.0], [F.verb, 0, 1.0], [F.pron, 1, 2.0], [F.verb, 1, 1.0], [F["1"], 1, 0.4], [F["1"], 2, 1.0]],
+      K: [[F.anim, 0, 2.2], [F.noun, 1, 2.0], [F.bos, 2, 1.2], [F["1"], 2, 0.3]],
+    },
+    {
+      id: "II", name: "Previous token", short: "every word looks one step back",
+      Q: [...rot(8, W1, 0, F["cos ω₁i"], F["sin ω₁i"]), ...rot(6, W2, 2, F["cos ω₂i"], F["sin ω₂i"])],
+      K: [[F["cos ω₁i"], 0, 1], [F["sin ω₁i"], 1, 1], [F["cos ω₂i"], 2, 1], [F["sin ω₂i"], 3, 1]],
+    },
+    {
+      id: "III", name: "Attention sink", short: "spare attention drains to the first token",
+      Q: [[F["1"], 5, 3.0]],
+      K: [[F.bos, 5, 3.0], [F.fn, 5, 0.5]],
+    },
+    {
+      id: "IV", name: "Verb lookup", short: "nouns and pronouns find the action they take part in",
+      Q: [[F.noun, 6, 2.4], [F.pron, 6, 2.6], [F.verb, 6, 0.8]],
+      K: [[F.verb, 6, 2.5], [F.fn, 6, 0.5]],
+    },
+  ];
+
+  const project = (v, W) => {
+    const out = new Array(DK).fill(0);
+    for (const [r, c, val] of W) out[c] += v[r] * val;
+    return out;
+  };
+  for (const h of HEADS) {
+    h.q = x.map((v) => project(v, h.Q));
+    h.k = x.map((v) => project(v, h.K));
+  }
+
+  /* Scaled dot-product attention for one query row. */
+  function attend(head, i, T = 1, causal = true) {
+    const h = HEADS[head], q = h.q[i], N = TOKENS.length, sq = Math.sqrt(DK);
+    const raw = [], scaled = [], logit = [], masked = [];
+    for (let j = 0; j < N; j++) {
+      let s = 0; for (let d = 0; d < DK; d++) s += q[d] * h.k[j][d];
+      raw.push(s); scaled.push(s / sq); logit.push(s / sq / T); masked.push(causal && j > i);
+    }
+    const m = Math.max(...logit.filter((_, j) => !masked[j]));
+    const ex = logit.map((l, j) => (masked[j] ? 0 : Math.exp(l - m)));
+    const Z = ex.reduce((a, b) => a + b, 0);
+    const a = ex.map((e) => e / Z);
+    const H = -a.reduce((s, p) => s + (p > 0 ? p * Math.log2(p) : 0), 0);
+    let top = 0; a.forEach((p, j) => { if (p > a[top]) top = j; });
+    const expAbs = logit.map((l, j) => (masked[j] ? 0 : Math.exp(l)));
+    return { raw, scaled, logit, masked, ex: expAbs, Z: expAbs.reduce((s, v) => s + v, 0), a, H, top, q };
+  }
+
+  root.AttnModel = { TOKENS, HEADS, FEATS, DM, DK, attend, x };
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+/* Plate I: scaled dot-product attention, as an assay bench.
+   Scene geometry is built once; only the parts that move are redrawn, each in its own slot
+   of the painter's order. */
+(function () {
+  "use strict";
+  const K = window.Folio, M = window.AttnModel;
+  const { box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, path, f } = K;
+  const N = M.TOKENS.length;
+  const W = 1000, H = 640;
+  const SX = (j) => 132 + j * 60;
+  const GL = { y: 98, z: 15, r: 15, h: 100 };  // glass cylinders
+  const PIPE = { y: 135, z: 12, r: 3.6 };
+  const DIAL = { y: 158, z: 16, r: 12 };
+  const TRAY = { x0: 100, x1: 584, y0: 200, y1: 244, z: 12 };
+  const RAIL = { y: 34, z: 146 };
+  const SCORE = [-2, 6];                           // the dial's scale, in units of q·k/√d_k
+  const HEAD_ANG = [205, 245, 295, 335];
+  const T_MIN = 0.25, T_MAX = 4;
+  const tAng = (T) => 160 + (Math.log(T / T_MIN) / Math.log(T_MAX / T_MIN)) * 220;
+
+  const pts = [];
+  for (const x of [-10, 730]) for (const y of [-10, 286]) for (const z of [-46, 0]) pts.push([x, y, z]);
+  pts.push([14, 34, 166], [590, 34, 166], [60, 98, 122]);
+  const cam = K.fit({ az: -24, el: 30 }, pts, W, H, 22);
+
+  /* ---------- static parts ---------- */
+  const order = []; // strings and {slot}
+  const S = (s) => order.push(s);
+  const slot = (name) => order.push({ slot: name });
+
+  // Plinth: base slab, feet, body with engraved hatch, groove, screws, catalogue plate.
+  for (const [x, y] of [[8, 8], [712, 8], [8, 268], [712, 268]]) S(drum(cam, x, y, -46, 8, 8, { cls: "foot" }));
+  S(box(cam, -6, -6, -38, 732, 288, 8, { hatch: 2.6 }));
+  S(box(cam, 0, 0, -30, 720, 276, 30, { hatch: 2.2, groove: 7, part: "plinth" }));
+  for (const [x, y] of [[16, 16], [704, 16], [16, 260], [704, 260]]) S(screw(cam, x, y, 0, 3));
+  S(box(cam, 250, 276, -24, 240, 1.4, 17, { cls: "brass" }));
+  S(faceText(cam, [370, 277.5, -12.6], [1, 0, 0], [0, 0, -1], "FOLIO · PLATE I · SCALED DOT-PRODUCT ATTENTION", 5.4));
+  S(faceText(cam, [370, 277.5, -20], [1, 0, 0], [0, 0, -1], "ONE HEAD · d_model 11 · d_k 8 · EIGHT TOKENS", 3.6, { cls: "engr lo" }));
+  for (const sx of [256, 484]) {
+    const p = cam.p(sx, 277.5, -15.5);
+    S(`<circle class="dot" cx="${f(p[0])}" cy="${f(p[1])}" r="${f(1.1 * cam.k)}"/>`);
+  }
+  // Station ruler engraved along the back of the plinth top.
+  {
+    let d = "";
+    for (let x = 100; x <= 600; x += 6) d += line(cam, [x, 58, 0], [x, (x - 100) % 30 === 0 ? 52 : 55, 0]);
+    S(`<path class="ln lo" d="${d}${line(cam, [100, 58, 0], [600, 58, 0])}"/>`);
+  }
+
+  // Query rail on two posts, behind the stations.
+  for (const x of [14, 590]) {
+    S(drum(cam, x, RAIL.y, 0, 10, 4, { cls: "base" }));
+    S(rod(cam, [x, RAIL.y, 4], [x, RAIL.y, RAIL.z + 10], 4.2));
+    S(drum(cam, x, RAIL.y, RAIL.z + 10, 6, 4));
+  }
+  S(rod(cam, [14, RAIL.y, RAIL.z], [590, RAIL.y, RAIL.z], 3.2, { seg: 30 }));
+  {
+    let d = "";
+    for (let j = 0; j < N; j++) d += line(cam, [SX(j), RAIL.y + 3.2, RAIL.z - 3], [SX(j), RAIL.y + 3.2, RAIL.z - 7]);
+    S(`<path class="ln lo" d="${d}"/>`);
+  }
+  slot("carriage");
+
+  // Pads: one per token, the reservoir's at the far end.
+  const pad = (x0, w, label, cls) => {
+    S(box(cam, x0, 66, 0, w, 110, 10, { groove: 3, part: cls }));
+    if (label) S(faceText(cam, [x0 + w / 2, 176.2, 2.6], [1, 0, 0], [0, 0, -1], label, 6.4, { cls: "engr tok" }));
+  };
+  pad(30, 60, "Σ = 1", "reservoir");
+  for (let j = 0; j < N; j++) pad(SX(j) - 27, 54, M.TOKENS[j].w, "station");
+  for (let j = 0; j < N; j++) {
+    const p = cam.p(SX(j) + 22, 170, 10);
+    S(`<text class="engr lo" x="${f(p[0])}" y="${f(p[1])}" font-size="${f(4 * cam.k)}" text-anchor="end">${j}</text>`);
+  }
+
+  // Glass column helper: back wall, a slot for the fluid, then the front glass with graduations.
+  const facing = Math.atan2(cam.view[1], cam.view[0]) / (Math.PI / 180);
+  function column(x, y, z, r, h, name, opts = {}) {
+    S(drum(cam, x, y, z - 5, r + 4, 5, { cls: "collar" }));
+    S(rod(cam, [x, y, z], [x, y, z + h], r, { sideCls: "glass-back", capCls: "glass-back", hatch: false }));
+    if (opts.fluid) S(opts.fluid); else slot(name);
+    let d = "";
+    for (let g = 1; g <= 9; g++) {
+      const zz = z + (h * g) / 10, span = g === 5 ? 26 : 14;
+      d += arcPath(cam, x, y, zz, r + 0.2, facing - span, facing + span, 8);
+    }
+    S(`<g class="sol glass">${rod(cam, [x, y, z], [x, y, z + h], r, { sideCls: "glass-front", capCls: "glass-rim", hatch: false }).replace(/^<g[^>]*>|<\/g>$/g, "")}` +
+      `<path class="ln grad" d="${d}"/>` +
+      `<path class="ln glint-line" d="${line(cam, ...[[0, 0], [0, 0]].map((_, i) => {
+        const t = (facing + 48) * Math.PI / 180; return [x + r * Math.cos(t), y + r * Math.sin(t), i ? z + h - 6 : z + 4];
+      }))}"/></g>`);
+    S(drum(cam, x, y, z + h, r + 1.6, 2, { capCls: "glass-rim", sideCls: "glass-lip", hatch: false }));
+  }
+
+  // The reservoir: one sealed unit of fluid, always full. Softmax shares exactly this much.
+  column(60, 98, 15, 20, 78, null, {
+    fluid: rod(cam, [60, 98, 15], [60, 98, 15 + 72], 19.2, { cls: "fluidg", sideCls: "fluid", capCls: "fluid-top" }),
+  });
+  S(drum(cam, 60, 98, 95, 12, 7, { cls: "stopper" }));
+  S(ball(cam, [60, 98, 106], 4));
+
+  for (let j = 0; j < N; j++) {
+    column(SX(j), GL.y, GL.z, GL.r, GL.h, "fluid" + j);
+    slot("shut" + j);
+  }
+
+  // Manifold: stubs with stopcocks from the pipe to each collar, then the pipe itself.
+  S(rod(cam, [60, 122, PIPE.z], [60, PIPE.y, PIPE.z], 3, { seg: 24 }));
+  for (let j = 0; j < N; j++) {
+    S(rod(cam, [SX(j), 117, PIPE.z], [SX(j), PIPE.y, PIPE.z], 2.6, { seg: 24 }));
+    S(box(cam, SX(j) - 4.5, 119.5, 6, 9, 8, 12, { cls: "cock" }));
+    slot("cock" + j);
+  }
+  S(rod(cam, [60, PIPE.y, PIPE.z], [SX(N - 1) + 14, PIPE.y, PIPE.z], PIPE.r, { seg: 30 }));
+  S(ball(cam, [60, PIPE.y, PIPE.z], 5));
+  for (let j = 0; j < N; j++) S(ball(cam, [SX(j), PIPE.y, PIPE.z], 4.6));
+
+  // Key dials: one per token. The needle reads q·k / √d_k.
+  const scoreAng = (s) => 180 + Math.max(0, Math.min(1, (s - SCORE[0]) / (SCORE[1] - SCORE[0]))) * 180;
+  for (let j = 0; j < N; j++) {
+    const x = SX(j);
+    S(drum(cam, x, DIAL.y, 10, DIAL.r + 2.5, 3));
+    S(drum(cam, x, DIAL.y, 13, DIAL.r, 3, { capCls: "t-face" }));
+    const majors = [], minors = [];
+    for (let s = SCORE[0]; s <= SCORE[1]; s += 0.5) (Number.isInteger(s / 2) ? majors : minors).push(scoreAng(s));
+    S(`<path class="ln lo" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 9.6, 11.2, minors)}"/>` +
+      `<path class="ln mid" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 8.4, 11.2, majors)}${arcPath(cam, x, DIAL.y, DIAL.z, 11.2, 180, 360, 24)}"/>` +
+      `<path class="ln zero" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 7.6, 11.2, [scoreAng(0)])}"/>`);
+    slot("needle" + j);
+  }
+
+  // The core-sample tray: the output, laid down as strata whose lengths are the weights.
+  {
+    const { x0, x1, y0, y1, z } = TRAY;
+    S(box(cam, x0, y0, 0, x1 - x0, y1 - y0, 4, { cls: "tray" }));
+    S(box(cam, x0, y0, 4, x1 - x0, 4, z - 4, { cls: "tray" }));
+    S(box(cam, x0, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+    slot("strata");
+    S(box(cam, x1 - 4, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+    S(box(cam, x0, y1 - 4, 4, x1 - x0, 4, z - 4, { cls: "tray", hatch: 3 }));
+    let d = "", dm = "";
+    for (let i = 0; i <= 20; i++) {
+      const x = x0 + 4 + ((x1 - x0 - 8) * i) / 20;
+      (i % 5 === 0 ? (dm += line(cam, [x, y1 - 4, z], [x, y1 - 1.2, z])) : (d += line(cam, [x, y1 - 4, z], [x, y1 - 2.4, z])));
+    }
+    S(`<path class="ln lo" d="${d}"/><path class="ln mid" d="${dm}"/>`);
+    for (const [fr, lab] of [[0, "0"], [0.25, ".25"], [0.5, ".50"], [0.75, ".75"], [1, "1"]]) {
+      const x = x0 + 4 + (x1 - x0 - 8) * fr;
+      S(faceText(cam, [x, y1 + 0.2, z - 3], [1, 0, 0], [0, 0, -1], lab, 3.6, { cls: "engr lo" }));
+    }
+    slot("trayText");
+    for (const x of [x0 - 6, x1 + 2]) S(box(cam, x, y0 + 8, 0, 4, y1 - y0 - 16, z + 2, { cls: "clamp" }));
+  }
+
+  // Controls: head selector, temperature knob, mask lever.
+  {
+    const hx = 655, hy = 96;
+    S(box(cam, hx - 30, hy - 26, 0, 60, 52, 3, { groove: 3 }));
+    S(drum(cam, hx, hy, 3, 17, 5, { cls: "base" }));
+    S(`<path class="ln mid" d="${radialTicks(cam, hx, hy, 8, 17.5, 20.5, HEAD_ANG)}"/>`);
+    HEAD_ANG.forEach((a, i) => {
+      const t = (a * Math.PI) / 180;
+      S(faceText(cam, [hx + 23.8 * Math.cos(t), hy + 23.8 * Math.sin(t) + 1.4, 3], [1, 0, 0], [0, 1, 0], M.HEADS[i].id, 4.4, { cls: "engr" }));
+    });
+    S(faceText(cam, [hx, hy + 22, 3], [1, 0, 0], [0, 1, 0], "HEAD", 3.4, { cls: "engr lo" }));
+    slot("headKnob");
+
+    const tx = 655, ty = 172;
+    S(drum(cam, tx, ty, 0, 26, 3, { cls: "base" }));
+    const tk = [], tkM = [];
+    for (let l = 0; l <= 16; l++) (l % 4 === 0 ? tkM : tk).push(160 + (l / 16) * 220);
+    S(`<path class="ln lo" d="${radialTicks(cam, tx, ty, 3, 20, 22.5, tk)}"/><path class="ln mid" d="${radialTicks(cam, tx, ty, 3, 18.6, 23.5, tkM)}"/>`);
+    for (const [T, lab] of [[0.25, "¼"], [1, "1"], [4, "4"]]) {
+      const t = (tAng(T) * Math.PI) / 180;
+      S(faceText(cam, [tx + 15.4 * Math.cos(t), ty + 15.4 * Math.sin(t) + 1.3, 3], [1, 0, 0], [0, 1, 0], lab, 3.8));
+    }
+    slot("tempKnob");
+
+    const mx = 655, my = 232;
+    S(box(cam, mx - 22, my - 14, 0, 44, 28, 3, { groove: 2.5 }));
+    S(faceText(cam, [mx - 12, my + 10, 3], [1, 0, 0], [0, 1, 0], "MASK", 3.4, { cls: "engr lo" }));
+    S(faceText(cam, [mx + 12, my + 10, 3], [1, 0, 0], [0, 1, 0], "OPEN", 3.4, { cls: "engr lo" }));
+    S(box(cam, mx - 6, my - 6, 3, 12, 12, 5, { cls: "cock" }));
+    slot("lever");
+  }
+  slot("pins");
+  slot("hits");
+
+  /* ---------- live parts ---------- */
+  const fluidCol = (j, lv) => {
+    const h = Math.max(0.0001, lv) * GL.h;
+    return rod(cam, [SX(j), GL.y, GL.z], [SX(j), GL.y, GL.z + Math.min(h, GL.h - 0.6)], GL.r - 0.7, { cls: "fluidg", sideCls: "fluid", capCls: "fluid-top" });
+  };
+  const draw = {
+    carriage(s) {
+      const x = s.xq;
+      let o = rod(cam, [x, RAIL.y, RAIL.z - 10], [x, RAIL.y, RAIL.z - 22], 1.5, { seg: 16 });
+      o += ball(cam, [x, RAIL.y, RAIL.z - 24], 3.2, { cls: "probe" });
+      o += box(cam, x - 17, RAIL.y - 11, RAIL.z - 10, 34, 22, 21, { cls: "carriage", part: "carriage", groove: 2.4 });
+      for (const dx of [-12, 12]) o += screw(cam, x + dx, RAIL.y, RAIL.z + 11, 1.6);
+      o += box(cam, x - 11, RAIL.y + 11, RAIL.z - 6, 22, 0.8, 11, { cls: "brass" });
+      const j = Math.round((x - SX(0)) / 60);
+      o += faceText(cam, [x, RAIL.y + 12, RAIL.z - 1.4], [1, 0, 0], [0, 0, -1], "q = " + M.TOKENS[Math.max(0, Math.min(N - 1, j))].w, 4.4, { cls: "engr" });
+      return o;
+    },
+    fluid(s, j) { return s.a[j] > 0.0005 ? fluidCol(j, s.a[j]) : ""; },
+    shut(s, j) {
+      const k = s.shut[j];
+      if (k < 0.01) return "";
+      const lift = (1 - k) * 14;
+      const z = GL.z + GL.h + 2 + lift;
+      return `<g style="opacity:${f(Math.min(1, k * 1.4))}">` + drum(cam, SX(j), GL.y, z, GL.r + 3, 3.4, { cls: "shutter", capCls: "t-shut" }) +
+        `<path class="ln lo" d="${radialTicks(cam, SX(j), GL.y, z + 3.4, 3, GL.r + 1.5, [20, 65, 110, 155, 200, 245, 290, 335])}"/>` +
+        drum(cam, SX(j), GL.y, z + 3.4, 3, 2.6) + `</g>`;
+    },
+    cock(s, j) {
+      const k = s.shut[j], a = (k * 90 * Math.PI) / 180, L = 9;
+      const c = [SX(j), 123.5, 18.5];
+      const d = [Math.sin(a) * L, Math.cos(a) * L, 0];
+      return rod(cam, [c[0] - d[0] * 0.4, c[1] - d[1] * 0.4, c[2]], [c[0] + d[0], c[1] + d[1], c[2]], 1.3, { seg: 12, cls: "lever" }) + ball(cam, c, 2);
+    },
+    needle(s, j) {
+      const x = SX(j), y = DIAL.y, z = DIAL.z + 0.2;
+      if (s.shut[j] > 0.98) return dotAt(x, y, z);
+      const t = (scoreAng(s.sc[j]) * Math.PI) / 180, c = Math.cos(t), sn = Math.sin(t);
+      const tip = [x + 10.4 * c, y + 10.4 * sn, z], tail = [x - 3 * c, y - 3 * sn, z];
+      const w1 = [x - 1.1 * sn, y + 1.1 * c, z], w2 = [x + 1.1 * sn, y - 1.1 * c, z];
+      return `<path class="needle" d="${path([tail, w1, tip, w2].map((p) => cam.p(p)))}"/>` + dotAt(x, y, z);
+    },
+    strata(s) {
+      const { x0, x1, y0, y1 } = TRAY, L = x1 - x0 - 8;
+      let x = x0 + 4, o = "";
+      for (let j = 0; j < N; j++) {
+        const w = s.a[j] * L;
+        if (w > 0.05) {
+          o += box(cam, x, y0 + 4, 4, w, y1 - y0 - 8, 6, { cls: j % 2 ? "stratum alt" : "stratum", topTone: j === s.top ? "fluid" : (j % 2 ? "fluid-2" : "fluid-top") });
+        }
+        x += w;
+      }
+      return o;
+    },
+    trayText(s) {
+      const { x0, x1, y1 } = TRAY, L = x1 - x0 - 8;
+      let x = x0 + 4, o = "";
+      for (let j = 0; j < N; j++) {
+        const w = s.a[j] * L;
+        if (w > 34) o += faceText(cam, [x + w / 2, y1 + 0.2, 7.2], [1, 0, 0], [0, 0, -1], M.TOKENS[j].w + " " + s.a[j].toFixed(2), 3.6);
+        x += w;
+      }
+      return o;
+    },
+    headKnob(s) {
+      const hx = 655, hy = 96, t = (s.headAng * Math.PI) / 180;
+      let o = drum(cam, hx, hy, 8, 8.5, 9, { knurl: 9 });
+      o += `<path class="ln hi" d="${line(cam, [hx - 2 * Math.cos(t), hy - 2 * Math.sin(t), 17.1], [hx + 7.4 * Math.cos(t), hy + 7.4 * Math.sin(t), 17.1])}"/>`;
+      return o;
+    },
+    tempKnob(s) {
+      const tx = 655, ty = 172, t = (s.tAng * Math.PI) / 180;
+      let o = drum(cam, tx, ty, 3, 12, 13, { knurl: 16, density: 1.2 });
+      o += drum(cam, tx, ty, 16, 8, 1.6);
+      o += `<path class="ln hi" d="${line(cam, [tx + 2 * Math.cos(t), ty + 2 * Math.sin(t), 17.7], [tx + 11.4 * Math.cos(t), ty + 11.4 * Math.sin(t), 16.1])}"/>`;
+      return o;
+    },
+    lever(s) {
+      const mx = 655, my = 232, a = ((s.lever * 2 - 1) * 32 * Math.PI) / 180;
+      const tip = [mx + Math.sin(a) * 16, my, 8 + Math.cos(a) * 16];
+      return rod(cam, [mx, my, 8], tip, 1.6, { seg: 14 }) + ball(cam, tip, 3.4);
+    },
+    pins(s) {
+      const P = [
+        [1, [s.xq + 23, RAIL.y + 11, RAIL.z + 14]],
+        [2, [SX(0) - 18, DIAL.y + 2, 18]],
+        [3, [SX(1) - 20, GL.y + 18, GL.z + GL.h * 0.72]],
+        [4, [30, 98, 72]],
+        [5, [SX(2) - 13, 123, 20]],
+        [6, [TRAY.x0 + 14, TRAY.y1 + 8, 10]],
+        [7, [655 + 30, 96 - 4, 14]],
+        [8, [655 + 30, 172 + 6, 16]],
+        [9, [655 + 26, 232 + 4, 12]],
+      ];
+      return P.map(([n, p]) => pin(cam, p, n)).join("");
+    },
+    hits() {
+      let o = "";
+      for (let j = 0; j < N; j++) {
+        const q = [];
+        for (const [x, y, z] of [[-27, 66, 0], [27, 66, 0], [27, 176, 0], [-27, 176, 0], [-27, 66, 10], [27, 176, 10], [-27, 176, 10]]) q.push(cam.p(SX(j) + x, y, z));
+        for (let i = 0; i < 16; i++) { const t = (i / 16) * Math.PI * 2; q.push(cam.p(SX(j) + 18 * Math.cos(t), GL.y + 18 * Math.sin(t), GL.z + GL.h + 6)); }
+        o += `<path class="hit" data-j="${j}" d="${path(hull(q))}"><title>Make “${M.TOKENS[j].w}” the query</title></path>`;
+      }
+      return o;
+    },
+  };
+  function dotAt(x, y, z) { const p = cam.p(x, y, z); return `<circle class="hub" cx="${f(p[0])}" cy="${f(p[1])}" r="${f(1.5 * cam.k)}"/>`; }
+  function hull(P) {
+    P = P.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    const cr = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+    const lo = [], up = [];
+    for (const p of P) { while (lo.length >= 2 && cr(lo[lo.length - 2], lo[lo.length - 1], p) <= 0) lo.pop(); lo.push(p); }
+    for (const p of P.reverse()) { while (up.length >= 2 && cr(up[up.length - 2], up[up.length - 1], p) <= 0) up.pop(); up.push(p); }
+    return lo.slice(0, -1).concat(up.slice(0, -1));
+  }
+
+  /* ---------- mount ---------- */
+  const svg = document.getElementById("plate-svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  let html = "", run = "";
+  for (const it of order) {
+    if (typeof it === "string") run += it;
+    else { html += run; run = ""; html += `<g data-slot="${it.slot}"></g>`; }
+  }
+  svg.innerHTML = html + run;
+  const slots = {};
+  svg.querySelectorAll("[data-slot]").forEach((g) => (slots[g.dataset.slot] = g));
+
+  /* ---------- state ---------- */
+  const st = { head: 0, q: 7, T: 1, causal: true };
+  let tgt = null;
+  const cur = { a: new Array(N).fill(0), sc: new Array(N).fill(SCORE[0]), shut: new Array(N).fill(0), xq: SX(7), headAng: HEAD_ANG[0], tAng: tAng(1), lever: 0, top: 0 };
+  function target() {
+    const r = M.attend(st.head, st.q, st.T, st.causal);
+    tgt = {
+      r, a: r.a, sc: r.scaled.map((v) => v), shut: r.masked.map((m) => (m ? 1 : 0)),
+      xq: SX(st.q), headAng: HEAD_ANG[st.head], tAng: tAng(st.T), lever: st.causal ? 0 : 1, top: r.top,
+    };
+  }
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let last = 0, raf = 0;
+  function frame(now) {
+    const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
+    const k = reduce.matches ? 1 : 1 - Math.exp(-dt * 5.2), kf = reduce.matches ? 1 : 1 - Math.exp(-dt * 3.4);
+    let moving = false;
+    const ease = (a, b, kk) => { const d = b - a; if (Math.abs(d) > 1e-4) moving = true; return Math.abs(d) < 1e-4 ? b : a + d * kk; };
+    for (let j = 0; j < N; j++) {
+      cur.a[j] = ease(cur.a[j], tgt.a[j], kf);
+      cur.sc[j] = ease(cur.sc[j], Math.max(SCORE[0] - 0.3, Math.min(SCORE[1] + 0.3, tgt.sc[j])), k);
+      cur.shut[j] = ease(cur.shut[j], tgt.shut[j], k);
+    }
+    for (const key of ["xq", "headAng", "tAng", "lever"]) cur[key] = ease(cur[key], tgt[key], k);
+    cur.top = tgt.top;
+    paint();
+    raf = moving ? requestAnimationFrame(frame) : 0;
+    if (!moving) last = 0;
+  }
+  function paint() {
+    slots.carriage.innerHTML = draw.carriage(cur);
+    for (let j = 0; j < N; j++) {
+      slots["fluid" + j].innerHTML = draw.fluid(cur, j);
+      slots["shut" + j].innerHTML = draw.shut(cur, j);
+      slots["cock" + j].innerHTML = draw.cock(cur, j);
+      slots["needle" + j].innerHTML = draw.needle(cur, j);
+    }
+    slots.strata.innerHTML = draw.strata(cur);
+    slots.trayText.innerHTML = draw.trayText(cur);
+    slots.headKnob.innerHTML = draw.headKnob(cur);
+    slots.tempKnob.innerHTML = draw.tempKnob(cur);
+    slots.lever.innerHTML = draw.lever(cur);
+    slots.pins.innerHTML = draw.pins(cur);
+  }
+  slots.hits.innerHTML = draw.hits();
+
+  const listeners = [];
+  function update(patch, fromUser = true) {
+    Object.assign(st, patch);
+    if (fromUser) lastTouch = performance.now();
+    target();
+    if (!raf) raf = requestAnimationFrame(frame);
+    listeners.forEach((fn) => fn(st, tgt.r));
+  }
+  window.Plate = { st, update, on: (fn) => { listeners.push(fn); if (tgt) fn(st, tgt.r); }, HEAD_ANG, T_MIN, T_MAX };
+
+  /* ---------- input ---------- */
+  svg.addEventListener("click", (e) => {
+    const h = e.target.closest(".hit");
+    if (h) update({ q: +h.dataset.j });
+  });
+  const fig = document.getElementById("plate");
+  fig.addEventListener("keydown", (e) => {
+    const k = e.key;
+    if (k === "ArrowLeft") update({ q: Math.max(0, st.q - 1) });
+    else if (k === "ArrowRight") update({ q: Math.min(N - 1, st.q + 1) });
+    else if (/^[1-4]$/.test(k)) update({ head: +k - 1 });
+    else if (k === "[") update({ T: Math.max(T_MIN, +(st.T / 1.25).toFixed(3)) });
+    else if (k === "]") update({ T: Math.min(T_MAX, +(st.T * 1.25).toFixed(3)) });
+    else if (k === "m" || k === "M") update({ causal: !st.causal });
+    else return;
+    e.preventDefault();
+  });
+
+  /* Self-demonstration: after a quiet spell the plate steps the query along the
+     sentence and changes head every lap. It stops for good under reduced motion. */
+  let lastTouch = -1e9, demoing = true;
+  fig.addEventListener("pointerenter", () => (demoing = false));
+  fig.addEventListener("pointerleave", () => (demoing = true));
+  fig.addEventListener("focusin", () => (demoing = false));
+  fig.addEventListener("focusout", () => (demoing = true));
+  let visible = true;
+  new IntersectionObserver((es) => (visible = es[0].isIntersecting)).observe(fig);
+  setInterval(() => {
+    if (reduce.matches || !demoing || !visible || document.hidden) return;
+    if (performance.now() - lastTouch < 12000) return;
+    let q = st.q + 1, head = st.head;
+    if (q >= N) { q = 1; head = (head + 1) % M.HEADS.length; }
+    update({ q, head }, false);
+  }, 3400);
+
+  target();
+  if (reduce.matches) { Object.assign(cur, JSON.parse(JSON.stringify(tgt)), { a: tgt.a.slice(), sc: tgt.sc.slice(), shut: tgt.shut.slice() }); paint(); }
+  else raf = requestAnimationFrame(frame);
+  })();
+
+</script>
+<script>
+/* Wall texts, ledger, matrix and controls: all read the same model the plate reads. */
+(function () {
+  "use strict";
+  const M = window.AttnModel, P = window.Plate, N = M.TOKENS.length;
+  const $ = (id) => document.getElementById(id);
+  const n2 = (v) => (Math.abs(v) < 0.005 ? "0.00" : v.toFixed(2));
+  const tok = (j) => M.TOKENS[j].w;
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+  // Controls
+  $("qseg").innerHTML = M.TOKENS.map((t, j) => `<button data-q="${j}" aria-pressed="false">${t.w}</button>`).join("");
+  $("hseg").innerHTML = M.HEADS.map((h, i) => `<button data-h="${i}" aria-pressed="false" title="${h.name}">${h.id}</button>`).join("");
+  $("qseg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) P.update({ q: +b.dataset.q }); });
+  $("hseg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) P.update({ head: +b.dataset.h }); });
+  $("temp").addEventListener("input", (e) => P.update({ T: +Math.pow(2, +e.target.value).toFixed(3) }));
+  $("mask").addEventListener("click", () => P.update({ causal: !P.st.causal }));
+  $("heads").innerHTML = M.HEADS.map((h, i) => `<button data-h="${i}" aria-pressed="false"><span class="rn">${h.id}</span><span><b>${h.name}</b><small>${h.short}</small></span><span class="h" id="hh${i}"></span></button>`).join("");
+  $("heads").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) P.update({ head: +b.dataset.h }); });
+  $("ledger").addEventListener("click", (e) => { const r = e.target.closest("tr"); if (r) P.update({ q: +r.dataset.j }); });
+  $("matrix").addEventListener("click", (e) => { const b = e.target.closest("[data-row]"); if (b) P.update({ q: +b.dataset.row }); });
+
+  // Key: hovering an entry lights its pin on the plate.
+  const key = $("key");
+  const light = (n) => {
+    key.querySelectorAll("li").forEach((li) => li.classList.toggle("on", li.dataset.pin === n));
+    document.querySelectorAll("#plate-svg .pin").forEach((p) => p.classList.toggle("on", p.dataset.pin === n));
+  };
+  key.addEventListener("mouseover", (e) => { const li = e.target.closest("li"); if (li) light(li.dataset.pin); });
+  key.addEventListener("mouseleave", () => light(null));
+  document.getElementById("plate-svg").addEventListener("mouseover", (e) => { const p = e.target.closest(".pin"); light(p ? p.dataset.pin : null); });
+
+  const strip = (v) => {
+    const mx = 3.2;
+    return `<span class="strip">${v.map((x) => {
+      const a = Math.min(1, Math.abs(x) / mx);
+      const c = x >= 0 ? `color-mix(in srgb, var(--accent) ${Math.round(a * 100)}%, var(--paper))` : `color-mix(in srgb, var(--ink-3) ${Math.round(a * 100)}%, var(--paper))`;
+      return `<i style="background:${c}" title="${x.toFixed(2)}"></i>`;
+    }).join("")}</span>`;
+  };
+
+  P.on((st, r) => {
+    const h = M.HEADS[st.head];
+    // controls
+    $("qseg").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", +b.dataset.q === st.q));
+    $("hseg").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", +b.dataset.h === st.head));
+    $("heads").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", +b.dataset.h === st.head));
+    $("qname").textContent = tok(st.q);
+    $("hname").textContent = h.id + " · " + h.name;
+    $("hdesc").textContent = h.short.charAt(0).toUpperCase() + h.short.slice(1) + ".";
+    $("tval").textContent = "T = " + st.T.toFixed(2);
+    const tv = Math.log2(st.T); if (Math.abs(+$("temp").value - tv) > 0.011) $("temp").value = tv.toFixed(2);
+    $("mask").setAttribute("aria-pressed", st.causal);
+    $("mask").textContent = st.causal ? "Causal" : "Open";
+
+    // readout
+    $("readout").innerHTML = `${tok(st.q)} → <b>${tok(r.top)} ${r.a[r.top].toFixed(2)}</b> · H ${r.H.toFixed(2)} bits · head ${h.id}`;
+
+    // stages
+    const open = r.a.map((_, j) => j).filter((j) => !r.masked[j]);
+    const best = open.slice().sort((a, b) => r.raw[b] - r.raw[a]);
+    $("L1").innerHTML = best.slice(0, 3).map((j) => `q·k(${tok(j)}) = ${j === r.top ? "<b>" : ""}${n2(r.raw[j])}${j === r.top ? "</b>" : ""}`).join("<br>");
+    $("L2").innerHTML = best.slice(0, 3).map((j) => `${tok(j)}: ${n2(r.raw[j])} / 2.83 = ${n2(r.scaled[j])}`).join("<br>") + `<br>then ÷ T ${st.T.toFixed(2)}`;
+    const Z = r.Z;
+    $("L3").innerHTML = `Σ e<sup>z</sup> = ${Z < 1000 ? Z.toFixed(2) : Z.toExponential(2)}<br>` + best.slice(0, 2).map((j) => `a(${tok(j)}) = ${r.ex[j] < 1000 ? r.ex[j].toFixed(2) : r.ex[j].toExponential(2)} / Σ = ${j === r.top ? "<b>" : ""}${r.a[j].toFixed(3)}${j === r.top ? "</b>" : ""}`).join("<br>") +
+      `<br>${r.masked.filter(Boolean).length} shut · Σ a = ${r.a.reduce((s, v) => s + v, 0).toFixed(3)}`;
+    const ranked = open.slice().sort((a, b) => r.a[b] - r.a[a]);
+    $("L4").innerHTML = `o = ` + ranked.slice(0, 3).map((j) => `${r.a[j].toFixed(2)}·v(${tok(j)})`).join(" + ") + (ranked.length > 3 ? ` + ${(1 - ranked.slice(0, 3).reduce((s, j) => s + r.a[j], 0)).toFixed(2)} rest` : "") +
+      `<br>entropy ${r.H.toFixed(2)} of ${Math.log2(open.length).toFixed(2)} bits`;
+
+    // ledger
+    $("qline").innerHTML = `<span class="label">Query</span><b style="font-family:var(--body);font-size:14px;color:var(--ink)">${tok(st.q)}</b> q = ${strip(r.q)} <span>[${r.q.map((v) => v.toFixed(1)).join(", ")}]</span>`;
+    $("ledger").innerHTML = M.TOKENS.map((t, j) => {
+      const m = r.masked[j];
+      return `<tr data-j="${j}" class="${j === st.q ? "q" : ""} ${m ? "mask" : ""}"><td>${j}</td><td class="tok">${t.w}</td><td>${strip(h.k[j])}</td>` +
+        `<td>${n2(r.raw[j])}</td><td>${n2(r.scaled[j])}</td><td>${n2(r.logit[j])}</td><td>${m ? "shut" : r.ex[j] < 1000 ? r.ex[j].toFixed(2) : r.ex[j].toExponential(1)}</td>` +
+        `<td class="w">${m ? "masked" : `<span class="bar"><span><i style="width:${(r.a[j] * 100).toFixed(1)}%"></i></span>${r.a[j].toFixed(3)}</span>`}</td></tr>`;
+    }).join("");
+
+    // matrix
+    let g = `<span></span>` + M.TOKENS.map((t) => `<span class="ch">${t.w}</span>`).join("");
+    for (let i = 0; i < N; i++) {
+      const ri = M.attend(st.head, i, st.T, st.causal);
+      g += `<span class="rh" data-row="${i}">${tok(i)}</span>`;
+      for (let j = 0; j < N; j++) {
+        const a = ri.a[j], m = ri.masked[j];
+        g += `<button data-row="${i}" class="${m ? "mask" : ""} ${i === st.q ? "row" : ""} ${a > 0.5 ? "dark" : ""}" aria-label="${tok(i)} to ${tok(j)}: ${m ? "masked" : a.toFixed(2)}">` +
+          (m ? "" : `<span class="fill" style="opacity:${Math.pow(a, 0.7).toFixed(3)}"></span><span>${a >= 0.995 ? "1" : a.toFixed(2).replace(/^0/, "")}</span>`) + `</button>`;
+      }
+    }
+    $("matrix").innerHTML = g;
+    M.HEADS.forEach((hh, i) => { const ri = M.attend(i, st.q, st.T, st.causal); $("hh" + i).textContent = `${tok(st.q)} → ${tok(ri.top)} ${ri.a[ri.top].toFixed(2)}`; });
+  });
+})();
+
+</script>
