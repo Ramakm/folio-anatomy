@@ -7,6 +7,8 @@
 *Explain an idea the way a museum explains a specimen.*
 
 [The collection](#the-collection) · [Install](#ii-install) · [Commission a plate](#iii-commission-a-plate) · [Anatomy of a plate](#iv-anatomy-of-a-plate) · [Make your own](#v-make-your-own)
+<img width="1776" height="896" alt="Untitled design" src="https://github.com/user-attachments/assets/ee106ff7-05df-4765-a7d2-03b81f1fc639" />
+
 
 <br>
 
