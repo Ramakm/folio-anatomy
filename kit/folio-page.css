@@ -269,3 +269,33 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 .fig.mode-3d.turning { cursor: grabbing; }
 .fig.mode-3d #plate-svg .hit { cursor: pointer; }
 @media (max-width: 720px) { .plate .tr .cap { display: none; } }
+
+/* Looking closer: the inspector card and the loupe */
+.fig { position: relative; }
+#plate-svg .pin { cursor: pointer; }
+#plate-svg .pin:hover circle { fill: var(--accent); }
+.inspect { position: absolute; left: 14px; bottom: 14px; width: min(340px, calc(100% - 28px)); background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 1px 0 var(--rule); padding: 14px 16px 14px; display: grid; gap: 6px; z-index: 3; }
+.inspect[hidden] { display: none; }
+.inspect-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.inspect-nav { display: inline-flex; gap: 4px; }
+.inspect-nav button { font: 500 11px/1 var(--mono); padding: 6px 8px; border: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; }
+.inspect-nav button:hover { border-color: var(--ink); }
+.inspect b { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.1; }
+.inspect p { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.inspect-live { font-family: var(--mono); font-size: 12px; line-height: 1.6; padding-top: 8px; border-top: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+.inspect-live b { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 500; }
+.fig.inspecting canvas.light { opacity: 0 !important; }
+.loupe-layer { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; display: none; }
+.loupe-layer .loupe-bg { fill: var(--paper); }
+.loupe-layer .loupe-ring { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.loupe-layer .loupe-ring2 { fill: none; stroke: var(--brass); stroke-width: 7; opacity: .9; }
+.loupe-layer .loupe-handle { stroke: var(--ink); stroke-width: 9; stroke-linecap: round; }
+.fig.loupe-on { cursor: none; }
+.tools { display: inline-grid; grid-auto-flow: column; border: 1px solid var(--rule); }
+.tools button { font: 500 10.5px/1 var(--mono); letter-spacing: .1em; padding: 7px 11px; background: none; border: 0; color: var(--ink-2); cursor: pointer; }
+.tools button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.tools button:hover:not([aria-pressed="true"]) { background: var(--accent-soft); color: var(--ink); }
+@media (max-width: 720px) { .inspect { position: static; width: auto; margin: 8px 0 0; } }
+.key li { cursor: pointer; }
+.plate .tr { gap: 10px; }
+.fig.loupe-on #plate-svg .hit:hover { fill: transparent; }

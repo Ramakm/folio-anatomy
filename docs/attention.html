@@ -278,6 +278,36 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 .fig.mode-3d #plate-svg .hit { cursor: pointer; }
 @media (max-width: 720px) { .plate .tr .cap { display: none; } }
 
+/* Looking closer: the inspector card and the loupe */
+.fig { position: relative; }
+#plate-svg .pin { cursor: pointer; }
+#plate-svg .pin:hover circle { fill: var(--accent); }
+.inspect { position: absolute; left: 14px; bottom: 14px; width: min(340px, calc(100% - 28px)); background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 1px 0 var(--rule); padding: 14px 16px 14px; display: grid; gap: 6px; z-index: 3; }
+.inspect[hidden] { display: none; }
+.inspect-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.inspect-nav { display: inline-flex; gap: 4px; }
+.inspect-nav button { font: 500 11px/1 var(--mono); padding: 6px 8px; border: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; }
+.inspect-nav button:hover { border-color: var(--ink); }
+.inspect b { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.1; }
+.inspect p { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.inspect-live { font-family: var(--mono); font-size: 12px; line-height: 1.6; padding-top: 8px; border-top: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+.inspect-live b { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 500; }
+.fig.inspecting canvas.light { opacity: 0 !important; }
+.loupe-layer { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; display: none; }
+.loupe-layer .loupe-bg { fill: var(--paper); }
+.loupe-layer .loupe-ring { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.loupe-layer .loupe-ring2 { fill: none; stroke: var(--brass); stroke-width: 7; opacity: .9; }
+.loupe-layer .loupe-handle { stroke: var(--ink); stroke-width: 9; stroke-linecap: round; }
+.fig.loupe-on { cursor: none; }
+.tools { display: inline-grid; grid-auto-flow: column; border: 1px solid var(--rule); }
+.tools button { font: 500 10.5px/1 var(--mono); letter-spacing: .1em; padding: 7px 11px; background: none; border: 0; color: var(--ink-2); cursor: pointer; }
+.tools button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.tools button:hover:not([aria-pressed="true"]) { background: var(--accent-soft); color: var(--ink); }
+@media (max-width: 720px) { .inspect { position: static; width: auto; margin: 8px 0 0; } }
+.key li { cursor: pointer; }
+.plate .tr { gap: 10px; }
+.fig.loupe-on #plate-svg .hit:hover { fill: transparent; }
+
 </style>
 
 <div class="wrap">
@@ -305,12 +335,12 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 
   <div class="exhibit">
     <figure class="plate" style="margin:0">
-      <div class="corners"><span class="tl">Pl. I</span><span class="tr"><span class="cap">The assay of a query</span><span class="views" id="views" role="group" aria-label="View"></span></span></div>
+      <div class="corners"><span class="tl">Pl. I</span><span class="tr"><span class="cap">The assay of a query</span><span class="views" id="views" role="group" aria-label="View"></span><span class="tools" id="tools" role="group" aria-label="Tools"><button type="button" data-t="loupe" aria-pressed="false" title="A magnifying glass that follows the pointer">Loupe</button></span></span></div>
       <div class="fig" id="plate" tabindex="0" role="img" aria-label="An isometric assay bench that computes attention. Use the arrow keys to move the query, 1 to 4 to change head, square brackets for temperature, M for the mask.">
         <svg id="plate-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
       </div>
       <div class="corners b">
-        <span class="bl">Click a column to make it the query · ← → step · 1 to 4 head · [ ] temperature · M mask</span>
+        <span class="bl">Click a column to make it the query · click a numbered pin to look closer · ← → step · 1 to 4 head · [ ] temperature · M mask</span>
         <span class="br" id="readout" aria-live="polite"></span>
       </div>
     </figure>
@@ -672,7 +702,7 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
     const base = K.fit({ az: o.az, el: o.el }, o.points, o.W, o.H, o.pad ?? 22);
     const C = o.center;
     const anchor = base.p(C);
-    const st = { cam: base, base, slots: {}, az: o.az, el: o.el, turned: false };
+    const st = { cam: base, base, slots: {}, az: o.az, el: o.el, turned: false, sceneId: (o.svg.id || "plate") + "-scene" };
     o.svg.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`);
 
     st.cameraAt = (az, el) => {
@@ -699,7 +729,7 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
         if (typeof it === "string") run += it;
         else { html += run; run = ""; html += `<g data-slot="${it.slot}"></g>`; }
       }
-      o.svg.innerHTML = html + run;
+      o.svg.innerHTML = `<g id="${st.sceneId}">` + html + run + "</g>";
       st.slots = {};
       o.svg.querySelectorAll("[data-slot]").forEach((g) => (st.slots[g.dataset.slot] = g));
       return cam;
@@ -888,13 +918,118 @@ float caustic(vec2 q, float t) {
     return { set(id) { host.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.v === id)); } };
   }
 
+
+  /* ---------- inspector: look closely at one part ---------- */
+  function inspector(o) {
+    // o: { fig, svg, W, H, parts:[{n, name, text, at:[x,y,z]}], cam(), live(n) -> html, zoom }
+    const card = document.createElement("div");
+    card.className = "inspect"; card.hidden = true; card.setAttribute("role", "dialog"); card.setAttribute("aria-live", "polite");
+    card.innerHTML = `<div class="inspect-top"><span class="label" data-k="num"></span><span class="inspect-nav">
+      <button type="button" data-a="prev" aria-label="Previous part">←</button><button type="button" data-a="next" aria-label="Next part">→</button>
+      <button type="button" data-a="close">Whole bench</button></span></div>
+      <b data-k="name"></b><p data-k="text"></p><div class="inspect-live" data-k="live"></div>`;
+    o.fig.appendChild(card);
+    const q = (k) => card.querySelector(`[data-k="${k}"]`);
+    let open = null, vb = [0, 0, o.W, o.H], anim = 0;
+    const setVB = (v) => { vb = v; o.svg.setAttribute("viewBox", v.map((x) => x.toFixed(2)).join(" ")); };
+    const animateTo = (to) => {
+      cancelAnimationFrame(anim);
+      const from = vb.slice(), t0 = performance.now(), dur = matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 650;
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / dur), e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        setVB(from.map((f, i) => f + (to[i] - f) * e));
+        if (k < 1) anim = requestAnimationFrame(step);
+      };
+      anim = requestAnimationFrame(step);
+    };
+    const lightPin = (n) => o.svg.querySelectorAll(".pin").forEach((p) => p.classList.toggle("on", String(p.dataset.pin) === String(n)));
+    const api = {
+      get open() { return open; },
+      show(n) {
+        const part = o.parts.find((p) => p.n === n); if (!part) return;
+        open = n;
+        const c = o.cam(), p = c.p(typeof part.at === "function" ? part.at() : part.at), z = o.zoom || 2.4, w = o.W / z, h = o.H / z;
+        const x = Math.max(0, Math.min(o.W - w, p[0] - w / 2)), y = Math.max(0, Math.min(o.H - h, p[1] - h * 0.42));
+        animateTo([x, y, w, h]);
+        o.fig.classList.add("inspecting");
+        q("num").textContent = `Part ${n} of ${o.parts.length}`;
+        q("name").textContent = part.name; q("text").textContent = part.text;
+        api.refresh(); card.hidden = false; lightPin(n);
+        o.onChange?.(n);
+      },
+      close() {
+        if (open === null) return;
+        open = null; animateTo([0, 0, o.W, o.H]); card.hidden = true;
+        o.fig.classList.remove("inspecting"); lightPin(null); o.onChange?.(null);
+      },
+      step(d) {
+        const i = o.parts.findIndex((p) => p.n === open);
+        api.show(o.parts[(i + d + o.parts.length) % o.parts.length].n);
+      },
+      refresh() { if (open !== null) q("live").innerHTML = o.live ? o.live(open) : ""; },
+    };
+    card.addEventListener("click", (e) => {
+      const a = e.target.closest("button")?.dataset.a;
+      if (a === "close") api.close(); else if (a === "prev") api.step(-1); else if (a === "next") api.step(1);
+      e.stopPropagation();
+    });
+    // Pins may be redrawn while they move, so act on the press rather than waiting for a click.
+    o.svg.addEventListener("pointerdown", (e) => {
+      const pinEl = e.target.closest(".pin");
+      if (pinEl) { const n = +pinEl.dataset.pin; open === n ? api.close() : api.show(n); e.stopPropagation(); e.preventDefault(); }
+    });
+    o.fig.addEventListener("keydown", (e) => {
+      if (open === null) return;
+      if (e.key === "Escape") api.close(); else if (e.key === ".") api.step(1); else if (e.key === ",") api.step(-1); else return;
+      e.preventDefault(); e.stopPropagation();
+    });
+    return api;
+  }
+
+  /* ---------- loupe: a magnifying glass over the bench ---------- */
+  function loupe(o) {
+    // o: { fig, svg, W, H, sceneId, mag, r }
+    const NS = "http://www.w3.org/2000/svg", id = o.sceneId + "-loupe";
+    const layer = document.createElementNS(NS, "svg");
+    layer.setAttribute("class", "loupe-layer"); layer.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`); layer.setAttribute("aria-hidden", "true");
+    layer.innerHTML = `<defs><clipPath id="${id}"><circle r="${o.r || 92}"/></clipPath></defs>
+      <g clip-path="url(#${id})"><rect class="loupe-bg" x="-5000" y="-5000" width="10000" height="10000"/><use href="#${o.sceneId}"/></g>
+      <circle class="loupe-ring" r="${o.r || 92}"/><circle class="loupe-ring2" r="${(o.r || 92) + 5}"/>
+      <line class="loupe-handle" x1="0" y1="0" x2="0" y2="0"/>`;
+    o.fig.appendChild(layer);
+    const clip = layer.querySelector("clipPath circle"), use = layer.querySelector("use");
+    const rings = layer.querySelectorAll(".loupe-ring, .loupe-ring2"), handle = layer.querySelector(".loupe-handle");
+    let on = false, pos = [o.W * 0.5, o.H * 0.45];
+    const r = o.r || 92, m = o.mag || 2.6;
+    const place = () => {
+      const [x, y] = pos;
+      clip.setAttribute("cx", x); clip.setAttribute("cy", y);
+      use.setAttribute("transform", `translate(${x} ${y}) scale(${m}) translate(${-x} ${-y})`);
+      rings.forEach((c) => { c.setAttribute("cx", x); c.setAttribute("cy", y); });
+      const a = Math.PI * 0.25;
+      handle.setAttribute("x1", x + (r + 5) * Math.cos(a)); handle.setAttribute("y1", y + (r + 5) * Math.sin(a));
+      handle.setAttribute("x2", x + (r + 60) * Math.cos(a)); handle.setAttribute("y2", y + (r + 60) * Math.sin(a));
+    };
+    const toVB = (e) => {
+      const b = o.svg.getBoundingClientRect(), vb = (o.svg.getAttribute("viewBox") || `0 0 ${o.W} ${o.H}`).split(/\s+/).map(Number);
+      return [vb[0] + ((e.clientX - b.left) / b.width) * vb[2], vb[1] + ((e.clientY - b.top) / b.height) * vb[3]];
+    };
+    o.fig.addEventListener("pointermove", (e) => { if (!on) return; pos = toVB(e); place(); });
+    place();
+    return {
+      get on() { return on; },
+      toggle(v = !on) { on = v; o.fig.classList.toggle("loupe-on", on); layer.style.display = on ? "block" : "none"; if (on) place(); },
+      sync() { const vb = (o.svg.getAttribute("viewBox") || "").trim(); if (vb) layer.setAttribute("viewBox", vb); },
+    };
+  }
+
   const isDark = () => {
     const t = document.documentElement.dataset.theme;
     return t ? t === "dark" : root.matchMedia("(prefers-color-scheme: dark)").matches;
   };
   const webglOK = () => { try { return !!document.createElement("canvas").getContext("webgl"); } catch (e) { return false; } };
 
-  K.live = { stage, orbit, light, views, isDark, webglOK, PRELUDE };
+  K.live = { stage, orbit, light, views, inspector, loupe, isDark, webglOK, PRELUDE };
 })(typeof window !== "undefined" ? window : globalThis);
 
 </script>
@@ -1157,8 +1292,8 @@ float caustic(vec2 q, float t) {
   }
 
   if (api.leftIsFar) controls();
-  slot("pins");
   slot("hits");
+  slot("pins");
   }
 
   // Controls: head selector, temperature knob, mask lever.
@@ -1387,22 +1522,18 @@ float caustic(vec2 q, float t) {
     e.preventDefault();
   });
 
-  /* Self-demonstration: after a quiet spell the plate steps the query along the
-     sentence and changes head every lap. It stops for good under reduced motion. */
-  let lastTouch = -1e9, demoing = true;
-  fig.addEventListener("pointerenter", () => (demoing = false));
-  fig.addEventListener("pointerleave", () => (demoing = true));
-  fig.addEventListener("focusin", () => (demoing = false));
-  fig.addEventListener("focusout", () => (demoing = true));
+  /* Self-demonstration: the plate keeps stepping the query along the sentence and changes
+     head every lap. It rests for a few seconds after you touch it, and under reduced motion. */
+  let lastTouch = -1e9;
   let visible = true;
   new IntersectionObserver((es) => (visible = es[0].isIntersecting)).observe(fig);
   setInterval(() => {
-    if (reduce.matches || !demoing || !visible || document.hidden) return;
-    if (performance.now() - lastTouch < 12000) return;
+    if (reduce.matches || !visible || document.hidden) return;
+    if (performance.now() - lastTouch < 9000) return;
     let q = st.q + 1, head = st.head;
     if (q >= N) { q = 1; head = (head + 1) % M.HEADS.length; }
     update({ q, head }, false);
-  }, 3400);
+  }, 3000);
 
   /* ---------- three views: SVG, WebGL, 3D ---------- */
   const LIGHT_FRAG = `
@@ -1483,6 +1614,7 @@ void main() {
   }
   function setMode(m) {
     mode = m;
+    if (m === "3d" && typeof insp !== "undefined") insp.close();
     fig.classList.toggle("mode-webgl", m === "webgl");
     fig.classList.toggle("mode-3d", m === "3d");
     if (m !== "3d" && (stage.az !== -24 || stage.el !== 30)) { mount(-24, 30); paint(); }
@@ -1521,6 +1653,48 @@ void main() {
   window.Plate.turn = (az, el) => { setMode("3d"); mount(az, el); paint(); };
   listeners.push(kickLight);
 
+  /* ---------- looking closer ---------- */
+  const tok = (j) => M.TOKENS[j].w;
+  const PARTS = [
+    { n: 1, name: "Query carriage", text: "Rides the rail to the word doing the looking. It carries that word's query, q = x·W_Q.", at: () => [cur.xq, RAIL.y, RAIL.z] },
+    { n: 2, name: "Key dials", text: "One per word. Each needle reads how well that word's key lines up with the query, scaled by √d_k.", at: [SX(1), DIAL.y, DIAL.z] },
+    { n: 3, name: "Glass columns", text: "The share of attention each word receives. Fluid height is the weight, graduated in tenths.", at: [SX(1), GL.y, GL.z + GL.h * 0.5] },
+    { n: 4, name: "Unit reservoir", text: "Holds exactly one unit and is sealed. Softmax can only divide it, so the columns always sum to one.", at: [60, 98, 60] },
+    { n: 5, name: "Stopcocks and shutters", text: "The causal mask. A word may only look back, so every later word's stopcock is shut and its column capped.", at: [SX(4), 123, 18] },
+    { n: 6, name: "Core-sample tray", text: "The output: a blend of every word's value, laid down in order. Each stratum's length is that word's weight.", at: [(TRAY.x0 + TRAY.x1) / 2, (TRAY.y0 + TRAY.y1) / 2, 8] },
+    { n: 7, name: "Head selector", text: "Four heads read the same words with different learned projections, so each pours attention differently.", at: [655, 96, 10] },
+    { n: 8, name: "Temperature knob", text: "Divides every score before softmax. Turn it down and one column takes everything; turn it up and the fluid spreads.", at: [655, 172, 10] },
+    { n: 9, name: "Mask lever", text: "Causal attention, as in a decoder, or open attention, as in an encoder where every word sees every other.", at: [655, 232, 8] },
+  ];
+  const top3 = (arr, f) => arr.map((v, j) => [v, j]).filter(([, j]) => !tgt.r.masked[j]).sort((a, b) => b[0] - a[0]).slice(0, 3).map(([v, j]) => f(v, j)).join(" · ");
+  const live = (n) => {
+    const r = tgt.r, h = M.HEADS[st.head];
+    switch (n) {
+      case 1: return `query <b>${tok(st.q)}</b> · q = [${r.q.slice(0, 4).map((v) => v.toFixed(1)).join(", ")}, …]`;
+      case 2: return "scaled score · " + top3(r.scaled, (v, j) => `${tok(j)} <b>${v.toFixed(2)}</b>`);
+      case 3: return "weight · " + top3(r.a, (v, j) => `${tok(j)} <b>${v.toFixed(2)}</b>`);
+      case 4: return `Σ a = <b>${r.a.reduce((x, y) => x + y, 0).toFixed(3)}</b> · shared by ${r.masked.filter((m) => !m).length} open columns`;
+      case 5: return `${r.masked.filter((m) => !m).length} open · <b>${r.masked.filter(Boolean).length}</b> shut · mask ${st.causal ? "causal" : "open"}`;
+      case 6: return "output = " + top3(r.a, (v, j) => `<b>${v.toFixed(2)}</b>·v(${tok(j)})`);
+      case 7: return `head <b>${h.id}</b> · ${h.name}`;
+      case 8: return `T = <b>${st.T.toFixed(2)}</b> · entropy ${r.H.toFixed(2)} bits`;
+      case 9: return `<b>${st.causal ? "causal" : "open"}</b> · ${tok(st.q)} can see ${r.masked.filter((m) => !m).length} of ${N} words`;
+    }
+    return "";
+  };
+  const insp = K.live.inspector({ fig, svg, W, H, parts: PARTS, cam: () => cam, live, zoom: 2.3,
+    onChange: (n) => { if (n !== null && lens.on) toggleLens(false); } });
+  const lens = K.live.loupe({ fig, svg, W, H, sceneId: stage.sceneId, mag: 2.6, r: 88 });
+  const toolsEl = document.getElementById("tools");
+  function toggleLens(v) {
+    lens.toggle(v); if (lens.on) insp.close();
+    toolsEl?.querySelector('[data-t="loupe"]')?.setAttribute("aria-pressed", lens.on);
+  }
+  toolsEl?.addEventListener("click", (e) => { if (e.target.closest('[data-t="loupe"]')) toggleLens(); });
+  listeners.push(() => insp.refresh());
+  document.addEventListener("folio:part", (e) => insp.show(e.detail));
+  Object.assign(window.Plate, { inspect: (n) => insp.show(n), closeInspect: () => insp.close(), loupe: (v) => toggleLens(v) });
+
   target();
   if (reduce.matches) { Object.assign(cur, JSON.parse(JSON.stringify(tgt)), { a: tgt.a.slice(), sc: tgt.sc.slice(), shut: tgt.shut.slice() }); paint(); }
   else raf = requestAnimationFrame(frame);
@@ -1557,6 +1731,12 @@ void main() {
   };
   key.addEventListener("mouseover", (e) => { const li = e.target.closest("li"); if (li) light(li.dataset.pin); });
   key.addEventListener("mouseleave", () => light(null));
+  key.addEventListener("click", (e) => {
+    const li = e.target.closest("li"); if (!li) return;
+    document.dispatchEvent(new CustomEvent("folio:part", { detail: +li.dataset.pin }));
+    const fig = document.getElementById("plate"), b = fig.getBoundingClientRect();
+    if (b.top < 0 || b.bottom > innerHeight) fig.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
   document.getElementById("plate-svg").addEventListener("mouseover", (e) => { const p = e.target.closest(".pin"); light(p ? p.dataset.pin : null); });
 
   const strip = (v) => {

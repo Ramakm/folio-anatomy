@@ -31,13 +31,13 @@
 </tr>
 </table>
 
-Both plates live on one website, with a cover page for the collection. It is in [`docs/`](docs/); open `docs/index.html` in a browser, or publish it with GitHub Pages (see [VI](#vi-the-website)).
+Both plates live on one website, with a cover page written as a short illustrated essay: **[ramakm.github.io/folio-anatomy/docs](https://ramakm.github.io/folio-anatomy/docs/)**. Its source is in [`site/`](site/) and the built site in [`docs/`](docs/) (see [VI](#vi-the-website)).
 
 <br>
 
 ## Three views of every plate
 
-Each plate has a switch in its top corner: **SVG · WebGL · 3D**.
+Each plate has a switch in its top corner: **SVG · WebGL · 3D**, plus two ways to look closer: press any numbered pin for a zoomed view of that part with its live reading, or turn on the **Loupe** to magnify the bench under your pointer.
 
 <table>
 <tr>

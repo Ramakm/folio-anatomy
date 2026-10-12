@@ -105,6 +105,19 @@ Accumulate light as premultiplied colour (`addLight`) and pick colours per theme
 
 Leaving 3D returns the camera to the default view, so the WebGL light (which assumes it) always lines up.
 
+## Phase C3: looking closer
+
+Every plate lets the reader get close to any part, whatever the topic.
+
+- **Inspector.** Give the plate a list of parts, `{ n, name, text, at }`, where `at` is the part's world position (or a function, for a part that moves), and a `live(n)` function that returns that part's current reading as a short line of HTML. `inspector()` then makes every pin pressable: the plate glides in on the part (the SVG `viewBox` animates; nothing is redrawn), and a card shows the part's name, what it does and its live reading, with previous and next buttons, Esc to leave, and `,` and `.` to step. Clicking a line of the key does the same, through a `folio:part` event. Act on pointer-down, not click, because pins on moving parts are redrawn while the reader presses them; pins on parts that never move should be drawn once per camera, not every frame.
+- **Loupe.** A **Loupe** button beside the view switch turns on a magnifying glass that follows the pointer. It is a second, small SVG over the plate that shows the scene through a `<use>` element, scaled 2.6 times inside a circular clip, so it always mirrors the live drawing at no extra cost.
+
+The inspector and the loupe close each other, and entering 3D closes the inspector. Keep the plate moving while the reader watches: Plate I steps its own query along the sentence and rests only for a few seconds after a touch, and Plate II beats continuously.
+
+## Phase C4: the website
+
+`scripts/build-site.mjs` builds three things from the same sources: each plate's full page, an embeddable copy of each plate (`embed-<name>.html`, the figure alone, which reports its height to the page around it), and the cover page from `site/index.html`. The cover is an essay: a live plate at the top, then numbered sections in one reading column with margin notes and a contents rail on wide screens. Add a plate to `PLATES` and `EMBED` in the build script and a card to the cover.
+
 ## Phase D: proof
 
 Check with screenshots, not assumptions. In the repo, `node scripts/capture.mjs dist/<name>.html shots --crop x,y,w,h` produces light, dark and phone captures, an enlarged crop in viewBox units, and a report of console errors and horizontal overflow. Pass `--eval "Plate.update({...})"` to capture other states. Look at every image and check:
@@ -411,7 +424,7 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
     const base = K.fit({ az: o.az, el: o.el }, o.points, o.W, o.H, o.pad ?? 22);
     const C = o.center;
     const anchor = base.p(C);
-    const st = { cam: base, base, slots: {}, az: o.az, el: o.el, turned: false };
+    const st = { cam: base, base, slots: {}, az: o.az, el: o.el, turned: false, sceneId: (o.svg.id || "plate") + "-scene" };
     o.svg.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`);
 
     st.cameraAt = (az, el) => {
@@ -438,7 +451,7 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
         if (typeof it === "string") run += it;
         else { html += run; run = ""; html += `<g data-slot="${it.slot}"></g>`; }
       }
-      o.svg.innerHTML = html + run;
+      o.svg.innerHTML = `<g id="${st.sceneId}">` + html + run + "</g>";
       st.slots = {};
       o.svg.querySelectorAll("[data-slot]").forEach((g) => (st.slots[g.dataset.slot] = g));
       return cam;
@@ -627,12 +640,117 @@ float caustic(vec2 q, float t) {
     return { set(id) { host.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.v === id)); } };
   }
 
+
+  /* ---------- inspector: look closely at one part ---------- */
+  function inspector(o) {
+    // o: { fig, svg, W, H, parts:[{n, name, text, at:[x,y,z]}], cam(), live(n) -> html, zoom }
+    const card = document.createElement("div");
+    card.className = "inspect"; card.hidden = true; card.setAttribute("role", "dialog"); card.setAttribute("aria-live", "polite");
+    card.innerHTML = `<div class="inspect-top"><span class="label" data-k="num"></span><span class="inspect-nav">
+      <button type="button" data-a="prev" aria-label="Previous part">←</button><button type="button" data-a="next" aria-label="Next part">→</button>
+      <button type="button" data-a="close">Whole bench</button></span></div>
+      <b data-k="name"></b><p data-k="text"></p><div class="inspect-live" data-k="live"></div>`;
+    o.fig.appendChild(card);
+    const q = (k) => card.querySelector(`[data-k="${k}"]`);
+    let open = null, vb = [0, 0, o.W, o.H], anim = 0;
+    const setVB = (v) => { vb = v; o.svg.setAttribute("viewBox", v.map((x) => x.toFixed(2)).join(" ")); };
+    const animateTo = (to) => {
+      cancelAnimationFrame(anim);
+      const from = vb.slice(), t0 = performance.now(), dur = matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 650;
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / dur), e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        setVB(from.map((f, i) => f + (to[i] - f) * e));
+        if (k < 1) anim = requestAnimationFrame(step);
+      };
+      anim = requestAnimationFrame(step);
+    };
+    const lightPin = (n) => o.svg.querySelectorAll(".pin").forEach((p) => p.classList.toggle("on", String(p.dataset.pin) === String(n)));
+    const api = {
+      get open() { return open; },
+      show(n) {
+        const part = o.parts.find((p) => p.n === n); if (!part) return;
+        open = n;
+        const c = o.cam(), p = c.p(typeof part.at === "function" ? part.at() : part.at), z = o.zoom || 2.4, w = o.W / z, h = o.H / z;
+        const x = Math.max(0, Math.min(o.W - w, p[0] - w / 2)), y = Math.max(0, Math.min(o.H - h, p[1] - h * 0.42));
+        animateTo([x, y, w, h]);
+        o.fig.classList.add("inspecting");
+        q("num").textContent = `Part ${n} of ${o.parts.length}`;
+        q("name").textContent = part.name; q("text").textContent = part.text;
+        api.refresh(); card.hidden = false; lightPin(n);
+        o.onChange?.(n);
+      },
+      close() {
+        if (open === null) return;
+        open = null; animateTo([0, 0, o.W, o.H]); card.hidden = true;
+        o.fig.classList.remove("inspecting"); lightPin(null); o.onChange?.(null);
+      },
+      step(d) {
+        const i = o.parts.findIndex((p) => p.n === open);
+        api.show(o.parts[(i + d + o.parts.length) % o.parts.length].n);
+      },
+      refresh() { if (open !== null) q("live").innerHTML = o.live ? o.live(open) : ""; },
+    };
+    card.addEventListener("click", (e) => {
+      const a = e.target.closest("button")?.dataset.a;
+      if (a === "close") api.close(); else if (a === "prev") api.step(-1); else if (a === "next") api.step(1);
+      e.stopPropagation();
+    });
+    // Pins may be redrawn while they move, so act on the press rather than waiting for a click.
+    o.svg.addEventListener("pointerdown", (e) => {
+      const pinEl = e.target.closest(".pin");
+      if (pinEl) { const n = +pinEl.dataset.pin; open === n ? api.close() : api.show(n); e.stopPropagation(); e.preventDefault(); }
+    });
+    o.fig.addEventListener("keydown", (e) => {
+      if (open === null) return;
+      if (e.key === "Escape") api.close(); else if (e.key === ".") api.step(1); else if (e.key === ",") api.step(-1); else return;
+      e.preventDefault(); e.stopPropagation();
+    });
+    return api;
+  }
+
+  /* ---------- loupe: a magnifying glass over the bench ---------- */
+  function loupe(o) {
+    // o: { fig, svg, W, H, sceneId, mag, r }
+    const NS = "http://www.w3.org/2000/svg", id = o.sceneId + "-loupe";
+    const layer = document.createElementNS(NS, "svg");
+    layer.setAttribute("class", "loupe-layer"); layer.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`); layer.setAttribute("aria-hidden", "true");
+    layer.innerHTML = `<defs><clipPath id="${id}"><circle r="${o.r || 92}"/></clipPath></defs>
+      <g clip-path="url(#${id})"><rect class="loupe-bg" x="-5000" y="-5000" width="10000" height="10000"/><use href="#${o.sceneId}"/></g>
+      <circle class="loupe-ring" r="${o.r || 92}"/><circle class="loupe-ring2" r="${(o.r || 92) + 5}"/>
+      <line class="loupe-handle" x1="0" y1="0" x2="0" y2="0"/>`;
+    o.fig.appendChild(layer);
+    const clip = layer.querySelector("clipPath circle"), use = layer.querySelector("use");
+    const rings = layer.querySelectorAll(".loupe-ring, .loupe-ring2"), handle = layer.querySelector(".loupe-handle");
+    let on = false, pos = [o.W * 0.5, o.H * 0.45];
+    const r = o.r || 92, m = o.mag || 2.6;
+    const place = () => {
+      const [x, y] = pos;
+      clip.setAttribute("cx", x); clip.setAttribute("cy", y);
+      use.setAttribute("transform", `translate(${x} ${y}) scale(${m}) translate(${-x} ${-y})`);
+      rings.forEach((c) => { c.setAttribute("cx", x); c.setAttribute("cy", y); });
+      const a = Math.PI * 0.25;
+      handle.setAttribute("x1", x + (r + 5) * Math.cos(a)); handle.setAttribute("y1", y + (r + 5) * Math.sin(a));
+      handle.setAttribute("x2", x + (r + 60) * Math.cos(a)); handle.setAttribute("y2", y + (r + 60) * Math.sin(a));
+    };
+    const toVB = (e) => {
+      const b = o.svg.getBoundingClientRect(), vb = (o.svg.getAttribute("viewBox") || `0 0 ${o.W} ${o.H}`).split(/\s+/).map(Number);
+      return [vb[0] + ((e.clientX - b.left) / b.width) * vb[2], vb[1] + ((e.clientY - b.top) / b.height) * vb[3]];
+    };
+    o.fig.addEventListener("pointermove", (e) => { if (!on) return; pos = toVB(e); place(); });
+    place();
+    return {
+      get on() { return on; },
+      toggle(v = !on) { on = v; o.fig.classList.toggle("loupe-on", on); layer.style.display = on ? "block" : "none"; if (on) place(); },
+      sync() { const vb = (o.svg.getAttribute("viewBox") || "").trim(); if (vb) layer.setAttribute("viewBox", vb); },
+    };
+  }
+
   const isDark = () => {
     const t = document.documentElement.dataset.theme;
     return t ? t === "dark" : root.matchMedia("(prefers-color-scheme: dark)").matches;
   };
   const webglOK = () => { try { return !!document.createElement("canvas").getContext("webgl"); } catch (e) { return false; } };
 
-  K.live = { stage, orbit, light, views, isDark, webglOK, PRELUDE };
+  K.live = { stage, orbit, light, views, inspector, loupe, isDark, webglOK, PRELUDE };
 })(typeof window !== "undefined" ? window : globalThis);
 ```

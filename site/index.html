@@ -1,146 +1,278 @@
 <title>Folio</title>
+<meta name="description" content="A Claude Code skill that explains an idea the way a museum explains a specimen: an invented instrument, drawn live, mounted with a key and wall texts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /*CSS*/
-/* The cover: a catalogue of the collection. A large wordmark, the plates as framed cards, then the method. */
-.cover { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 32px 72px; align-items: end; padding-block: 72px 56px; }
-.cover h1 { font-family: var(--display); font-weight: 400; font-style: italic; font-size: clamp(96px, 17vw, 236px); line-height: .8; letter-spacing: -.035em; margin: 18px 0 0; }
-.cover h1 span { color: var(--accent); font-style: normal; }
-.cover .lede { font-family: var(--display); font-size: clamp(22px, 2.4vw, 30px); line-height: 1.25; margin: 0 0 22px; text-wrap: balance; }
-.cover p { color: var(--ink-2); margin: 0 0 22px; max-width: 48ch; }
-.cover > div, .install > * { min-width: 0; }
-.install .row code { flex: 1 1 auto; }
-.install { background: var(--paper); padding: 16px 18px; display: grid; gap: 10px; }
-.install .row { display: flex; gap: 12px; align-items: center; justify-content: space-between; }
-.install code { font-family: var(--mono); font-size: 13.5px; overflow-x: auto; white-space: nowrap; min-width: 0; }
-.install button { font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 8px 12px; border: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; flex: none; }
-.install button:hover { border-color: var(--ink); }
-.collection { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
-.card { background: var(--paper); text-decoration: none; display: flex; flex-direction: column; outline: 1px solid var(--rule); outline-offset: -9px; padding: 18px; transition: transform .25s ease; }
-.card:hover { transform: translateY(-3px); }
-.card:hover h3 { color: var(--accent); }
-.card .im { aspect-ratio: 1.36; overflow: hidden; display: block; margin: 6px 0 16px; }
-.card img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; display: block; }
-.card .top { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 4px 0; }
-.card .pl { font-family: var(--display); font-style: italic; font-size: 20px; }
-.card h3 { font-family: var(--display); font-weight: 400; font-size: 30px; line-height: 1.05; margin: 0 4px 10px; text-wrap: balance; }
-.card h3 em { font-style: italic; }
-.card p { color: var(--ink-2); margin: 0 4px 16px; font-size: 14.5px; }
-.card .go { margin: auto 4px 4px; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
-.card.empty { background: none; outline: 1px dashed var(--ink-3); }
-.card.empty .im { display: grid; place-items: center; background: repeating-linear-gradient(135deg, transparent 0 7px, var(--rule) 7px 8px); }
-.card.empty .im span { font-family: var(--display); font-style: italic; font-size: 64px; color: var(--ink-3); background: var(--ground); padding: 0 18px; }
-.card.empty code { font-family: var(--mono); font-size: 12.5px; color: var(--ink); }
-.method { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-left: 1px solid var(--rule); }
-.method div { padding: 4px 22px 10px; border-right: 1px solid var(--rule); display: grid; gap: 10px; align-content: start; }
-.method .rn { font-family: var(--display); font-style: italic; font-size: 34px; line-height: 1; color: var(--accent); }
-.method h3 { margin: 0; font-size: 15px; font-weight: 600; }
-.method p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
-.prompts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
-.prompts div { border-top: 1px solid var(--rule); padding: 14px 0; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; }
-.prompts .n { font-family: var(--display); font-style: italic; color: var(--ink-3); font-size: 18px; }
-.prompts code { font-family: var(--mono); font-size: 13px; }
-.prompts small { display: block; color: var(--ink-3); font-size: 13px; margin-top: 4px; }
-.credits { display: flex; gap: 22px; flex-wrap: wrap; }
-.credits a { text-decoration: none; } .credits a:hover { color: var(--accent); }
-@media (max-width: 1080px) { .collection { grid-template-columns: repeat(2, minmax(0, 1fr)); } .method { grid-template-columns: repeat(2, minmax(0, 1fr)); border-left: 0; } .method div { border-right: 0; border-top: 1px solid var(--rule); padding: 18px 18px 22px 0; } }
-@media (max-width: 720px) { .cover { grid-template-columns: minmax(0, 1fr); padding-block: 40px 32px; } .collection, .method, .prompts { grid-template-columns: minmax(0, 1fr); } }
+/* The cover reads like a museum catalogue essay: a quiet header, one live plate, then numbered
+   sections in a single reading column with margin notes, a contents rail on wide screens. */
+body { padding-inline: 0; font-size: 19px; line-height: 1.68; }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule); }
+.top .in { max-width: 1240px; margin: 0 auto; padding: 14px clamp(16px, 4vw, 40px); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.top .mark { font-family: var(--display); font-size: 19px; letter-spacing: .3em; text-transform: uppercase; text-decoration: none; }
+.top nav { display: flex; gap: clamp(12px, 2.4vw, 28px); font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; }
+.top nav a { text-decoration: none; color: var(--ink-2); }
+.top nav a:hover { color: var(--accent); }
+
+.hero { max-width: 760px; margin: 0 auto; padding: clamp(56px, 9vw, 112px) clamp(16px, 4vw, 40px) 40px; text-align: center; }
+.hero .eyebrow { font-family: var(--mono); font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
+.hero h1 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 6.2vw, 74px); line-height: 1.04; letter-spacing: -.015em; margin: 22px 0 26px; text-wrap: balance; }
+.hero h1 em { color: var(--accent); }
+.hero .lede { font-size: clamp(19px, 2.1vw, 22px); line-height: 1.6; color: var(--ink-2); margin: 0 auto; max-width: 36em; text-wrap: pretty; }
+.byline { margin-top: 30px; display: flex; justify-content: center; gap: 10px 22px; flex-wrap: wrap; font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.byline b { color: var(--ink); font-weight: 500; }
+.cmd { margin: 30px auto 0; max-width: 560px; display: flex; align-items: center; gap: 12px; background: var(--paper); border: 1px solid var(--rule); padding: 10px 10px 10px 16px; text-align: left; }
+.cmd code { flex: 1 1 auto; min-width: 0; font-family: var(--mono); font-size: 13.5px; overflow-x: auto; white-space: nowrap; }
+.cmd code::before { content: "$ "; color: var(--ink-3); }
+.cmd button { flex: none; font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 9px 12px; border: 1px solid var(--rule); background: var(--ground); color: var(--ink); cursor: pointer; }
+.cmd button:hover { border-color: var(--ink); }
+
+.live { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+.frame { background: var(--paper); padding: 10px; outline: 1px solid var(--rule); outline-offset: -1px; }
+.frame iframe { display: block; width: 100%; aspect-ratio: 1000 / 735; border: 0; background: var(--paper); }
+.caption { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px 18px; align-items: baseline; margin: 14px 4px 0; font-size: 15.5px; color: var(--ink-2); line-height: 1.5; }
+.caption .fig-n { font-family: var(--display); font-style: italic; color: var(--ink); font-size: 18px; }
+.caption a { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; color: var(--ink); white-space: nowrap; }
+.caption a:hover { color: var(--accent); }
+
+.layout { max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: grid; grid-template-columns: 200px minmax(0, 680px) 260px; gap: 0 48px; justify-content: center; }
+.toc { position: sticky; top: 92px; align-self: start; padding-top: 104px; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: t; }
+.toc li { counter-increment: t; }
+.toc a { display: grid; grid-template-columns: 26px 1fr; text-decoration: none; font-size: 14.5px; color: var(--ink-3); padding: 4px 0; line-height: 1.35; }
+.toc a::before { content: counter(t, decimal-leading-zero); font-family: var(--mono); font-size: 10.5px; padding-top: 3px; }
+.toc a:hover, .toc a.on { color: var(--ink); }
+.toc a.on::before { color: var(--accent); }
+.toc .label { display: block; margin-bottom: 12px; }
+article { min-width: 0; grid-column: 2; }
+article section { padding-top: 96px; position: relative; }
+article h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 3.6vw, 40px); line-height: 1.12; margin: 0 0 22px; letter-spacing: -.01em; text-wrap: balance; display: grid; grid-template-columns: auto 1fr; gap: 0 18px; align-items: baseline; }
+article h2 .no { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: .08em; }
+article p { margin: 0 0 1.05em; text-wrap: pretty; }
+article p.first::first-letter { font-family: var(--display); float: left; font-size: 4.1em; line-height: .82; padding: 6px 10px 0 0; color: var(--accent); }
+article em { font-style: italic; }
+article a { text-decoration-thickness: 1px; }
+.note { float: right; clear: right; width: 240px; margin-right: -308px; font-size: 14px; line-height: 1.55; color: var(--ink-3); position: relative; }
+.note sup, .nref { font-family: var(--mono); font-size: 10.5px; color: var(--accent); }
+.nref { vertical-align: super; line-height: 0; margin-left: 1px; }
+.pull { font-family: var(--display); font-size: clamp(24px, 2.8vw, 31px); line-height: 1.3; margin: 34px 0; padding: 4px 0 4px 26px; border-left: 2px solid var(--accent); text-wrap: balance; }
+.pull small { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-top: 12px; }
+.commit { display: grid; gap: 0; margin: 28px 0; border-top: 1px solid var(--ink); }
+.commit div { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 6px 24px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.commit b { font-family: var(--display); font-weight: 400; font-style: italic; font-size: 21px; line-height: 1.3; }
+.commit span { font-size: 16.5px; color: var(--ink-2); }
+.wide { margin: 32px -120px; }
+.wide .frame iframe { aspect-ratio: 1000 / 720; }
+.plates { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0 8px; }
+.pcard { text-decoration: none; display: grid; gap: 10px; }
+.pcard .im { background: var(--paper); outline: 1px solid var(--rule); outline-offset: -1px; padding: 8px; }
+.pcard img { display: block; width: 100%; }
+.pcard b { font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.2; }
+.pcard span { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
+.pcard:hover b { color: var(--accent); }
+.views3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 28px -120px 12px; }
+.views3 figure { margin: 0; }
+.views3 img { display: block; width: 100%; background: var(--paper); outline: 1px solid var(--rule); outline-offset: -1px; }
+.views3 figcaption { font-size: 14.5px; color: var(--ink-2); margin-top: 10px; line-height: 1.5; }
+.views3 figcaption b { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; color: var(--ink); font-weight: 500; display: block; margin-bottom: 2px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px -120px 12px; }
+.pair img { display: block; width: 100%; outline: 1px solid var(--rule); outline-offset: -1px; }
+.pair figure { margin: 0; } .pair figcaption { font-size: 14.5px; color: var(--ink-2); margin-top: 10px; }
+.phases { list-style: none; margin: 26px 0; padding: 0; border-left: 1px solid var(--rule); }
+.phases li { position: relative; padding: 0 0 22px 30px; }
+.phases li::before { content: ""; position: absolute; left: -5px; top: 10px; width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--accent); }
+.phases b { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 23px; display: block; line-height: 1.3; }
+.phases span { color: var(--ink-2); font-size: 17px; }
+.prompts { margin: 22px 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.prompts div { padding: 13px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 2px; }
+.prompts code { font-family: var(--mono); font-size: 14px; color: var(--ink); white-space: normal; }
+.prompts small { font-size: 14.5px; color: var(--ink-3); }
+pre.block { background: var(--paper); border: 1px solid var(--rule); padding: 14px 16px; overflow-x: auto; font-family: var(--mono); font-size: 13.5px; line-height: 1.7; margin: 18px 0 22px; }
+pre.block .c { color: var(--ink-3); }
+details { border-top: 1px solid var(--rule); padding: 14px 0; }
+details:last-of-type { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-family: var(--display); font-size: 21px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--mono); color: var(--accent); }
+details[open] summary::after { content: "–"; }
+details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
+.colophon { max-width: 680px; margin: 120px auto 0; padding: 30px clamp(16px, 4vw, 40px) 0; border-top: 1px solid var(--ink); text-align: center; display: grid; gap: 14px; justify-items: center; }
+.colophon .mark { font-family: var(--display); letter-spacing: .32em; text-transform: uppercase; font-size: 18px; }
+.colophon p { margin: 0; font-size: 15px; color: var(--ink-3); max-width: 46em; }
+.colophon .links { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; }
+.colophon .links a { text-decoration: none; color: var(--ink); } .colophon .links a:hover { color: var(--accent); }
+@media (max-width: 1240px) {
+  .layout { grid-template-columns: minmax(0, 680px); }
+  .toc { display: none; }
+  article { grid-column: 1; }
+  .note { float: none; width: auto; margin: 0 0 1.1em; padding-left: 16px; border-left: 1px solid var(--rule); }
+  .wide, .views3, .pair { margin-left: 0; margin-right: 0; }
+}
+@media (max-width: 720px) {
+  body { font-size: 18px; }
+  .top nav a.opt { display: none; }
+  .views3, .plates, .pair { grid-template-columns: minmax(0, 1fr); }
+  .commit div { grid-template-columns: minmax(0, 1fr); }
+  .caption { grid-template-columns: minmax(0, 1fr); }
+}
 </style>
 
-<div class="wrap">
-  <header class="mast">
-    <span class="label">A skill for Claude Code</span>
-    <span class="mark c">Folio</span>
-    <span class="label r">The collection · II plates</span>
-  </header>
+<header class="top">
+  <div class="in">
+    <a class="mark" href="#">Folio</a>
+    <nav aria-label="Sections">
+      <a href="#plates">Plates</a><a class="opt" href="#views">Views</a><a class="opt" href="#method">Method</a><a href="#install">Install</a><a href="https://github.com/Ramakm/folio-anatomy">GitHub</a>
+    </nav>
+  </div>
+</header>
 
-  <section class="cover">
-    <div>
-      <span class="label">An atlas of instruments that explain ideas</span>
-      <h1>Folio<span>.</span></h1>
-    </div>
-    <div>
-      <p class="lede">Explain an idea the way a museum explains a specimen.</p>
-      <p>Name an idea and Claude designs an instrument whose working parts carry it out. It draws the instrument as a live, engraved isometric figure you can read in SVG, light with WebGL or turn in 3D, then mounts it with a numbered key and wall texts that walk you through the science.</p>
-      <div class="install">
-        <span class="label">Install in Claude Code</span>
-        <div class="row"><code id="cmd">npx skills add Ramakm/folio-anatomy -g -a claude-code</code><button id="copy" type="button">Copy</button></div>
-      </div>
-    </div>
-  </section>
+<section class="hero">
+  <span class="eyebrow">A skill for Claude Code</span>
+  <h1>Explain an idea the way a museum explains a <em>specimen</em>.</h1>
+  <p class="lede">Name an idea, and Claude invents the instrument that performs it. It draws that instrument as a live, engraved figure, then mounts it with a numbered key and wall texts, so the reader can watch the idea work and read why.</p>
+  <div class="byline"><span>By <b>Ramakrushna Mohapatra</b></span><span>October 2026</span><span>Two plates</span><span>MIT</span></div>
+  <div class="cmd"><code id="cmd">npx skills add Ramakm/folio-anatomy -g -a claude-code</code><button id="copy" type="button">Copy</button></div>
+</section>
 
-  <section class="wall" style="margin-top:24px">
-    <div class="sechead">
-      <span class="label">The collection</span>
-      <h2>Plates on view</h2>
-      <p>Each plate is a working instrument with a real model behind every number. Open one, turn its knobs, switch between SVG, WebGL and 3D, and read its wall texts.</p>
-    </div>
-    <div class="collection">
-      <a class="card" href="attention.html">
-        <span class="top"><span class="pl">Pl. I</span><span class="label">Machine learning · FOL-001</span></span>
-        <span class="im"><img src="img/plate-i.png" alt="Plate I: an isometric assay bench of glass columns computing attention"></span>
-        <h3>Attention, as an <em>assay bench</em></h3>
-        <p>A sealed reservoir holds one unit of attention and pours it between eight words by softmax. Four heads, a temperature knob and a causal mask.</p>
-        <span class="go">Enter the plate →</span>
-      </a>
-      <a class="card" href="heart.html">
-        <span class="top"><span class="pl">Pl. II</span><span class="label">Physiology · FOL-002</span></span>
-        <span class="im"><img src="img/plate-ii.png" alt="Plate II: an isometric double piston pump circulating blood through lungs and body"></span>
-        <h3>The heart, as a <em>double pump</em></h3>
-        <p>Four piston chambers, four valves, two circuits and a beating cardiac cycle you can slow down, speed up and break.</p>
-        <span class="go">Enter the plate →</span>
-      </a>
-      <div class="card empty">
-        <span class="top"><span class="pl">Pl. III</span><span class="label">Yours · FOL-003</span></span>
-        <span class="im"><span>?</span></span>
-        <h3>Commission the <em>next plate</em></h3>
-        <p>Install the skill, then name an idea:</p>
-        <p><code>/folio explain how a KV cache speeds up inference</code></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="wall">
-    <div class="sechead">
-      <span class="label">How a plate is made</span>
-      <h2>Four phases, from brief to proof</h2>
-      <p>The skill follows the same method for every idea, so each plate is accurate before it is beautiful.</p>
-    </div>
-    <div class="method">
-      <div><span class="rn">i.</span><h3>Brief</h3><p>Write the model first and test it. Choose an instrument, then map each term of the idea to a part of it.</p></div>
-      <div><span class="rn">ii.</span><h3>Bench</h3><p>Lay the parts out in depth bands, engrave the static geometry once and redraw only the moving parts.</p></div>
-      <div><span class="rn">iii.</span><h3>Mount</h3><p>Add the title block, the numbered key, the controls and four wall texts: reading, ledger, wider view and an honest note.</p></div>
-      <div><span class="rn">iv.</span><h3>Proof</h3><p>Screenshot it in light, dark and on a phone, zoom in on the joints, and check every number against the model.</p></div>
-    </div>
-  </section>
-
-  <section class="wall">
-    <div class="sechead">
-      <span class="label">Commission a plate</span>
-      <h2>Name the idea, not the drawing</h2>
-      <p>Folio picks the instrument. If you already have one in mind, name it, along with any real numbers you care about.</p>
-    </div>
-    <div class="prompts">
-      <div><span class="n">a.</span><span><code>/folio explain how a hash map resolves collisions</code><small>a sorting desk of pigeonholes, perhaps</small></span></div>
-      <div><span class="n">b.</span><span><code>/folio explain backpropagation through one neuron</code><small>for a course page</small></span></div>
-      <div><span class="n">c.</span><span><code>/folio how does consistent hashing move keys</code><small>when a server joins the ring</small></span></div>
-      <div><span class="n">d.</span><span><code>/folio explain how the kidney filters blood</code><small>a physiology plate, like Plate II</small></span></div>
-    </div>
-  </section>
-
-  <footer>
-    <span><span class="mark">Folio</span> &nbsp;Made by Ramakrushna Mohapatra. Plates drawn by Claude with the Folio skill. MIT licence.</span>
-    <span class="credits mono"><a href="https://www.instagram.com/techwith.ram/">Instagram @techwith.ram</a><a href="https://x.com/techwith_ram">X @techwith_ram</a><a href="https://github.com/Ramakm/folio-anatomy">GitHub</a></span>
-  </footer>
+<div class="live">
+  <div class="frame"><iframe id="f-heart" src="embed-heart.html" title="Plate II, live: the human heart as a double pump" loading="eager"></iframe></div>
+  <p class="caption"><span class="fig-n">Plate II</span><span>The heart as a double pump, beating now. Switch to WebGL to light it, or 3D to turn it. Press a numbered pin to look inside.</span><a href="heart.html">Full plate →</a></p>
 </div>
+
+<div class="layout">
+  <nav class="toc" aria-label="Contents">
+    <span class="label">Contents</span>
+    <ol>
+      <li><a href="#instrument">An instrument, not a diagram</a></li>
+      <li><a href="#plates">The collection</a></li>
+      <li><a href="#views">Three ways to look</a></li>
+      <li><a href="#inside">Looking inside</a></li>
+      <li><a href="#method">How a plate is made</a></li>
+      <li><a href="#commission">Commissioning a plate</a></li>
+      <li><a href="#install">Installing Folio</a></li>
+      <li><a href="#questions">Questions</a></li>
+    </ol>
+  </nav>
+
+  <article>
+    <section id="instrument">
+      <h2><span class="no">01</span><span>An instrument, not a diagram</span></h2>
+      <p class="first">Most explanations are drawn as boxes joined by arrows. The boxes name the parts, but the motion the arrows stand for happens only in the reader's head, and that is where understanding is lost.</p>
+      <p>A Folio plate takes a different route. It asks what physical instrument would <em>perform</em> the idea, builds that instrument out of small, precise parts, and lets you operate it. Softmax becomes a sealed reservoir that can only share out one unit of fluid. A heartbeat becomes two piston pumps and four valves that open only when the pressure behind them wins.</p>
+      <aside class="note"><sup>1</sup> Every plate starts from one sentence: when the reader does <em>this</em>, <em>that</em> part moves, and the movement is <em>this</em> in the idea.</aside>
+      <p>Then the plate is mounted the way a museum mounts a specimen: a catalogue entry, numbered pins with a key, and wall texts that walk you from the first term of the formula to the last.<span class="nref">1</span></p>
+      <div class="commit">
+        <div><b>Mechanism, not metaphor</b><span>The instrument does the idea. The fluid is the probability mass; the reservoir really holds one unit.</span></div>
+        <div><b>One source of numbers</b><span>A small model computes every needle, level, readout and table, so nothing on the page can disagree.</span></div>
+        <div><b>A guided reading</b><span>A key, a term-by-term walkthrough, the full working, and a plain note on what was simplified.</span></div>
+      </div>
+    </section>
+
+    <section id="plates">
+      <h2><span class="no">02</span><span>The collection</span></h2>
+      <p>Two plates are on view. Both are live: the figures run on the same equations their wall texts describe, and every control you touch changes the numbers everywhere at once.</p>
+      <div class="wide">
+        <div class="frame"><iframe id="f-attention" src="embed-attention.html" title="Plate I, live: attention as an assay bench" loading="eager"></iframe></div>
+        <p class="caption"><span class="fig-n">Plate I</span><span>Attention as an assay bench. The query carriage walks the sentence on its own; click a column to take over.</span><a href="attention.html">Full plate →</a></p>
+      </div>
+      <aside class="note"><sup>2</sup> Plate I uses one hand-set attention head with real arithmetic. Plate II is a lumped model of the circulation tuned to a resting adult: about 115/80 mmHg and 5 litres a minute.</aside>
+      <p>In <a href="attention.html">Plate I</a>, eight glass columns stand for eight words. A query carriage parks above the word that is asking, a dial for every word reads its score, and the reservoir pours one unit of attention between them by softmax. Four heads, a temperature knob and a causal mask are on the bench.<span class="nref">2</span></p>
+      <p>In <a href="heart.html">Plate II</a>, the bench is laid out as the circulation itself: veins, right heart, lungs on a stand, left heart, an air chamber for the aorta and a bed of capillaries. You can slow the beat to a sixteenth, change the heart rate, or give it a narrowed or leaking valve and watch the pressures respond.</p>
+      <div class="plates">
+        <a class="pcard" href="attention.html"><span class="im"><img src="img/plate-i.png" alt="Plate I"></span><b>Plate I · Attention</b><span>Machine learning. Scaled dot-product attention, four heads.</span></a>
+        <a class="pcard" href="heart.html"><span class="im"><img src="img/plate-ii.png" alt="Plate II"></span><b>Plate II · The heart</b><span>Physiology. The cardiac cycle in five phases.</span></a>
+      </div>
+    </section>
+
+    <section id="views">
+      <h2><span class="no">03</span><span>Three ways to look</span></h2>
+      <p>Each plate carries a small switch in its top corner. The instrument, the model and the wall texts stay the same; only the way you see the bench changes.</p>
+      <div class="views3">
+        <figure><img src="img/view-svg.png" alt="SVG view"><figcaption><b>SVG</b>The engraved drawing. Solid parts, tones by facing, hatching that follows the shade.</figcaption></figure>
+        <figure><img src="img/view-webgl.png" alt="WebGL view"><figcaption><b>WebGL</b>Light over the drawing. Pulses run at the true flow; fluid glows with its value.</figcaption></figure>
+        <figure><img src="img/view-3d.png" alt="3D view"><figcaption><b>3D</b>Drag to turn the bench. Every part is re-projected and re-shaded from the new angle.</figcaption></figure>
+      </div>
+      <aside class="note"><sup>3</sup> The mask is just the drawing, recoloured by role: red for the floor, green for vessels, blue for glass. Whatever the drawing hides, the light cannot reach.</aside>
+      <p>The light in the WebGL view only lands where you can see. Folio renders the drawing once more with every surface coloured by its role and uses that picture as a mask, so a glow never leaks through a part that stands in front of it.<span class="nref">3</span> In 3D, the whole scene is rebuilt from the new viewpoint as you drag, about thirty times a second.</p>
+    </section>
+
+    <section id="inside">
+      <h2><span class="no">04</span><span>Looking inside</span></h2>
+      <p>A plate is dense on purpose, so it gives you two ways to get closer. Press any numbered pin, or a line of the key, and the plate glides in on that part. A card names it, says what it does, and shows its live reading: the left ventricle's pressure and volume as it beats, or a word's share of attention as the query moves.</p>
+      <div class="pair">
+        <figure><img src="img/inspect.png" alt="Inspecting the left ventricle"><figcaption>Part 9: the left ventricle, with its live pressure, volume and phase.</figcaption></figure>
+        <figure><img src="img/loupe.png" alt="The loupe over Plate I"><figcaption>The loupe, magnifying a key dial at 2.6 times.</figcaption></figure>
+      </div>
+      <p>The <em>Loupe</em> button hands you a magnifying glass instead. Move it over the bench to read an engraved scale or follow a needle without losing your place. Both tools come with every plate the skill makes, whatever the topic: the plate only has to say where its parts are and what each one should report.</p>
+    </section>
+
+    <section id="method">
+      <h2><span class="no">05</span><span>How a plate is made</span></h2>
+      <p>The skill follows the same four phases for every idea, so a plate is correct before it is beautiful.</p>
+      <ol class="phases">
+        <li><b>Brief</b><span>Write the model first and test it against known numbers. Choose the instrument and map each term of the idea to a part.</span></li>
+        <li><b>Bench</b><span>Lay the parts out in depth bands, engrave the geometry once, and redraw only what moves.</span></li>
+        <li><b>Mount</b><span>Add the catalogue entry, pins and key, controls, the three views, and four wall texts.</span></li>
+        <li><b>Proof</b><span>Photograph it in light, dark and on a phone, zoom into the joints, turn it in 3D, and check every number against the model.</span></li>
+      </ol>
+    </section>
+
+    <section id="commission">
+      <h2><span class="no">06</span><span>Commissioning a plate</span></h2>
+      <p>Ask for the idea, not the drawing. Folio chooses the instrument; if you already have one in mind, name it, along with any real numbers you care about.</p>
+      <div class="prompts">
+        <div><code>/folio explain how a hash map resolves collisions</code><small>Perhaps a sorting desk of pigeonholes.</small></div>
+        <div><code>/folio explain backpropagation through one neuron</code><small>For a course page, with the gradients on dials.</small></div>
+        <div><code>/folio how does consistent hashing move keys when a server joins</code><small>A ring you can add a station to.</small></div>
+        <div><code>/folio explain how the kidney filters blood</code><small>A physiology plate in the manner of Plate II.</small></div>
+      </div>
+    </section>
+
+    <section id="install">
+      <h2><span class="no">07</span><span>Installing Folio</span></h2>
+      <p>One command installs it for Claude Code, for every project:</p>
+<pre class="block">npx skills add Ramakm/folio-anatomy -g -a claude-code</pre>
+      <p>Or clone it yourself, into your own skills or into a single project:</p>
+<pre class="block">git clone https://github.com/Ramakm/folio-anatomy.git ~/.claude/skills/folio
+<span class="c"># or, for one project</span>
+git clone https://github.com/Ramakm/folio-anatomy.git .claude/skills/folio</pre>
+      <p>Then type <code>/folio</code> and name an idea. The repository also holds both plates' source, the drawing kit, and scripts to build and photograph a plate.</p>
+    </section>
+
+    <section id="questions">
+      <h2><span class="no">08</span><span>Questions</span></h2>
+      <details><summary>Are the numbers real?</summary><p>They are computed, not drawn. Each plate has a small model, and everything on the page reads from it. Where values are chosen by hand, such as Plate I's attention weights, the plate's last wall text says so.</p></details>
+      <details><summary>What does a plate need to run?</summary><p>Nothing but a browser. A plate is one HTML file with no dependencies. The WebGL view needs WebGL and falls back to the drawing without it.</p></details>
+      <details><summary>Can it use my brand?</summary><p>Yes. Every colour is a design token and the fonts are three lines of CSS. Swap them and the structure and engraving stay.</p></details>
+      <details><summary>Does it work on a phone?</summary><p>The plates are tested at 390 pixels wide. The view switch, the pins and the inspector all work by touch, and the 3D bench turns with a finger.</p></details>
+      <details><summary>What is the licence?</summary><p>MIT, for the skill and for the plates.</p></details>
+    </section>
+  </article>
+</div>
+
+<footer class="colophon">
+  <span class="mark">Folio</span>
+  <p>Made by Ramakrushna Mohapatra. Every plate drawn by Claude with the Folio skill. Set in Bodoni Moda, Source Serif 4 and IBM Plex Mono. Inspired by <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> by Ryan; all of Folio was written from scratch.</p>
+  <span class="links"><a href="https://www.instagram.com/techwith.ram/">Instagram @techwith.ram</a><a href="https://x.com/techwith_ram">X @techwith_ram</a><a href="https://github.com/Ramakm/folio-anatomy">GitHub</a></span>
+</footer>
 
 <script>
 document.getElementById("copy").addEventListener("click", async (e) => {
-  const b = e.currentTarget, t = document.getElementById("cmd").textContent;
-  try { await navigator.clipboard.writeText(t); b.textContent = "Copied"; }
-  catch (err) { const r = document.createRange(); r.selectNodeContents(document.getElementById("cmd")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Selected"; }
+  const b = e.currentTarget, el = document.getElementById("cmd");
+  try { await navigator.clipboard.writeText(el.textContent); b.textContent = "Copied"; }
+  catch (err) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Selected"; }
   setTimeout(() => (b.textContent = "Copy"), 1600);
 });
+// Live plates report their height, so each frame fits its plate exactly.
+addEventListener("message", (e) => {
+  const d = e.data; if (!d || !d.folio || !d.h) return;
+  const f = document.getElementById("f-" + d.folio); if (f) { f.style.aspectRatio = "auto"; f.style.height = d.h + "px"; }
+});
+// Mark the section being read in the contents rail.
+const links = [...document.querySelectorAll(".toc a")];
+const io = new IntersectionObserver((es) => es.forEach((en) => {
+  if (en.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id));
+}), { rootMargin: "-30% 0px -60% 0px" });
+document.querySelectorAll("article section").forEach((s) => io.observe(s));
 </script>

@@ -308,6 +308,7 @@
   const keyOff = {};
   function mount(az, el) {
     cam = stage.mount(az, el); slots = stage.slots;
+    if (slots.pins) slots.pins.innerHTML = draw.pins();
     flowEls = flowPaths.map((fp) => ({ ...fp, el: document.getElementById(fp.id) }));
     // vessel segments on screen, each with its distance along its vessel, for the light layer
     let run = 0;
@@ -338,7 +339,7 @@
     }
   }
   function paint() {
-    for (const k in draw) if (slots[k]) slots[k].innerHTML = draw[k](cur, ui);
+    for (const k in draw) if (k !== "pins" && slots[k]) slots[k].innerHTML = draw[k](cur, ui);
   }
   function advance(dtReal) {
     const dt = 0.0005;
@@ -525,6 +526,7 @@ void main() {
     .glass-back, .glass-front { fill: #00f !important; stroke: #00f !important; }`;
   function setMode(m) {
     mode = m;
+    if (m === "3d" && typeof insp !== "undefined") insp.close();
     fig.classList.toggle("mode-webgl", m === "webgl");
     fig.classList.toggle("mode-3d", m === "3d");
     if (m !== "3d" && (stage.az !== -24 || stage.el !== 30)) { mount(-24, 30); paint(); }
@@ -559,6 +561,55 @@ void main() {
     turn: (az, el) => { setMode("3d"); mount(az, el); paint(); dashes(); },
     light: () => lightLayer,
   });
+
+  /* ---------- looking closer ---------- */
+  const r0 = (v) => Math.round(v);
+  const vstate = (v) => (v === 1 ? "<b>open</b>" : v === -1 ? "<b>leaking back</b>" : "shut");
+  const PART_TEXT = [
+    [1, "Venous reservoir", "The great veins. Blood comes home from the body here, low in pressure and low in oxygen."],
+    [2, "Right atrium", "A small primer pump. It fills while the ventricle squeezes, then tops the ventricle up with a short kick."],
+    [3, "Tricuspid valve", "Lets blood fall into the right ventricle and seals when the ventricle squeezes."],
+    [4, "Right ventricle", "The pump for the lungs. It needs only about 25 mmHg; the lung circuit is short and soft."],
+    [5, "Pulmonary valve", "Opens while the right ventricle ejects, then seals the pulmonary artery."],
+    [6, "Lungs", "Bellows breathing 14 times a minute. Blood goes in dark and leaves bright with oxygen."],
+    [7, "Left atrium", "Collects oxygenated blood from the pulmonary veins and primes the left ventricle."],
+    [8, "Mitral valve", "The left inflow valve. Set the valves to Leak and it lets blood back into the atrium."],
+    [9, "Left ventricle", "The pump for the whole body. It reaches about 115 mmHg and moves about 70 mL a beat."],
+    [10, "Aortic valve", "Opens once the ventricle out-pushes the aorta. Set the valves to Stenosis and it narrows."],
+    [11, "Air chamber", "The elastic aorta. A cushion of air stores each surge and keeps pressure up between beats."],
+    [12, "Capillary bed", "The body. Seventeen fine tubes where blood gives up its oxygen and turns dark again."],
+  ];
+  const PARTS = PART_TEXT.map(([n, name, text]) => ({ n, name, text, at: PINS.find((p) => p[0] === n)[1] }));
+  const liveH = (n) => {
+    const r = cur, b = lastBeat;
+    switch (n) {
+      case 1: return `pressure <b>${r.P.SV.toFixed(1)}</b> mmHg · holds ${r0(r.V.SV)} mL`;
+      case 2: return `pressure <b>${r.P.RA.toFixed(1)}</b> mmHg · volume ${r0(r.V.RA)} mL`;
+      case 3: return `${vstate(r.valves.tri)} · flow ${r0(Math.max(0, r.Q.tri))} mL/s`;
+      case 4: return `pressure <b>${r0(r.P.RV)}</b> mmHg · volume ${r0(r.V.RV)} mL · ${r.phase}`;
+      case 5: return `${vstate(r.valves.pulv)} · flow ${r0(Math.max(0, r.Q.pulv))} mL/s`;
+      case 6: return `artery <b>${r0(r.P.PA)}</b> mmHg → veins ${r0(r.P.PV)} mmHg · ${r0(r.Q.pul)} mL/s`;
+      case 7: return `pressure <b>${r.P.LA.toFixed(1)}</b> mmHg · volume ${r0(r.V.LA)} mL`;
+      case 8: return `${vstate(r.valves.mit)} · flow ${r0(r.Q.mit)} mL/s` + (b && b.regurg > 1 ? ` · leaks ${r0(b.regurg)} mL a beat` : "");
+      case 9: return `pressure <b>${r0(r.P.LV)}</b> mmHg · volume ${r0(r.V.LV)} mL · ${r.phase}`;
+      case 10: return `${vstate(r.valves.aov)} · flow ${r0(Math.max(0, r.Q.aov))} mL/s` + (b ? ` · LV peak ${r0(b.LV[1])} mmHg` : "");
+      case 11: return `pressure <b>${r0(r.P.SA)}</b> mmHg` + (b ? ` · ${r0(b.SA[1])}/${r0(b.SA[0])} last beat` : "");
+      case 12: return `flow <b>${r0(r.Q.sys)}</b> mL/s` + (b ? ` · ${b.CO.toFixed(1)} L/min` : "");
+    }
+    return "";
+  };
+  const insp = K.live.inspector({ fig, svg, W, H: HT, parts: PARTS, cam: () => cam, live: liveH, zoom: 2.3,
+    onChange: (n) => { if (n !== null && lens.on) toggleLens(false); } });
+  const lens = K.live.loupe({ fig, svg, W, H: HT, sceneId: stage.sceneId, mag: 2.6, r: 88 });
+  const toolsEl = document.getElementById("tools");
+  function toggleLens(v) {
+    lens.toggle(v); if (lens.on) insp.close();
+    toolsEl?.querySelector('[data-t="loupe"]')?.setAttribute("aria-pressed", lens.on);
+  }
+  toolsEl?.addEventListener("click", (e) => { if (e.target.closest('[data-t="loupe"]')) toggleLens(); });
+  setInterval(() => insp.refresh(), 220);
+  document.addEventListener("folio:part", (e) => insp.show(e.detail));
+  Object.assign(window.Plate, { inspect: (n) => insp.show(n), closeInspect: () => insp.close(), loupe: (v) => toggleLens(v) });
 
   if (reduce.matches) { ui.playing = false; stillAt(0.18); }
   else { const r0 = H.settle(H.make(ui), 10); lastBeat = { ...r0, HR: ui.HR }; paint(); raf = requestAnimationFrame(frame); }

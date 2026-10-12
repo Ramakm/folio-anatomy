@@ -27,6 +27,12 @@
   };
   key.addEventListener("mouseover", (e) => { const li = e.target.closest("li"); if (li) light(li.dataset.pin); });
   key.addEventListener("mouseleave", () => light(null));
+  key.addEventListener("click", (e) => {
+    const li = e.target.closest("li"); if (!li) return;
+    document.dispatchEvent(new CustomEvent("folio:part", { detail: +li.dataset.pin }));
+    const fig = document.getElementById("plate"), b = fig.getBoundingClientRect();
+    if (b.top < 0 || b.bottom > innerHeight) fig.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
   document.getElementById("plate-svg").addEventListener("mouseover", (e) => { const p = e.target.closest(".pin"); light(p ? p.dataset.pin : null); });
 
   const strip = (v) => {

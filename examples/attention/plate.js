@@ -167,8 +167,8 @@
   }
 
   if (api.leftIsFar) controls();
-  slot("pins");
   slot("hits");
+  slot("pins");
   }
 
   // Controls: head selector, temperature knob, mask lever.
@@ -397,22 +397,18 @@
     e.preventDefault();
   });
 
-  /* Self-demonstration: after a quiet spell the plate steps the query along the
-     sentence and changes head every lap. It stops for good under reduced motion. */
-  let lastTouch = -1e9, demoing = true;
-  fig.addEventListener("pointerenter", () => (demoing = false));
-  fig.addEventListener("pointerleave", () => (demoing = true));
-  fig.addEventListener("focusin", () => (demoing = false));
-  fig.addEventListener("focusout", () => (demoing = true));
+  /* Self-demonstration: the plate keeps stepping the query along the sentence and changes
+     head every lap. It rests for a few seconds after you touch it, and under reduced motion. */
+  let lastTouch = -1e9;
   let visible = true;
   new IntersectionObserver((es) => (visible = es[0].isIntersecting)).observe(fig);
   setInterval(() => {
-    if (reduce.matches || !demoing || !visible || document.hidden) return;
-    if (performance.now() - lastTouch < 12000) return;
+    if (reduce.matches || !visible || document.hidden) return;
+    if (performance.now() - lastTouch < 9000) return;
     let q = st.q + 1, head = st.head;
     if (q >= N) { q = 1; head = (head + 1) % M.HEADS.length; }
     update({ q, head }, false);
-  }, 3400);
+  }, 3000);
 
   /* ---------- three views: SVG, WebGL, 3D ---------- */
   const LIGHT_FRAG = `
@@ -493,6 +489,7 @@ void main() {
   }
   function setMode(m) {
     mode = m;
+    if (m === "3d" && typeof insp !== "undefined") insp.close();
     fig.classList.toggle("mode-webgl", m === "webgl");
     fig.classList.toggle("mode-3d", m === "3d");
     if (m !== "3d" && (stage.az !== -24 || stage.el !== 30)) { mount(-24, 30); paint(); }
@@ -530,6 +527,48 @@ void main() {
   window.Plate.light = () => lightLayer;
   window.Plate.turn = (az, el) => { setMode("3d"); mount(az, el); paint(); };
   listeners.push(kickLight);
+
+  /* ---------- looking closer ---------- */
+  const tok = (j) => M.TOKENS[j].w;
+  const PARTS = [
+    { n: 1, name: "Query carriage", text: "Rides the rail to the word doing the looking. It carries that word's query, q = x·W_Q.", at: () => [cur.xq, RAIL.y, RAIL.z] },
+    { n: 2, name: "Key dials", text: "One per word. Each needle reads how well that word's key lines up with the query, scaled by √d_k.", at: [SX(1), DIAL.y, DIAL.z] },
+    { n: 3, name: "Glass columns", text: "The share of attention each word receives. Fluid height is the weight, graduated in tenths.", at: [SX(1), GL.y, GL.z + GL.h * 0.5] },
+    { n: 4, name: "Unit reservoir", text: "Holds exactly one unit and is sealed. Softmax can only divide it, so the columns always sum to one.", at: [60, 98, 60] },
+    { n: 5, name: "Stopcocks and shutters", text: "The causal mask. A word may only look back, so every later word's stopcock is shut and its column capped.", at: [SX(4), 123, 18] },
+    { n: 6, name: "Core-sample tray", text: "The output: a blend of every word's value, laid down in order. Each stratum's length is that word's weight.", at: [(TRAY.x0 + TRAY.x1) / 2, (TRAY.y0 + TRAY.y1) / 2, 8] },
+    { n: 7, name: "Head selector", text: "Four heads read the same words with different learned projections, so each pours attention differently.", at: [655, 96, 10] },
+    { n: 8, name: "Temperature knob", text: "Divides every score before softmax. Turn it down and one column takes everything; turn it up and the fluid spreads.", at: [655, 172, 10] },
+    { n: 9, name: "Mask lever", text: "Causal attention, as in a decoder, or open attention, as in an encoder where every word sees every other.", at: [655, 232, 8] },
+  ];
+  const top3 = (arr, f) => arr.map((v, j) => [v, j]).filter(([, j]) => !tgt.r.masked[j]).sort((a, b) => b[0] - a[0]).slice(0, 3).map(([v, j]) => f(v, j)).join(" · ");
+  const live = (n) => {
+    const r = tgt.r, h = M.HEADS[st.head];
+    switch (n) {
+      case 1: return `query <b>${tok(st.q)}</b> · q = [${r.q.slice(0, 4).map((v) => v.toFixed(1)).join(", ")}, …]`;
+      case 2: return "scaled score · " + top3(r.scaled, (v, j) => `${tok(j)} <b>${v.toFixed(2)}</b>`);
+      case 3: return "weight · " + top3(r.a, (v, j) => `${tok(j)} <b>${v.toFixed(2)}</b>`);
+      case 4: return `Σ a = <b>${r.a.reduce((x, y) => x + y, 0).toFixed(3)}</b> · shared by ${r.masked.filter((m) => !m).length} open columns`;
+      case 5: return `${r.masked.filter((m) => !m).length} open · <b>${r.masked.filter(Boolean).length}</b> shut · mask ${st.causal ? "causal" : "open"}`;
+      case 6: return "output = " + top3(r.a, (v, j) => `<b>${v.toFixed(2)}</b>·v(${tok(j)})`);
+      case 7: return `head <b>${h.id}</b> · ${h.name}`;
+      case 8: return `T = <b>${st.T.toFixed(2)}</b> · entropy ${r.H.toFixed(2)} bits`;
+      case 9: return `<b>${st.causal ? "causal" : "open"}</b> · ${tok(st.q)} can see ${r.masked.filter((m) => !m).length} of ${N} words`;
+    }
+    return "";
+  };
+  const insp = K.live.inspector({ fig, svg, W, H, parts: PARTS, cam: () => cam, live, zoom: 2.3,
+    onChange: (n) => { if (n !== null && lens.on) toggleLens(false); } });
+  const lens = K.live.loupe({ fig, svg, W, H, sceneId: stage.sceneId, mag: 2.6, r: 88 });
+  const toolsEl = document.getElementById("tools");
+  function toggleLens(v) {
+    lens.toggle(v); if (lens.on) insp.close();
+    toolsEl?.querySelector('[data-t="loupe"]')?.setAttribute("aria-pressed", lens.on);
+  }
+  toolsEl?.addEventListener("click", (e) => { if (e.target.closest('[data-t="loupe"]')) toggleLens(); });
+  listeners.push(() => insp.refresh());
+  document.addEventListener("folio:part", (e) => insp.show(e.detail));
+  Object.assign(window.Plate, { inspect: (n) => insp.show(n), closeInspect: () => insp.close(), loupe: (v) => toggleLens(v) });
 
   target();
   if (reduce.matches) { Object.assign(cur, JSON.parse(JSON.stringify(tgt)), { a: tgt.a.slice(), sc: tgt.sc.slice(), shut: tgt.shut.slice() }); paint(); }
