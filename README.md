@@ -28,18 +28,24 @@ Internal components that actually rotate, shift, and interact, not just static v
 
 <table>
 <tr>
-<td width="33%" valign="top"><a href="docs/attention.html"><img src="docs/img/plate-i-light.png" alt="Plate I: attention as an assay bench"></a></td>
-<td width="33%" valign="top"><a href="docs/heart.html"><img src="docs/img/plate-ii-light.png" alt="Plate II: the human heart as a double pump"></a></td>
-<td width="33%" valign="top"><a href="docs/grid.html"><img src="docs/img/plate-iii-light.png" alt="Plate III: a power grid in miniature"></a></td>
+<td width="50%" valign="top"><a href="docs/attention.html"><img src="docs/img/plate-i-light.png" alt="Plate I: attention as an assay bench"></a></td>
+<td width="50%" valign="top"><a href="docs/heart.html"><img src="docs/img/plate-ii-light.png" alt="Plate II: the human heart as a double pump"></a></td>
 </tr>
 <tr>
 <td valign="top"><b>Plate I · Attention, as an assay bench</b><br><sub>Machine learning. A sealed reservoir pours one unit of attention between eight words by softmax. Flow wheels turn in the manifold as the weights shift. Four heads, a temperature knob and a causal mask.</sub></td>
 <td valign="top"><b>Plate II · The heart, as a double pump</b><br><sub>Physiology. Four piston chambers, four valves, two circuits and turning timing cams, run by a live model of the circulation. Slow it down, speed it up, or give it a narrowed or leaking valve.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="docs/grid.html"><img src="docs/img/plate-iii-light.png" alt="Plate III: a power grid in miniature"></a></td>
+<td width="50%" valign="top"><a href="docs/hashmap.html"><img src="docs/img/plate-iv-light.png" alt="Plate IV: a hash map as a sorting office, with a lookup card following its red probe trail"></a></td>
+</tr>
+<tr>
 <td valign="top"><b>Plate III · The grid, as a miniature</b><br><sub>Electricity. Falling water turns a wheel, a rotor's field sweeps the stator coils, transformers step the voltage up and down, and a town draws the power. Frequency, governor, line losses and protection are all simulated live.</sub></td>
+<td valign="top"><b>Plate IV · The hash map, as a sorting office</b><br><sub>Data structures. Keys are hashed with Java's own <code>hashCode</code>, folded to a bin by their low bits, and filed by a carriage on a rail. Collisions are settled by chaining, linear or quadratic probing, and the table doubles past a load of 0.75.</sub></td>
 </tr>
 </table>
 
-All three plates live on one website, with a cover page written as a short illustrated essay: **[ramakm.github.io/folio-anatomy/docs](https://ramakm.github.io/folio-anatomy/docs/)**. Its source is in [`site/`](site/) and the built site in [`docs/`](docs/) (see [VI](#vi-the-website)).
+All four plates live on one website, with a cover page written as a short illustrated essay: **[ramakm.github.io/folio-anatomy/docs](https://ramakm.github.io/folio-anatomy/docs/)**. Its source is in [`site/`](site/) and the built site in [`docs/`](docs/) (see [VI](#vi-the-website)).
 
 <br>
 
@@ -123,7 +129,7 @@ If the `skills` folder did not exist when your session started, run `/reload-ski
 Name the idea, not the drawing:
 
 ```
-/folio explain how a hash map resolves collisions
+/folio explain how a hash map resolves collisions        (this became Plate IV)
 /folio explain backpropagation through a single neuron, for a course page
 /folio how does consistent hashing move keys when a server joins
 /folio explain the KV cache in LLM inference, dark theme
@@ -222,6 +228,7 @@ docs/index.html        the cover: the collection, install, the method
 docs/attention.html    Plate I
 docs/heart.html        Plate II
 docs/grid.html         Plate III
+docs/hashmap.html      Plate IV
 docs/img/              thumbnails and README images
 ```
 
@@ -242,6 +249,7 @@ kit/folio-theme.js       light by default, a remembered Dark switch shared acros
 examples/attention/      Plate I: model.js, plate.js, page.html, page.js
 examples/heart/          Plate II: a lumped-parameter model of the circulation and its bench
 examples/grid/           Plate III: a swing-equation model of a small grid, and its bench of machines
+examples/hashmap/        Plate IV: a hash map with three ways to resolve collisions, and its sorting office
 site/index.html          the cover page of the website
 scripts/build.mjs        inline one plate into a standalone HTML file
 scripts/build-site.mjs   build the whole website into docs/

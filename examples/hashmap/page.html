@@ -1,0 +1,212 @@
+<title>Folio Plate IV: The Hash Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/*CSS*/
+/* Plate IV: five terms, a ledger of keys, the whole table and the cost of a full one. */
+.stages.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.stage .eq.small { font-size: 13px; font-family: var(--mono); white-space: normal; line-height: 1.4; }
+.vitals { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; background: var(--paper); margin-bottom: 18px; }
+.vitals div { padding: 16px 18px; border-left: 1px solid var(--rule); display: grid; gap: 4px; }
+.vitals div:first-child { border-left: 0; }
+.vitals b { font-family: var(--display); font-weight: 400; font-size: 32px; line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
+.vitals b small { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-left: 4px; }
+.vitals .warn b { color: var(--accent); }
+.btnrow { display: flex; gap: 8px; flex-wrap: wrap; }
+.btnrow button { font: 500 12px/1 var(--mono); letter-spacing: .06em; padding: 10px 14px; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); cursor: pointer; }
+.btnrow button:hover { border-color: var(--ink); }
+.btnrow button.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btnrow button:disabled { opacity: .45; cursor: default; }
+.seg.three { grid-template-columns: repeat(3, 1fr); }
+.seg.keys { grid-template-columns: repeat(4, 1fr); }
+.seg.keys button.absent { font-style: italic; color: var(--ink-3); }
+.seg.keys button.absent[aria-pressed="true"] { color: var(--paper); }
+.ledger tr.clash td.slot { color: var(--accent); }
+.ledger tr.last td { background: var(--accent-soft); }
+.ledger tr { cursor: pointer; }
+.bits { font-family: var(--mono); letter-spacing: .06em; }
+.bits i { font-style: normal; color: var(--accent); }
+.wider { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; }
+.wider figure { margin: 0; background: var(--paper); padding: 18px 18px 14px; }
+.wider figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.wider figcaption b { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 21px; }
+.wider p { margin: 12px 0 0; font-size: 14px; color: var(--ink-2); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; color: var(--ink-2); align-items: center; }
+.legend i { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--accent); vertical-align: middle; margin-right: 6px; }
+.legend i.k { border-top: 1.5px solid var(--ink); } .legend i.d { border-top: 1.5px dashed var(--ink-3); }
+.table-view { display: grid; grid-template-columns: repeat(var(--cols, 8), minmax(0, 1fr)); gap: 6px; }
+.cell { border: 1px solid var(--rule); background: var(--ground); min-height: 64px; padding: 6px 6px 8px; display: grid; align-content: start; gap: 4px; }
+.cell .ix { font-family: var(--display); font-style: italic; font-size: 15px; color: var(--ink-3); line-height: 1; }
+.cell .k { font-size: 13.5px; font-weight: 600; line-height: 1.2; padding: 3px 5px; background: var(--paper); border: 1px solid var(--rule); overflow-wrap: anywhere; }
+.cell .k.clash { border-color: var(--accent); color: var(--accent); }
+.cell .k.clash { box-shadow: inset 3px 0 0 var(--accent); }
+.cell.empty { opacity: .65; }
+.chart .ax { stroke: var(--ink-3); stroke-width: 1; }
+.chart .grid { stroke: var(--rule); stroke-width: 1; }
+.chart text { font-family: var(--mono); font-size: 10.5px; fill: var(--ink-3); }
+.chart .c-chain, .chart .c-linear, .chart .c-quad { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+.chart .c-linear { stroke-dasharray: 6 3; } .chart .c-quad { stroke-dasharray: 2 3; }
+.chart .on { stroke: var(--accent) !important; stroke-width: 2.2 !important; }
+.chart .limit { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; }
+.chart .now { fill: var(--accent); }
+.chart .meas { fill: var(--paper); stroke: var(--accent); stroke-width: 1.8; }
+@media (max-width: 1080px) { .stages.five { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vitals { grid-template-columns: repeat(3, minmax(0, 1fr)); } .vitals div:nth-child(4) { border-left: 0; } .wider { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 720px) { .stages.five { grid-template-columns: minmax(0, 1fr); } .vitals { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vitals div:nth-child(odd) { border-left: 0; } .vitals div:nth-child(4) { border-left: 1px solid var(--rule); } .vitals b { font-size: 26px; } .table-view { --cols: 4 !important; } .seg.keys { grid-template-columns: repeat(3, 1fr); } }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <a class="label" href="index.html">← The collection</a>
+    <a class="mark c" href="index.html">Folio</a>
+    <span class="r"><span class="label">Plate IV of IV</span><button class="theme" type="button" data-theme-toggle>Dark</button></span>
+  </header>
+
+  <div class="title">
+    <div>
+      <span class="label">Plate IV · Data structures</span>
+      <h1>The hash map, as a <em>sorting office</em>.</h1>
+    </div>
+    <div>
+      <p>Each key is read by a press that turns it into a number, and a dial keeps only the low bits of that number to choose a bin. Two keys will sooner or later choose the same bin. Watch the office settle it three ways: hang a chain of cards in front of the bin, or send the carriage on to try other bins, one step at a time or in growing strides.</p>
+      <dl class="cat">
+        <dt>Object</dt><dd>Card file, hash press, rail and eight bins</dd>
+        <dt>Idea</dt><dd>slot = hash(key) &amp; (m − 1) · α = n / m</dd>
+        <dt>Model</dt><dd>Java String.hashCode · HashMap spread · resize at 0.75</dd>
+        <dt>Catalogue</dt><dd>FOL-004 · October 2026</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="exhibit">
+    <figure class="plate" style="margin:0">
+      <div class="corners"><span class="tl">Pl. IV</span><span class="tr"><span class="cap">The sorting office</span><span class="views" id="views" role="group" aria-label="View"></span><span class="tools" id="tools" role="group" aria-label="Tools"><button type="button" data-t="loupe" aria-pressed="false" title="A magnifying glass that follows the pointer">Loupe</button></span></span></div>
+      <div class="fig" id="plate" tabindex="0" role="img" aria-label="An isometric sorting office for a hash map: a card file of keys, a hash press with bit windows, a dial, a carriage on a rail and eight bins. I files the next key, L looks one up, 1 2 3 choose chaining, linear or quadratic probing, A toggles resizing, R empties the table.">
+        <svg id="plate-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+      </div>
+      <div class="corners b">
+        <span class="bl">Click the card file to file a key, a bin to look one up · I file · L look up · 1 2 3 method · A resize · R empty</span>
+        <span class="br" id="readout" aria-live="off"></span>
+      </div>
+    </figure>
+
+    <aside class="side">
+      <div class="key">
+        <span class="label">Key to the plate · follow a card</span>
+        <h2>From a key to its bin</h2>
+        <ol id="key">
+          <li data-pin="1"><span class="num">1</span><span><b>Card file</b><span class="d">The keys still to be filed, the next at the front.</span></span></li>
+          <li data-pin="2"><span class="num">2</span><span><b>Hash press</b><span class="d">Turns the key into a 32-bit number: <code>h = Σ s[i]·31ⁿ⁻¹⁻ⁱ</code>, then <code>h ^ h>>>16</code>.</span></span></li>
+          <li data-pin="3"><span class="num">3</span><span><b>Fold dial</b><span class="d">Keeps the low bits: <code>slot = h &amp; (m − 1)</code>, the home bin.</span></span></li>
+          <li data-pin="4"><span class="num">4</span><span><b>Carriage</b><span class="d">Takes the card to its home bin, and further if it must.</span></span></li>
+          <li data-pin="5"><span class="num">5</span><span><b>Bins</b><span class="d">The table itself. A red edge marks a card that collided.</span></span></li>
+          <li data-pin="6"><span class="num">6</span><span><b>Chains</b><span class="d">Separate chaining: later keys hang on a chain in front of their bin.</span></span></li>
+          <li data-pin="7"><span class="num">7</span><span><b>Probe trails</b><span class="d">Open addressing: each arc is one more bin tried. Red is the card in hand.</span></span></li>
+          <li data-pin="8"><span class="num">8</span><span><b>Shutters</b><span class="d">Four more bins, opened when the table doubles.</span></span></li>
+          <li data-pin="9"><span class="num">9</span><span><b>Load gauge</b><span class="d"><code>α = n / m</code>. Past the red mark the table doubles.</span></span></li>
+          <li data-pin="10"><span class="num">10</span><span><b>Probe counter</b><span class="d">Bins or chain cards the last search looked at.</span></span></li>
+          <li data-pin="11"><span class="num">11</span><span><b>Method knob</b><span class="d">Chaining, linear probing or quadratic probing.</span></span></li>
+          <li data-pin="12"><span class="num">12</span><span><b>Resize lever</b><span class="d">Double at 0.75, or stay at four bins.</span></span></li>
+        </ol>
+      </div>
+
+      <div class="controls">
+        <h2>At the bench</h2>
+        <div class="ctl">
+          <div class="label"><span>File and find</span><span id="nmv" class="mono"></span></div>
+          <div class="btnrow"><button id="ins" class="primary" type="button">File next key</button><button id="rst" type="button">Empty the table</button></div>
+        </div>
+        <div class="ctl">
+          <div class="label"><span>Look up a key</span><span class="mono">italic: absent</span></div>
+          <div class="seg keys" id="lookseg" role="group" aria-label="Look up a key"></div>
+        </div>
+        <div class="ctl">
+          <div class="label"><span>Method</span><span id="modev"></span></div>
+          <div class="seg three" id="modeseg" role="group" aria-label="Method"></div>
+          <div class="headname" id="modedesc"></div>
+        </div>
+        <div class="toggle"><span>Double at α &gt; 0.75</span><button id="auto" aria-pressed="true">Auto</button></div>
+        <div class="toggle"><span>Self-demonstration</span><button id="demo" aria-pressed="true">Running</button></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text I</span>
+      <h2>Reading the plate, in five terms</h2>
+      <p>How one key finds its bin, and what happens when the bin is taken. The boxes follow the last card through the office.</p>
+    </div>
+    <div class="stages five" id="steps"></div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text II</span>
+      <h2>The ledger</h2>
+      <p>Every key in the table: its hash, the low bits the dial keeps, the bin it wanted, the bin it got, and how many looks it takes to find it again. Click a row to look that key up on the bench.</p>
+    </div>
+    <div class="vitals" id="vitals"></div>
+    <div class="ledger-wrap">
+      <table class="ledger">
+        <thead><tr><th>Key</th><th>hashCode</th><th>Low bits</th><th>Home</th><th>Filed in</th><th>Probes</th><th>What happened</th></tr></thead>
+        <tbody id="ledger"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text III</span>
+      <h2>The whole table, and the price of a full one</h2>
+      <p>On the left, the table as a programmer would draw it. On the right, the average number of looks a successful search costs as the table fills, for each method, from Knuth's analysis; the circle is what this table actually costs now.</p>
+    </div>
+    <div class="wider">
+      <figure>
+        <figcaption><b>The table</b><span class="legend" id="tlegend"></span></figcaption>
+        <div class="table-view" id="tview"></div>
+        <p id="tnote"></p>
+      </figure>
+      <figure>
+        <figcaption><b>Probes per search</b><span class="legend"><span><i class="k"></i>chaining</span><span><i class="k" style="border-top-style:dashed"></i>linear</span><span><i class="k" style="border-top-style:dotted"></i>quadratic</span></span></figcaption>
+        <svg class="chart" id="curve" viewBox="0 0 420 300" role="img" aria-label="Expected probes for a successful search against load factor, for each method"></svg>
+        <p id="cnote"></p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text IV</span>
+      <h2>About this specimen</h2>
+    </div>
+    <div class="notes">
+      <div><h3>What is exact</h3><p>The arithmetic. Keys are hashed with Java's <code>String.hashCode</code>, spread with <code>h ^ (h &gt;&gt;&gt; 16)</code> and masked with <code>m − 1</code>, exactly as <code>java.util.HashMap</code> does. The probe sequences, the 0.75 load limit, the doubling and the probe counts are computed, not drawn; the curves are Knuth's formulas for keys hashed uniformly.</p></div>
+      <div><h3>What is set by hand</h3><p>The eight fruit and the three absent ones, chosen so that collisions happen early, and the order they arrive in. The table starts at four bins and the bench has room for eight, so after one doubling it fills past 0.75 instead of growing again; that is where the long probe runs show. When it doubles, keys are placed again in the order they first arrived; real tables walk the old array instead.</p></div>
+      <div><h3>What is left out</h3><p>Deletion, which open addressing needs tombstones for; Java's habit of turning a chain of eight or more into a small tree; Python's perturbed probing; Robin Hood, cuckoo and Swiss tables. And the cost of the hash itself, which for long keys can outweigh every probe.</p></div>
+    </div>
+  </section>
+
+  <nav class="platenav" aria-label="Plates">
+    <a href="grid.html"><span class="label">Previous · Plate III</span><b>The grid</b></a>
+    <a href="index.html"><span class="label">Back to</span><b>The collection</b></a>
+  </nav>
+
+  <footer>
+    <span><span class="mark">Folio</span> &nbsp;Plate IV, drawn by Claude with the Folio skill. Set in Bodoni Moda, Source Serif 4 and IBM Plex Mono.</span>
+    <span class="mono">techwith.ram</span>
+  </footer>
+</div>
+
+<script>
+/*KIT*/
+</script>
+<script>
+/*MODEL*/
+</script>
+<script>
+/*PLATE*/
+</script>
+<script>
+/*PAGE*/
+</script>

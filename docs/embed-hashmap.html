@@ -1,0 +1,2042 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plate IV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>/* Folio theme: light by default. Dark only when the reader chooses it; the choice is remembered
+   and shared with every Folio page and embedded plate on the same site. */
+(function () {
+  "use strict";
+  var KEY = "folio-theme", doc = document.documentElement;
+  function get() { try { return localStorage.getItem(KEY) === "dark" ? "dark" : "light"; } catch (e) { return "light"; } }
+  function label() {
+    var t = doc.dataset.theme === "dark" ? "dark" : "light";
+    document.querySelectorAll("[data-theme-toggle]").forEach(function (b) {
+      b.setAttribute("aria-pressed", t === "dark");
+      b.textContent = t === "dark" ? "Light" : "Dark";
+      b.title = t === "dark" ? "Switch to the light theme" : "Switch to the dark theme";
+    });
+  }
+  function apply(t) {
+    doc.dataset.theme = t;
+    doc.style.colorScheme = t;
+    label();
+    document.querySelectorAll("iframe").forEach(function (f) { try { f.contentWindow.postMessage({ folioTheme: t }, "*"); } catch (e) {} });
+  }
+  apply(get());
+  addEventListener("storage", function (e) { if (e.key === KEY) apply(get()); });
+  addEventListener("message", function (e) { var d = e.data; if (d && (d.folioTheme === "dark" || d.folioTheme === "light")) apply(d.folioTheme); });
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-theme-toggle]");
+    if (!b) return;
+    var t = doc.dataset.theme === "dark" ? "light" : "dark";
+    try { localStorage.setItem(KEY, t); } catch (err) {}
+    apply(t);
+  });
+  document.addEventListener("DOMContentLoaded", label);
+  // a plate embedded in this page learns the theme as soon as it loads
+  document.addEventListener("load", function (e) {
+    if (e.target && e.target.tagName === "IFRAME") try { e.target.contentWindow.postMessage({ folioTheme: doc.dataset.theme }, "*"); } catch (err) {}
+  }, true);
+})();
+</script>
+<style>
+/* Layout: a museum exhibition wall. One mounted plate, a catalogue key beside it, then wall texts below. */
+:root {
+  --ground: #E5E1DA; --paper: #F5F2ED; --ink: #1F1C18; --ink-2: #554F46; --ink-3: #857E73; --rule: #C8C1B5; --accent: #C9381D; --accent-soft: rgba(201,56,29,.12);
+  --top: #FCFAF6; --s3: #ECE7DF; --s2: #DED8CE; --s1: #CFC8BB; --s0: #BCB4A6; --cyl: #E6E1D8; --line: #2B2722; --lo: #7A7266; --faint: #B3AB9D;
+  --hatch: #3F3932; --hatch-op: .5; --glass: #DDE4E3; --glass-line: #5D6A6B; --face: #FFFDF8; --brass: #DCD1BB;
+  --fluid: #C9381D; --fluid-2: #DF6A50; --fluid-3: #D24B2F; --fluid-top: #EE9078; --fluid-deep: #8E2412; --shut: #8A8276; --light-blend: normal;
+  --venous: #3E4C84; --venous-top: #7180B6; --venous-deep: #232C55;
+  --water: #8FB3C4; --water-top: #B9D3DE; --water-deep: #4D7487; --copper: #B8794A; --copper-top: #D9A47A; --copper-deep: #6E4123; --iron: #7E8188; --lamp: #F2B544;
+  --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+/* Light is the default. Dark applies only when the reader chooses it (kit/folio-theme.js). */
+:root[data-theme="dark"] {
+  --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
+  --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
+  --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
+  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
+  --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  --water: #3F6A7E; --water-top: #6E98AA; --water-deep: #1F3A47; --copper: #C2814F; --copper-top: #E0A97C; --copper-deep: #6A3E20; --iron: #5D6068; --lamp: #FFC657;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; margin: 0; padding-inline: clamp(16px, 4vw, 56px); padding-block: 0 64px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1240px; margin: 0 auto; }
+.mono { font-family: var(--mono); font-feature-settings: "zero" 0; }
+.label { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Masthead */
+.mast { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-block: 22px 18px; border-bottom: 1px solid var(--rule); }
+.mast .mark { font-family: var(--display); font-size: 22px; letter-spacing: .32em; text-transform: uppercase; font-weight: 500; justify-self: center; }
+.mast .r { justify-self: end; text-align: right; display: flex; align-items: center; gap: 14px; }
+.theme { font: 500 10.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); background: transparent; border: 1px solid var(--rule); padding: 7px 10px 7px 26px; cursor: pointer; position: relative; white-space: nowrap; }
+.theme::before { content: ""; position: absolute; left: 9px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; border: 1px solid currentColor; background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+.theme:hover { border-color: var(--ink); }
+
+/* Title block */
+.title { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: 24px 64px; align-items: end; padding-block: 52px 36px; }
+.title h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 7.4vw, 104px); line-height: .94; letter-spacing: -.02em; margin: 14px 0 0; text-wrap: balance; }
+.title h1 em { font-style: italic; color: var(--accent); }
+.title p { margin: 0; color: var(--ink-2); font-size: 17px; max-width: 46ch; }
+.title .cat { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.title .cat dt { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.title .cat dd { margin: 0; font-family: var(--mono); font-size: 12.5px; }
+
+/* The plate */
+.exhibit { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: start; }
+.plate { background: var(--paper); position: relative; padding: 18px 18px 14px; outline: 1px solid var(--rule); outline-offset: -9px; }
+.plate .corners { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 6px 10px 0; }
+.plate .corners.b { padding: 0 10px 6px; align-items: end; }
+.plate .tl { font-family: var(--display); font-style: italic; font-size: 19px; }
+.plate .tr { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); text-align: right; align-self: center; }
+.plate .bl { font-family: var(--mono); font-size: 11px; color: var(--ink-3); max-width: 46ch; }
+.plate .br { font-family: var(--mono); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+.plate .br b { color: var(--accent); font-weight: 500; }
+.fig { position: relative; }
+#plate { display: block; cursor: default; }
+#plate:focus-visible { outline-offset: -4px; }
+#plate-svg { width: 100%; height: auto; display: block; }
+
+/* Figure tones */
+#plate-svg .f { stroke: var(--line); stroke-width: .55; stroke-linejoin: round; }
+#plate-svg .t-top { fill: var(--top); } #plate-svg .t-s3 { fill: var(--s3); } #plate-svg .t-s2 { fill: var(--s2); }
+#plate-svg .t-s1 { fill: var(--s1); } #plate-svg .t-s0 { fill: var(--s0); } #plate-svg .t-cyl { fill: var(--cyl); }
+#plate-svg .t-face { fill: var(--face); }
+#plate-svg .hatch { fill: none; stroke: var(--hatch); stroke-width: .42; opacity: var(--hatch-op); }
+#plate-svg .ln { fill: none; stroke-width: .5; stroke-linecap: round; }
+#plate-svg .ln.lo, #plate-svg .ln-lo { stroke: var(--lo); } #plate-svg .ln.mid { stroke: var(--line); stroke-width: .6; }
+#plate-svg .ln.hi { stroke: var(--line); stroke-width: 1.3; } #plate-svg .ln.faint { stroke: var(--faint); }
+#plate-svg .ln.zero { stroke: var(--accent); stroke-width: .9; }
+#plate-svg .ln-lo { stroke-width: .4; }
+#plate-svg .dot, #plate-svg .hub { fill: var(--line); }
+#plate-svg .glint { fill: var(--top); opacity: .9; }
+#plate-svg .brass .f { fill: var(--brass); }
+#plate-svg .engr { fill: var(--ink); font-family: var(--mono); letter-spacing: .06em; }
+#plate-svg .engr.lo { fill: var(--ink-3); } #plate-svg .engr.tok { font-family: var(--body); font-weight: 600; letter-spacing: .02em; }
+#plate-svg .glass-back { fill: var(--glass); opacity: .55; stroke: var(--glass-line); stroke-width: .35; }
+#plate-svg .glass-front { fill: var(--glass); fill-opacity: .14; stroke: var(--glass-line); stroke-width: .6; }
+#plate-svg .glass-rim { fill: none; stroke: var(--glass-line); stroke-width: .6; }
+#plate-svg .glass-lip { fill: var(--glass); fill-opacity: .35; stroke: var(--glass-line); stroke-width: .5; }
+#plate-svg .ln.grad { stroke: var(--glass-line); stroke-width: .45; }
+#plate-svg .ln.glint-line { stroke: var(--top); stroke-width: 1.4; opacity: .8; }
+#plate-svg .fluid { fill: var(--fluid); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .fluid-top { fill: var(--fluid-top); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .fluidg .hatch { stroke: var(--fluid-deep); opacity: .55; }
+#plate-svg .t-fluid { fill: var(--fluid); } #plate-svg .t-fluid-top { fill: var(--fluid-top); } #plate-svg .t-fluid-2 { fill: var(--fluid-2); } #plate-svg .t-fluid-3 { fill: var(--fluid-3); }
+#plate-svg .stratum .f { stroke: var(--fluid-deep); }
+#plate-svg .t-shut { fill: var(--shut); }
+#plate-svg .shutter .t-cyl { fill: var(--s1); }
+#plate-svg .needle { fill: var(--accent); stroke: var(--fluid-deep); stroke-width: .3; }
+#plate-svg .pin circle { fill: var(--ink); stroke: var(--paper); stroke-width: 1.4; transition: fill .2s; }
+#plate-svg .pin text { fill: var(--paper); font-family: var(--mono); font-size: 8.4px; font-weight: 500; }
+#plate-svg .pin.on circle { fill: var(--accent); }
+#plate-svg .hit { fill: transparent; cursor: pointer; }
+#plate-svg .hit:hover { fill: var(--accent-soft); }
+#plate-svg [data-part].lit .f { stroke: var(--accent); stroke-width: 1; }
+
+/* The key */
+.key { background: var(--paper); padding: 20px 20px 16px; }
+.key h2, .controls h2 { font-family: var(--display); font-weight: 500; font-style: italic; font-size: 22px; margin: 0 0 4px; }
+.key ol { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 2px; }
+.key li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 7px 4px; border-top: 1px solid var(--rule); cursor: default; border-radius: 2px; }
+.key li:hover, .key li.on { background: var(--accent-soft); }
+.num { display: inline-grid; place-items: center; width: 19px; height: 19px; border-radius: 50%; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 10.5px; font-weight: 500; line-height: 1; }
+.key li.on .num { background: var(--accent); }
+.key b { font-weight: 600; font-size: 14px; display: block; line-height: 1.3; }
+.key span.d { font-size: 13px; color: var(--ink-2); line-height: 1.4; display: block; }
+.key code { font-family: var(--mono); font-size: 11.5px; color: var(--ink); }
+.controls { margin-top: 18px; background: var(--paper); padding: 20px; display: grid; gap: 16px; }
+.ctl .label { display: flex; justify-content: space-between; margin-bottom: 7px; }
+.seg { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); }
+.seg.tok { grid-template-columns: repeat(4, 1fr); }
+.seg button { font: 500 12px/1 var(--mono); padding: 9px 2px; background: none; border: 0; border-left: 1px solid var(--rule); color: var(--ink-2); cursor: pointer; }
+.seg.tok button:nth-child(4n+1) { border-left: 0; } .seg.tok button:nth-child(n+5) { border-top: 1px solid var(--rule); }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg button:hover:not([aria-pressed="true"]) { background: var(--accent-soft); color: var(--ink); }
+.headname { font-size: 13px; color: var(--ink-2); margin-top: 7px; min-height: 2.8em; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13.5px; }
+.toggle button { font: 500 12px/1 var(--mono); padding: 8px 12px; border: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; min-width: 92px; }
+.toggle button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* Wall texts */
+section.wall { margin-top: 84px; }
+.sechead { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px 40px; padding-top: 14px; border-top: 1px solid var(--ink); margin-bottom: 30px; }
+.sechead .label { padding-top: 10px; }
+.sechead h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.sechead p { grid-column: 2; margin: 0; color: var(--ink-2); max-width: 64ch; }
+.stages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-left: 1px solid var(--rule); }
+.stage { padding: 4px 22px 8px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.stage .rn { font-family: var(--display); font-style: italic; font-size: 34px; line-height: 1; color: var(--accent); }
+.stage h3 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+.stage .eq { font-family: var(--display); font-size: 21px; padding: 10px 0; border-block: 1px solid var(--rule); white-space: nowrap; overflow-x: auto; }
+.stage .eq i { font-style: italic; }
+.stage p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.stage .live { font-family: var(--mono); font-size: 12px; color: var(--ink); background: var(--paper); padding: 10px 12px; font-variant-numeric: tabular-nums; line-height: 1.6; }
+.stage .live b { color: var(--accent); font-weight: 500; }
+.inl { display: inline-grid; width: 16px; height: 16px; font-size: 9.5px; vertical-align: 1px; }
+
+/* Ledger */
+.ledger-wrap { overflow-x: auto; background: var(--paper); padding: 8px 20px 18px; }
+.qline { font-family: var(--mono); font-size: 12px; padding: 12px 0 14px; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--ink-2); }
+table.ledger { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; min-width: 760px; }
+.ledger th { font-weight: 500; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); text-align: right; padding: 12px 10px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.ledger th:nth-child(-n+3), .ledger td:nth-child(-n+3) { text-align: left; }
+.ledger td { padding: 7px 10px; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
+.ledger td.tok { font-family: var(--body); font-weight: 600; font-size: 14px; }
+.ledger tr.q td { background: var(--accent-soft); }
+.ledger tr.mask td { color: var(--ink-3); }
+.ledger tr.mask td.w { background-image: repeating-linear-gradient(135deg, transparent 0 4px, var(--rule) 4px 5px); }
+.ledger tr { cursor: pointer; }
+.strip { display: inline-grid; grid-template-columns: repeat(8, 11px); gap: 2px; vertical-align: middle; }
+.strip i { height: 11px; border: 1px solid var(--rule); display: block; }
+.bar { display: grid; grid-template-columns: 1fr 50px; gap: 10px; align-items: center; min-width: 170px; }
+.bar span { height: 7px; background: var(--rule); position: relative; display: block; }
+.bar span i { position: absolute; inset: 0 auto 0 0; background: var(--accent); display: block; }
+
+/* Matrix */
+.matrix-wrap { display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr); gap: 32px 48px; align-items: start; }
+.matrix { display: grid; grid-template-columns: 74px repeat(8, 44px); gap: 3px; font-family: var(--mono); font-size: 11px; overflow-x: auto; background: var(--paper); padding: 18px; }
+.matrix .ch { writing-mode: vertical-rl; transform: rotate(180deg); text-align: left; color: var(--ink-3); padding-top: 4px; height: 64px; font-family: var(--body); font-weight: 600; font-size: 12px; }
+.matrix .rh { text-align: right; padding-right: 8px; align-self: center; font-family: var(--body); font-weight: 600; font-size: 12.5px; cursor: pointer; }
+.matrix button { height: 44px; border: 1px solid var(--rule); background: var(--paper); position: relative; padding: 0; font: 500 10px/1 var(--mono); color: var(--ink); cursor: pointer; font-variant-numeric: tabular-nums; }
+.matrix button .fill { position: absolute; inset: 0; background: var(--accent); }
+.matrix button span { position: relative; }
+.matrix button.dark { color: #fff; }
+.matrix button.mask { background-image: repeating-linear-gradient(135deg, transparent 0 4px, var(--rule) 4px 5px); color: transparent; }
+.matrix button.row { outline: 1.5px solid var(--ink); outline-offset: 0; z-index: 1; }
+.matrix-notes p { margin: 0 0 14px; color: var(--ink-2); max-width: 52ch; }
+.matrix-notes h3 { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 24px; margin: 0 0 10px; }
+.heads { display: grid; gap: 0; margin-top: 18px; border-top: 1px solid var(--rule); }
+.heads button { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; text-align: left; padding: 11px 6px; border: 0; border-bottom: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; font: inherit; align-items: baseline; }
+.heads button .rn { font-family: var(--display); font-style: italic; font-size: 19px; color: var(--ink-3); }
+.heads button b { font-weight: 600; font-size: 14.5px; } .heads button small { display: block; color: var(--ink-2); font-size: 13px; }
+.heads button .h { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+.heads button[aria-pressed="true"] { background: var(--paper); } .heads button[aria-pressed="true"] .rn { color: var(--accent); }
+
+/* Notes and colophon */
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 40px; }
+.notes div { border-top: 1px solid var(--rule); padding-top: 14px; }
+.notes h3 { font-size: 14.5px; font-weight: 600; margin: 0 0 6px; }
+.notes p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+footer { margin-top: 84px; padding-top: 16px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; gap: 16px; font-size: 13px; color: var(--ink-3); }
+footer .mark { font-family: var(--display); letter-spacing: .32em; text-transform: uppercase; color: var(--ink); }
+
+@media (max-width: 1080px) {
+  .exhibit { grid-template-columns: minmax(0, 1fr); }
+  .side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .controls { margin-top: 0; }
+  .stages { grid-template-columns: repeat(2, minmax(0, 1fr)); border-left: 0; }
+  .stage { border-right: 0; border-top: 1px solid var(--rule); padding: 18px 18px 22px 0; }
+  .matrix-wrap { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .mast { grid-template-columns: 1fr auto; } .mast .c { display: none; }
+  .title { grid-template-columns: minmax(0, 1fr); padding-block: 32px 24px; }
+  .side { grid-template-columns: minmax(0, 1fr); }
+  .plate { padding: 10px 6px 8px; outline-offset: -5px; }
+  .plate .bl { display: none; } .plate .corners.b { grid-template-columns: 1fr; }
+  .stages { grid-template-columns: minmax(0, 1fr); }
+  .sechead { grid-template-columns: minmax(0, 1fr); gap: 8px; } .sechead p { grid-column: 1; } .sechead .label { padding-top: 0; }
+  .notes { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .matrix { grid-template-columns: 56px repeat(8, minmax(26px, 1fr)); padding: 10px; gap: 2px; }
+  .matrix button { height: 32px; font-size: 0; }
+  footer { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Site navigation */
+.mast a { color: inherit; text-decoration: none; }
+.mast a:hover { color: var(--accent); }
+.mast .mark a { letter-spacing: inherit; }
+.platenav { margin-top: 84px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid var(--ink); padding-top: 16px; }
+.platenav a { text-decoration: none; display: grid; gap: 4px; padding: 14px 0; }
+.platenav a:last-child { text-align: right; }
+.platenav b { font-family: var(--display); font-weight: 400; font-size: clamp(22px, 3vw, 32px); line-height: 1.1; }
+.platenav a:hover b { color: var(--accent); }
+
+/* Blood: arterial uses the accent, venous its own indigo. Colour is the subject here. */
+#plate-svg .arterial { fill: var(--fluid); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .arterial-top, #plate-svg .arterial-cap { fill: var(--fluid-top); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .venous { fill: var(--venous); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .venous-top, #plate-svg .venous-cap { fill: var(--venous-top); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .arterial-ball .f { fill: var(--fluid); stroke: var(--fluid-deep); }
+#plate-svg .venous-ball .f { fill: var(--venous); stroke: var(--venous-deep); }
+#plate-svg .arterialg .hatch, #plate-svg .arterial-ball .hatch { stroke: var(--fluid-deep); opacity: .5; }
+#plate-svg .venousg .hatch, #plate-svg .venous-ball .hatch { stroke: var(--venous-deep); opacity: .55; }
+#plate-svg .sol > .hatch { }
+#plate-svg .flow { fill: none; stroke: var(--paper); stroke-width: 1.1; stroke-dasharray: 2.5 7; stroke-linecap: round; opacity: .9; }
+#plate-svg .flow.thin { stroke-width: .7; stroke-dasharray: 1.4 4; }
+#plate-svg .leather .f { stroke-width: .45; }
+#plate-svg .leather .t-top { fill: var(--s2); } #plate-svg .leather .t-s2, #plate-svg .leather .t-s3 { fill: var(--s1); } #plate-svg .leather .t-s1, #plate-svg .leather .t-s0 { fill: var(--s0); }
+#plate-svg .piston .t-cyl { fill: var(--s2); } #plate-svg .piston .t-top { fill: var(--s3); }
+#plate-svg .lever.leak .t-cyl { fill: var(--accent); }
+#plate-svg .leakring { fill: none; stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 2 2; }
+#plate-svg .housing .t-top { fill: var(--s3); }
+
+/* Charts in wall texts */
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
+.chart .ax { stroke: var(--rule); stroke-width: 1; fill: none; }
+.chart .grid { stroke: var(--rule); stroke-width: .6; stroke-dasharray: 2 4; }
+.chart text { fill: var(--ink-3); font-family: var(--mono); font-size: 10.5px; }
+.chart .lbl { fill: var(--ink-2); font-family: var(--body); font-size: 12px; font-weight: 600; }
+.chart .lv { stroke: var(--accent); stroke-width: 2; fill: none; }
+.chart .ao { stroke: var(--ink); stroke-width: 1.4; fill: none; }
+.chart .la { stroke: var(--ink-3); stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; }
+.chart .loop { stroke: var(--accent); stroke-width: 2; fill: var(--accent-soft); }
+.chart .cursor { stroke: var(--ink); stroke-width: 1; }
+.chart .dot { fill: var(--accent); stroke: var(--paper); stroke-width: 2; }
+.chart .band { fill: var(--ink); opacity: .045; }
+.chart .bandlbl { fill: var(--ink-3); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; }
+
+/* Three views: the switch, the light layer, the turning bench */
+.plate .tr { display: flex; align-items: center; justify-content: flex-end; gap: 16px; flex-wrap: wrap; }
+.views { display: inline-grid; grid-auto-flow: column; border: 1px solid var(--rule); }
+.views button { font: 500 10.5px/1 var(--mono); letter-spacing: .1em; padding: 7px 11px; background: none; border: 0; border-left: 1px solid var(--rule); color: var(--ink-2); cursor: pointer; }
+.views button:first-child { border-left: 0; }
+.views button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.views button:hover:not([aria-pressed="true"]):not(:disabled) { background: var(--accent-soft); color: var(--ink); }
+.views button:disabled { opacity: .4; cursor: not-allowed; }
+.fig canvas.light { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: var(--light-blend); opacity: 0; transition: opacity .5s ease; }
+.fig.mode-webgl canvas.light { opacity: 1; }
+.fig.mode-webgl #plate-svg .flow { visibility: hidden; }
+.fig.mode-3d { cursor: grab; touch-action: none; }
+.fig.mode-3d.turning { cursor: grabbing; }
+.fig.mode-3d #plate-svg .hit { cursor: pointer; }
+@media (max-width: 720px) { .plate .tr .cap { display: none; } }
+
+/* Looking closer: the inspector card and the loupe */
+.fig { position: relative; }
+#plate-svg .pin { cursor: pointer; }
+#plate-svg .pin:hover circle { fill: var(--accent); }
+.inspect { position: absolute; left: 14px; bottom: 14px; width: min(340px, calc(100% - 28px)); background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 1px 0 var(--rule); padding: 14px 16px 14px; display: grid; gap: 6px; z-index: 3; }
+.inspect[hidden] { display: none; }
+.inspect-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.inspect-nav { display: inline-flex; gap: 4px; }
+.inspect-nav button { font: 500 11px/1 var(--mono); padding: 6px 8px; border: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; }
+.inspect-nav button:hover { border-color: var(--ink); }
+.inspect b { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.1; }
+.inspect p { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.inspect-live { font-family: var(--mono); font-size: 12px; line-height: 1.6; padding-top: 8px; border-top: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+.inspect-live b { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 500; }
+.fig.inspecting canvas.light { opacity: 0 !important; }
+.loupe-layer { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; display: none; }
+.loupe-layer .loupe-bg { fill: var(--paper); }
+.loupe-layer .loupe-ring { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.loupe-layer .loupe-ring2 { fill: none; stroke: var(--brass); stroke-width: 7; opacity: .9; }
+.loupe-layer .loupe-handle { stroke: var(--ink); stroke-width: 9; stroke-linecap: round; }
+.fig.loupe-on { cursor: none; }
+.tools { display: inline-grid; grid-auto-flow: column; border: 1px solid var(--rule); }
+.tools button { font: 500 10.5px/1 var(--mono); letter-spacing: .1em; padding: 7px 11px; background: none; border: 0; color: var(--ink-2); cursor: pointer; }
+.tools button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.tools button:hover:not([aria-pressed="true"]) { background: var(--accent-soft); color: var(--ink); }
+@media (max-width: 720px) { .inspect { position: static; width: auto; margin: 8px 0 0; } }
+.key li { cursor: pointer; }
+.plate .tr { gap: 10px; }
+.fig.loupe-on #plate-svg .hit:hover { fill: transparent; }
+
+/* Moving internals */
+#plate-svg .vane { fill: var(--s2); stroke: var(--line); stroke-width: .4; }
+#plate-svg .vane.busy { fill: var(--fluid-top); stroke: var(--fluid-deep); }
+#plate-svg .lobe .f { fill: var(--accent); stroke: var(--fluid-deep); }
+#plate-svg .camdisc .t-top { fill: var(--face); }
+
+/* Plate III: water, copper, iron, fields and light */
+#plate-svg .water { fill: var(--water); stroke: var(--water-deep); stroke-width: .5; }
+#plate-svg .water-top { fill: var(--water-top); stroke: var(--water-deep); stroke-width: .5; }
+#plate-svg .waterg .hatch { stroke: var(--water-deep); opacity: .45; }
+#plate-svg .copper { fill: var(--copper); stroke: var(--copper-deep); stroke-width: .5; }
+#plate-svg .copper-top { fill: var(--copper-top); stroke: var(--copper-deep); stroke-width: .5; }
+#plate-svg .ln.turns { stroke: var(--copper-deep); stroke-width: .45; }
+#plate-svg .core .t-top { fill: var(--iron); } #plate-svg .core .t-s3, #plate-svg .core .t-s2 { fill: color-mix(in srgb, var(--iron) 80%, var(--line)); } #plate-svg .core .t-s1, #plate-svg .core .t-s0 { fill: color-mix(in srgb, var(--iron) 60%, var(--line)); }
+#plate-svg .core .hatch { stroke: var(--line); }
+#plate-svg .rotorbody .t-cyl { fill: var(--iron); } #plate-svg .rotorbody .t-top { fill: color-mix(in srgb, var(--iron) 75%, var(--paper)); }
+#plate-svg .pole-n { fill: var(--accent); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .pole-s { fill: var(--venous); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .ring { fill: none; stroke: var(--line); stroke-width: 2.4; stroke-linecap: round; }
+#plate-svg .field { fill: none; stroke: var(--accent); stroke-width: .7; stroke-dasharray: 2 3; opacity: .75; }
+#plate-svg .flux { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 6; }
+#plate-svg .insul .t-cyl { fill: var(--glass); } #plate-svg .insul .t-top { fill: color-mix(in srgb, var(--glass) 70%, var(--paper)); }
+#plate-svg .conductor { fill: var(--s1); stroke: var(--line); stroke-width: .4; }
+#plate-svg .cable { fill: var(--line); stroke: var(--line); stroke-width: .3; }
+#plate-svg .flow.energy { stroke: var(--lamp); stroke-width: 1.2; stroke-dasharray: 2 9; opacity: .95; }
+#plate-svg .ln.lattice { stroke: var(--lo); stroke-width: .45; }
+#plate-svg .ln.spoke { stroke: var(--line); stroke-width: 1; }
+#plate-svg .bucket .f { stroke-width: .45; }
+#plate-svg .flyball .t-cyl { fill: var(--brass); }
+#plate-svg .roof .t-top, #plate-svg .roof .t-s3, #plate-svg .roof .t-s2 { fill: color-mix(in srgb, var(--accent) 35%, var(--s2)); } #plate-svg .roof .t-s1, #plate-svg .roof .t-s0 { fill: color-mix(in srgb, var(--accent) 30%, var(--s0)); }
+#plate-svg .win { fill: var(--lamp); stroke: var(--line); stroke-width: .3; }
+#plate-svg .jet { fill: none; stroke: var(--water); stroke-width: 3; stroke-dasharray: 4 3; stroke-linecap: round; }
+#plate-svg .tripped .t-cyl { fill: var(--accent); }
+.fig.mode-webgl #plate-svg .flow.energy { visibility: visible; }
+
+/* Plate IV: filing cards, bins, chains and probe trails */
+#plate-svg .card .t-top, #plate-svg .card .t-s3, #plate-svg .card .t-s2 { fill: var(--face); }
+#plate-svg .card .t-s1, #plate-svg .card .t-s0 { fill: var(--s3); }
+#plate-svg .card .f { stroke: var(--line); stroke-width: .35; }
+#plate-svg .card.touch .f { stroke: var(--accent); stroke-width: 1.1; }
+#plate-svg .card.found .t-s3, #plate-svg .card.found .t-s2, #plate-svg .card.found .t-top { fill: color-mix(in srgb, var(--accent) 22%, var(--face)); }
+#plate-svg .card.query .f { stroke: var(--accent); stroke-width: .8; stroke-dasharray: 2.2 1.6; }
+#plate-svg .cardtab .f { fill: var(--accent); stroke: none; }
+#plate-svg .engr.cardkey { font-family: var(--body); font-weight: 600; letter-spacing: .01em; }
+#plate-svg .engr.binno { fill: var(--ink-2); font-family: var(--display); font-style: italic; letter-spacing: 0; }
+#plate-svg .engr.bit { font-weight: 500; } #plate-svg .engr.bit.on, #plate-svg .engr.acc { fill: var(--accent); }
+#plate-svg .win-frame { fill: var(--face); stroke: var(--line); stroke-width: .5; }
+#plate-svg .maskline { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; }
+#plate-svg .trail { fill: none; stroke: var(--ink-2); stroke-width: 1.1; stroke-dasharray: 2.4 2.4; stroke-linecap: round; opacity: .8; }
+#plate-svg .trail.on { stroke: var(--accent); stroke-width: 2; stroke-dasharray: none; opacity: 1; }
+#plate-svg .bead .t-cyl { fill: var(--s1); }
+#plate-svg .bin .t-top { fill: var(--top); }
+#plate-svg .binfloor .t-top { fill: var(--s2); }
+#plate-svg .drawer .t-top { fill: var(--top); }
+
+/* A plate on its own, for embedding in the cover page. */
+html, body { background: var(--paper); }
+body { padding: 0; }
+.plate { outline-offset: -1px; padding: 14px 14px 10px; }
+</style>
+<figure class="plate" style="margin:0">
+  <div class="corners"><span class="tl">Pl. IV</span><span class="tr"><span class="cap">The sorting office</span><span class="views" id="views" role="group" aria-label="View"></span><span class="tools" id="tools" role="group" aria-label="Tools"><button type="button" data-t="loupe" aria-pressed="false">Loupe</button></span></span></div>
+  <div class="fig" id="plate" tabindex="0" role="img" aria-label="Plate IV: a hash map as a sorting office">
+    <svg id="plate-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+  </div>
+  <div class="corners b"><span class="bl">Click the card file or a bin · drag all the way round in 3D</span><span class="br" id="readout" aria-live="off"></span></div>
+</figure>
+<script>
+/* Folio kit: an orthographic isometric camera and engraved solids, drawn as SVG strings.
+   World units: x along the bench, y toward the viewer, z up. No dependencies. */
+(function (root) {
+  "use strict";
+  const D = Math.PI / 180;
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const mul = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const len = (a) => Math.hypot(a[0], a[1], a[2]);
+  const norm = (a) => mul(a, 1 / (len(a) || 1));
+  const f = (n) => (Math.round(n * 100) / 100).toString();
+
+  /* The light comes from the upper left, slightly in front. Tones are chosen by facing. */
+  const LIGHT = norm([-0.55, 0.35, 0.78]);
+
+  function camera(o = {}) {
+    const az = o.az ?? -24, el = o.el ?? 30, k = o.k ?? 1, ox = o.ox ?? 0, oy = o.oy ?? 0;
+    const a = az * D, e = el * D;
+    const ca = Math.cos(a), sa = Math.sin(a), ce = Math.cos(e), se = Math.sin(e);
+    return {
+      az, el, k, ox, oy,
+      view: [-sa * ce, ca * ce, se],
+      p(x, y, z) {
+        if (Array.isArray(x)) [x, y, z] = x;
+        const u = x * ca + y * sa, w = -x * sa + y * ca;
+        return [ox + k * u, oy + k * (w * se - z * ce)];
+      },
+      depth(x, y, z) {
+        if (Array.isArray(x)) [x, y, z] = x;
+        return -x * sa * ce + y * ca * ce + z * se;
+      },
+    };
+  }
+
+  /* Fit a camera so that the given world points fill W x H with padding. */
+  function fit(o, pts, W, H, pad = 24) {
+    const c = camera({ ...o, k: 1, ox: 0, oy: 0 });
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const p of pts) {
+      const [x, y] = c.p(p);
+      x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+    }
+    const k = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0), o.maxK ?? Infinity);
+    return camera({ ...o, k, ox: W / 2 - k * (x0 + x1) / 2, oy: H / 2 - k * (y0 + y1) / 2 });
+  }
+
+  const path = (pts, close = true) =>
+    "M" + pts.map((q) => f(q[0]) + " " + f(q[1])).join("L") + (close ? "Z" : "");
+
+  function toneOf(n) {
+    if (n[2] > 0.9) return "top";
+    if (n[2] < -0.9) return "s0";
+    const d = dot(n, LIGHT);
+    return d < -0.25 ? "s0" : d < 0 ? "s1" : d < 0.25 ? "s2" : "s3";
+  }
+
+  const attrs = (o) => {
+    let s = "";
+    if (o.id) s += ` id="${o.id}"`;
+    if (o.part) s += ` data-part="${o.part}"`;
+    return s;
+  };
+
+  /* A box from (x,y,z) with size (w,d,h). Draws only the faces turned to the viewer,
+     shaded by facing, with an optional engraved hatch on the darkest side and an inset
+     groove on the top. */
+  function box(cam, x, y, z, w, d, h, o = {}) {
+    const P = (a, b, c) => cam.p(a, b, c);
+    const X = x + w, Y = y + d, Z = z + h;
+    const faces = [
+      { n: [0, 0, 1], q: [[x, y, Z], [X, y, Z], [X, Y, Z], [x, Y, Z]] },
+      { n: [0, 1, 0], q: [[x, Y, z], [X, Y, z], [X, Y, Z], [x, Y, Z]] },
+      { n: [0, -1, 0], q: [[x, y, z], [X, y, z], [X, y, Z], [x, y, Z]] },
+      { n: [1, 0, 0], q: [[X, y, z], [X, Y, z], [X, Y, Z], [X, y, Z]] },
+      { n: [-1, 0, 0], q: [[x, y, z], [x, Y, z], [x, Y, Z], [x, y, Z]] },
+    ];
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    let darkest = null;
+    for (const fc of faces) {
+      if (dot(fc.n, cam.view) <= 1e-6) continue;
+      const t = o.tone && fc.n[2] < 0.9 ? o.tone : toneOf(fc.n);
+      s += `<path class="f t-${fc.n[2] > 0.9 ? (o.topTone || "top") : t}" d="${path(fc.q.map((v) => P(...v)))}"/>`;
+      if (fc.n[2] < 0.9 && (!darkest || dot(fc.n, LIGHT) < dot(darkest.n, LIGHT))) darkest = fc;
+    }
+    if (o.hatch && darkest && h > 2) {
+      const sp = o.hatch === true ? 3 : o.hatch;
+      const n = darkest.n, along = n[0] !== 0 ? [0, 1, 0] : [1, 0, 0];
+      const L = n[0] !== 0 ? d : w, base = darkest.q[0];
+      let lines = "";
+      for (let t = sp; t < L - sp * 0.5; t += sp) {
+        const a = add(base, mul(along, t));
+        lines += `M${f(P(...a)[0])} ${f(P(...a)[1])}L${f(P(a[0], a[1], Z)[0])} ${f(P(a[0], a[1], Z)[1])}`;
+      }
+      s += `<path class="hatch" d="${lines}"/>`;
+    }
+    if (o.groove) {
+      const g = o.groove;
+      s += `<path class="ln faint" d="${path([[x + g, y + g, Z], [X - g, y + g, Z], [X - g, Y - g, Z], [x + g, Y - g, Z]].map((v) => P(...v)))}"/>`;
+    }
+    return s + "</g>";
+  }
+
+  function basis(axis) {
+    const n = norm(axis);
+    const t = Math.abs(n[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];
+    const u = norm(cross(n, t));
+    const v = cross(n, u);
+    return [n, u, v];
+  }
+  const ringPt = (c, u, v, r, t) => add(c, add(mul(u, r * Math.cos(t)), mul(v, r * Math.sin(t))));
+
+  /* A round bar from p0 to p1 of radius r: a post, a rail, a pipe, a knob or a drum.
+     The side is engraved with hatch lines whose density follows the shade, so a
+     curved body reads as turned metal instead of a staircase of flat tones. */
+  function rod(cam, p0, p1, r, o = {}) {
+    const N = o.seg || 44;
+    const [n, u, v] = basis(sub(p1, p0));
+    const V = cam.view;
+    const phi = Math.atan2(dot(v, V), dot(u, V));
+    const t0 = phi - Math.PI / 2, t1 = phi + Math.PI / 2;
+    const side = [];
+    for (let i = 0; i <= N; i++) side.push(cam.p(ringPt(p0, u, v, r, t0 + (t1 - t0) * i / N)));
+    for (let i = N; i >= 0; i--) side.push(cam.p(ringPt(p1, u, v, r, t0 + (t1 - t0) * i / N)));
+    const capC = dot(n, V) > 0 ? p1 : p0;
+    const cap = [];
+    for (let i = 0; i < N * 2; i++) cap.push(cam.p(ringPt(capC, u, v, r, (i / (N * 2)) * Math.PI * 2)));
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    s += `<path class="f ${o.sideCls || "t-cyl"}" d="${path(side)}"/>`;
+    if (o.hatch !== false) {
+      const K = 90; let acc = 0, lines = "";
+      const dens = o.density ?? 1;
+      for (let i = 1; i < K; i++) {
+        const t = t0 + (t1 - t0) * i / K;
+        const m = add(mul(u, Math.cos(t)), mul(v, Math.sin(t)));
+        const dark = Math.pow(Math.max(0, 1 - (dot(m, LIGHT) + 1) / 1.6), 1.7);
+        acc += dark * dens * (r * cam.k) / 14;
+        if (acc >= 1) {
+          acc -= 1;
+          const a = cam.p(ringPt(p0, u, v, r, t)), b = cam.p(ringPt(p1, u, v, r, t));
+          lines += `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`;
+        }
+      }
+      if (lines) s += `<path class="hatch" d="${lines}"/>`;
+    }
+    if (o.knurl) {
+      let lines = "";
+      for (let i = 0; i < o.knurl; i++) {
+        const t = t0 + (t1 - t0) * (i + 0.5) / o.knurl;
+        const a = cam.p(ringPt(p0, u, v, r, t)), b = cam.p(ringPt(p1, u, v, r, t));
+        lines += `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`;
+      }
+      s += `<path class="ln lo" d="${lines}"/>`;
+    }
+    if (o.cap !== false) s += `<path class="f ${o.capCls || "t-top"}" d="${path(cap)}"/>`;
+    return s + "</g>";
+  }
+
+  /* A vertical drum standing on the floor plane. */
+  const drum = (cam, cx, cy, z, r, h, o) => rod(cam, [cx, cy, z], [cx, cy, z + h], r, o);
+
+  /* A ball: in an orthographic camera it projects to a circle. */
+  function ball(cam, c, r, o = {}) {
+    const [x, y] = cam.p(c);
+    const R = r * cam.k;
+    const hx = x - R * 0.35, hy = y - R * 0.4;
+    return `<g class="sol ${o.cls || ""}"${attrs(o)}><circle class="f t-cyl" cx="${f(x)}" cy="${f(y)}" r="${f(R)}"/>` +
+      `<path class="hatch" d="M${f(x + R * 0.15)} ${f(y + R * 0.92)}A${f(R)} ${f(R)} 0 0 0 ${f(x + R * 0.92)} ${f(y + R * 0.2)}"/>` +
+      `<circle class="glint" cx="${f(hx)}" cy="${f(hy)}" r="${f(R * 0.18)}"/></g>`;
+  }
+
+  /* A circle lying on a horizontal plane, as a closed path. */
+  function ringPath(cam, cx, cy, z, r, N = 48) {
+    const pts = [];
+    for (let i = 0; i < N; i++) { const t = (i / N) * Math.PI * 2; pts.push(cam.p(cx + r * Math.cos(t), cy + r * Math.sin(t), z)); }
+    return path(pts);
+  }
+
+  /* An arc on a horizontal plane, angles in degrees measured in world xy. */
+  function arcPath(cam, cx, cy, z, r, a0, a1, N = 32) {
+    const pts = [];
+    for (let i = 0; i <= N; i++) { const t = (a0 + (a1 - a0) * i / N) * D; pts.push(cam.p(cx + r * Math.cos(t), cy + r * Math.sin(t), z)); }
+    return path(pts, false);
+  }
+
+  /* Radial ticks on a horizontal plane. */
+  function radialTicks(cam, cx, cy, z, r0, r1, angles) {
+    let s = "";
+    for (const a of angles) {
+      const t = a * D;
+      const p = cam.p(cx + r0 * Math.cos(t), cy + r0 * Math.sin(t), z);
+      const q = cam.p(cx + r1 * Math.cos(t), cy + r1 * Math.sin(t), z);
+      s += `M${f(p[0])} ${f(p[1])}L${f(q[0])} ${f(q[1])}`;
+    }
+    return s;
+  }
+
+  function line(cam, a, b) {
+    const p = cam.p(a), q = cam.p(b);
+    return `M${f(p[0])} ${f(p[1])}L${f(q[0])} ${f(q[1])}`;
+  }
+
+  /* Text engraved in a plane: ax is the world direction of the baseline, ay the world
+     direction of "down" on the glyphs. Size is in world units. */
+  function faceText(cam, origin, ax, ay, str, size, o = {}) {
+    // Engraving on a face turned away from the viewer is hidden with its face.
+    if (o.cull !== false && dot(cross(ax, ay), cam.view) <= 0.02) return "";
+    const p0 = cam.p(origin);
+    const px = cam.p(add(origin, ax)), py = cam.p(add(origin, ay));
+    const a = (px[0] - p0[0]), b = (px[1] - p0[1]), c = (py[0] - p0[0]), d = (py[1] - p0[1]);
+    const esc = String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    return `<text class="${o.cls || "engr"}" text-anchor="${o.anchor || "middle"}" font-size="${size}" transform="matrix(${f(a)} ${f(b)} ${f(c)} ${f(d)} ${f(p0[0])} ${f(p0[1])})">${esc}</text>`;
+  }
+
+  /* A specimen pin: a small numbered disc set on a part, never a leader line. */
+  function pin(cam, at, num, o = {}) {
+    const [x, y] = cam.p(at);
+    return `<g class="pin" data-pin="${num}" tabindex="-1"><circle cx="${f(x)}" cy="${f(y)}" r="7.2"/>` +
+      `<text x="${f(x)}" y="${f(y + 2.9)}" text-anchor="middle">${num}</text></g>`;
+  }
+
+  /* A screw head on a horizontal plane: a ring and a slot. */
+  function screw(cam, cx, cy, z, r = 2.2) {
+    const a = cam.p(cx - r * 0.7, cy - r * 0.2, z), b = cam.p(cx + r * 0.7, cy + r * 0.2, z);
+    return `<path class="f t-s3 ln-lo" d="${ringPath(cam, cx, cy, z, r, 20)}"/><path class="ln lo" d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}"/>`;
+  }
+
+
+  /* A convex prism: a flat convex polygon (3D points, in order) swept along dir.
+     Only faces turned to the viewer are drawn, each toned by its facing. Roofs, wedges, hoppers. */
+  function prism(cam, base, dir, o = {}) {
+    const n0 = norm(cross(sub(base[1], base[0]), sub(base[2], base[0])));
+    const nb = dot(n0, dir) > 0 ? mul(n0, -1) : n0;
+    const top = base.map((p) => add(p, dir));
+    const cen = mul(base.reduce((a, p) => add(a, p), [0, 0, 0]), 1 / base.length);
+    const mid = add(cen, mul(dir, 0.5));
+    const faces = [{ n: nb, q: base }, { n: mul(nb, -1), q: top }];
+    for (let i = 0; i < base.length; i++) {
+      const a = base[i], b = base[(i + 1) % base.length];
+      let n = norm(cross(sub(b, a), dir));
+      const fc = mul(add(add(a, b), add(add(a, dir), add(b, dir))), 0.25);
+      if (dot(n, sub(fc, mid)) < 0) n = mul(n, -1);
+      faces.push({ n, q: [a, b, add(b, dir), add(a, dir)] });
+    }
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    for (const fc of faces) {
+      if (dot(fc.n, cam.view) <= 1e-6) continue;
+      const t = fc.n[2] > 0.9 ? (o.topTone || "top") : (o.tone || toneOf(fc.n));
+      s += `<path class="f t-${t}" d="${path(fc.q.map((v) => cam.p(v)))}"/>`;
+    }
+    return s + "</g>";
+  }
+
+  /* The half of a ring (a circle around an axis) that lies behind or in front of its centre,
+     for rings that wrap another part: draw the back half first and the front half last. */
+  function ringArc(cam, c, axis, r, front, N = 48) {
+    const [, u, v] = basis(axis), cd = cam.depth(c);
+    let d = "", pen = false;
+    for (let i = 0; i <= N; i++) {
+      const t = (i / N) * Math.PI * 2, p = ringPt(c, u, v, r, t);
+      const on = front ? cam.depth(p) >= cd : cam.depth(p) < cd;
+      if (on) { const q = cam.p(p); d += (pen ? "L" : "M") + f(q[0]) + " " + f(q[1]); pen = true; } else pen = false;
+    }
+    return d;
+  }
+  /* A point on a ring around an axis, at angle t: for parts that orbit a shaft. */
+  function orbitPt(c, axis, r, t) { const [, u, v] = basis(axis); return ringPt(c, u, v, r, t); }
+
+  root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, cross, LIGHT, prism, ringArc, orbitPt };
+})(typeof window !== "undefined" ? window : globalThis);
+
+/* Folio live kit: the three views of a plate.
+   - stage():  owns the camera and the painter's order; rebuilds the drawing when the camera turns.
+   - light():  a WebGL layer over the SVG. Its visibility mask is rendered from the drawing itself,
+               so light only lands on surfaces the reader can actually see.
+   - orbit():  drag to turn the bench; the scene is re-projected and re-shaded from the new view.
+   - views():  the SVG · WebGL · 3D switch on the plate's mount.
+   Requires folio-kit.js. No dependencies. */
+(function (root) {
+  "use strict";
+  const K = root.Folio;
+  const D = Math.PI / 180;
+
+  /* ---------- stage ---------- */
+  function stage(o) {
+    // o: { svg, W, H, az, el, points, center, build(cam, api) }
+    const base = K.fit({ az: o.az, el: o.el }, o.points, o.W, o.H, o.pad ?? 22);
+    const C = o.center;
+    const anchor = base.p(C);
+    const st = { cam: base, base, slots: {}, az: o.az, el: o.el, turned: false, sceneId: (o.svg.id || "plate") + "-scene" };
+    o.svg.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`);
+
+    // Any other view is fitted to the frame afresh, but never closer than the default view,
+    // so the bench stays whole however it is turned.
+    st.cameraAt = (az, el) => {
+      if (az === o.az && el === o.el) return base;
+      return K.fit({ az, el, maxK: base.k * (o.orbitScale ?? 0.92) }, o.points, o.W, o.H, o.pad ?? 22);
+    };
+    st.mount = (az = st.az, el = st.el) => {
+      st.az = az; st.el = el; st.turned = az !== o.az || el !== o.el;
+      const cam = (st.cam = st.cameraAt(az, el));
+      const order = [];
+      const api = {
+        S: (s) => order.push(s),
+        slot: (n) => order.push({ slot: n }),
+        // Units along the bench: far end first. Valid for any view from the front half.
+        alongX: (list, key = (v) => v) => list.slice().sort((a, b) => cam.depth(key(a), 0, 0) - cam.depth(key(b), 0, 0)),
+        farFirst: (list, pt) => list.slice().sort((a, b) => cam.depth(...pt(a)) - cam.depth(...pt(b))),
+        leftIsFar: cam.depth(0, 0, 0) < cam.depth(1, 0, 0),
+        backIsFar: cam.depth(0, 0, 0) < cam.depth(0, 1, 0),
+        // Bands of the bench, each {y, draw}: drawn far to near from any side.
+        bands: (list) => list.slice().sort((a, b) => cam.depth(0, a.y, 0) - cam.depth(0, b.y, 0)).forEach((b) => b.draw()),
+        // Free-standing units, each {at:[x,y,z], draw}: drawn far to near from any angle.
+        units: (list) => list.slice().sort((a, b) => cam.depth(...a.at) - cam.depth(...b.at)).forEach((u) => u.draw()),
+      };
+      o.build(cam, api);
+      let html = "", run = "";
+      for (const it of order) {
+        if (typeof it === "string") run += it;
+        else { html += run; run = ""; html += `<g data-slot="${it.slot}"></g>`; }
+      }
+      o.svg.innerHTML = `<g id="${st.sceneId}">` + html + run + "</g>";
+      st.slots = {};
+      o.svg.querySelectorAll("[data-slot]").forEach((g) => (st.slots[g.dataset.slot] = g));
+      return cam;
+    };
+    return st;
+  }
+
+  /* ---------- orbit ---------- */
+  function orbit(el, o) {
+    // o: { az0, el0, azRange:[a,b], elRange:[a,b], onTurn(az, el), onSettle(az, el), enabled() }
+    let az = o.az0, elv = o.el0, va = 0, ve = 0, drag = null, raf = 0, last = 0;
+    const clamp = (v, r) => Math.max(r[0], Math.min(r[1], v));
+    // With wrap, the bench turns all the way round; azimuth stays in [-180, 180).
+    const turnAz = (v) => (o.wrap ? ((((v + 180) % 360) + 360) % 360) - 180 : clamp(v, o.azRange));
+    const tick = (now) => {
+      const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
+      if (!drag) {
+        az = turnAz(az + va * dt); elv = clamp(elv + ve * dt, o.elRange);
+        va *= Math.exp(-dt * 5); ve *= Math.exp(-dt * 5);
+        if (Math.abs(va) + Math.abs(ve) < 2) { va = ve = 0; o.onTurn(az, elv); o.onSettle?.(az, elv); raf = 0; last = 0; return; }
+      }
+      o.onTurn(az, elv);
+      raf = requestAnimationFrame(tick);
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    el.addEventListener("pointerdown", (e) => {
+      if (!o.enabled()) return;
+      if (e.target.closest(".hit")) return;
+      drag = { x: e.clientX, y: e.clientY, t: performance.now() };
+      el.setPointerCapture(e.pointerId); el.classList.add("turning"); kick();
+    });
+    el.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      const now = performance.now(), dt = Math.max(1, now - drag.t) / 1000;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      const sa = -dx * 0.32, se = dy * 0.22;
+      az = turnAz(az + sa); elv = clamp(elv + se, o.elRange);
+      va = sa / dt; ve = se / dt;
+      drag = { x: e.clientX, y: e.clientY, t: now };
+    });
+    const end = () => { if (!drag) return; drag = null; el.classList.remove("turning"); kick(); };
+    el.addEventListener("pointerup", end); el.addEventListener("pointercancel", end);
+    el.addEventListener("dblclick", () => { if (o.enabled()) api.to(o.az0, o.el0); });
+    const api = {
+      get: () => [az, elv],
+      to(a, e) {
+        // ease to a view without inertia
+        let a0 = az; const e0 = elv, t0 = performance.now();
+        if (o.wrap) { while (a - a0 > 180) a0 += 360; while (a0 - a > 180) a0 -= 360; }
+        const step = (now) => {
+          const k = Math.min(1, (now - t0) / 600), s = k * k * (3 - 2 * k);
+          az = a0 + (a - a0) * s; elv = e0 + (e - e0) * s; o.onTurn(az, elv);
+          if (k < 1) requestAnimationFrame(step); else o.onSettle?.(az, elv);
+        };
+        va = ve = 0; requestAnimationFrame(step);
+      },
+      nudge(da, de) { az = turnAz(az + da); elv = clamp(elv + de, o.elRange); o.onTurn(az, elv); o.onSettle?.(az, elv); },
+    };
+    return api;
+  }
+
+  /* ---------- light ---------- */
+  const PRELUDE = `
+precision highp float;
+uniform vec2 uRes; uniform vec2 uVB; uniform vec3 uCam; uniform vec2 uAng;
+uniform float uTime; uniform float uDark; uniform sampler2D uMask;
+vec2 vbOf() { return vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y) / uRes * uVB; }
+vec4 maskAt() { return texture2D(uMask, gl_FragCoord.xy / uRes); }
+vec2 project(vec3 p) {
+  float ca = cos(uAng.x), sa = sin(uAng.x), ce = cos(uAng.y), se = sin(uAng.y);
+  float u = p.x * ca + p.y * sa, w = -p.x * sa + p.y * ca;
+  return vec2(uCam.x + uCam.z * u, uCam.y + uCam.z * (w * se - p.z * ce));
+}
+// The world point on the horizontal plane at height z that lands on this pixel.
+vec2 onPlane(vec2 vb, float z) {
+  float ca = cos(uAng.x), sa = sin(uAng.x), ce = cos(uAng.y), se = sin(uAng.y);
+  float u = (vb.x - uCam.x) / uCam.z;
+  float w = ((vb.y - uCam.y) / uCam.z + z * ce) / se;
+  return vec2(u * ca - w * sa, u * sa + w * ca);
+}
+float segDist(vec2 p, vec2 a, vec2 b, out float t) {
+  vec2 ab = b - a; t = clamp(dot(p - a, ab) / max(dot(ab, ab), 1e-4), 0.0, 1.0);
+  return length(p - a - ab * t);
+}
+// Where light falls: the bench is lit from a lamp behind it and to the left, so light that
+// passes through a part lands on the floor in front of it.
+const vec3 LAMP = vec3(-0.38, -0.62, 0.69);
+vec2 fall(vec3 p, float floorZ) { vec3 L = normalize(LAMP); float h = p.z - floorZ; return p.xy - L.xy * h / L.z; }
+// Accumulate premultiplied light of one colour.
+void addLight(inout vec4 acc, vec3 col, float a) { a = clamp(a, 0.0, 1.0); acc.rgb += col * a * (1.0 - acc.a); acc.a += a * (1.0 - acc.a); }
+float caustic(vec2 q, float t) {
+  float a = sin(q.x * 0.55 + t * 1.1) + sin(q.y * 0.7 - t * 0.9) + sin((q.x + q.y) * 0.4 + t * 1.6);
+  float b = sin(q.x * 0.31 - q.y * 0.52 + t * 0.7);
+  return pow(clamp(1.0 - abs(a + b) * 0.42, 0.0, 1.0), 5.0);
+}
+`;
+
+  function light(o) {
+    // o: { canvas, svg, W, H, frag, maskCss }
+    const gl = o.canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false });
+    if (!gl) return null;
+    const sh = (type, src) => {
+      const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+      return s;
+    };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, "attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }"));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, PRELUDE + o.frag));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, "p");
+    gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
+    const U = {};
+    const u = (n) => (n in U ? U[n] : (U[n] = gl.getUniformLocation(prog, n)));
+    let w = 0, h = 0, maskBusy = false;
+
+    const api = {
+      gl,
+      size() {
+        const r = Math.min(1.5, root.devicePixelRatio || 1);
+        const cw = Math.max(2, Math.round(o.canvas.clientWidth * r)), ch = Math.max(2, Math.round(o.canvas.clientHeight * r));
+        if (cw !== w || ch !== h) { w = o.canvas.width = cw; h = o.canvas.height = ch; gl.viewport(0, 0, w, h); return true; }
+        return false;
+      },
+      /* Render the drawing with flat channel colours: red = floor, green = vessels, blue = glass,
+         black = everything else, in the drawing's own painter's order. Occlusion comes for free. */
+      async mask() {
+        if (maskBusy || !w) return; maskBusy = true;
+        try {
+          const clone = o.svg.cloneNode(true);
+          clone.setAttribute("width", w); clone.setAttribute("height", h);
+          clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+          const style = document.createElementNS("http://www.w3.org/2000/svg", "style");
+          style.textContent = `* { fill: #000 !important; stroke: #000 !important; opacity: 1 !important; fill-opacity: 1 !important; stroke-opacity: 1 !important; }
+            .hit, .pin, .flow, text { display: none !important; }
+            .ln, .hatch, .leakring { fill: none !important; } ${o.maskCss}`;
+          clone.insertBefore(style, clone.firstChild);
+          const img = new Image();
+          img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(new XMLSerializer().serializeToString(clone));
+          await img.decode();
+          const c = document.createElement("canvas"); c.width = w; c.height = h;
+          const g = c.getContext("2d"); g.fillStyle = "#000"; g.fillRect(0, 0, w, h); g.drawImage(img, 0, 0, w, h);
+          api.maskCanvas = c;
+          gl.bindTexture(gl.TEXTURE_2D, tex);
+          gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c);
+        } catch (e) { /* the light layer is an extra; the drawing stays */ }
+        maskBusy = false;
+      },
+      set(name, v) {
+        const l = u(name); if (l === null) return;
+        if (typeof v === "number") gl.uniform1f(l, v);
+        else if (v instanceof Float32Array) gl.uniform1fv(l, v); // an array of floats
+        else if (v.length === 2) gl.uniform2fv(l, v);
+        else if (v.length === 3) gl.uniform3fv(l, v);
+        else if (v.length % 4 === 0) gl.uniform4fv(l, v);
+      },
+      draw(cam, t, dark) {
+        api.set("uRes", [w, h]); api.set("uVB", [o.W, o.H]); api.set("uCam", [cam.ox, cam.oy, cam.k]);
+        api.set("uAng", [cam.az * D, cam.el * D]); api.set("uTime", t); api.set("uDark", dark ? 1 : 0);
+        gl.uniform1i(u("uMask"), 0);
+        gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      },
+    };
+    return api;
+  }
+
+  /* ---------- the view switch ---------- */
+  function views(host, o) {
+    // o: { modes: [{id,label,ok}], current, onSelect(id) }
+    host.innerHTML = o.modes.map((m) => `<button type="button" data-v="${m.id}" aria-pressed="${m.id === o.current}" ${m.ok === false ? "disabled title=\"Not available in this browser\"" : ""}>${m.label}</button>`).join("");
+    host.addEventListener("click", (e) => {
+      const b = e.target.closest("button"); if (!b || b.disabled) return;
+      host.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+      o.onSelect(b.dataset.v);
+    });
+    return { set(id) { host.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.v === id)); } };
+  }
+
+
+  /* ---------- inspector: look closely at one part ---------- */
+  function inspector(o) {
+    // o: { fig, svg, W, H, parts:[{n, name, text, at:[x,y,z]}], cam(), live(n) -> html, zoom }
+    const card = document.createElement("div");
+    card.className = "inspect"; card.hidden = true; card.setAttribute("role", "dialog"); card.setAttribute("aria-live", "polite");
+    card.innerHTML = `<div class="inspect-top"><span class="label" data-k="num"></span><span class="inspect-nav">
+      <button type="button" data-a="prev" aria-label="Previous part">←</button><button type="button" data-a="next" aria-label="Next part">→</button>
+      <button type="button" data-a="close">Whole bench</button></span></div>
+      <b data-k="name"></b><p data-k="text"></p><div class="inspect-live" data-k="live"></div>`;
+    o.fig.appendChild(card);
+    const q = (k) => card.querySelector(`[data-k="${k}"]`);
+    let open = null, vb = [0, 0, o.W, o.H], anim = 0;
+    const setVB = (v) => { vb = v; o.svg.setAttribute("viewBox", v.map((x) => x.toFixed(2)).join(" ")); };
+    const animateTo = (to) => {
+      cancelAnimationFrame(anim);
+      const from = vb.slice(), t0 = performance.now(), dur = matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 650;
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / dur), e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        setVB(from.map((f, i) => f + (to[i] - f) * e));
+        if (k < 1) anim = requestAnimationFrame(step);
+      };
+      anim = requestAnimationFrame(step);
+    };
+    const lightPin = (n) => o.svg.querySelectorAll(".pin").forEach((p) => p.classList.toggle("on", String(p.dataset.pin) === String(n)));
+    const api = {
+      get open() { return open; },
+      show(n) {
+        const part = o.parts.find((p) => p.n === n); if (!part) return;
+        open = n;
+        const c = o.cam(), p = c.p(typeof part.at === "function" ? part.at() : part.at), z = o.zoom || 2.4, w = o.W / z, h = o.H / z;
+        const x = Math.max(0, Math.min(o.W - w, p[0] - w / 2)), y = Math.max(0, Math.min(o.H - h, p[1] - h * 0.42));
+        animateTo([x, y, w, h]);
+        o.fig.classList.add("inspecting");
+        q("num").textContent = `Part ${n} of ${o.parts.length}`;
+        q("name").textContent = part.name; q("text").textContent = part.text;
+        api.refresh(); card.hidden = false; lightPin(n);
+        o.onChange?.(n);
+      },
+      close() {
+        if (open === null) return;
+        open = null; animateTo([0, 0, o.W, o.H]); card.hidden = true;
+        o.fig.classList.remove("inspecting"); lightPin(null); o.onChange?.(null);
+      },
+      step(d) {
+        const i = o.parts.findIndex((p) => p.n === open);
+        api.show(o.parts[(i + d + o.parts.length) % o.parts.length].n);
+      },
+      refresh() { if (open !== null) q("live").innerHTML = o.live ? o.live(open) : ""; },
+    };
+    card.addEventListener("click", (e) => {
+      const a = e.target.closest("button")?.dataset.a;
+      if (a === "close") api.close(); else if (a === "prev") api.step(-1); else if (a === "next") api.step(1);
+      e.stopPropagation();
+    });
+    // Pins may be redrawn while they move, so act on the press rather than waiting for a click.
+    o.svg.addEventListener("pointerdown", (e) => {
+      const pinEl = e.target.closest(".pin");
+      if (pinEl) { const n = +pinEl.dataset.pin; open === n ? api.close() : api.show(n); e.stopPropagation(); e.preventDefault(); }
+    });
+    o.fig.addEventListener("keydown", (e) => {
+      if (open === null) return;
+      if (e.key === "Escape") api.close(); else if (e.key === ".") api.step(1); else if (e.key === ",") api.step(-1); else return;
+      e.preventDefault(); e.stopPropagation();
+    });
+    return api;
+  }
+
+  /* ---------- loupe: a magnifying glass over the bench ---------- */
+  function loupe(o) {
+    // o: { fig, svg, W, H, sceneId, mag, r }
+    const NS = "http://www.w3.org/2000/svg", id = o.sceneId + "-loupe";
+    const layer = document.createElementNS(NS, "svg");
+    layer.setAttribute("class", "loupe-layer"); layer.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`); layer.setAttribute("aria-hidden", "true");
+    layer.innerHTML = `<defs><clipPath id="${id}"><circle r="${o.r || 92}"/></clipPath></defs>
+      <g clip-path="url(#${id})"><rect class="loupe-bg" x="-5000" y="-5000" width="10000" height="10000"/><use href="#${o.sceneId}"/></g>
+      <circle class="loupe-ring" r="${o.r || 92}"/><circle class="loupe-ring2" r="${(o.r || 92) + 5}"/>
+      <line class="loupe-handle" x1="0" y1="0" x2="0" y2="0"/>`;
+    o.fig.appendChild(layer);
+    const clip = layer.querySelector("clipPath circle"), use = layer.querySelector("use");
+    const rings = layer.querySelectorAll(".loupe-ring, .loupe-ring2"), handle = layer.querySelector(".loupe-handle");
+    let on = false, pos = [o.W * 0.5, o.H * 0.45];
+    const r = o.r || 92, m = o.mag || 2.6;
+    const place = () => {
+      const [x, y] = pos;
+      clip.setAttribute("cx", x); clip.setAttribute("cy", y);
+      use.setAttribute("transform", `translate(${x} ${y}) scale(${m}) translate(${-x} ${-y})`);
+      rings.forEach((c) => { c.setAttribute("cx", x); c.setAttribute("cy", y); });
+      const a = Math.PI * 0.25;
+      handle.setAttribute("x1", x + (r + 5) * Math.cos(a)); handle.setAttribute("y1", y + (r + 5) * Math.sin(a));
+      handle.setAttribute("x2", x + (r + 60) * Math.cos(a)); handle.setAttribute("y2", y + (r + 60) * Math.sin(a));
+    };
+    const toVB = (e) => {
+      const b = o.svg.getBoundingClientRect(), vb = (o.svg.getAttribute("viewBox") || `0 0 ${o.W} ${o.H}`).split(/\s+/).map(Number);
+      return [vb[0] + ((e.clientX - b.left) / b.width) * vb[2], vb[1] + ((e.clientY - b.top) / b.height) * vb[3]];
+    };
+    o.fig.addEventListener("pointermove", (e) => { if (!on) return; pos = toVB(e); place(); });
+    place();
+    return {
+      get on() { return on; },
+      toggle(v = !on) { on = v; o.fig.classList.toggle("loupe-on", on); layer.style.display = on ? "block" : "none"; if (on) place(); },
+      sync() { const vb = (o.svg.getAttribute("viewBox") || "").trim(); if (vb) layer.setAttribute("viewBox", vb); },
+    };
+  }
+
+  const isDark = () => {
+    return document.documentElement.dataset.theme === "dark";
+  };
+  const webglOK = () => { try { return !!document.createElement("canvas").getContext("webgl"); } catch (e) { return false; } };
+
+  K.live = { stage, orbit, light, views, inspector, loupe, isDark, webglOK, PRELUDE };
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+/* The true model behind Plate IV: how a hash map resolves collisions.
+   Keys are hashed with Java's String.hashCode, spread as java.util.HashMap does (h ^ h>>>16),
+   and folded to a slot with a mask: i = spread(h) & (m − 1), the same as h mod m for m a power
+   of two. Three ways to settle a collision:
+   - chaining:   every slot holds a list; a new key joins the end of its slot's list.
+   - linear:     open addressing; try i, i+1, i+2, … until a slot is free.
+   - quadratic:  open addressing; try i, i+1, i+3, i+6, … (triangular steps, which visit every
+                 slot when m is a power of two).
+   When the load α = n/m would pass 0.75 the table doubles and every key is placed again. */
+(function (root) {
+  "use strict";
+  const KEYS = ["pear", "plum", "kiwi", "fig", "date", "lemon", "lime", "quince"];
+  const ABSENT = ["cherry", "melon", "banana"];
+  const MODES = [
+    { id: "chain", name: "Separate chaining", short: "Chaining" },
+    { id: "linear", name: "Linear probing", short: "Linear" },
+    { id: "quad", name: "Quadratic probing", short: "Quadratic" },
+  ];
+  const LIMIT = 0.75, M0 = 4, MMAX = 8;
+
+  const hashCode = (s) => { let h = 0; for (const c of s) h = (Math.imul(31, h) + c.charCodeAt(0)) | 0; return h; };
+  const spread = (h) => h ^ (h >>> 16);
+  const index = (s, m) => spread(hashCode(s)) & (m - 1);
+  const hex = (h) => "0x" + (h >>> 0).toString(16).toUpperCase().padStart(8, "0");
+  const bits = (v, n) => (v >>> 0).toString(2).padStart(32, "0").slice(-n);
+  const step = (mode, i) => (mode === "quad" ? (i * (i + 1)) / 2 : i);
+
+  /* Probe sequence of a key in an open-addressed table: the slots tried, ending at the one
+     that holds it (found) or the first empty one (absent or about to be placed). */
+  function probe(slots, key, mode, m) {
+    const h = index(key, m), path = [];
+    for (let i = 0; i < m; i++) {
+      const s = (h + step(mode, i)) & (m - 1);
+      path.push(s);
+      if (slots[s] === null || slots[s] === key) return { path, slot: s, found: slots[s] === key };
+    }
+    return { path, slot: -1, found: false }; // full: every slot tried
+  }
+
+  function empty(mode, m) {
+    return { mode, m, n: 0, slots: new Array(m).fill(null), chains: Array.from({ length: m }, () => []) };
+  }
+  function put(t, key) {
+    if (t.mode === "chain") { t.chains[index(key, t.m)].push(key); t.n++; return true; }
+    const p = probe(t.slots, key, t.mode, t.m);
+    if (p.slot < 0) return false;
+    t.slots[p.slot] = key; t.n++; return true;
+  }
+
+  /* Build the table from a list of keys, inserted in order, resizing as needed.
+     Returns the table, every key's home slot, path and cost, and the history of resizes. */
+  function place(keys, o = {}) {
+    const mode = o.mode || "chain", auto = o.auto !== false;
+    let t = empty(mode, o.m0 || M0);
+    const order = [], resizes = [];
+    let refused = null;
+    for (const k of keys) {
+      if (auto && t.m < MMAX && (t.n + 1) / t.m > LIMIT) {
+        const from = t.m, nt = empty(mode, t.m * 2);
+        for (const old of order) put(nt, old); // placed again in the order they arrived
+        resizes.push({ before: k, at: t.n, from, to: nt.m });
+        t = nt;
+      }
+      if (!put(t, k)) { refused = k; break; }
+      order.push(k);
+    }
+    const entries = {};
+    for (const k of order) entries[k] = locate(t, k);
+    return { ...t, keys: order, entries, resizes, refused, alpha: t.n / t.m, full: mode !== "chain" && t.n >= t.m };
+  }
+
+  /* Where a key is, and what it costs to find it: the slots read and the keys compared. */
+  function locate(t, key) {
+    const home = index(key, t.m), h = hashCode(key);
+    if (t.mode === "chain") {
+      const ch = t.chains[home], pos = ch.indexOf(key);
+      const seen = pos >= 0 ? ch.slice(0, pos + 1) : ch.slice();
+      return { key, h, home, slot: home, pos, found: pos >= 0, path: [home], compared: seen, probes: pos >= 0 ? pos + 1 : ch.length };
+    }
+    const p = probe(t.slots, key, t.mode, t.m);
+    return { key, h, home, slot: p.slot, pos: 0, found: p.found, path: p.path, compared: p.path.map((s) => t.slots[s]).filter(Boolean), probes: p.path.length };
+  }
+
+  /* Averages over the table as it stands: a successful search for every stored key, and an
+     unsuccessful one starting from every slot (each slot equally likely as a home). */
+  function measure(t) {
+    const hit = t.keys.length ? t.keys.reduce((a, k) => a + t.entries[k].probes, 0) / t.keys.length : 0;
+    let miss = 0;
+    for (let h = 0; h < t.m; h++) {
+      if (t.mode === "chain") miss += t.chains[h].length;
+      else {
+        let i = 0;
+        for (; i < t.m; i++) if (t.slots[(h + step(t.mode, i)) & (t.m - 1)] === null) break;
+        miss += Math.min(t.m, i + 1);
+      }
+    }
+    let longest = 0, collided = 0;
+    for (const k of t.keys) { const e = t.entries[k]; if (e.probes > 1) collided++; longest = Math.max(longest, e.probes); }
+    return { hit, miss: miss / t.m, longest, collided };
+  }
+
+  /* Knuth's averages for a table at load α with keys hashed uniformly. */
+  function expected(mode, a) {
+    if (mode === "chain") return { hit: 1 + a / 2, miss: a };
+    if (a >= 1) return { hit: Infinity, miss: Infinity };
+    if (mode === "linear") return { hit: 0.5 * (1 + 1 / (1 - a)), miss: 0.5 * (1 + 1 / ((1 - a) * (1 - a))) };
+    return { hit: 1 - Math.log(1 - a) - a / 2, miss: 1 / (1 - a) - a - Math.log(1 - a) };
+  }
+
+  root.HashModel = { KEYS, ABSENT, MODES, LIMIT, M0, MMAX, hashCode, spread, index, hex, bits, step, place, locate, measure, expected, probe };
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+/* Plate IV: how a hash map resolves collisions, as a sorting office.
+   A card file holds the keys still to be filed. Each card is read by the hash press, whose
+   windows show the low bits of the hash; a dial folds them to a slot; a carriage on the rail
+   takes the card to that bin. If the bin is taken, the card either joins a chain hung in front of
+   it (separate chaining) or the carriage tries other bins (open addressing), leaving a red trail.
+   When the load passes 0.75 the shutters lift on four more bins and every card is filed again.
+   Every part is a unit sorted by depth, so the office can be turned all the way round. */
+(function () {
+  "use strict";
+  const K = window.Folio, HM = window.HashModel;
+  const { box, rod, drum, ball, arcPath, radialTicks, line, faceText, pin, screw, path, f } = K;
+  const W = 1000, H = 600;
+  const KEYS = HM.KEYS;
+
+  // Layout (world units, x along the bench, y toward the viewer, z up)
+  const NB = HM.MMAX;                                    // bins on the bench
+  const PL = { x1: 720, y1: 288 };
+  const BX = (i) => 262 + i * 58;                       // bin centres
+  const BIN = { y: 80, y0: 58, y1: 102, hw: 25, h: 22, wall: 2 };
+  const CARD = { hw: 19, t: 1.9, h: 46 };
+  const NY = (k) => 134 + (k - 1) * 33;                 // chain node k (k ≥ 1) stands here
+  const RAIL = { y: 80, z: 134, x0: 36, x1: 702 };
+  const HANG = 70;                                      // a card on the carriage hangs with its foot here
+  const PRESS = { x: 112, x0: 54, x1: 170, y0: 44, y1: 116, h: 56 };
+  const DIAL = { x: 112, y: 146, r: 22 };
+  const DRAWER = { x0: 80, x1: 146, y0: 178, y1: 270, h: 26 };
+  const DRAW_Y = (j) => 256 - j * 8.6;                    // card j of the file, 0 at the front
+  const FR = 250;                                       // the front row of instruments
+  const GA = { x: 236, r: 20 }, CNT = { x: 330 }, NM = { x: 430 }, KNOB = { x: 548, r: 20 }, LEV = { x: 648 };
+  const MODE_ANG = { chain: 215, linear: 270, quad: 325 };
+  const A_MAX = 1.5, aAng = (a) => 180 + Math.max(0, Math.min(1, a / A_MAX)) * 180;
+  const dialAng = (s, m) => -90 + (s * 360) / m;
+
+  const pts = [];
+  for (const x of [-10, PL.x1 + 10]) for (const y of [-10, PL.y1 + 10]) for (const z of [-36, 0]) pts.push([x, y, z]);
+  pts.push([RAIL.x0, RAIL.y, RAIL.z + 14], [RAIL.x1, RAIL.y, RAIL.z + 14]);
+  const svg = document.getElementById("plate-svg");
+  const stage = K.live.stage({ svg, W, H, az: -24, el: 30, points: pts, center: [370, 160, 50], pad: 16, build });
+  let cam = stage.base, S, slot, api;
+
+  /* ---------- a filing card ---------- */
+  function card(x, y, z, key, o = {}) {
+    const cls = "card" + (o.red ? " clash" : "") + (o.touch ? " touch" : "") + (o.found ? " found" : "") + (o.query ? " query" : "");
+    let s = box(cam, x - CARD.hw, y - CARD.t, z, CARD.hw * 2, CARD.t * 2, CARD.h, { cls });
+    if (o.red || o.query) s += box(cam, x - CARD.hw, y - CARD.t, z + CARD.h, CARD.hw * 2, CARD.t * 2, 2, { cls: "cardtab" });
+    const home = o.home != null ? "h " + o.home : "";
+    for (const sgn of [1, -1]) {
+      const ax = [sgn, 0, 0], yy = y + sgn * (CARD.t + 0.05);
+      s += faceText(cam, [x, yy, z + CARD.h - 10], ax, [0, 0, -1], key, 9.6, { cls: "engr cardkey" });
+      if (home) s += faceText(cam, [x, yy, z + 9], ax, [0, 0, -1], home, 5.2, { cls: "engr lo" });
+    }
+    return o.alpha != null && o.alpha < 1 ? `<g style="opacity:${f(o.alpha)}">${s}</g>` : s;
+  }
+
+  /* ---------- static parts ---------- */
+  function build(c, a) {
+    cam = c; api = a; S = a.S; slot = a.slot;
+    const far = (arr) => (api.leftIsFar ? arr : arr.slice().reverse());
+    // Plinth, feet, screws, catalogue plate.
+    for (const [x, y] of [[10, 10], [PL.x1 - 10, 10], [10, PL.y1 - 10], [PL.x1 - 10, PL.y1 - 10]]) S(drum(cam, x, y, -36, 8, 6, { cls: "foot" }));
+    S(box(cam, -6, -6, -32, PL.x1 + 12, PL.y1 + 12, 8, { hatch: 2.6 }));
+    S(box(cam, 0, 0, -24, PL.x1, PL.y1, 24, { hatch: 2.2, groove: 7, part: "plinth", cls: "floor" }));
+    for (const [x, y] of [[16, 16], [PL.x1 - 16, 16], [16, PL.y1 - 16], [PL.x1 - 16, PL.y1 - 16]]) S(screw(cam, x, y, 0, 3));
+    const frontSeen = cam.view[1] > 0;
+    if (frontSeen) S(box(cam, 245, PL.y1, -20, 230, 1.4, 15, { cls: "brass" }));
+    S(faceText(cam, [360, PL.y1 + 1.5, -10.4], [1, 0, 0], [0, 0, -1], "FOLIO · PLATE IV · HOW A HASH MAP RESOLVES COLLISIONS", 5));
+    S(faceText(cam, [360, PL.y1 + 1.5, -16.6], [1, 0, 0], [0, 0, -1], "JAVA String.hashCode · SPREAD h ^ h>>>16 · SLOT = h & (m − 1)", 3.4, { cls: "engr lo" }));
+    // Flat bases go down first: the bin rack and the front-row plates.
+    S(box(cam, BX(0) - 36, 50, 0, BX(NB - 1) - BX(0) + 72, 60, 3, { groove: 3, cls: "pad" }));
+    {
+      let d = "";
+      for (let i = 0; i < NB; i++) d += line(cam, [BX(i), 110, 3], [BX(i), 115, 0.2]);
+      S(`<path class="ln lo" d="${d}"/>`);
+    }
+
+    const U = [];
+    // The bins: a back wall, two side walls, the card, the front wall with its number, and a lid.
+    for (let i = 0; i < NB; i++) {
+      const x = BX(i), { y0, y1, hw, h, wall } = BIN;
+      U.push({ at: [x, BIN.y, 9], draw() {
+        S(box(cam, x - hw, y0, 3, hw * 2, y1 - y0, 1, { cls: "binfloor" }));
+        const wb = () => S(box(cam, x - hw, y0, 3, hw * 2, wall, h, { cls: "bin" }));
+        const wf = () => {
+          S(box(cam, x - hw, y1 - wall, 3, hw * 2, wall, h, { cls: "bin", hatch: 2.4 }));
+          S(faceText(cam, [x, y1 + 0.05, 3 + h - 6], [1, 0, 0], [0, 0, -1], String(i), 11, { cls: "engr binno" }));
+          S(faceText(cam, [x, y0 - 0.05, 3 + h - 6], [-1, 0, 0], [0, 0, -1], String(i), 11, { cls: "engr binno" }));
+        };
+        const wl = () => S(box(cam, x - hw, y0 + wall, 3, wall, y1 - y0 - wall * 2, h, { cls: "bin" }));
+        const wr = () => S(box(cam, x + hw - wall, y0 + wall, 3, wall, y1 - y0 - wall * 2, h, { cls: "bin" }));
+        api.backIsFar ? wb() : wf();
+        api.leftIsFar ? wl() : wr();
+        slot("bin" + i);
+        api.leftIsFar ? wr() : wl();
+        api.backIsFar ? wf() : wb();
+        slot("lid" + i);
+      } });
+      U.push({ at: [x, 170, 8], draw() { slot("chain" + i); } });
+    }
+
+    // The hash press: a housing under the rail's left end, with bit windows on its face.
+    U.push({ at: [PRESS.x, 78, 22], draw() {
+      const { x0, x1, y0, y1, h } = PRESS;
+      S(box(cam, x0, y0, 0, x1 - x0, y1 - y0, h, { hatch: 2.4, groove: 3, cls: "housing", part: "press" }));
+      S(box(cam, PRESS.x - 22, 75, h, 44, 10, 2, { cls: "slotlip" }));
+      for (const [sx, sy] of [[x0 + 5, y0 + 5], [x1 - 5, y0 + 5], [x0 + 5, y1 - 5], [x1 - 5, y1 - 5]]) S(screw(cam, sx, sy, h, 2));
+      // bit windows: five recessed frames, b4 … b0
+      for (const sgn of [1, -1]) {
+        const yy = sgn > 0 ? y1 + 0.05 : y0 - 0.05, ax = [sgn, 0, 0];
+        S(faceText(cam, [PRESS.x, yy, 10], ax, [0, 0, -1], "HASH PRESS", 5, { cls: "engr lo" }));
+      }
+      if (cam.view[1] > 0) {
+        let d = "";
+        for (let j = 0; j < 4; j++) {
+          const cx = PRESS.x + (j - 1.5) * 19;
+          d += path([[cx - 7.5, y1, 26], [cx + 7.5, y1, 26], [cx + 7.5, y1, 42], [cx - 7.5, y1, 42]].map((p) => cam.p(p)));
+        }
+        S(`<path class="win-frame" d="${d}"/>`);
+      }
+      slot("bits");
+    } });
+    // The fold dial in front of the press.
+    U.push({ at: [DIAL.x, DIAL.y, 3], draw() {
+      S(box(cam, DIAL.x - 30, DIAL.y - 26, 0, 60, 52, 2, { groove: 2.4 }));
+      S(drum(cam, DIAL.x, DIAL.y, 2, DIAL.r + 2, 3, { cls: "base" }));
+      S(drum(cam, DIAL.x, DIAL.y, 5, DIAL.r, 1.2, { capCls: "t-face" }));
+      slot("dialFace");
+      S(faceText(cam, [DIAL.x, DIAL.y + DIAL.r + 2.6, 2], [1, 0, 0], [0, 1, 0], "SLOT = h & (m − 1)", 4, { cls: "engr lo" }));
+      slot("dial");
+    } });
+    // The card file: the keys waiting to be filed, the next one at the front.
+    U.push({ at: [(DRAWER.x0 + DRAWER.x1) / 2, (DRAWER.y0 + DRAWER.y1) / 2, 11], draw() {
+      const { x0, x1, y0, y1, h } = DRAWER, w = 2;
+      S(box(cam, x0, y0, 0, x1 - x0, y1 - y0, 2, { cls: "pad" }));
+      const wb = () => S(box(cam, x0, y0, 2, x1 - x0, w, h - 2, { cls: "drawer" }));
+      const wf = () => {
+        S(box(cam, x0 - 1, y1 - w, 0, x1 - x0 + 2, w + 1, h, { cls: "drawer", hatch: 2.4 }));
+        if (cam.view[1] > 0) S(box(cam, (x0 + x1) / 2 - 12, y1 + 1, 11, 24, 0.8, 8, { cls: "brass" }));
+        S(faceText(cam, [(x0 + x1) / 2, y1 + 1.9, 14.2], [1, 0, 0], [0, 0, -1], "KEYS", 4.6, { cls: "engr" }));
+        S(rod(cam, [(x0 + x1) / 2 - 8, y1 + 4, 6], [(x0 + x1) / 2 + 8, y1 + 4, 6], 1.3, { seg: 12 }));
+      };
+      const wl = () => S(box(cam, x0, y0 + w, 2, w, y1 - y0 - w * 2, h - 2, { cls: "drawer" }));
+      const wr = () => S(box(cam, x1 - w, y0 + w, 2, w, y1 - y0 - w * 2, h - 2, { cls: "drawer" }));
+      api.backIsFar ? wb() : wf();
+      api.leftIsFar ? wl() : wr();
+      slot("drawer");
+      api.leftIsFar ? wr() : wl();
+      api.backIsFar ? wf() : wb();
+    } });
+    // Front row: load gauge, probe counter, n and m, mode knob, resize lever.
+    U.push({ at: [GA.x, FR, 4], draw() {
+      S(box(cam, GA.x - 26, FR - 22, 0, 52, 40, 2, { groove: 2 }));
+      S(drum(cam, GA.x, FR, 2, GA.r + 2.4, 3));
+      S(drum(cam, GA.x, FR, 5, GA.r, 1.4, { capCls: "t-face" }));
+      const z = 6.5, tk = [], tkM = [];
+      for (let a = 0; a <= 1.5001; a += 0.125) (Math.abs(a * 4 - Math.round(a * 4)) < 1e-6 && Math.round(a * 4) % 2 === 0 ? tkM : tk).push(aAng(a));
+      S(`<path class="ln lo" d="${radialTicks(cam, GA.x, FR, z, GA.r - 3.4, GA.r - 1, tk)}"/><path class="ln mid" d="${radialTicks(cam, GA.x, FR, z, GA.r - 5, GA.r - 1, tkM)}${arcPath(cam, GA.x, FR, z, GA.r - 1, 180, 360, 30)}"/>`);
+      S(`<path class="ln zero" d="${radialTicks(cam, GA.x, FR, z, GA.r - 7, GA.r - 0.6, [aAng(HM.LIMIT)])}${arcPath(cam, GA.x, FR, z, GA.r - 1.8, aAng(HM.LIMIT), 360, 12)}"/>`);
+      for (const [a, lab] of [[0, "0"], [0.75, ".75"], [1.5, "1.5"]]) {
+        const t = (aAng(a) * Math.PI) / 180;
+        S(faceText(cam, [GA.x + (GA.r - 9) * Math.cos(t), FR + (GA.r - 9) * Math.sin(t) + 1.2, z], [1, 0, 0], [0, 1, 0], lab, 3.2, { cls: "engr lo" }));
+      }
+      S(faceText(cam, [GA.x, FR + 8, z], [1, 0, 0], [0, 1, 0], "LOAD α = n/m", 3, { cls: "engr lo" }));
+      slot("gA");
+    } });
+    U.push({ at: [CNT.x, FR, 8], draw() {
+      S(box(cam, CNT.x - 26, FR - 12, 0, 52, 24, 16, { hatch: 2.4, groove: 2, cls: "housing" }));
+      S(faceText(cam, [CNT.x, FR + 12.05, 4.2], [1, 0, 0], [0, 0, -1], "PROBES", 3.4, { cls: "engr lo" }));
+      S(faceText(cam, [CNT.x, FR - 12.05, 4.2], [-1, 0, 0], [0, 0, -1], "PROBES", 3.4, { cls: "engr lo" }));
+      slot("cnt");
+    } });
+    U.push({ at: [NM.x, FR, 8], draw() {
+      S(box(cam, NM.x - 30, FR - 12, 0, 60, 24, 16, { hatch: 2.4, groove: 2, cls: "housing" }));
+      S(faceText(cam, [NM.x, FR + 12.05, 4.2], [1, 0, 0], [0, 0, -1], "KEYS n · SLOTS m", 3.2, { cls: "engr lo" }));
+      S(faceText(cam, [NM.x, FR - 12.05, 4.2], [-1, 0, 0], [0, 0, -1], "KEYS n · SLOTS m", 3.2, { cls: "engr lo" }));
+      slot("nm");
+    } });
+    U.push({ at: [KNOB.x, FR, 4], draw() {
+      S(drum(cam, KNOB.x, FR, 0, KNOB.r + 6, 3, { cls: "base" }));
+      S(`<path class="ln mid" d="${radialTicks(cam, KNOB.x, FR, 3, KNOB.r - 1, KNOB.r + 2, Object.values(MODE_ANG))}"/>`);
+      for (const [id, a] of Object.entries(MODE_ANG)) {
+        const t = (a * Math.PI) / 180, lab = { chain: "CHAIN", linear: "LINEAR", quad: "QUAD" }[id];
+        S(faceText(cam, [KNOB.x + (KNOB.r + 3.4) * Math.cos(t), FR + (KNOB.r + 3.4) * Math.sin(t) - 0.6, 3], [1, 0, 0], [0, 1, 0], lab, 3, { cls: "engr" }));
+      }
+      slot("knob");
+    } });
+    U.push({ at: [LEV.x, FR, 4], draw() {
+      S(box(cam, LEV.x - 26, FR - 14, 0, 52, 28, 3, { groove: 2.5 }));
+      S(box(cam, LEV.x - 13, FR - 2, 3, 26, 4, 1.4, { cls: "slotlip" }));
+      S(faceText(cam, [LEV.x - 15, FR + 10, 3], [1, 0, 0], [0, 1, 0], "AUTO", 3.2, { cls: "engr lo" }));
+      S(faceText(cam, [LEV.x + 15, FR + 10, 3], [1, 0, 0], [0, 1, 0], "FIXED", 3.2, { cls: "engr lo" }));
+      S(faceText(cam, [LEV.x, FR - 7, 3], [1, 0, 0], [0, 1, 0], "RESIZE AT .75", 2.8, { cls: "engr lo" }));
+      slot("lever");
+    } });
+    // The rail's posts stand among the other units; the rail, the trails and the carriage ride
+    // above everything on the bench, so they are drawn after it from any side.
+    for (const x of [RAIL.x0, RAIL.x1]) U.push({ at: [x, RAIL.y, 40], draw() {
+      S(drum(cam, x, RAIL.y, 0, 10, 4, { cls: "base" }));
+      S(rod(cam, [x, RAIL.y, 4], [x, RAIL.y, RAIL.z + 10], 4.2));
+      S(drum(cam, x, RAIL.y, RAIL.z + 10, 6, 4));
+    } });
+    api.units(U);
+    S(rod(cam, [RAIL.x0, RAIL.y, RAIL.z], [RAIL.x1, RAIL.y, RAIL.z], 3.2, { seg: 30 }));
+    {
+      let d = "";
+      for (let i = 0; i < NB; i++) d += line(cam, [BX(i), RAIL.y + 3.3, RAIL.z - 3], [BX(i), RAIL.y + 3.3, RAIL.z - 7]);
+      S(`<path class="ln lo" d="${d}"/>`);
+    }
+    slot("trails");
+    slot("carriage");
+    slot("air");
+    slot("hits");
+    slot("pins");
+  }
+
+  /* ---------- the scene: what the office shows at this moment ---------- */
+  const st = { mode: "chain", auto: true };
+  const sc = {
+    layout: HM.place([], { mode: st.mode, auto: st.auto }),
+    hidden: new Set(), fliers: [], mover: null,  // mover: { key, pos, attached, query, alpha }
+    carX: PRESS.x, lidM: HM.M0, lid: new Array(NB).fill(0).map((_, i) => (i < HM.M0 ? 1 : 0)),
+    touch: null, found: null, trail: null, press: null, spinUntil: 0,
+    dialS: 0, dialA: dialAng(0, HM.M0), gA: aAng(0), knob: MODE_ANG.chain, lever: 0, count: 0,
+    last: null,
+  };
+  const drawerKeys = () => KEYS.filter((k) => !sc.layout.entries[k] && !sc.hidden.has(k) && !(sc.mover && sc.mover.key === k));
+  const poseIn = (lay, key) => {
+    const e = lay.entries[key];
+    if (!e) { const j = KEYS.filter((k) => !lay.entries[k]).indexOf(key); return [(DRAWER.x0 + DRAWER.x1) / 2, DRAW_Y(Math.max(0, j)), 3]; }
+    if (lay.mode === "chain" && e.pos > 0) return [BX(e.slot), NY(e.pos), 3];
+    return [BX(e.slot), BIN.y, 4];
+  };
+  const collided = (lay, key) => { const e = lay.entries[key]; return !!e && (lay.mode === "chain" ? e.pos > 0 : e.slot !== e.home); };
+
+  /* ---------- live parts ---------- */
+  const draw = {
+    bin(i) {
+      const lay = sc.layout;
+      const key = lay.mode === "chain" ? lay.chains[i] && lay.chains[i][0] : lay.slots[i];
+      if (!key || sc.hidden.has(key)) return "";
+      return card(BX(i), BIN.y, 4, key, { red: collided(lay, key), home: lay.entries[key].home, touch: sc.touch === key, found: sc.found === key });
+    },
+    lid(i) {
+      const k = sc.lid[i];
+      if (k > 0.995) return "";
+      const z = 3 + BIN.h + k * 30, o = Math.min(1, (1 - k) * 1.6);
+      return `<g style="opacity:${f(o)}">` + box(cam, BX(i) - BIN.hw - 0.8, BIN.y0 - 0.8, z, BIN.hw * 2 + 1.6, BIN.y1 - BIN.y0 + 1.6, 2, { cls: "shutter", hatch: 2 }) +
+        box(cam, BX(i) - 6, BIN.y - 2, z + 2, 12, 4, 2, { cls: "cock" }) + `</g>`;
+    },
+    chain(i) {
+      const lay = sc.layout;
+      if (lay.mode !== "chain" || !lay.chains[i]) return "";
+      const ch = lay.chains[i];
+      if (ch.length < 2) return "";
+      const x = BX(i), parts = [];
+      for (let k = 1; k < ch.length; k++) {
+        const key = ch[k], y = NY(k), yPrev = k === 1 ? BIN.y1 + 0.5 : NY(k - 1) + 6;
+        if (sc.hidden.has(key)) break;
+        // the chain: beads from the previous node to this one
+        let beads = "";
+        const n = Math.max(2, Math.round((y - 6 - yPrev) / 3));
+        for (let b = 0; b <= n; b++) beads += ball(cam, [x, yPrev + ((y - 6 - yPrev) * b) / n, 1.8], 1.4, { cls: "bead" });
+        const node = box(cam, x - 22, y - 6, 0, 44, 12, 3, { cls: "stand", groove: 1.6 }) +
+          (sc.hidden.has(key) ? "" : card(x, y, 3, key, { red: true, home: lay.entries[key].home, touch: sc.touch === key, found: sc.found === key }));
+        parts.push({ y, s: beads + node });
+      }
+      if (!api.backIsFar) parts.reverse();
+      return parts.map((p) => p.s).join("");
+    },
+    drawer() {
+      const ks = drawerKeys(), x = (DRAWER.x0 + DRAWER.x1) / 2;
+      const items = ks.map((k, j) => ({ j, s: card(x, DRAW_Y(j), 3, k) }));
+      if (api.backIsFar) items.reverse();
+      return items.map((it) => it.s).join("") || "";
+    },
+    trails() {
+      const lay = sc.layout;
+      if (lay.mode === "chain") return "";
+      let quiet = "", hot = "";
+      const arc = (a, b) => {
+        const P = [], span = Math.abs(b - a), lift = 8 + span * 3 + (b < a ? 12 : 0);
+        for (let t = 0; t <= 1.0001; t += 1 / 16) P.push(cam.p(BX(a) + (BX(b) - BX(a)) * t, BIN.y, 56 + lift * Math.sin(Math.PI * t)));
+        return path(P, false);
+      };
+      for (const k of lay.keys) {
+        const p = lay.entries[k].path;
+        if (sc.trail && sc.trail.key === k) continue;
+        for (let i = 0; i + 1 < p.length; i++) quiet += arc(p[i], p[i + 1]);
+      }
+      if (sc.trail) { const p = sc.trail.path; for (let i = 0; i + 1 < Math.min(p.length, sc.trail.upTo + 1); i++) hot += arc(p[i], p[i + 1]); }
+      return (quiet ? `<path class="trail" d="${quiet}"/>` : "") + (hot ? `<path class="trail on" d="${hot}"/>` : "");
+    },
+    carriage() {
+      const x = sc.carX, z = RAIL.z;
+      let o = "";
+      const m = sc.mover;
+      if (m && m.attached) o += card(m.pos[0], m.pos[1], m.pos[2], m.key, { query: m.query, alpha: m.alpha });
+      o += rod(cam, [x, RAIL.y, z - 10], [x, RAIL.y, HANG + CARD.h - 1], 1.8, { seg: 12 });
+      o += box(cam, x - 9, RAIL.y - 4, HANG + CARD.h - 4, 18, 8, 8, { cls: "cock" });
+      o += box(cam, x - 20, RAIL.y - 13, z - 10, 40, 26, 22, { cls: "carriage", part: "carriage", groove: 2.6 });
+      for (const dx of [-14, 14]) o += screw(cam, x + dx, RAIL.y, z + 12, 1.8);
+      o += box(cam, x - 14, RAIL.y + 13, z - 6, 28, 0.8, 12, { cls: "brass" });
+      const s = Math.round((x - BX(0)) / 58);
+      o += faceText(cam, [x, RAIL.y + 14, z + 2], [1, 0, 0], [0, 0, -1], x < BX(0) - 29 ? "PARK" : "SLOT " + Math.max(0, Math.min(NB - 1, s)), 5, { cls: "engr" });
+      return o;
+    },
+    air() {
+      const items = sc.fliers.map((fl) => ({ d: cam.depth(...fl.pos), s: card(fl.pos[0], fl.pos[1], fl.pos[2], fl.key, { alpha: fl.alpha }) }));
+      const m = sc.mover;
+      if (m && !m.attached) items.push({ d: cam.depth(...m.pos), s: card(m.pos[0], m.pos[1], m.pos[2], m.key, { query: m.query, alpha: m.alpha }) });
+      items.sort((a, b) => a.d - b.d);
+      return items.map((i) => i.s).join("");
+    },
+    bits() {
+      const p = sc.press;
+      if (!p) return faceText(cam, [PRESS.x, PRESS.y1 + 0.05, 48], [1, 0, 0], [0, 0, -1], "—", 5, { cls: "engr lo" });
+      const spin = performance.now() < sc.spinUntil;
+      const v = HM.spread(p.h), b = HM.bits(v, 4), lowN = Math.log2(p.m);
+      let o = "";
+      for (let j = 0; j < 4; j++) {
+        const cx = PRESS.x + (j - 1.5) * 19, ch = spin ? String((Math.random() * 2) | 0) : b[j], inMask = 3 - j < lowN;
+        o += faceText(cam, [cx, PRESS.y1 + 0.05, 29.6], [1, 0, 0], [0, 0, -1], ch, 12, { cls: inMask && !spin ? "engr bit on" : "engr bit" });
+      }
+      o += faceText(cam, [PRESS.x, PRESS.y1 + 0.05, 49], [1, 0, 0], [0, 0, -1], spin ? "reading…" : `${p.key} · ${HM.hex(p.h)}`, 5.2, { cls: "engr" });
+      if (!spin) {
+        const xs = PRESS.x + (4 - lowN - 1.5) * 19 - 8, xe = PRESS.x + 1.5 * 19 + 8;
+        o += `<path class="maskline" d="${line(cam, [xs, PRESS.y1 + 0.1, 22.6], [xe, PRESS.y1 + 0.1, 22.6])}"/>`;
+        o += faceText(cam, [PRESS.x, PRESS.y1 + 0.05, 16.4], [1, 0, 0], [0, 0, -1], `& ${p.m - 1} → slot ${v & (p.m - 1)}`, 4.6, { cls: "engr acc" });
+      }
+      return o;
+    },
+    dialFace() {
+      const m = sc.lidM, z = 6.3, ang = [];
+      for (let s = 0; s < m; s++) ang.push(dialAng(s, m));
+      let o = `<path class="ln mid" d="${radialTicks(cam, DIAL.x, DIAL.y, z, DIAL.r - 3, DIAL.r - 0.8, ang)}"/>`;
+      for (let s = 0; s < m; s++) {
+        const t = (dialAng(s, m) * Math.PI) / 180, rr = DIAL.r - 7.5;
+        o += faceText(cam, [DIAL.x + rr * Math.cos(t), DIAL.y + rr * Math.sin(t) + 1.6, z], [1, 0, 0], [0, 1, 0], String(s), 4.6, { cls: "engr" });
+      }
+      return o;
+    },
+    dial() {
+      const t = (sc.dialA * Math.PI) / 180, c = Math.cos(t), sn = Math.sin(t), z = 6.6, x = DIAL.x, y = DIAL.y, L = DIAL.r - 2;
+      const tip = [x + L * c, y + L * sn, z], tail = [x - 3 * c, y - 3 * sn, z];
+      const w1 = [x - 1.2 * sn, y + 1.2 * c, z], w2 = [x + 1.2 * sn, y - 1.2 * c, z];
+      return `<path class="needle" d="${path([tail, w1, tip, w2].map((p) => cam.p(p)))}"/>` + dotAt(x, y, z);
+    },
+    gA() {
+      const t = (sc.gA * Math.PI) / 180, c = Math.cos(t), sn = Math.sin(t), z = 6.8, x = GA.x, y = FR, L = GA.r - 2.5;
+      const tip = [x + L * c, y + L * sn, z], tail = [x - 3 * c, y - 3 * sn, z];
+      const w1 = [x - 1.1 * sn, y + 1.1 * c, z], w2 = [x + 1.1 * sn, y - 1.1 * c, z];
+      return `<path class="needle" d="${path([tail, w1, tip, w2].map((p) => cam.p(p)))}"/>` + dotAt(x, y, z);
+    },
+    cnt() {
+      const v = String(Math.min(99, sc.count)).padStart(2, "0");
+      let o = "";
+      for (const sgn of [1, -1]) {
+        const y = FR + sgn * 12.05, ax = [sgn, 0, 0];
+        for (let j = 0; j < 2; j++) {
+          const cx = CNT.x + sgn * (j - 0.5) * 12;
+          if (sgn > 0 && cam.view[1] > 0) o += `<path class="win-frame" d="${path([[cx - 5, y, 7], [cx + 5, y, 7], [cx + 5, y, 15], [cx - 5, y, 15]].map((p) => cam.p(p)))}"/>`;
+          o += faceText(cam, [cx, y, 13.4], ax, [0, 0, -1], v[j], 7, { cls: "engr bit" + (sc.count > 1 ? " on" : "") });
+        }
+      }
+      return o;
+    },
+    nm() {
+      const lay = sc.layout, s = `${lay.n} · ${sc.lidM}`;
+      return faceText(cam, [NM.x, FR + 12.05, 12.6], [1, 0, 0], [0, 0, -1], s, 6.4, { cls: "engr bit" }) +
+        faceText(cam, [NM.x, FR - 12.05, 12.6], [-1, 0, 0], [0, 0, -1], s, 6.4, { cls: "engr bit" });
+    },
+    knob() {
+      const t = (sc.knob * Math.PI) / 180;
+      let o = drum(cam, KNOB.x, FR, 3, 11, 11, { knurl: 14, density: 1.2 });
+      o += drum(cam, KNOB.x, FR, 14, 7, 1.6);
+      o += `<path class="ln hi" d="${line(cam, [KNOB.x + 2 * Math.cos(t), FR + 2 * Math.sin(t), 15.7], [KNOB.x + 10.5 * Math.cos(t), FR + 10.5 * Math.sin(t), 14.1])}"/>`;
+      return o;
+    },
+    lever() {
+      const a = ((sc.lever * 2 - 1) * 32 * Math.PI) / 180, base = [LEV.x, FR, 4.4], tip = [LEV.x + Math.sin(a) * 15, FR, 4.4 + Math.cos(a) * 15];
+      return rod(cam, base, tip, 1.5, { seg: 12 }) + ball(cam, tip, 3.2);
+    },
+    pins() {
+      return PINS().map(([n, p]) => pin(cam, p, n)).join("");
+    },
+    hits() {
+      let o = "";
+      const quad = (pts3, attrs, title) => `<path class="hit" ${attrs} d="${path(hull(pts3.map((p) => cam.p(p))))}"><title>${title}</title></path>`;
+      const D = DRAWER, dp = [];
+      for (const x of [D.x0, D.x1]) for (const y of [D.y0, D.y1]) for (const z of [0, 50]) dp.push([x, y, z]);
+      o += quad(dp, `data-act="insert"`, "File the next key");
+      for (let i = 0; i < NB; i++) {
+        const q = [];
+        for (const x of [BX(i) - BIN.hw, BX(i) + BIN.hw]) for (const y of [BIN.y0, BIN.y1]) for (const z of [0, 50]) q.push([x, y, z]);
+        o += quad(q, `data-act="look" data-slot="${i}"`, `Look up the key in slot ${i}`);
+      }
+      return o;
+    },
+  };
+  function dotAt(x, y, z) { const p = cam.p(x, y, z); return `<circle class="hub" cx="${f(p[0])}" cy="${f(p[1])}" r="${f(1.5 * cam.k)}"/>`; }
+  function hull(P) {
+    P = P.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    const cr = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+    const lo = [], up = [];
+    for (const p of P) { while (lo.length >= 2 && cr(lo[lo.length - 2], lo[lo.length - 1], p) <= 0) lo.pop(); lo.push(p); }
+    for (const p of P.reverse()) { while (up.length >= 2 && cr(up[up.length - 2], up[up.length - 1], p) <= 0) up.pop(); up.push(p); }
+    return lo.slice(0, -1).concat(up.slice(0, -1));
+  }
+  const PINS = () => [
+    [1, [DRAWER.x0 - 4, DRAWER.y1 - 10, 30]],
+    [2, [PRESS.x0 - 2, PRESS.y1, 30]],
+    [3, [DIAL.x - DIAL.r - 6, DIAL.y, 7]],
+    [4, [sc.carX + 26, RAIL.y + 13, RAIL.z + 14]],
+    [5, [BX(0) - 34, BIN.y0 + 4, 24]],
+    [6, [BX(2) + 27, NY(1), 30]],
+    [7, [BX(3) + 29, BIN.y, 84]],
+    [8, [BX(6), BIN.y1, 30]],
+    [9, [GA.x - GA.r - 8, FR, 8]],
+    [10, [CNT.x - 30, FR + 4, 14]],
+    [11, [KNOB.x + KNOB.r + 10, FR, 8]],
+    [12, [LEV.x + 28, FR, 8]],
+  ];
+
+  /* ---------- mount and paint ---------- */
+  let slots = {};
+  const memo = {};
+  function sig(name) {
+    const lay = sc.layout, hid = [...sc.hidden].join(",");
+    const m = /^(bin|lid|chain)(\d+)$/.exec(name);
+    if (m) {
+      const i = +m[2];
+      if (m[1] === "lid") return (sc.lid[i] * 200 | 0) + "";
+      const keys = lay.mode === "chain" ? (lay.chains[i] || []) : [lay.slots[i]];
+      return [lay.mode, keys.join(","), hid, keys.includes(sc.touch) ? sc.touch : "", keys.includes(sc.found) ? sc.found : ""].join("|");
+    }
+    switch (name) {
+      case "drawer": return drawerKeys().join(",");
+      case "trails": return lay.mode + lay.keys.join(",") + (sc.trail ? sc.trail.key + sc.trail.upTo : "");
+      case "carriage": return [sc.carX.toFixed(2), sc.mover && sc.mover.attached ? sc.mover.pos.map((v) => v.toFixed(1)).join() + sc.mover.alpha : ""].join("|");
+      case "air": return sc.fliers.length || (sc.mover && !sc.mover.attached) ? Math.random() + "" : "none";
+      case "bits": return performance.now() < sc.spinUntil ? Math.random() + "" : (sc.press ? sc.press.key + sc.press.m : "-");
+      case "dialFace": return sc.lidM + "";
+      case "dial": return sc.dialA.toFixed(2);
+      case "gA": return sc.gA.toFixed(2);
+      case "cnt": return sc.count + "";
+      case "nm": return lay.n + "/" + sc.lidM;
+      case "knob": return sc.knob.toFixed(2);
+      case "lever": return sc.lever.toFixed(3);
+      case "pins": return sc.carX.toFixed(1);
+    }
+    return null;
+  }
+  function paint(force) {
+    for (const name in slots) {
+      const g = slots[name];
+      if (name === "hits") continue;
+      const s = sig(name);
+      if (!force && s !== null && memo[name] === s) continue;
+      memo[name] = s;
+      const m = /^(bin|lid|chain)(\d+)$/.exec(name);
+      g.innerHTML = m ? draw[m[1]](+m[2]) : draw[name] ? draw[name]() : "";
+    }
+  }
+  function mount(az, el) {
+    cam = stage.mount(az, el); slots = stage.slots;
+    for (const k in memo) delete memo[k];
+    slots.hits.innerHTML = draw.hits();
+  }
+  mount(-24, 30);
+
+  /* ---------- the sequencer: every operation becomes a list of timed acts ---------- */
+  const ops = [];      // pending operations, each expands into acts when it starts
+  let acts = [], act = null, busy = false, lastInfo = null;
+  const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const lerp3 = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+  const A = {
+    wait: (dur) => ({ dur }),
+    call: (fn) => ({ dur: 0, start: fn }),
+    move(to, dur, o = {}) {
+      return { dur, start() { this.from = sc.mover.pos.slice(); if (o.attach != null) sc.mover.attached = o.attach; },
+        step(k) {
+          const e = ease(k), p = lerp3(this.from, to, e);
+          if (o.lift) p[2] += o.lift * Math.sin(Math.PI * e);
+          sc.mover.pos = p; if (sc.mover.attached) sc.carX = p[0];
+        } };
+    },
+    fade(to, dur) { return { dur, start() { this.a0 = sc.mover.alpha; }, step(k) { sc.mover.alpha = this.a0 + (to - this.a0) * k; } }; },
+    dip(onTouch) { // lower the card onto what is there, compare, lift again
+      return { dur: 0.5, start() { this.p0 = sc.mover.pos.slice(); this.fired = false; },
+        step(k) {
+          const d = Math.sin(Math.PI * Math.min(1, k * 1.1)) * 16;
+          sc.mover.pos = [this.p0[0], this.p0[1], this.p0[2] - d];
+          if (!this.fired && k > 0.45) { this.fired = true; onTouch(); }
+        } };
+    },
+    fly(from, to, dur, lift = 46) { // every card moves from one arrangement to another at once
+      return { dur,
+        start() {
+          this.keys = KEYS.filter((k) => from.entries[k] || to.entries[k]);
+          this.keys.forEach((k) => sc.hidden.add(k));
+          this.a = this.keys.map((k) => poseIn(from, k)); this.b = this.keys.map((k) => poseIn(to, k));
+          this.delay = this.keys.map((_, j) => (j / Math.max(1, this.keys.length)) * 0.35);
+        },
+        step(k) {
+          sc.fliers = this.keys.map((key, j) => {
+            const t = Math.max(0, Math.min(1, (k - this.delay[j]) / 0.65)), e = ease(t);
+            const p = lerp3(this.a[j], this.b[j], e); p[2] += lift * Math.sin(Math.PI * e);
+            return { key, pos: p };
+          });
+        },
+        end() { sc.fliers = []; sc.layout = to; sc.hidden.clear(); } };
+    },
+  };
+
+  function slotsTo(m) { return [A.call(() => (sc.lidM = m)), A.wait(0.55)]; }
+  function readCard(key, m) {
+    return [
+      A.call(() => { sc.press = { key, h: HM.hashCode(key), m }; sc.spinUntil = performance.now() + 650; sc.count = 0; }),
+      A.wait(0.7),
+      A.call(() => { sc.dialS = HM.index(key, m); }),
+      A.wait(0.45),
+    ];
+  }
+  // Walk the card through a probe sequence on the rail, touching every occupied bin it tries.
+  function walkRail(lay, key, pathSlots, final) {
+    const out = [];
+    pathSlots.forEach((s, i) => {
+      const x = BX(s);
+      out.push(A.move([x, BIN.y, HANG], 0.3 + Math.abs(x - (i ? BX(pathSlots[i - 1]) : PRESS.x)) * 0.0018, { attach: true }));
+      out.push(A.call(() => { if (sc.trail) sc.trail.upTo = i; }));
+      const occupant = lay.slots[s];
+      if (i < pathSlots.length - 1 || (final === "look" && occupant)) {
+        out.push(A.dip(() => { sc.touch = occupant; sc.count++; if (occupant === key) sc.found = key; }));
+        if (occupant === key) return;
+      } else out.push(A.call(() => { sc.count++; }));
+    });
+    return out;
+  }
+  function begin(key, query) {
+    if (query) return [A.call(() => { sc.mover = { key, pos: [PRESS.x, BIN.y, HANG], attached: true, query: true, alpha: 0 }; }), A.fade(1, 0.35)];
+    const x = (DRAWER.x0 + DRAWER.x1) / 2;
+    return [
+      A.call(() => { sc.mover = { key, pos: [x, DRAW_Y(0), 3], attached: false, alpha: 1 }; }),
+      A.move([x, DRAW_Y(0), 56], 0.35),
+      A.move([PRESS.x, BIN.y, HANG], 0.65, { lift: 18 }),
+      A.call(() => { sc.mover.attached = true; }),
+    ];
+  }
+  function finish(info) {
+    return [A.call(() => { sc.mover = null; sc.touch = null; lastInfo = info; emit(); remask(); })];
+  }
+
+  function opInsert() {
+    const before = sc.layout;
+    const key = KEYS.find((k) => !before.entries[k]);
+    if (!key) return [];
+    const after = HM.place(before.keys.concat(key), { mode: st.mode, auto: st.auto });
+    let list = [];
+    let lay = before;
+    if (after.m > before.m) {
+      const re = HM.place(before.keys, { mode: st.mode, auto: st.auto, m0: after.m });
+      list.push(A.call(() => { lastInfo = { type: "resize", from: before.m, to: after.m }; emit(); }), ...slotsTo(after.m), A.fly(before, re, 1.5, 40), A.wait(0.3));
+      lay = re;
+    }
+    list.push(...begin(key, false), ...readCard(key, after.m));
+    if (after.refused === key) {
+      const p = HM.probe(lay.slots, key, st.mode, lay.m).path;
+      list.push(A.call(() => (sc.trail = { key, path: p, upTo: 0 })), ...walkRail(lay, key, p, "full"));
+      list.push(A.call(() => { sc.mover.attached = false; }), A.move([(DRAWER.x0 + DRAWER.x1) / 2, DRAW_Y(0), 3], 0.9, { lift: 30 }),
+        A.call(() => (sc.trail = null)), ...finish({ type: "full", key, probes: p.length, m: lay.m }));
+      return list;
+    }
+    const e = after.entries[key];
+    if (st.mode === "chain") {
+      const ch = lay.chains[e.home] || [], x = BX(e.home);
+      list.push(A.move([x, BIN.y, HANG], 0.3 + Math.abs(x - PRESS.x) * 0.0018, { attach: true }));
+      if (!ch.length) list.push(A.call(() => (sc.count = 1)), A.move([x, BIN.y, 4], 0.45));
+      else {
+        list.push(A.dip(() => { sc.touch = ch[0]; sc.count++; }), A.call(() => { sc.mover.attached = false; }));
+        for (let k = 1; k < ch.length; k++) list.push(A.move([x, NY(k), 56], 0.4), A.dip(() => { sc.touch = ch[k]; sc.count++; }));
+        list.push(A.move([x, NY(ch.length), 56], 0.4), A.call(() => (sc.touch = null)), A.move([x, NY(ch.length), 3], 0.4));
+      }
+    } else {
+      list.push(A.call(() => (sc.trail = { key, path: e.path, upTo: 0 })), ...walkRail(lay, key, e.path, "put"), A.call(() => (sc.touch = null)), A.move([BX(e.slot), BIN.y, 4], 0.45));
+    }
+    list.push(A.call(() => { sc.layout = after; sc.trail = null; }));
+    list.push(...finish({ type: "insert", key, home: e.home, slot: e.slot, pos: e.pos, probes: e.probes, path: e.path, m: after.m, resized: after.m > before.m }));
+    return list;
+  }
+  function opLookup(key) {
+    const lay = sc.layout;
+    if (!lay.keys.length) return [];
+    const e = HM.locate(lay, key);
+    const list = [...begin(key, true), ...readCard(key, lay.m)];
+    if (st.mode === "chain") {
+      const ch = lay.chains[e.home], x = BX(e.home);
+      list.push(A.move([x, BIN.y, HANG], 0.3 + Math.abs(x - PRESS.x) * 0.0018));
+      if (!ch.length) list.push(A.dip(() => {}));
+      else {
+        list.push(A.dip(() => { sc.touch = ch[0]; sc.count = 1; if (ch[0] === key) sc.found = key; }));
+        if (ch[0] !== key) {
+          list.push(A.call(() => { sc.mover.attached = false; }));
+          for (let k = 1; k < ch.length; k++) {
+            list.push(A.move([x, NY(k), 56], 0.4), A.dip(() => { sc.touch = ch[k]; sc.count++; if (ch[k] === key) sc.found = key; }));
+            if (ch[k] === key) break;
+          }
+        }
+      }
+    } else {
+      list.push(A.call(() => (sc.trail = { key, path: e.path, upTo: 0 })), ...walkRail(lay, key, e.path, "look"));
+      if (!e.found) list.push(A.dip(() => { sc.touch = null; }));
+    }
+    list.push(A.wait(e.found ? 0.7 : 0.35), A.fade(0, 0.4), A.call(() => { sc.found = null; sc.trail = null; sc.mover.attached = false; }));
+    list.push(...finish({ type: "look", key, found: e.found, home: e.home, slot: e.slot, probes: e.probes, path: e.path, m: lay.m }));
+    return list;
+  }
+  function opRearrange(next) { // a new mode, a new resize rule, or an empty table
+    const before = sc.layout;
+    const list = [];
+    if (next.m > before.m) list.push(...slotsTo(next.m));
+    list.push(A.fly(before, next, next.n === 0 ? 1.1 : 1.4, next.n === 0 ? 30 : 40));
+    if (next.m < before.m) list.push(...slotsTo(next.m));
+    list.push(A.call(() => { sc.press = null; sc.count = 0; sc.dialS = 0; }), ...finish({ type: next.n === 0 ? "reset" : "rearrange", m: next.m }));
+    return list;
+  }
+
+  /* ---------- frame loop ---------- */
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let last = 0, visible = true;
+  function tick(dt) {
+    const hurry = ops.some((o) => o.user) ? 3 : 1;
+    let left = dt * hurry;
+    while (left > 0) {
+      if (!act) {
+        if (!acts.length) {
+          const op = ops.shift();
+          if (!op) { busy = false; break; }
+          busy = true; acts = op.build();
+          continue;
+        }
+        act = acts.shift(); act.t = 0; act.start && act.start();
+      }
+      const need = act.dur - act.t, use = Math.min(left, Math.max(0, need));
+      act.t += use; left -= use;
+      act.step && act.step(act.dur > 0 ? Math.min(1, act.t / act.dur) : 1);
+      if (act.t >= act.dur - 1e-9) { act.end && act.end(); act = null; } else break;
+    }
+  }
+  function frame(now) {
+    const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
+    tick(reduce.matches ? 10 : dt);
+    const k = reduce.matches ? 1 : 1 - Math.exp(-dt * 6);
+    // parts that settle on their own: lids, dial, gauge, knob, lever, the carriage going home
+    for (let i = 0; i < NB; i++) sc.lid[i] += ((i < sc.lidM ? 1 : 0) - sc.lid[i]) * (reduce.matches ? 1 : 1 - Math.exp(-dt * 4));
+    const dT = dialAng(sc.dialS, sc.lidM);
+    sc.dialA += (dT - sc.dialA) * k;
+    sc.gA += (aAng(sc.layout.n / Math.max(1, sc.lidM)) - sc.gA) * k;
+    sc.knob += (MODE_ANG[st.mode] - sc.knob) * k;
+    sc.lever += ((st.auto ? 0 : 1) - sc.lever) * k;
+    if (!(sc.mover && sc.mover.attached)) sc.carX += (PRESS.x - sc.carX) * (reduce.matches ? 1 : 1 - Math.exp(-dt * 2.2));
+    if (visible) paint();
+    if (now - lastEmit > 150) { lastEmit = now; emit(); }
+    requestAnimationFrame(frame);
+  }
+  let lastEmit = 0;
+
+  /* ---------- the plate's public face ---------- */
+  const listeners = [];
+  function info() {
+    const lay = sc.layout;
+    return { st, layout: lay, m: lay.m, n: lay.n, alpha: lay.n / lay.m, last: lastInfo, measure: HM.measure(lay), expected: HM.expected(lay.mode, lay.n / lay.m), busy: busy || ops.length > 0, count: sc.count, press: sc.press };
+  }
+  function emit() { const i = info(); listeners.forEach((fn) => fn(st, i)); }
+  function enqueue(build, user = true) {
+    if (user) { lastTouch = performance.now(); for (let i = ops.length - 1; i >= 0; i--) if (!ops[i].user) ops.splice(i, 1); }
+    if (ops.length > 4) return;
+    ops.push({ build, user });
+    emit();
+  }
+  const api2 = {
+    insert: (user = true) => enqueue(opInsert, user),
+    lookup: (key, user = true) => enqueue(() => opLookup(key), user),
+    reset: (user = true) => enqueue(() => opRearrange(HM.place([], { mode: st.mode, auto: st.auto })), user),
+    setMode(mode, user = true) {
+      if (st.mode === mode) return;
+      st.mode = mode;
+      enqueue(() => opRearrange(HM.place(sc.layout.keys, { mode: st.mode, auto: st.auto })), user);
+    },
+    setAuto(v, user = true) {
+      if (st.auto === v) return;
+      st.auto = v;
+      enqueue(() => opRearrange(HM.place(sc.layout.keys, { mode: st.mode, auto: st.auto })), user);
+    },
+  };
+  window.Plate = Object.assign(api2, { st, on: (fn) => { listeners.push(fn); fn(st, info()); }, info, keys: KEYS });
+
+  /* ---------- input ---------- */
+  const fig = document.getElementById("plate");
+  svg.addEventListener("click", (e) => {
+    const h = e.target.closest(".hit");
+    if (!h) return;
+    if (h.dataset.act === "insert") api2.insert();
+    else if (h.dataset.act === "look") {
+      const i = +h.dataset.slot, lay = sc.layout;
+      const key = lay.mode === "chain" ? (lay.chains[i] || []).slice(-1)[0] : lay.slots[i];
+      if (key) api2.lookup(key);
+    }
+  });
+  fig.addEventListener("keydown", (e) => {
+    const k = e.key;
+    if (e.shiftKey && mode === "3d") return;
+    if (k === "i" || k === "I" || k === "Enter") api2.insert();
+    else if (k === "l" || k === "L") { const ks = sc.layout.keys; if (ks.length) api2.lookup(ks[(Math.random() * ks.length) | 0]); }
+    else if (k === "r" || k === "R") api2.reset();
+    else if (/^[1-3]$/.test(k)) api2.setMode(HM.MODES[+k - 1].id);
+    else if (k === "a" || k === "A") api2.setAuto(!st.auto);
+    else return;
+    e.preventDefault();
+  });
+  new IntersectionObserver((es) => (visible = es[0].isIntersecting)).observe(fig);
+
+  /* Self-demonstration: file every key, look a few up, then empty the table and try the next
+     way of resolving collisions. It steps aside for twelve seconds after you touch it. */
+  let lastTouch = -1e9, demoStep = 0;
+  const DEMO_LOOK = ["lemon", "banana", "quince", "melon"];
+  setInterval(() => {
+    if (reduce.matches || !visible || document.hidden || busy || ops.length) return;
+    if (performance.now() - lastTouch < 12000) return;
+    const lay = sc.layout, left = KEYS.find((k) => !lay.entries[k]);
+    if (left && !lay.refused && !(lay.full && lay.mode !== "chain")) { api2.insert(false); return; }
+    if (demoStep < DEMO_LOOK.length) { api2.lookup(DEMO_LOOK[demoStep++], false); return; }
+    demoStep = 0;
+    const order = ["chain", "linear", "quad"], next = order[(order.indexOf(st.mode) + 1) % 3];
+    st.mode = next;
+    api2.reset(false);
+  }, 900);
+
+  /* ---------- three views: SVG, WebGL, 3D ---------- */
+  const LIGHT_FRAG = `
+uniform vec4 uCar; uniform float uHot[8]; uniform float uOpen; uniform vec4 uMover;
+void main() {
+  vec2 vb = vbOf(); vec4 m = maskAt();
+  vec4 acc = vec4(0.0);
+  bool dk = uDark > 0.5;
+  vec3 warm = dk ? vec3(1.0, 0.82, 0.55) : vec3(1.0, 0.86, 0.62);
+  vec3 red = dk ? vec3(1.0, 0.34, 0.2) : vec3(0.85, 0.22, 0.1);
+  // A lamp under the carriage lights the bins below it; bins just touched glow red in front.
+  if (m.r > 0.25) {
+    float z = m.r > 0.75 ? 0.0 : 3.0;
+    vec2 p = onPlane(vb, z);
+    float lamp = exp(-pow((p.x - uCar.x) / 34.0, 2.0) - pow((p.y - 90.0) / 42.0, 2.0));
+    addLight(acc, warm, lamp * (dk ? 0.55 : 0.32) * (0.85 + 0.15 * sin(uTime * 3.0)));
+    float hot = 0.0;
+    for (int i = 0; i < 8; i++) {
+      float h = uHot[i];
+      if (h < 0.01) continue;
+      float x = 262.0 + float(i) * 58.0;
+      hot += h * exp(-pow((p.x - x) / 22.0, 2.0) - pow((p.y - 114.0) / 11.0, 2.0)) * (0.55 + 0.45 * caustic(p * 0.6, uTime));
+    }
+    addLight(acc, red, hot * (dk ? 0.9 : 0.5));
+  }
+  // The chains: a pulse runs out along every chain, from the bin to its last card.
+  if (m.g > 0.5) {
+    vec2 p = onPlane(vb, 1.6);
+    float pu = pow(0.5 + 0.5 * cos(p.y * 0.26 - uTime * 4.0), 6.0);
+    addLight(acc, dk ? warm : red, pu * 0.75);
+  }
+  // Cards catch a slow sweep of light; the card in hand glows.
+  if (m.b > 0.5) {
+    float sweep = pow(0.5 + 0.5 * sin(vb.x * 0.05 - uTime * 1.3 + vb.y * 0.02), 8.0);
+    addLight(acc, warm, sweep * 0.22);
+    float d = length((vb - uMover.xy) / max(uMover.z, 1.0));
+    addLight(acc, warm, uMover.w * exp(-d * d * 2.2) * 0.5);
+  }
+  gl_FragColor = acc;
+}`;
+  const MASK_CSS = `.floor .t-top, .pad .t-top, .binfloor .t-top, .stand .t-top { fill: #f00 !important; }
+    .bead .f { fill: #0f0 !important; stroke: #0f0 !important; }
+    .card .f { fill: #00f !important; stroke: #00f !important; }`;
+  const canvas = document.createElement("canvas");
+  canvas.className = "light"; canvas.setAttribute("aria-hidden", "true");
+  fig.appendChild(canvas);
+  let lightLayer = null, mode = "svg", lightRaf = 0, maskT = 0;
+  const hot = new Float32Array(NB);
+  const hintEl = document.querySelector(".plate .bl"), hint0 = hintEl ? hintEl.textContent : "";
+  function remask() { if (mode === "webgl" && lightLayer) { clearTimeout(maskT); maskT = setTimeout(() => lightLayer.mask(), 60); } }
+  function lightFrame(now) {
+    lightRaf = 0;
+    if (mode !== "webgl" || !lightLayer) return;
+    if (!visible) { lightRaf = requestAnimationFrame(lightFrame); return; }
+    if (lightLayer.size()) lightLayer.mask();
+    // bins heat up when touched and cool slowly
+    const touchSlot = (() => {
+      if (!sc.touch) return -1;
+      const e = sc.layout.entries[sc.touch]; return e ? e.slot : -1;
+    })();
+    for (let i = 0; i < NB; i++) hot[i] = Math.max(i === touchSlot ? 1 : 0, hot[i] * 0.975);
+    if (sc.trail) for (let i = 0; i <= Math.min(sc.trail.upTo, sc.trail.path.length - 1); i++) hot[sc.trail.path[i]] = Math.max(hot[sc.trail.path[i]], 0.6);
+    lightLayer.set("uHot", hot);
+    lightLayer.set("uCar", [sc.carX, RAIL.y, 0, 0]);
+    const mv = sc.mover ? cam.p(sc.mover.pos[0], sc.mover.pos[1], sc.mover.pos[2] + CARD.h / 2) : [0, 0];
+    lightLayer.set("uMover", [mv[0], mv[1], 30 * cam.k, sc.mover ? sc.mover.alpha : 0]);
+    lightLayer.draw(cam, reduce.matches ? 2 : now / 1000, K.live.isDark());
+    if (!reduce.matches) lightRaf = requestAnimationFrame(lightFrame);
+  }
+  function setMode(m) {
+    mode = m;
+    if (m === "3d") insp.close();
+    fig.classList.toggle("mode-webgl", m === "webgl");
+    fig.classList.toggle("mode-3d", m === "3d");
+    if (m !== "3d" && (stage.az !== -24 || stage.el !== 30)) { mount(-24, 30); paint(true); }
+    if (m === "webgl") {
+      try { lightLayer = lightLayer || K.live.light({ canvas, svg, W, H, frag: LIGHT_FRAG, maskCss: MASK_CSS }); } catch (e) { lightLayer = null; console.warn(e); }
+      if (lightLayer) { lightLayer.size(); lightLayer.mask().then(() => { if (!lightRaf) lightRaf = requestAnimationFrame(lightFrame); }); }
+    }
+    if (hintEl) hintEl.textContent = m === "3d" ? "Drag to turn the office all the way round · double-click to reset · Shift + arrows to turn" : hint0;
+    views.set(m);
+  }
+  const views = K.live.views(document.getElementById("views"), {
+    modes: [{ id: "svg", label: "SVG" }, { id: "webgl", label: "WebGL", ok: K.live.webglOK() }, { id: "3d", label: "3D" }],
+    current: "svg", onSelect: setMode,
+  });
+  let turnPending = null;
+  const orb = K.live.orbit(fig, {
+    az0: -24, el0: 30, wrap: true, azRange: [-180, 180], elRange: [8, 76], enabled: () => mode === "3d",
+    onTurn(az, el) {
+      if (turnPending) { turnPending = [az, el]; return; }
+      turnPending = [az, el];
+      requestAnimationFrame(() => { const [a, e] = turnPending; turnPending = null; mount(a, e); paint(true); });
+    },
+  });
+  fig.addEventListener("keydown", (e) => {
+    if (mode !== "3d" || !e.shiftKey) return;
+    const d = { ArrowLeft: [-8, 0], ArrowRight: [8, 0], ArrowUp: [0, -4], ArrowDown: [0, 4] }[e.key];
+    if (d) { orb.nudge(...d); e.preventDefault(); }
+  }, true);
+  new ResizeObserver(() => { if (mode === "webgl" && lightLayer && lightLayer.size()) lightLayer.mask(); }).observe(fig);
+
+  /* ---------- looking closer ---------- */
+  const lay = () => sc.layout;
+  const PARTS = [
+    [1, "Card file", "The keys waiting to be filed, the next one at the front. Press it to file the next key.", () => { const ks = drawerKeys(); return ks.length ? `next <b>${ks[0]}</b> · ${ks.length} waiting` : "<b>empty</b> · every key is filed"; }],
+    [2, "Hash press", "Reads the key's hashCode, h = s[0]·31ⁿ⁻¹ + … + s[n−1], mixes the high half into the low (h ^ h>>>16), and shows the last four bits in its windows.", () => sc.press ? `${sc.press.key} → <b>${HM.hex(sc.press.h)}</b> · low bits ${HM.bits(HM.spread(sc.press.h), 4)}` : "waiting for a card"],
+    [3, "Fold dial", "Keeps only the low bits the table can use: slot = h & (m − 1), the same as h mod m when m is a power of two.", () => sc.press ? `${sc.press.key} → home slot <b>${HM.index(sc.press.key, sc.press.m)}</b> of ${sc.press.m}` : `${lay().m} slots`],
+    [4, "Carriage", "Carries the card along the rail to its home bin, and on to other bins when open addressing has to look further.", () => sc.mover ? `carrying <b>${sc.mover.key}</b>` : "parked over the press"],
+    [5, "Bins", "The table: one bin per slot. Each card shows its key and, below, its home slot. A red edge means it did not get its first choice.", () => `${lay().n} keys in ${lay().m} bins · <b>${HM.measure(lay()).collided}</b> collided`],
+    [6, "Chains", "Separate chaining: a bin holds a list, and a new key is hung at the end of its bin's chain. Finding a key means walking the chain.", () => { const L = lay(); if (L.mode !== "chain") return "unused while probing"; const lens = L.chains.map((c) => c.length); return `longest chain <b>${Math.max(...lens)}</b> · ${lens.filter((v) => v > 1).length} bins share`; }],
+    [7, "Probe trails", "Open addressing: when a bin is taken, the carriage tries the next in the probe sequence. Each arc is one extra probe; the red one is the card in hand.", () => { const L = lay(); if (L.mode === "chain") return "unused while chaining"; const ms = HM.measure(L); return `longest search <b>${ms.longest}</b> probes · ${L.mode === "linear" ? "i, i+1, i+2 …" : "i, i+1, i+3, i+6 …"}`; }],
+    [8, "Shutters", "Four more bins stay shut until the load passes 0.75. Then the shutters lift, m doubles, and every card is filed again by one more bit.", () => `m = <b>${lay().m}</b> · ${lay().m === NB ? "all eight bins open" : "four bins shut"}`],
+    [9, "Load gauge", "α = n / m, keys per bin. Every cost on this bench grows with it; the red mark at 0.75 is where the table doubles.", () => `α = <b>${(lay().n / lay().m).toFixed(2)}</b> · ${lay().n} / ${lay().m}`],
+    [10, "Probe counter", "How many bins or chain cards the last search had to look at. One means no collision.", () => `last search <b>${sc.count}</b> · average ${HM.measure(lay()).hit.toFixed(2)} for keys present`],
+    [11, "Method knob", "Chaining, linear probing or quadratic probing. Turning it files every card again by the new rule.", () => `<b>${HM.MODES.find((m) => m.id === st.mode).name}</b>`],
+    [12, "Resize lever", "Automatic doubling at α > 0.75, as in Java's HashMap, or a fixed four bins. Fixed and open addressing: the fifth key has nowhere to go.", () => (st.auto ? "<b>auto</b> · doubles past 0.75, up to eight bins" : "<b>fixed</b> at four bins")],
+  ].map(([n, name, text, live]) => ({ n, name, text, live, at: () => PINS().find((p) => p[0] === n)[1] }));
+  const insp = K.live.inspector({ fig, svg, W, H, parts: PARTS, cam: () => cam, live: (n) => PARTS.find((p) => p.n === n).live(), zoom: 2.4,
+    onChange: (n) => { if (n !== null && lens.on) toggleLens(false); } });
+  const lens = K.live.loupe({ fig, svg, W, H, sceneId: stage.sceneId, mag: 2.6, r: 88 });
+  const toolsEl = document.getElementById("tools");
+  function toggleLens(v) { lens.toggle(v); if (lens.on) insp.close(); toolsEl?.querySelector('[data-t="loupe"]')?.setAttribute("aria-pressed", lens.on); }
+  toolsEl?.addEventListener("click", (e) => { if (e.target.closest('[data-t="loupe"]')) toggleLens(); });
+  setInterval(() => insp.refresh(), 250);
+  document.addEventListener("folio:part", (e) => insp.show(e.detail));
+  Object.assign(window.Plate, {
+    view: (m) => setMode(m), turn: (az, el) => { setMode("3d"); mount(az, el); paint(true); }, light: () => lightLayer,
+    inspect: (n) => insp.show(n), closeInspect: () => insp.close(), loupe: (v) => toggleLens(v),
+    // for tests and screenshots: jump straight to a state, no animation
+    jump(n, mode = st.mode, auto = st.auto) {
+      ops.length = 0; acts = []; act = null; sc.mover = null; sc.fliers = []; sc.hidden.clear(); sc.trail = null; sc.touch = null; sc.found = null;
+      st.mode = mode; st.auto = auto; sc.layout = HM.place(KEYS.slice(0, n), { mode, auto });
+      sc.lidM = sc.layout.m; for (let i = 0; i < NB; i++) sc.lid[i] = i < sc.lidM ? 1 : 0;
+      lastTouch = performance.now() + 1e9; paint(true); emit();
+    },
+    demo(on) { lastTouch = on ? -1e9 : performance.now() + 1e9; },
+  });
+
+  paint(true);
+  requestAnimationFrame(frame);
+})();
+
+</script>
+<script>
+Plate.on((st, I) => { const L = I.layout, x = I.last; document.getElementById("readout").innerHTML = HashModel.MODES.find((m) => m.id === L.mode).short + " · " + L.n + "/" + L.m + " · α " + (L.n / L.m).toFixed(2) + (x && x.key ? " · <b>" + x.key + "</b> " + (x.type === "look" ? (x.found ? "found" : "absent") + " in " + x.probes : "→ bin " + x.slot + " · " + x.probes + " probe" + (x.probes === 1 ? "" : "s")) : ""); });
+// Tell the page around us how tall we are.
+const post = () => parent !== window && parent.postMessage({ folio: "hashmap", h: document.documentElement.scrollHeight }, "*");
+new ResizeObserver(post).observe(document.body); addEventListener("load", post); post();
+</script>

@@ -380,6 +380,26 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 #plate-svg .tripped .t-cyl { fill: var(--accent); }
 .fig.mode-webgl #plate-svg .flow.energy { visibility: visible; }
 
+/* Plate IV: filing cards, bins, chains and probe trails */
+#plate-svg .card .t-top, #plate-svg .card .t-s3, #plate-svg .card .t-s2 { fill: var(--face); }
+#plate-svg .card .t-s1, #plate-svg .card .t-s0 { fill: var(--s3); }
+#plate-svg .card .f { stroke: var(--line); stroke-width: .35; }
+#plate-svg .card.touch .f { stroke: var(--accent); stroke-width: 1.1; }
+#plate-svg .card.found .t-s3, #plate-svg .card.found .t-s2, #plate-svg .card.found .t-top { fill: color-mix(in srgb, var(--accent) 22%, var(--face)); }
+#plate-svg .card.query .f { stroke: var(--accent); stroke-width: .8; stroke-dasharray: 2.2 1.6; }
+#plate-svg .cardtab .f { fill: var(--accent); stroke: none; }
+#plate-svg .engr.cardkey { font-family: var(--body); font-weight: 600; letter-spacing: .01em; }
+#plate-svg .engr.binno { fill: var(--ink-2); font-family: var(--display); font-style: italic; letter-spacing: 0; }
+#plate-svg .engr.bit { font-weight: 500; } #plate-svg .engr.bit.on, #plate-svg .engr.acc { fill: var(--accent); }
+#plate-svg .win-frame { fill: var(--face); stroke: var(--line); stroke-width: .5; }
+#plate-svg .maskline { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; }
+#plate-svg .trail { fill: none; stroke: var(--ink-2); stroke-width: 1.1; stroke-dasharray: 2.4 2.4; stroke-linecap: round; opacity: .8; }
+#plate-svg .trail.on { stroke: var(--accent); stroke-width: 2; stroke-dasharray: none; opacity: 1; }
+#plate-svg .bead .t-cyl { fill: var(--s1); }
+#plate-svg .bin .t-top { fill: var(--top); }
+#plate-svg .binfloor .t-top { fill: var(--s2); }
+#plate-svg .drawer .t-top { fill: var(--top); }
+
 /* The cover reads like a museum catalogue essay: a quiet header, one live plate, then numbered
    sections in a single reading column with margin notes, a contents rail on wide screens. */
 body { padding-inline: 0; font-size: 19px; line-height: 1.68; }
@@ -446,9 +466,10 @@ article a { text-decoration-thickness: 1px; }
 .wide .frame iframe { aspect-ratio: 1000 / 720; }
 .plates { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0 8px; }
 .plates.three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.pcard { text-decoration: none; display: grid; gap: 10px; }
-.pcard .im { background: var(--paper); outline: 1px solid var(--rule); outline-offset: -1px; padding: 8px; }
-.pcard img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: contain; }
+.plates.four { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
+.pcard { text-decoration: none; display: grid; gap: 10px; align-content: start; }
+.pcard .im { display: block; background: var(--paper); outline: 1px solid var(--rule); outline-offset: -1px; padding: 8px; }
+.pcard img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; }
 .pcard b { font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.2; }
 .pcard span { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
 .pcard:hover b { color: var(--accent); }
@@ -493,7 +514,7 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
 }
 @media (max-width: 720px) {
   body { font-size: 18px; }
-  .plates.three { grid-template-columns: minmax(0, 1fr); }
+  .plates.three, .plates.four { grid-template-columns: minmax(0, 1fr); }
   .features li { font-size: 16px; }
   .top nav a.opt { display: none; }
   .views3, .plates, .pair { grid-template-columns: minmax(0, 1fr); }
@@ -515,7 +536,7 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
   <span class="eyebrow">A skill for Claude Code</span>
   <h1>Explain an idea the way a museum explains a <em>specimen</em>.</h1>
   <p class="lede">Name an idea, and Claude invents the instrument that performs it. It draws that instrument as a live, engraved figure, then mounts it with a numbered key and wall texts, so the reader can watch the idea work and read why.</p>
-  <div class="byline"><span>By <b>Ramakrushna Mohapatra</b></span><span>October 2026</span><span>Three plates</span><span>MIT</span></div>
+  <div class="byline"><span>By <b>Ramakrushna Mohapatra</b></span><span>October 2026</span><span>Four plates</span><span>MIT</span></div>
   <ul class="features">
     <li><span class="fn">i</span>Three-dimensional isometric technical drawings that you can control and inspect from every angle</li>
     <li><span class="fn">ii</span>Live simulations of electricity, magnetism, and energy flows</li>
@@ -560,7 +581,7 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
 
     <section id="plates">
       <h2><span class="no">02</span><span>The collection</span></h2>
-      <p>Three plates are on view. All are live: the figures run on the same equations their wall texts describe, and every control you touch changes the numbers everywhere at once.</p>
+      <p>Four plates are on view. All are live: the figures run on the same equations their wall texts describe, and every control you touch changes the numbers everywhere at once.</p>
       <div class="wide">
         <div class="frame"><iframe id="f-attention" src="embed-attention.html" title="Plate I, live: attention as an assay bench" loading="eager"></iframe></div>
         <p class="caption"><span class="fig-n">Plate I</span><span>Attention as an assay bench. The query carriage walks the sentence on its own; click a column to take over.</span><a href="attention.html">Full plate →</a></p>
@@ -574,10 +595,16 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
       </div>
       <aside class="note"><sup>3</sup> Plate III's machine turns a hundred times slower on the bench than in life, so you can watch the rotor and the alternating current; the model itself runs at true speed.</aside>
       <p>In <a href="grid.html">Plate III</a>, energy travels from falling water to a lit window. A flyball governor spins on the shaft and closes the water valve as the machine speeds up, the rotor's north and south poles sweep their field through the stator's copper, and the iron cores of two transformers carry an alternating flux. Raise the town's demand and the frequency dips; drop the line voltage and the losses climb with the square of the current; open the breaker and the machine runs away until the governor catches it.<span class="nref">3</span></p>
-      <div class="plates three">
+      <div class="wide">
+        <div class="frame"><iframe id="f-hashmap" src="embed-hashmap.html" title="Plate IV, live: a hash map as a sorting office" loading="lazy"></iframe></div>
+        <p class="caption"><span class="fig-n">Plate IV</span><span>A hash map as a sorting office. Keys are filed one by one; when two want the same bin, watch the office settle it.</span><a href="hashmap.html">Full plate →</a></p>
+      </div>
+      <p>In <a href="hashmap.html">Plate IV</a>, the plate leaves physics for a data structure. Each key is a filing card. A hash press reads it with Java's own <code>hashCode</code> and shows the low bits in its windows, a dial folds them to a bin, and a carriage on a rail delivers the card. When two keys want the same bin the office settles it one of three ways: a chain of cards hung in front of the bin, or the carriage trying the next bin along, or bins further and further away, leaving a red trail for every extra look. Past three quarters full, the shutters lift on four more bins and every card is filed again.</p>
+      <div class="plates four">
         <a class="pcard" href="attention.html"><span class="im"><img src="img/plate-i.png" alt="Plate I"></span><b>Plate I · Attention</b><span>Machine learning. Scaled dot-product attention, four heads.</span></a>
         <a class="pcard" href="heart.html"><span class="im"><img src="img/plate-ii.png" alt="Plate II"></span><b>Plate II · The heart</b><span>Physiology. The cardiac cycle in five phases.</span></a>
         <a class="pcard" href="grid.html"><span class="im"><img src="img/plate-iii.png" alt="Plate III"></span><b>Plate III · The grid</b><span>Electricity and magnetism. From water to lamp.</span></a>
+        <a class="pcard" href="hashmap.html"><span class="im"><img src="img/plate-iv.png" alt="Plate IV"></span><b>Plate IV · The hash map</b><span>Data structures. Chaining, linear and quadratic probing.</span></a>
       </div>
     </section>
 
@@ -618,7 +645,7 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
       <h2><span class="no">06</span><span>Commissioning a plate</span></h2>
       <p>Ask for the idea, not the drawing. Folio chooses the instrument; if you already have one in mind, name it, along with any real numbers you care about.</p>
       <div class="prompts">
-        <div><code>/folio explain how a hash map resolves collisions</code><small>Perhaps a sorting desk of pigeonholes.</small></div>
+        <div><code>/folio explain how a hash map resolves collisions</code><small>This one became Plate IV: a sorting office with a hash press.</small></div>
         <div><code>/folio explain backpropagation through one neuron</code><small>For a course page, with the gradients on dials.</small></div>
         <div><code>/folio how does consistent hashing move keys when a server joins</code><small>A ring you can add a station to.</small></div>
         <div><code>/folio explain how the kidney filters blood</code><small>A physiology plate in the manner of Plate II.</small></div>
@@ -633,7 +660,7 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
 <pre class="block">git clone https://github.com/Ramakm/folio-anatomy.git ~/.claude/skills/folio
 <span class="c"># or, for one project</span>
 git clone https://github.com/Ramakm/folio-anatomy.git .claude/skills/folio</pre>
-      <p>Then type <code>/folio</code> and name an idea. The repository also holds both plates' source, the drawing kit, and scripts to build and photograph a plate.</p>
+      <p>Then type <code>/folio</code> and name an idea. The repository also holds every plate's source, the drawing kit, and scripts to build and photograph a plate.</p>
     </section>
 
     <section id="questions">
@@ -642,7 +669,7 @@ git clone https://github.com/Ramakm/folio-anatomy.git .claude/skills/folio</pre>
       <details><summary>What does a plate need to run?</summary><p>Nothing but a browser. A plate is one HTML file with no dependencies. The WebGL view needs WebGL and falls back to the drawing without it.</p></details>
       <details><summary>Can it use my brand?</summary><p>Yes. Every colour is a design token and the fonts are three lines of CSS. Swap them and the structure and engraving stay.</p></details>
       <details><summary>Does it work on a phone?</summary><p>The plates are tested at 390 pixels wide. The view switch, the pins and the inspector all work by touch, and the 3D bench turns with a finger.</p></details>
-      <details><summary>Can the parts really move?</summary><p>Yes. Plate I's flow wheels spin as fluid pours, Plate II's pistons and timing cams run with the beat, and Plate III's water wheel, rotor, field and governor turn with the machine's true frequency, slowed so you can follow them.</p></details>
+      <details><summary>Can the parts really move?</summary><p>Yes. Plate I's flow wheels spin as fluid pours, Plate II's pistons and timing cams run with the beat, and Plate III's water wheel, rotor, field and governor turn with the machine's true frequency, slowed so you can follow them. In Plate IV a carriage runs the rail, cards are filed and chained, and shutters lift when the table doubles.</p></details>
       <details><summary>What is the licence?</summary><p>MIT, for the skill and for the plates.</p></details>
     </section>
   </article>

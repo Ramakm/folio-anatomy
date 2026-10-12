@@ -379,6 +379,26 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 #plate-svg .tripped .t-cyl { fill: var(--accent); }
 .fig.mode-webgl #plate-svg .flow.energy { visibility: visible; }
 
+/* Plate IV: filing cards, bins, chains and probe trails */
+#plate-svg .card .t-top, #plate-svg .card .t-s3, #plate-svg .card .t-s2 { fill: var(--face); }
+#plate-svg .card .t-s1, #plate-svg .card .t-s0 { fill: var(--s3); }
+#plate-svg .card .f { stroke: var(--line); stroke-width: .35; }
+#plate-svg .card.touch .f { stroke: var(--accent); stroke-width: 1.1; }
+#plate-svg .card.found .t-s3, #plate-svg .card.found .t-s2, #plate-svg .card.found .t-top { fill: color-mix(in srgb, var(--accent) 22%, var(--face)); }
+#plate-svg .card.query .f { stroke: var(--accent); stroke-width: .8; stroke-dasharray: 2.2 1.6; }
+#plate-svg .cardtab .f { fill: var(--accent); stroke: none; }
+#plate-svg .engr.cardkey { font-family: var(--body); font-weight: 600; letter-spacing: .01em; }
+#plate-svg .engr.binno { fill: var(--ink-2); font-family: var(--display); font-style: italic; letter-spacing: 0; }
+#plate-svg .engr.bit { font-weight: 500; } #plate-svg .engr.bit.on, #plate-svg .engr.acc { fill: var(--accent); }
+#plate-svg .win-frame { fill: var(--face); stroke: var(--line); stroke-width: .5; }
+#plate-svg .maskline { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; }
+#plate-svg .trail { fill: none; stroke: var(--ink-2); stroke-width: 1.1; stroke-dasharray: 2.4 2.4; stroke-linecap: round; opacity: .8; }
+#plate-svg .trail.on { stroke: var(--accent); stroke-width: 2; stroke-dasharray: none; opacity: 1; }
+#plate-svg .bead .t-cyl { fill: var(--s1); }
+#plate-svg .bin .t-top { fill: var(--top); }
+#plate-svg .binfloor .t-top { fill: var(--s2); }
+#plate-svg .drawer .t-top { fill: var(--top); }
+
 /* Plate II: five phases, a key of twelve, and two charts. */
 .stages.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .stage.now { background: var(--paper); }
@@ -408,7 +428,7 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
   <header class="mast">
     <a class="label" href="index.html">← The collection</a>
     <a class="mark c" href="index.html">Folio</a>
-    <span class="r"><span class="label">Plate II of III</span><button class="theme" type="button" data-theme-toggle>Dark</button></span>
+    <span class="r"><span class="label">Plate II of IV</span><button class="theme" type="button" data-theme-toggle>Dark</button></span>
   </header>
 
   <div class="title">
