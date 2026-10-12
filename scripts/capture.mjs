@@ -4,7 +4,7 @@ import { chromium } from "playwright";
 import { mkdirSync } from "node:fs";
 import { resolve } from "node:path";
 
-const [, , page = "dist/attention.html", outDir = "shots", ...rest] = process.argv;
+const [, , page = "docs/attention.html", outDir = "shots", ...rest] = process.argv;
 const arg = (k) => { const i = rest.indexOf(k); return i >= 0 ? rest[i + 1] : null; };
 mkdirSync(outDir, { recursive: true });
 const url = "file://" + resolve(page);

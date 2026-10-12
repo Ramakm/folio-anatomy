@@ -6,8 +6,8 @@
   "license": "MIT",
   "author": "Ramakrushna Mohapatra (techwith.ram)",
   "scripts": {
-    "build": "node scripts/build.mjs examples/attention dist/attention.html",
-    "capture": "node scripts/capture.mjs dist/attention.html shots",
+    "build": "node scripts/build-site.mjs",
+    "capture": "node scripts/capture.mjs docs/heart.html shots",
     "new": "node scripts/new-plate.mjs"
   },
   "devDependencies": {

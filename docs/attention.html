@@ -1,3 +1,6 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Folio Plate I: Attention</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,6 +12,7 @@
   --top: #FCFAF6; --s3: #ECE7DF; --s2: #DED8CE; --s1: #CFC8BB; --s0: #BCB4A6; --cyl: #E6E1D8; --line: #2B2722; --lo: #7A7266; --faint: #B3AB9D;
   --hatch: #3F3932; --hatch-op: .5; --glass: #DDE4E3; --glass-line: #5D6A6B; --face: #FFFDF8; --brass: #DCD1BB;
   --fluid: #C9381D; --fluid-2: #DF6A50; --fluid-3: #D24B2F; --fluid-top: #EE9078; --fluid-deep: #8E2412; --shut: #8A8276;
+  --venous: #3E4C84; --venous-top: #7180B6; --venous-deep: #232C55;
   --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
   --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -18,12 +22,14 @@
   --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
   --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
   --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E;
+  --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
   color-scheme: dark; } }
 :root[data-theme="dark"] {
   --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
   --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
   --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
   --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E;
+  --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
   color-scheme: dark; }
 
 * { box-sizing: border-box; }
@@ -211,13 +217,58 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
   footer { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Site navigation */
+.mast a { color: inherit; text-decoration: none; }
+.mast a:hover { color: var(--accent); }
+.mast .mark a { letter-spacing: inherit; }
+.platenav { margin-top: 84px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid var(--ink); padding-top: 16px; }
+.platenav a { text-decoration: none; display: grid; gap: 4px; padding: 14px 0; }
+.platenav a:last-child { text-align: right; }
+.platenav b { font-family: var(--display); font-weight: 400; font-size: clamp(22px, 3vw, 32px); line-height: 1.1; }
+.platenav a:hover b { color: var(--accent); }
+
+/* Blood: arterial uses the accent, venous its own indigo. Colour is the subject here. */
+#plate-svg .arterial { fill: var(--fluid); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .arterial-top, #plate-svg .arterial-cap { fill: var(--fluid-top); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .venous { fill: var(--venous); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .venous-top, #plate-svg .venous-cap { fill: var(--venous-top); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .arterial-ball .f { fill: var(--fluid); stroke: var(--fluid-deep); }
+#plate-svg .venous-ball .f { fill: var(--venous); stroke: var(--venous-deep); }
+#plate-svg .arterialg .hatch, #plate-svg .arterial-ball .hatch { stroke: var(--fluid-deep); opacity: .5; }
+#plate-svg .venousg .hatch, #plate-svg .venous-ball .hatch { stroke: var(--venous-deep); opacity: .55; }
+#plate-svg .sol > .hatch { }
+#plate-svg .flow { fill: none; stroke: var(--paper); stroke-width: 1.1; stroke-dasharray: 2.5 7; stroke-linecap: round; opacity: .9; }
+#plate-svg .flow.thin { stroke-width: .7; stroke-dasharray: 1.4 4; }
+#plate-svg .leather .f { stroke-width: .45; }
+#plate-svg .leather .t-top { fill: var(--s2); } #plate-svg .leather .t-s2, #plate-svg .leather .t-s3 { fill: var(--s1); } #plate-svg .leather .t-s1, #plate-svg .leather .t-s0 { fill: var(--s0); }
+#plate-svg .piston .t-cyl { fill: var(--s2); } #plate-svg .piston .t-top { fill: var(--s3); }
+#plate-svg .lever.leak .t-cyl { fill: var(--accent); }
+#plate-svg .leakring { fill: none; stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 2 2; }
+#plate-svg .housing .t-top { fill: var(--s3); }
+
+/* Charts in wall texts */
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
+.chart .ax { stroke: var(--rule); stroke-width: 1; fill: none; }
+.chart .grid { stroke: var(--rule); stroke-width: .6; stroke-dasharray: 2 4; }
+.chart text { fill: var(--ink-3); font-family: var(--mono); font-size: 10.5px; }
+.chart .lbl { fill: var(--ink-2); font-family: var(--body); font-size: 12px; font-weight: 600; }
+.chart .lv { stroke: var(--accent); stroke-width: 2; fill: none; }
+.chart .ao { stroke: var(--ink); stroke-width: 1.4; fill: none; }
+.chart .la { stroke: var(--ink-3); stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; }
+.chart .loop { stroke: var(--accent); stroke-width: 2; fill: var(--accent-soft); }
+.chart .cursor { stroke: var(--ink); stroke-width: 1; }
+.chart .dot { fill: var(--accent); stroke: var(--paper); stroke-width: 2; }
+.chart .band { fill: var(--ink); opacity: .045; }
+.chart .bandlbl { fill: var(--ink-3); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; }
+
 </style>
 
 <div class="wrap">
   <header class="mast">
-    <span class="label">Machine learning series</span>
-    <span class="mark c">Folio</span>
-    <span class="label r">Plate I</span>
+    <a class="label" href="index.html">← The collection</a>
+    <a class="mark c" href="index.html">Folio</a>
+    <span class="label r">Plate I of II</span>
   </header>
 
   <div class="title">
@@ -345,6 +396,11 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
       <div><h3>What is left out</h3><p>Value vectors are shown as strata, not numbers. A real layer also has many heads in parallel, an output projection, residual connections and layer normalisation. The plate is one head, one row at a time.</p></div>
     </div>
   </section>
+
+  <nav class="platenav" aria-label="Plates">
+    <a href="index.html"><span class="label">Back to</span><b>The collection</b></a>
+    <a href="heart.html"><span class="label">Next · Plate II</span><b>The human heart</b></a>
+  </nav>
 
   <footer>
     <span><span class="mark">Folio</span> &nbsp;Plate I, drawn by Claude with the Folio skill. Set in Bodoni Moda, Hanken Grotesk and IBM Plex Mono.</span>

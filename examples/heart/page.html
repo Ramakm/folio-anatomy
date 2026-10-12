@@ -1,0 +1,192 @@
+<title>Folio Plate II: The Heart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/*CSS*/
+/* Plate II: five phases, a key of twelve, and two charts. */
+.stages.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.stage.now { background: var(--paper); }
+.stage.now .rn { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.stage .eq.small { font-size: 13px; font-family: var(--mono); white-space: normal; line-height: 1.4; }
+.vitals { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; background: var(--paper); margin-bottom: 18px; }
+.vitals div { padding: 16px 18px; border-left: 1px solid var(--rule); display: grid; gap: 4px; }
+.vitals div:first-child { border-left: 0; }
+.vitals b { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
+.vitals b small { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-left: 4px; }
+.ledger td .sw { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; vertical-align: 0; }
+.charts { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; }
+.charts figure { margin: 0; background: var(--paper); padding: 18px 18px 12px; }
+.charts figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.charts figcaption b { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 21px; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; color: var(--ink-2); align-items: center; }
+.legend i { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--accent); vertical-align: middle; margin-right: 6px; }
+.legend i.ao { border-top: 1.5px solid var(--ink); } .legend i.la { border-top: 1.5px dashed var(--ink-3); }
+.charts p { margin: 10px 0 0; font-size: 13.5px; color: var(--ink-2); }
+.seg.three { grid-template-columns: repeat(3, 1fr); } .seg.four { grid-template-columns: repeat(4, 1fr); }
+.seg.three button { font-size: 11px; padding: 9px 2px; }
+@media (max-width: 1080px) { .stages.five { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vitals { grid-template-columns: repeat(3, minmax(0, 1fr)); } .vitals div:nth-child(4) { border-left: 0; } .charts { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 720px) { .stages.five { grid-template-columns: minmax(0, 1fr); } .vitals { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vitals div:nth-child(odd) { border-left: 0; } .vitals div:nth-child(4) { border-left: 1px solid var(--rule); } .vitals b { font-size: 28px; } }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <a class="label" href="index.html">← The collection</a>
+    <a class="mark c" href="index.html">Folio</a>
+    <span class="label r">Plate II of II</span>
+  </header>
+
+  <div class="title">
+    <div>
+      <span class="label">Plate II · The human heart</span>
+      <h1>The heart, as a <em>double pump</em>.</h1>
+    </div>
+    <div>
+      <p>Two piston pumps share one bench and one beat. The right pump pushes dark blood through the lungs; the left pump pushes bright blood through the body. Four valves keep every drop moving one way.</p>
+      <dl class="cat">
+        <dt>Object</dt><dd>Double piston pump, two circuits</dd>
+        <dt>Idea</dt><dd>The cardiac cycle · P = E(t)(V − V₀)</dd>
+        <dt>Model</dt><dd>8 compartments · time-varying elastance</dd>
+        <dt>Catalogue</dt><dd>FOL-002 · October 2026</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="exhibit">
+    <figure class="plate" style="margin:0">
+      <div class="corners"><span class="tl">Pl. II</span><span class="tr">The double pump</span></div>
+      <div class="fig" id="plate" tabindex="0" role="img" aria-label="An isometric bench of pumps, valves, bellows and tubes that circulates blood like the human heart. Up and down arrows change heart rate, square brackets change contractility, 1 to 3 choose the valve condition, S slows time, Space pauses.">
+        <svg id="plate-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+      </div>
+      <div class="corners b">
+        <span class="bl">↑ ↓ heart rate · [ ] contractility · 1 2 3 valves · S slow motion · Space pause</span>
+        <span class="br" id="readout" aria-live="off"></span>
+      </div>
+    </figure>
+
+    <aside class="side">
+      <div class="key">
+        <span class="label">Key to the plate · follow one drop</span>
+        <h2>From the body, round, and back</h2>
+        <ol id="key">
+          <li data-pin="1"><span class="num">1</span><span><b>Venous reservoir</b><span class="d">The great veins. Blood comes home from the body here, at low pressure and low in oxygen.</span></span></li>
+          <li data-pin="2"><span class="num">2</span><span><b>Right atrium</b><span class="d">A small primer pump. It fills while the ventricle squeezes, then tops it up with a short kick.</span></span></li>
+          <li data-pin="3"><span class="num">3</span><span><b>Tricuspid valve</b><span class="d">Lets blood fall into the right ventricle. The lever lies along the pipe when open, across it when shut.</span></span></li>
+          <li data-pin="4"><span class="num">4</span><span><b>Right ventricle</b><span class="d">The pump for the lungs. It peaks near <code>25 mmHg</code>; the lungs need only a gentle push.</span></span></li>
+          <li data-pin="5"><span class="num">5</span><span><b>Pulmonary valve</b><span class="d">Opens while the right ventricle ejects, then seals the pulmonary artery.</span></span></li>
+          <li data-pin="6"><span class="num">6</span><span><b>Lungs</b><span class="d">Bellows breathing 14 times a minute. Blood goes in dark and comes out bright with oxygen.</span></span></li>
+          <li data-pin="7"><span class="num">7</span><span><b>Left atrium</b><span class="d">Collects oxygenated blood from the pulmonary veins.</span></span></li>
+          <li data-pin="8"><span class="num">8</span><span><b>Mitral valve</b><span class="d">The left inflow valve. Choose MR and it leaks backwards; a red ring marks the leak.</span></span></li>
+          <li data-pin="9"><span class="num">9</span><span><b>Left ventricle</b><span class="d">The pump for the whole body. It peaks near <code>115 mmHg</code> and moves about <code>70 mL</code> a beat.</span></span></li>
+          <li data-pin="10"><span class="num">10</span><span><b>Aortic valve</b><span class="d">Opens once the ventricle out-pushes the aorta. Choose AS and it narrows.</span></span></li>
+          <li data-pin="11"><span class="num">11</span><span><b>Air chamber</b><span class="d">The elastic aorta. A cushion of air stores each surge and keeps pressure up between beats.</span></span></li>
+          <li data-pin="12"><span class="num">12</span><span><b>Capillary bed</b><span class="d">The body. Seventeen fine tubes where blood gives up its oxygen. Marks move at the true flow.</span></span></li>
+        </ol>
+      </div>
+
+      <div class="controls">
+        <h2>At the bench</h2>
+        <div class="ctl">
+          <div class="label"><label for="hr">Heart rate</label><span id="hrv" class="mono"></span></div>
+          <input id="hr" type="range" min="40" max="180" step="1" value="72">
+        </div>
+        <div class="ctl">
+          <div class="label"><label for="ct">Contractility</label><span id="ctv" class="mono"></span></div>
+          <input id="ct" type="range" min="0.4" max="1.6" step="0.05" value="1">
+        </div>
+        <div class="ctl">
+          <div class="label"><span>Valves</span><span id="fv"></span></div>
+          <div class="seg three" id="fseg" role="group" aria-label="Valve condition">
+            <button data-f="normal" aria-pressed="true">Healthy</button><button data-f="as" aria-pressed="false">Stenosis</button><button data-f="mr" aria-pressed="false">Leak</button>
+          </div>
+          <div class="headname" id="fdesc"></div>
+        </div>
+        <div class="ctl">
+          <div class="label"><span>Time</span><span id="sv"></span></div>
+          <div class="seg four" id="sseg" role="group" aria-label="Playback speed">
+            <button data-s="1" aria-pressed="true">1×</button><button data-s="0.25" aria-pressed="false">¼×</button><button data-s="0.06" aria-pressed="false">1/16×</button><button data-s="0" aria-pressed="false">Pause</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text I</span>
+      <h2>One beat, in five phases</h2>
+      <p>Every beat runs through the same five phases, and the valves decide which one you are in. A valve opens only when the pressure behind it is higher than the pressure in front. The phase the bench is in now is shaded.</p>
+    </div>
+    <div class="stages five" id="phases"></div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text II</span>
+      <h2>The ledger</h2>
+      <p>The vital signs of the last full beat, then every compartment of the circulation: its pressure now, its range over the beat, and the blood it holds.</p>
+    </div>
+    <div class="vitals" id="vitals"></div>
+    <div class="ledger-wrap">
+      <table class="ledger">
+        <thead><tr><th></th><th>Compartment</th><th>Blood</th><th>Pressure now</th><th>Range, last beat</th><th>Volume now</th><th>Volume, last beat</th></tr></thead>
+        <tbody id="ledger"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text III</span>
+      <h2>The beat on paper</h2>
+      <p>Physiologists draw the same beat two ways. On the left is pressure against time, the chart Carl Wiggers published in 1915. On the right is pressure against volume: each beat traces a loop, and the area inside is the work the ventricle does. Both are redrawn from the bench after every beat.</p>
+    </div>
+    <div class="charts">
+      <figure>
+        <figcaption><b>Pressure through one beat</b><span class="legend"><span><i></i>left ventricle</span><span><i class="ao"></i>aorta</span><span><i class="la"></i>left atrium</span></span></figcaption>
+        <svg class="chart" id="wiggers" viewBox="0 0 560 300" role="img" aria-label="Pressure in the left ventricle, aorta and left atrium over one heartbeat"></svg>
+        <p id="wigNote"></p>
+      </figure>
+      <figure>
+        <figcaption><b>Pressure against volume</b><span class="legend"><span><i></i>left ventricle</span></span></figcaption>
+        <svg class="chart" id="pvloop" viewBox="0 0 400 300" role="img" aria-label="Pressure-volume loop of the left ventricle"></svg>
+        <p id="pvNote"></p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text IV</span>
+      <h2>About this specimen</h2>
+    </div>
+    <div class="notes">
+      <div><h3>What is exact</h3><p>The arithmetic. Each chamber is a time-varying elastance, P = E(t)(V − V₀). Arteries and veins are compliances; vessels and valves are resistances, and valves only pass blood forwards. The bench integrates these equations every half millisecond while you watch.</p></div>
+      <div><h3>What is set by hand</h3><p>The parameters, tuned to a resting adult: about 115/80 mmHg, 70 mL per beat and 5 L a minute at 72 beats. The stenosis and leak are stronger than most patients have, so the change is easy to see.</p></div>
+      <div><h3>What is left out</h3><p>Heart muscle, the coronary arteries and the electrical system. The lungs only recolour the blood; breathing is not modelled. The contraction curve is simple, so isovolumic contraction runs about twice as long as in a real heart.</p></div>
+    </div>
+  </section>
+
+  <nav class="platenav" aria-label="Plates">
+    <a href="attention.html"><span class="label">Previous · Plate I</span><b>Attention</b></a>
+    <a href="index.html"><span class="label">Back to</span><b>The collection</b></a>
+  </nav>
+
+  <footer>
+    <span><span class="mark">Folio</span> &nbsp;Plate II, drawn by Claude with the Folio skill. Set in Bodoni Moda, Hanken Grotesk and IBM Plex Mono.</span>
+    <span class="mono">techwith.ram</span>
+  </footer>
+</div>
+
+<script>
+/*KIT*/
+</script>
+<script>
+/*MODEL*/
+</script>
+<script>
+/*PLATE*/
+</script>
+<script>
+/*PAGE*/
+</script>

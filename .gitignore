@@ -1,5 +1,4 @@
 node_modules/
 shots/
-dist/*
-!dist/attention.html
+dist/
 .DS_Store

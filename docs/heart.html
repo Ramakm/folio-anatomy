@@ -1,0 +1,1376 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Folio Plate II: The Heart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a museum exhibition wall. One mounted plate, a catalogue key beside it, then wall texts below. */
+:root {
+  --ground: #E5E1DA; --paper: #F5F2ED; --ink: #1F1C18; --ink-2: #554F46; --ink-3: #857E73; --rule: #C8C1B5; --accent: #C9381D; --accent-soft: rgba(201,56,29,.12);
+  --top: #FCFAF6; --s3: #ECE7DF; --s2: #DED8CE; --s1: #CFC8BB; --s0: #BCB4A6; --cyl: #E6E1D8; --line: #2B2722; --lo: #7A7266; --faint: #B3AB9D;
+  --hatch: #3F3932; --hatch-op: .5; --glass: #DDE4E3; --glass-line: #5D6A6B; --face: #FFFDF8; --brass: #DCD1BB;
+  --fluid: #C9381D; --fluid-2: #DF6A50; --fluid-3: #D24B2F; --fluid-top: #EE9078; --fluid-deep: #8E2412; --shut: #8A8276;
+  --venous: #3E4C84; --venous-top: #7180B6; --venous-deep: #232C55;
+  --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
+  --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
+  --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
+  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E;
+  --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
+  --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
+  --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
+  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E;
+  --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; margin: 0; padding-inline: clamp(16px, 4vw, 56px); padding-block: 0 64px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1240px; margin: 0 auto; }
+.mono { font-family: var(--mono); font-feature-settings: "zero" 0; }
+.label { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Masthead */
+.mast { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-block: 22px 18px; border-bottom: 1px solid var(--rule); }
+.mast .mark { font-family: var(--display); font-size: 22px; letter-spacing: .32em; text-transform: uppercase; font-weight: 500; justify-self: center; }
+.mast .r { justify-self: end; text-align: right; }
+
+/* Title block */
+.title { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: 24px 64px; align-items: end; padding-block: 52px 36px; }
+.title h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 7.4vw, 104px); line-height: .94; letter-spacing: -.02em; margin: 14px 0 0; text-wrap: balance; }
+.title h1 em { font-style: italic; color: var(--accent); }
+.title p { margin: 0; color: var(--ink-2); font-size: 17px; max-width: 46ch; }
+.title .cat { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.title .cat dt { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.title .cat dd { margin: 0; font-family: var(--mono); font-size: 12.5px; }
+
+/* The plate */
+.exhibit { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: start; }
+.plate { background: var(--paper); position: relative; padding: 18px 18px 14px; outline: 1px solid var(--rule); outline-offset: -9px; }
+.plate .corners { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 6px 10px 0; }
+.plate .corners.b { padding: 0 10px 6px; align-items: end; }
+.plate .tl { font-family: var(--display); font-style: italic; font-size: 19px; }
+.plate .tr { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); text-align: right; align-self: center; }
+.plate .bl { font-family: var(--mono); font-size: 11px; color: var(--ink-3); max-width: 46ch; }
+.plate .br { font-family: var(--mono); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+.plate .br b { color: var(--accent); font-weight: 500; }
+.fig { position: relative; }
+#plate { display: block; cursor: default; }
+#plate:focus-visible { outline-offset: -4px; }
+#plate-svg { width: 100%; height: auto; display: block; }
+
+/* Figure tones */
+#plate-svg .f { stroke: var(--line); stroke-width: .55; stroke-linejoin: round; }
+#plate-svg .t-top { fill: var(--top); } #plate-svg .t-s3 { fill: var(--s3); } #plate-svg .t-s2 { fill: var(--s2); }
+#plate-svg .t-s1 { fill: var(--s1); } #plate-svg .t-s0 { fill: var(--s0); } #plate-svg .t-cyl { fill: var(--cyl); }
+#plate-svg .t-face { fill: var(--face); }
+#plate-svg .hatch { fill: none; stroke: var(--hatch); stroke-width: .42; opacity: var(--hatch-op); }
+#plate-svg .ln { fill: none; stroke-width: .5; stroke-linecap: round; }
+#plate-svg .ln.lo, #plate-svg .ln-lo { stroke: var(--lo); } #plate-svg .ln.mid { stroke: var(--line); stroke-width: .6; }
+#plate-svg .ln.hi { stroke: var(--line); stroke-width: 1.3; } #plate-svg .ln.faint { stroke: var(--faint); }
+#plate-svg .ln.zero { stroke: var(--accent); stroke-width: .9; }
+#plate-svg .ln-lo { stroke-width: .4; }
+#plate-svg .dot, #plate-svg .hub { fill: var(--line); }
+#plate-svg .glint { fill: var(--top); opacity: .9; }
+#plate-svg .brass .f { fill: var(--brass); }
+#plate-svg .engr { fill: var(--ink); font-family: var(--mono); letter-spacing: .06em; }
+#plate-svg .engr.lo { fill: var(--ink-3); } #plate-svg .engr.tok { font-family: var(--body); font-weight: 600; letter-spacing: .02em; }
+#plate-svg .glass-back { fill: var(--glass); opacity: .55; stroke: var(--glass-line); stroke-width: .35; }
+#plate-svg .glass-front { fill: var(--glass); fill-opacity: .14; stroke: var(--glass-line); stroke-width: .6; }
+#plate-svg .glass-rim { fill: none; stroke: var(--glass-line); stroke-width: .6; }
+#plate-svg .glass-lip { fill: var(--glass); fill-opacity: .35; stroke: var(--glass-line); stroke-width: .5; }
+#plate-svg .ln.grad { stroke: var(--glass-line); stroke-width: .45; }
+#plate-svg .ln.glint-line { stroke: var(--top); stroke-width: 1.4; opacity: .8; }
+#plate-svg .fluid { fill: var(--fluid); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .fluid-top { fill: var(--fluid-top); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .fluidg .hatch { stroke: var(--fluid-deep); opacity: .55; }
+#plate-svg .t-fluid { fill: var(--fluid); } #plate-svg .t-fluid-top { fill: var(--fluid-top); } #plate-svg .t-fluid-2 { fill: var(--fluid-2); } #plate-svg .t-fluid-3 { fill: var(--fluid-3); }
+#plate-svg .stratum .f { stroke: var(--fluid-deep); }
+#plate-svg .t-shut { fill: var(--shut); }
+#plate-svg .shutter .t-cyl { fill: var(--s1); }
+#plate-svg .needle { fill: var(--accent); stroke: var(--fluid-deep); stroke-width: .3; }
+#plate-svg .pin circle { fill: var(--ink); stroke: var(--paper); stroke-width: 1.4; transition: fill .2s; }
+#plate-svg .pin text { fill: var(--paper); font-family: var(--mono); font-size: 8.4px; font-weight: 500; }
+#plate-svg .pin.on circle { fill: var(--accent); }
+#plate-svg .hit { fill: transparent; cursor: pointer; }
+#plate-svg .hit:hover { fill: var(--accent-soft); }
+#plate-svg [data-part].lit .f { stroke: var(--accent); stroke-width: 1; }
+
+/* The key */
+.key { background: var(--paper); padding: 20px 20px 16px; }
+.key h2, .controls h2 { font-family: var(--display); font-weight: 500; font-style: italic; font-size: 22px; margin: 0 0 4px; }
+.key ol { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 2px; }
+.key li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 7px 4px; border-top: 1px solid var(--rule); cursor: default; border-radius: 2px; }
+.key li:hover, .key li.on { background: var(--accent-soft); }
+.num { display: inline-grid; place-items: center; width: 19px; height: 19px; border-radius: 50%; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 10.5px; font-weight: 500; line-height: 1; }
+.key li.on .num { background: var(--accent); }
+.key b { font-weight: 600; font-size: 14px; display: block; line-height: 1.3; }
+.key span.d { font-size: 13px; color: var(--ink-2); line-height: 1.4; display: block; }
+.key code { font-family: var(--mono); font-size: 11.5px; color: var(--ink); }
+.controls { margin-top: 18px; background: var(--paper); padding: 20px; display: grid; gap: 16px; }
+.ctl .label { display: flex; justify-content: space-between; margin-bottom: 7px; }
+.seg { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); }
+.seg.tok { grid-template-columns: repeat(4, 1fr); }
+.seg button { font: 500 12px/1 var(--mono); padding: 9px 2px; background: none; border: 0; border-left: 1px solid var(--rule); color: var(--ink-2); cursor: pointer; }
+.seg.tok button:nth-child(4n+1) { border-left: 0; } .seg.tok button:nth-child(n+5) { border-top: 1px solid var(--rule); }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg button:hover:not([aria-pressed="true"]) { background: var(--accent-soft); color: var(--ink); }
+.headname { font-size: 13px; color: var(--ink-2); margin-top: 7px; min-height: 2.8em; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13.5px; }
+.toggle button { font: 500 12px/1 var(--mono); padding: 8px 12px; border: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; min-width: 92px; }
+.toggle button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* Wall texts */
+section.wall { margin-top: 84px; }
+.sechead { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px 40px; padding-top: 14px; border-top: 1px solid var(--ink); margin-bottom: 30px; }
+.sechead .label { padding-top: 10px; }
+.sechead h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.sechead p { grid-column: 2; margin: 0; color: var(--ink-2); max-width: 64ch; }
+.stages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-left: 1px solid var(--rule); }
+.stage { padding: 4px 22px 8px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.stage .rn { font-family: var(--display); font-style: italic; font-size: 34px; line-height: 1; color: var(--accent); }
+.stage h3 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+.stage .eq { font-family: var(--display); font-size: 21px; padding: 10px 0; border-block: 1px solid var(--rule); white-space: nowrap; overflow-x: auto; }
+.stage .eq i { font-style: italic; }
+.stage p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.stage .live { font-family: var(--mono); font-size: 12px; color: var(--ink); background: var(--paper); padding: 10px 12px; font-variant-numeric: tabular-nums; line-height: 1.6; }
+.stage .live b { color: var(--accent); font-weight: 500; }
+.inl { display: inline-grid; width: 16px; height: 16px; font-size: 9.5px; vertical-align: 1px; }
+
+/* Ledger */
+.ledger-wrap { overflow-x: auto; background: var(--paper); padding: 8px 20px 18px; }
+.qline { font-family: var(--mono); font-size: 12px; padding: 12px 0 14px; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--ink-2); }
+table.ledger { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; min-width: 760px; }
+.ledger th { font-weight: 500; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); text-align: right; padding: 12px 10px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.ledger th:nth-child(-n+3), .ledger td:nth-child(-n+3) { text-align: left; }
+.ledger td { padding: 7px 10px; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
+.ledger td.tok { font-family: var(--body); font-weight: 600; font-size: 14px; }
+.ledger tr.q td { background: var(--accent-soft); }
+.ledger tr.mask td { color: var(--ink-3); }
+.ledger tr.mask td.w { background-image: repeating-linear-gradient(135deg, transparent 0 4px, var(--rule) 4px 5px); }
+.ledger tr { cursor: pointer; }
+.strip { display: inline-grid; grid-template-columns: repeat(8, 11px); gap: 2px; vertical-align: middle; }
+.strip i { height: 11px; border: 1px solid var(--rule); display: block; }
+.bar { display: grid; grid-template-columns: 1fr 50px; gap: 10px; align-items: center; min-width: 170px; }
+.bar span { height: 7px; background: var(--rule); position: relative; display: block; }
+.bar span i { position: absolute; inset: 0 auto 0 0; background: var(--accent); display: block; }
+
+/* Matrix */
+.matrix-wrap { display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr); gap: 32px 48px; align-items: start; }
+.matrix { display: grid; grid-template-columns: 74px repeat(8, 44px); gap: 3px; font-family: var(--mono); font-size: 11px; overflow-x: auto; background: var(--paper); padding: 18px; }
+.matrix .ch { writing-mode: vertical-rl; transform: rotate(180deg); text-align: left; color: var(--ink-3); padding-top: 4px; height: 64px; font-family: var(--body); font-weight: 600; font-size: 12px; }
+.matrix .rh { text-align: right; padding-right: 8px; align-self: center; font-family: var(--body); font-weight: 600; font-size: 12.5px; cursor: pointer; }
+.matrix button { height: 44px; border: 1px solid var(--rule); background: var(--paper); position: relative; padding: 0; font: 500 10px/1 var(--mono); color: var(--ink); cursor: pointer; font-variant-numeric: tabular-nums; }
+.matrix button .fill { position: absolute; inset: 0; background: var(--accent); }
+.matrix button span { position: relative; }
+.matrix button.dark { color: #fff; }
+.matrix button.mask { background-image: repeating-linear-gradient(135deg, transparent 0 4px, var(--rule) 4px 5px); color: transparent; }
+.matrix button.row { outline: 1.5px solid var(--ink); outline-offset: 0; z-index: 1; }
+.matrix-notes p { margin: 0 0 14px; color: var(--ink-2); max-width: 52ch; }
+.matrix-notes h3 { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 24px; margin: 0 0 10px; }
+.heads { display: grid; gap: 0; margin-top: 18px; border-top: 1px solid var(--rule); }
+.heads button { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; text-align: left; padding: 11px 6px; border: 0; border-bottom: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; font: inherit; align-items: baseline; }
+.heads button .rn { font-family: var(--display); font-style: italic; font-size: 19px; color: var(--ink-3); }
+.heads button b { font-weight: 600; font-size: 14.5px; } .heads button small { display: block; color: var(--ink-2); font-size: 13px; }
+.heads button .h { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+.heads button[aria-pressed="true"] { background: var(--paper); } .heads button[aria-pressed="true"] .rn { color: var(--accent); }
+
+/* Notes and colophon */
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 40px; }
+.notes div { border-top: 1px solid var(--rule); padding-top: 14px; }
+.notes h3 { font-size: 14.5px; font-weight: 600; margin: 0 0 6px; }
+.notes p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+footer { margin-top: 84px; padding-top: 16px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; gap: 16px; font-size: 13px; color: var(--ink-3); }
+footer .mark { font-family: var(--display); letter-spacing: .32em; text-transform: uppercase; color: var(--ink); }
+
+@media (max-width: 1080px) {
+  .exhibit { grid-template-columns: minmax(0, 1fr); }
+  .side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .controls { margin-top: 0; }
+  .stages { grid-template-columns: repeat(2, minmax(0, 1fr)); border-left: 0; }
+  .stage { border-right: 0; border-top: 1px solid var(--rule); padding: 18px 18px 22px 0; }
+  .matrix-wrap { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .mast { grid-template-columns: 1fr auto; } .mast .c { display: none; }
+  .title { grid-template-columns: minmax(0, 1fr); padding-block: 32px 24px; }
+  .side { grid-template-columns: minmax(0, 1fr); }
+  .plate { padding: 10px 6px 8px; outline-offset: -5px; }
+  .plate .bl { display: none; } .plate .corners.b { grid-template-columns: 1fr; }
+  .stages { grid-template-columns: minmax(0, 1fr); }
+  .sechead { grid-template-columns: minmax(0, 1fr); gap: 8px; } .sechead p { grid-column: 1; } .sechead .label { padding-top: 0; }
+  .notes { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .matrix { grid-template-columns: 56px repeat(8, minmax(26px, 1fr)); padding: 10px; gap: 2px; }
+  .matrix button { height: 32px; font-size: 0; }
+  footer { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Site navigation */
+.mast a { color: inherit; text-decoration: none; }
+.mast a:hover { color: var(--accent); }
+.mast .mark a { letter-spacing: inherit; }
+.platenav { margin-top: 84px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid var(--ink); padding-top: 16px; }
+.platenav a { text-decoration: none; display: grid; gap: 4px; padding: 14px 0; }
+.platenav a:last-child { text-align: right; }
+.platenav b { font-family: var(--display); font-weight: 400; font-size: clamp(22px, 3vw, 32px); line-height: 1.1; }
+.platenav a:hover b { color: var(--accent); }
+
+/* Blood: arterial uses the accent, venous its own indigo. Colour is the subject here. */
+#plate-svg .arterial { fill: var(--fluid); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .arterial-top, #plate-svg .arterial-cap { fill: var(--fluid-top); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .venous { fill: var(--venous); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .venous-top, #plate-svg .venous-cap { fill: var(--venous-top); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .arterial-ball .f { fill: var(--fluid); stroke: var(--fluid-deep); }
+#plate-svg .venous-ball .f { fill: var(--venous); stroke: var(--venous-deep); }
+#plate-svg .arterialg .hatch, #plate-svg .arterial-ball .hatch { stroke: var(--fluid-deep); opacity: .5; }
+#plate-svg .venousg .hatch, #plate-svg .venous-ball .hatch { stroke: var(--venous-deep); opacity: .55; }
+#plate-svg .sol > .hatch { }
+#plate-svg .flow { fill: none; stroke: var(--paper); stroke-width: 1.1; stroke-dasharray: 2.5 7; stroke-linecap: round; opacity: .9; }
+#plate-svg .flow.thin { stroke-width: .7; stroke-dasharray: 1.4 4; }
+#plate-svg .leather .f { stroke-width: .45; }
+#plate-svg .leather .t-top { fill: var(--s2); } #plate-svg .leather .t-s2, #plate-svg .leather .t-s3 { fill: var(--s1); } #plate-svg .leather .t-s1, #plate-svg .leather .t-s0 { fill: var(--s0); }
+#plate-svg .piston .t-cyl { fill: var(--s2); } #plate-svg .piston .t-top { fill: var(--s3); }
+#plate-svg .lever.leak .t-cyl { fill: var(--accent); }
+#plate-svg .leakring { fill: none; stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 2 2; }
+#plate-svg .housing .t-top { fill: var(--s3); }
+
+/* Charts in wall texts */
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
+.chart .ax { stroke: var(--rule); stroke-width: 1; fill: none; }
+.chart .grid { stroke: var(--rule); stroke-width: .6; stroke-dasharray: 2 4; }
+.chart text { fill: var(--ink-3); font-family: var(--mono); font-size: 10.5px; }
+.chart .lbl { fill: var(--ink-2); font-family: var(--body); font-size: 12px; font-weight: 600; }
+.chart .lv { stroke: var(--accent); stroke-width: 2; fill: none; }
+.chart .ao { stroke: var(--ink); stroke-width: 1.4; fill: none; }
+.chart .la { stroke: var(--ink-3); stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; }
+.chart .loop { stroke: var(--accent); stroke-width: 2; fill: var(--accent-soft); }
+.chart .cursor { stroke: var(--ink); stroke-width: 1; }
+.chart .dot { fill: var(--accent); stroke: var(--paper); stroke-width: 2; }
+.chart .band { fill: var(--ink); opacity: .045; }
+.chart .bandlbl { fill: var(--ink-3); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; }
+
+/* Plate II: five phases, a key of twelve, and two charts. */
+.stages.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.stage.now { background: var(--paper); }
+.stage.now .rn { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.stage .eq.small { font-size: 13px; font-family: var(--mono); white-space: normal; line-height: 1.4; }
+.vitals { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; background: var(--paper); margin-bottom: 18px; }
+.vitals div { padding: 16px 18px; border-left: 1px solid var(--rule); display: grid; gap: 4px; }
+.vitals div:first-child { border-left: 0; }
+.vitals b { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
+.vitals b small { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-left: 4px; }
+.ledger td .sw { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; vertical-align: 0; }
+.charts { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; }
+.charts figure { margin: 0; background: var(--paper); padding: 18px 18px 12px; }
+.charts figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.charts figcaption b { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 21px; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; color: var(--ink-2); align-items: center; }
+.legend i { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--accent); vertical-align: middle; margin-right: 6px; }
+.legend i.ao { border-top: 1.5px solid var(--ink); } .legend i.la { border-top: 1.5px dashed var(--ink-3); }
+.charts p { margin: 10px 0 0; font-size: 13.5px; color: var(--ink-2); }
+.seg.three { grid-template-columns: repeat(3, 1fr); } .seg.four { grid-template-columns: repeat(4, 1fr); }
+.seg.three button { font-size: 11px; padding: 9px 2px; }
+@media (max-width: 1080px) { .stages.five { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vitals { grid-template-columns: repeat(3, minmax(0, 1fr)); } .vitals div:nth-child(4) { border-left: 0; } .charts { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 720px) { .stages.five { grid-template-columns: minmax(0, 1fr); } .vitals { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vitals div:nth-child(odd) { border-left: 0; } .vitals div:nth-child(4) { border-left: 1px solid var(--rule); } .vitals b { font-size: 28px; } }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <a class="label" href="index.html">← The collection</a>
+    <a class="mark c" href="index.html">Folio</a>
+    <span class="label r">Plate II of II</span>
+  </header>
+
+  <div class="title">
+    <div>
+      <span class="label">Plate II · The human heart</span>
+      <h1>The heart, as a <em>double pump</em>.</h1>
+    </div>
+    <div>
+      <p>Two piston pumps share one bench and one beat. The right pump pushes dark blood through the lungs; the left pump pushes bright blood through the body. Four valves keep every drop moving one way.</p>
+      <dl class="cat">
+        <dt>Object</dt><dd>Double piston pump, two circuits</dd>
+        <dt>Idea</dt><dd>The cardiac cycle · P = E(t)(V − V₀)</dd>
+        <dt>Model</dt><dd>8 compartments · time-varying elastance</dd>
+        <dt>Catalogue</dt><dd>FOL-002 · October 2026</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="exhibit">
+    <figure class="plate" style="margin:0">
+      <div class="corners"><span class="tl">Pl. II</span><span class="tr">The double pump</span></div>
+      <div class="fig" id="plate" tabindex="0" role="img" aria-label="An isometric bench of pumps, valves, bellows and tubes that circulates blood like the human heart. Up and down arrows change heart rate, square brackets change contractility, 1 to 3 choose the valve condition, S slows time, Space pauses.">
+        <svg id="plate-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+      </div>
+      <div class="corners b">
+        <span class="bl">↑ ↓ heart rate · [ ] contractility · 1 2 3 valves · S slow motion · Space pause</span>
+        <span class="br" id="readout" aria-live="off"></span>
+      </div>
+    </figure>
+
+    <aside class="side">
+      <div class="key">
+        <span class="label">Key to the plate · follow one drop</span>
+        <h2>From the body, round, and back</h2>
+        <ol id="key">
+          <li data-pin="1"><span class="num">1</span><span><b>Venous reservoir</b><span class="d">The great veins. Blood comes home from the body here, at low pressure and low in oxygen.</span></span></li>
+          <li data-pin="2"><span class="num">2</span><span><b>Right atrium</b><span class="d">A small primer pump. It fills while the ventricle squeezes, then tops it up with a short kick.</span></span></li>
+          <li data-pin="3"><span class="num">3</span><span><b>Tricuspid valve</b><span class="d">Lets blood fall into the right ventricle. The lever lies along the pipe when open, across it when shut.</span></span></li>
+          <li data-pin="4"><span class="num">4</span><span><b>Right ventricle</b><span class="d">The pump for the lungs. It peaks near <code>25 mmHg</code>; the lungs need only a gentle push.</span></span></li>
+          <li data-pin="5"><span class="num">5</span><span><b>Pulmonary valve</b><span class="d">Opens while the right ventricle ejects, then seals the pulmonary artery.</span></span></li>
+          <li data-pin="6"><span class="num">6</span><span><b>Lungs</b><span class="d">Bellows breathing 14 times a minute. Blood goes in dark and comes out bright with oxygen.</span></span></li>
+          <li data-pin="7"><span class="num">7</span><span><b>Left atrium</b><span class="d">Collects oxygenated blood from the pulmonary veins.</span></span></li>
+          <li data-pin="8"><span class="num">8</span><span><b>Mitral valve</b><span class="d">The left inflow valve. Choose MR and it leaks backwards; a red ring marks the leak.</span></span></li>
+          <li data-pin="9"><span class="num">9</span><span><b>Left ventricle</b><span class="d">The pump for the whole body. It peaks near <code>115 mmHg</code> and moves about <code>70 mL</code> a beat.</span></span></li>
+          <li data-pin="10"><span class="num">10</span><span><b>Aortic valve</b><span class="d">Opens once the ventricle out-pushes the aorta. Choose AS and it narrows.</span></span></li>
+          <li data-pin="11"><span class="num">11</span><span><b>Air chamber</b><span class="d">The elastic aorta. A cushion of air stores each surge and keeps pressure up between beats.</span></span></li>
+          <li data-pin="12"><span class="num">12</span><span><b>Capillary bed</b><span class="d">The body. Seventeen fine tubes where blood gives up its oxygen. Marks move at the true flow.</span></span></li>
+        </ol>
+      </div>
+
+      <div class="controls">
+        <h2>At the bench</h2>
+        <div class="ctl">
+          <div class="label"><label for="hr">Heart rate</label><span id="hrv" class="mono"></span></div>
+          <input id="hr" type="range" min="40" max="180" step="1" value="72">
+        </div>
+        <div class="ctl">
+          <div class="label"><label for="ct">Contractility</label><span id="ctv" class="mono"></span></div>
+          <input id="ct" type="range" min="0.4" max="1.6" step="0.05" value="1">
+        </div>
+        <div class="ctl">
+          <div class="label"><span>Valves</span><span id="fv"></span></div>
+          <div class="seg three" id="fseg" role="group" aria-label="Valve condition">
+            <button data-f="normal" aria-pressed="true">Healthy</button><button data-f="as" aria-pressed="false">Stenosis</button><button data-f="mr" aria-pressed="false">Leak</button>
+          </div>
+          <div class="headname" id="fdesc"></div>
+        </div>
+        <div class="ctl">
+          <div class="label"><span>Time</span><span id="sv"></span></div>
+          <div class="seg four" id="sseg" role="group" aria-label="Playback speed">
+            <button data-s="1" aria-pressed="true">1×</button><button data-s="0.25" aria-pressed="false">¼×</button><button data-s="0.06" aria-pressed="false">1/16×</button><button data-s="0" aria-pressed="false">Pause</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text I</span>
+      <h2>One beat, in five phases</h2>
+      <p>Every beat runs through the same five phases, and the valves decide which one you are in. A valve opens only when the pressure behind it is higher than the pressure in front. The phase the bench is in now is shaded.</p>
+    </div>
+    <div class="stages five" id="phases"></div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text II</span>
+      <h2>The ledger</h2>
+      <p>The vital signs of the last full beat, then every compartment of the circulation: its pressure now, its range over the beat, and the blood it holds.</p>
+    </div>
+    <div class="vitals" id="vitals"></div>
+    <div class="ledger-wrap">
+      <table class="ledger">
+        <thead><tr><th></th><th>Compartment</th><th>Blood</th><th>Pressure now</th><th>Range, last beat</th><th>Volume now</th><th>Volume, last beat</th></tr></thead>
+        <tbody id="ledger"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text III</span>
+      <h2>The beat on paper</h2>
+      <p>Physiologists draw the same beat two ways. On the left is pressure against time, the chart Carl Wiggers published in 1915. On the right is pressure against volume: each beat traces a loop, and the area inside is the work the ventricle does. Both are redrawn from the bench after every beat.</p>
+    </div>
+    <div class="charts">
+      <figure>
+        <figcaption><b>Pressure through one beat</b><span class="legend"><span><i></i>left ventricle</span><span><i class="ao"></i>aorta</span><span><i class="la"></i>left atrium</span></span></figcaption>
+        <svg class="chart" id="wiggers" viewBox="0 0 560 300" role="img" aria-label="Pressure in the left ventricle, aorta and left atrium over one heartbeat"></svg>
+        <p id="wigNote"></p>
+      </figure>
+      <figure>
+        <figcaption><b>Pressure against volume</b><span class="legend"><span><i></i>left ventricle</span></span></figcaption>
+        <svg class="chart" id="pvloop" viewBox="0 0 400 300" role="img" aria-label="Pressure-volume loop of the left ventricle"></svg>
+        <p id="pvNote"></p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text IV</span>
+      <h2>About this specimen</h2>
+    </div>
+    <div class="notes">
+      <div><h3>What is exact</h3><p>The arithmetic. Each chamber is a time-varying elastance, P = E(t)(V − V₀). Arteries and veins are compliances; vessels and valves are resistances, and valves only pass blood forwards. The bench integrates these equations every half millisecond while you watch.</p></div>
+      <div><h3>What is set by hand</h3><p>The parameters, tuned to a resting adult: about 115/80 mmHg, 70 mL per beat and 5 L a minute at 72 beats. The stenosis and leak are stronger than most patients have, so the change is easy to see.</p></div>
+      <div><h3>What is left out</h3><p>Heart muscle, the coronary arteries and the electrical system. The lungs only recolour the blood; breathing is not modelled. The contraction curve is simple, so isovolumic contraction runs about twice as long as in a real heart.</p></div>
+    </div>
+  </section>
+
+  <nav class="platenav" aria-label="Plates">
+    <a href="attention.html"><span class="label">Previous · Plate I</span><b>Attention</b></a>
+    <a href="index.html"><span class="label">Back to</span><b>The collection</b></a>
+  </nav>
+
+  <footer>
+    <span><span class="mark">Folio</span> &nbsp;Plate II, drawn by Claude with the Folio skill. Set in Bodoni Moda, Hanken Grotesk and IBM Plex Mono.</span>
+    <span class="mono">techwith.ram</span>
+  </footer>
+</div>
+
+<script>
+/* Folio kit: an orthographic isometric camera and engraved solids, drawn as SVG strings.
+   World units: x along the bench, y toward the viewer, z up. No dependencies. */
+(function (root) {
+  "use strict";
+  const D = Math.PI / 180;
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const mul = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const len = (a) => Math.hypot(a[0], a[1], a[2]);
+  const norm = (a) => mul(a, 1 / (len(a) || 1));
+  const f = (n) => (Math.round(n * 100) / 100).toString();
+
+  /* The light comes from the upper left, slightly in front. Tones are chosen by facing. */
+  const LIGHT = norm([-0.55, 0.35, 0.78]);
+
+  function camera(o = {}) {
+    const az = o.az ?? -24, el = o.el ?? 30, k = o.k ?? 1, ox = o.ox ?? 0, oy = o.oy ?? 0;
+    const a = az * D, e = el * D;
+    const ca = Math.cos(a), sa = Math.sin(a), ce = Math.cos(e), se = Math.sin(e);
+    return {
+      az, el, k, ox, oy,
+      view: [-sa * ce, ca * ce, se],
+      p(x, y, z) {
+        if (Array.isArray(x)) [x, y, z] = x;
+        const u = x * ca + y * sa, w = -x * sa + y * ca;
+        return [ox + k * u, oy + k * (w * se - z * ce)];
+      },
+      depth(x, y, z) {
+        if (Array.isArray(x)) [x, y, z] = x;
+        return -x * sa * ce + y * ca * ce + z * se;
+      },
+    };
+  }
+
+  /* Fit a camera so that the given world points fill W x H with padding. */
+  function fit(o, pts, W, H, pad = 24) {
+    const c = camera({ ...o, k: 1, ox: 0, oy: 0 });
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const p of pts) {
+      const [x, y] = c.p(p);
+      x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+    }
+    const k = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0));
+    return camera({ ...o, k, ox: W / 2 - k * (x0 + x1) / 2, oy: H / 2 - k * (y0 + y1) / 2 });
+  }
+
+  const path = (pts, close = true) =>
+    "M" + pts.map((q) => f(q[0]) + " " + f(q[1])).join("L") + (close ? "Z" : "");
+
+  function toneOf(n) {
+    if (n[2] > 0.9) return "top";
+    if (n[2] < -0.9) return "s0";
+    const d = dot(n, LIGHT);
+    return d < -0.25 ? "s0" : d < 0 ? "s1" : d < 0.25 ? "s2" : "s3";
+  }
+
+  const attrs = (o) => {
+    let s = "";
+    if (o.id) s += ` id="${o.id}"`;
+    if (o.part) s += ` data-part="${o.part}"`;
+    return s;
+  };
+
+  /* A box from (x,y,z) with size (w,d,h). Draws only the faces turned to the viewer,
+     shaded by facing, with an optional engraved hatch on the darkest side and an inset
+     groove on the top. */
+  function box(cam, x, y, z, w, d, h, o = {}) {
+    const P = (a, b, c) => cam.p(a, b, c);
+    const X = x + w, Y = y + d, Z = z + h;
+    const faces = [
+      { n: [0, 0, 1], q: [[x, y, Z], [X, y, Z], [X, Y, Z], [x, Y, Z]] },
+      { n: [0, 1, 0], q: [[x, Y, z], [X, Y, z], [X, Y, Z], [x, Y, Z]] },
+      { n: [0, -1, 0], q: [[x, y, z], [X, y, z], [X, y, Z], [x, y, Z]] },
+      { n: [1, 0, 0], q: [[X, y, z], [X, Y, z], [X, Y, Z], [X, y, Z]] },
+      { n: [-1, 0, 0], q: [[x, y, z], [x, Y, z], [x, Y, Z], [x, y, Z]] },
+    ];
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    let darkest = null;
+    for (const fc of faces) {
+      if (dot(fc.n, cam.view) <= 1e-6) continue;
+      const t = o.tone && fc.n[2] < 0.9 ? o.tone : toneOf(fc.n);
+      s += `<path class="f t-${fc.n[2] > 0.9 ? (o.topTone || "top") : t}" d="${path(fc.q.map((v) => P(...v)))}"/>`;
+      if (fc.n[2] < 0.9 && (!darkest || dot(fc.n, LIGHT) < dot(darkest.n, LIGHT))) darkest = fc;
+    }
+    if (o.hatch && darkest && h > 2) {
+      const sp = o.hatch === true ? 3 : o.hatch;
+      const n = darkest.n, along = n[0] !== 0 ? [0, 1, 0] : [1, 0, 0];
+      const L = n[0] !== 0 ? d : w, base = darkest.q[0];
+      let lines = "";
+      for (let t = sp; t < L - sp * 0.5; t += sp) {
+        const a = add(base, mul(along, t));
+        lines += `M${f(P(...a)[0])} ${f(P(...a)[1])}L${f(P(a[0], a[1], Z)[0])} ${f(P(a[0], a[1], Z)[1])}`;
+      }
+      s += `<path class="hatch" d="${lines}"/>`;
+    }
+    if (o.groove) {
+      const g = o.groove;
+      s += `<path class="ln faint" d="${path([[x + g, y + g, Z], [X - g, y + g, Z], [X - g, Y - g, Z], [x + g, Y - g, Z]].map((v) => P(...v)))}"/>`;
+    }
+    return s + "</g>";
+  }
+
+  function basis(axis) {
+    const n = norm(axis);
+    const t = Math.abs(n[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];
+    const u = norm(cross(n, t));
+    const v = cross(n, u);
+    return [n, u, v];
+  }
+  const ringPt = (c, u, v, r, t) => add(c, add(mul(u, r * Math.cos(t)), mul(v, r * Math.sin(t))));
+
+  /* A round bar from p0 to p1 of radius r: a post, a rail, a pipe, a knob or a drum.
+     The side is engraved with hatch lines whose density follows the shade, so a
+     curved body reads as turned metal instead of a staircase of flat tones. */
+  function rod(cam, p0, p1, r, o = {}) {
+    const N = o.seg || 44;
+    const [n, u, v] = basis(sub(p1, p0));
+    const V = cam.view;
+    const phi = Math.atan2(dot(v, V), dot(u, V));
+    const t0 = phi - Math.PI / 2, t1 = phi + Math.PI / 2;
+    const side = [];
+    for (let i = 0; i <= N; i++) side.push(cam.p(ringPt(p0, u, v, r, t0 + (t1 - t0) * i / N)));
+    for (let i = N; i >= 0; i--) side.push(cam.p(ringPt(p1, u, v, r, t0 + (t1 - t0) * i / N)));
+    const capC = dot(n, V) > 0 ? p1 : p0;
+    const cap = [];
+    for (let i = 0; i < N * 2; i++) cap.push(cam.p(ringPt(capC, u, v, r, (i / (N * 2)) * Math.PI * 2)));
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    s += `<path class="f ${o.sideCls || "t-cyl"}" d="${path(side)}"/>`;
+    if (o.hatch !== false) {
+      const K = 90; let acc = 0, lines = "";
+      const dens = o.density ?? 1;
+      for (let i = 1; i < K; i++) {
+        const t = t0 + (t1 - t0) * i / K;
+        const m = add(mul(u, Math.cos(t)), mul(v, Math.sin(t)));
+        const dark = Math.pow(Math.max(0, 1 - (dot(m, LIGHT) + 1) / 1.6), 1.7);
+        acc += dark * dens * (r * cam.k) / 14;
+        if (acc >= 1) {
+          acc -= 1;
+          const a = cam.p(ringPt(p0, u, v, r, t)), b = cam.p(ringPt(p1, u, v, r, t));
+          lines += `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`;
+        }
+      }
+      if (lines) s += `<path class="hatch" d="${lines}"/>`;
+    }
+    if (o.knurl) {
+      let lines = "";
+      for (let i = 0; i < o.knurl; i++) {
+        const t = t0 + (t1 - t0) * (i + 0.5) / o.knurl;
+        const a = cam.p(ringPt(p0, u, v, r, t)), b = cam.p(ringPt(p1, u, v, r, t));
+        lines += `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`;
+      }
+      s += `<path class="ln lo" d="${lines}"/>`;
+    }
+    if (o.cap !== false) s += `<path class="f ${o.capCls || "t-top"}" d="${path(cap)}"/>`;
+    return s + "</g>";
+  }
+
+  /* A vertical drum standing on the floor plane. */
+  const drum = (cam, cx, cy, z, r, h, o) => rod(cam, [cx, cy, z], [cx, cy, z + h], r, o);
+
+  /* A ball: in an orthographic camera it projects to a circle. */
+  function ball(cam, c, r, o = {}) {
+    const [x, y] = cam.p(c);
+    const R = r * cam.k;
+    const hx = x - R * 0.35, hy = y - R * 0.4;
+    return `<g class="sol ${o.cls || ""}"${attrs(o)}><circle class="f t-cyl" cx="${f(x)}" cy="${f(y)}" r="${f(R)}"/>` +
+      `<path class="hatch" d="M${f(x + R * 0.15)} ${f(y + R * 0.92)}A${f(R)} ${f(R)} 0 0 0 ${f(x + R * 0.92)} ${f(y + R * 0.2)}"/>` +
+      `<circle class="glint" cx="${f(hx)}" cy="${f(hy)}" r="${f(R * 0.18)}"/></g>`;
+  }
+
+  /* A circle lying on a horizontal plane, as a closed path. */
+  function ringPath(cam, cx, cy, z, r, N = 48) {
+    const pts = [];
+    for (let i = 0; i < N; i++) { const t = (i / N) * Math.PI * 2; pts.push(cam.p(cx + r * Math.cos(t), cy + r * Math.sin(t), z)); }
+    return path(pts);
+  }
+
+  /* An arc on a horizontal plane, angles in degrees measured in world xy. */
+  function arcPath(cam, cx, cy, z, r, a0, a1, N = 32) {
+    const pts = [];
+    for (let i = 0; i <= N; i++) { const t = (a0 + (a1 - a0) * i / N) * D; pts.push(cam.p(cx + r * Math.cos(t), cy + r * Math.sin(t), z)); }
+    return path(pts, false);
+  }
+
+  /* Radial ticks on a horizontal plane. */
+  function radialTicks(cam, cx, cy, z, r0, r1, angles) {
+    let s = "";
+    for (const a of angles) {
+      const t = a * D;
+      const p = cam.p(cx + r0 * Math.cos(t), cy + r0 * Math.sin(t), z);
+      const q = cam.p(cx + r1 * Math.cos(t), cy + r1 * Math.sin(t), z);
+      s += `M${f(p[0])} ${f(p[1])}L${f(q[0])} ${f(q[1])}`;
+    }
+    return s;
+  }
+
+  function line(cam, a, b) {
+    const p = cam.p(a), q = cam.p(b);
+    return `M${f(p[0])} ${f(p[1])}L${f(q[0])} ${f(q[1])}`;
+  }
+
+  /* Text engraved in a plane: ax is the world direction of the baseline, ay the world
+     direction of "down" on the glyphs. Size is in world units. */
+  function faceText(cam, origin, ax, ay, str, size, o = {}) {
+    const p0 = cam.p(origin);
+    const px = cam.p(add(origin, ax)), py = cam.p(add(origin, ay));
+    const a = (px[0] - p0[0]), b = (px[1] - p0[1]), c = (py[0] - p0[0]), d = (py[1] - p0[1]);
+    const esc = String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    return `<text class="${o.cls || "engr"}" text-anchor="${o.anchor || "middle"}" font-size="${size}" transform="matrix(${f(a)} ${f(b)} ${f(c)} ${f(d)} ${f(p0[0])} ${f(p0[1])})">${esc}</text>`;
+  }
+
+  /* A specimen pin: a small numbered disc set on a part, never a leader line. */
+  function pin(cam, at, num, o = {}) {
+    const [x, y] = cam.p(at);
+    return `<g class="pin" data-pin="${num}" tabindex="-1"><circle cx="${f(x)}" cy="${f(y)}" r="7.2"/>` +
+      `<text x="${f(x)}" y="${f(y + 2.9)}" text-anchor="middle">${num}</text></g>`;
+  }
+
+  /* A screw head on a horizontal plane: a ring and a slot. */
+  function screw(cam, cx, cy, z, r = 2.2) {
+    const a = cam.p(cx - r * 0.7, cy - r * 0.2, z), b = cam.p(cx + r * 0.7, cy + r * 0.2, z);
+    return `<path class="f t-s3 ln-lo" d="${ringPath(cam, cx, cy, z, r, 20)}"/><path class="ln lo" d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}"/>`;
+  }
+
+  root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, LIGHT };
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+/* The true model behind Plate II: a lumped-parameter model of the human circulation.
+   Four heart chambers are time-varying elastances, P = E(t)(V - V0). The pulmonary and
+   systemic circuits are compliances joined by resistances. Valves are diodes; a damaged
+   valve becomes a narrow orifice (stenosis) or leaks backwards (regurgitation).
+   Units: volume mL, pressure mmHg, flow mL/s, time s. */
+(function (root) {
+  "use strict";
+  const CH = ["RA", "RV", "PA", "PV", "LA", "LV", "SA", "SV"];
+  const NAME = {
+    RA: "Right atrium", RV: "Right ventricle", PA: "Pulmonary arteries", PV: "Pulmonary veins",
+    LA: "Left atrium", LV: "Left ventricle", SA: "Systemic arteries", SV: "Systemic veins",
+  };
+  const P0 = {
+    // chambers: Emax, Emin (mmHg/mL), V0 (mL)
+    RA: { Emax: 0.25, Emin: 0.12, V0: 4 },
+    RV: { Emax: 0.55, Emin: 0.05, V0: 10 },
+    LA: { Emax: 0.30, Emin: 0.15, V0: 4 },
+    LV: { Emax: 2.5, Emin: 0.07, V0: 8 },
+    // vessels: compliance C (mL/mmHg), V0 (mL, unstressed)
+    PA: { C: 4.0, V0: 120 }, PV: { C: 18, V0: 180 }, SA: { C: 1.6, V0: 700 }, SV: { C: 65, V0: 2600 },
+    // resistances, mmHg·s/mL
+    R: { tri: 0.004, pulv: 0.004, pul: 0.08, pv: 0.012, mit: 0.004, aov: 0.005, sys: 1.1, sv: 0.03 },
+  };
+  const FAULTS = {
+    normal: { id: "normal", name: "Healthy", note: "every valve opens wide and seals" },
+    as: { id: "as", name: "Aortic stenosis", note: "a narrowed aortic valve the ventricle must force blood through" },
+    mr: { id: "mr", name: "Mitral regurgitation", note: "a leaking mitral valve; some blood flows back each beat" },
+  };
+
+  function make(opts = {}) {
+    const s = {
+      HR: opts.HR ?? 72, contract: opts.contract ?? 1, fault: opts.fault ?? "normal",
+      t: 0, tc: 0, V: { RA: 50, RV: 120, PA: 190, PV: 330, LA: 60, LV: 120, SA: 820, SV: 3070 },
+      P: {}, Q: {}, phase: "", valves: {},
+    };
+    s.total = Object.values(s.V).reduce((a, b) => a + b, 0);
+    return s;
+  }
+
+  /* Ventricular and atrial activation, 0..1, from the time since the last ventricular onset. */
+  function activation(tc, T) {
+    const Ts1 = 0.42 * Math.sqrt(T), Ts2 = 0.2 * Ts1;
+    let v = 0;
+    if (tc < Ts1) v = 0.5 * (1 - Math.cos((Math.PI * tc) / Ts1));
+    else if (tc < Ts1 + Ts2) v = 0.5 * (1 + Math.cos((Math.PI * (tc - Ts1)) / Ts2));
+    const Ta = Math.min(0.2, 0.25 * T), ta0 = T - Ta - 0.02;
+    let a = 0;
+    if (tc > ta0 && tc < ta0 + Ta) a = 0.5 * (1 - Math.cos((2 * Math.PI * (tc - ta0)) / Ta));
+    return { v, a, Ts1, Ts2 };
+  }
+
+  function pressures(s) {
+    const T = 60 / s.HR, act = activation(s.tc, T), P = {};
+    for (const c of ["RA", "LA"]) { const p = P0[c]; P[c] = (p.Emin + (p.Emax - p.Emin) * act.a) * (s.V[c] - p.V0); }
+    for (const c of ["RV", "LV"]) {
+      const p = P0[c], Emax = c === "LV" ? p.Emax * s.contract : p.Emax * (0.6 + 0.4 * s.contract);
+      P[c] = (p.Emin + (Emax - p.Emin) * act.v) * (s.V[c] - p.V0);
+    }
+    for (const c of ["PA", "PV", "SA", "SV"]) P[c] = (s.V[c] - P0[c].V0) / P0[c].C;
+    return { P, act };
+  }
+
+  function flows(s, P) {
+    const R = P0.R, f = s.fault, d = (a, b, r) => Math.max(0, (a - b) / r);
+    const Q = {
+      sv: (P.SV - P.RA) / R.sv,
+      tri: d(P.RA, P.RV, R.tri),
+      pulv: d(P.RV, P.PA, R.pulv),
+      pul: (P.PA - P.PV) / R.pul,
+      pv: (P.PV - P.LA) / R.pv,
+      mit: d(P.LA, P.LV, R.mit),
+      aov: d(P.LV, P.SA, f === "as" ? 0.16 : R.aov),
+      sys: (P.SA - P.SV) / R.sys,
+    };
+    if (f === "mr" && P.LV > P.LA) Q.mit = -(P.LV - P.LA) / 0.32;
+    return Q;
+  }
+
+  function step(s, dt) {
+    const T = 60 / s.HR;
+    const { P } = pressures(s);
+    const Q = flows(s, P);
+    s.V.SV += (Q.sys - Q.sv) * dt;
+    s.V.RA += (Q.sv - Q.tri) * dt;
+    s.V.RV += (Q.tri - Q.pulv) * dt;
+    s.V.PA += (Q.pulv - Q.pul) * dt;
+    s.V.PV += (Q.pul - Q.pv) * dt;
+    s.V.LA += (Q.pv - Q.mit) * dt;
+    s.V.LV += (Q.mit - Q.aov) * dt;
+    s.V.SA += (Q.aov - Q.sys) * dt;
+    s.t += dt; s.tc += dt;
+    let beat = false;
+    if (s.tc >= T) { s.tc -= T; beat = true; }
+    return beat;
+  }
+
+  /* Read everything the plate shows at the current instant. */
+  function read(s) {
+    const T = 60 / s.HR, { P, act } = pressures(s), Q = flows(s, P);
+    const lvSys = s.tc < act.Ts1 + act.Ts2;
+    let phase;
+    if (Q.aov > 0.5) phase = "ejection";
+    else if (Q.mit > 0.5) phase = act.a > 0.05 ? "atrial kick" : "filling";
+    else if (s.tc < act.Ts1) phase = "isovolumic contraction";
+    else if (P.LV > P.LA && s.tc < act.Ts1 + act.Ts2 + 0.12) phase = "isovolumic relaxation";
+    else phase = "filling";
+    const valves = {
+      tri: Q.tri > 0.5 ? 1 : 0, pulv: Q.pulv > 0.5 ? 1 : 0,
+      mit: Q.mit > 0.5 ? 1 : Q.mit < -0.5 ? -1 : 0, aov: Q.aov > 0.5 ? 1 : 0,
+    };
+    return { P, Q, V: { ...s.V }, act, phase, valves, T, tc: s.tc, lvSys };
+  }
+
+  /* Run to a steady beat, then record one full cycle at fine resolution. */
+  function settle(s, beats = 14, dt = 0.0005) {
+    let n = 0;
+    while (n < beats) if (step(s, dt)) n++;
+    const T = 60 / s.HR, rec = [];
+    let k = 0;
+    const N = Math.round(T / dt);
+    for (let i = 0; i < N; i++) { if (i % 8 === 0) rec.push({ t: s.tc, ...read(s) }); step(s, dt); k++; }
+    return summarise(rec, T);
+  }
+
+  function summarise(rec, T) {
+    const mx = (f) => Math.max(...rec.map(f)), mn = (f) => Math.min(...rec.map(f));
+    const EDV = mx((r) => r.V.LV), ESV = mn((r) => r.V.LV);
+    let fwd = 0, back = 0;
+    for (let i = 1; i < rec.length; i++) {
+      const dt = rec[i].t - rec[i - 1].t > 0 ? rec[i].t - rec[i - 1].t : 0;
+      fwd += Math.max(0, rec[i].Q.aov) * dt;
+      back += Math.max(0, -rec[i].Q.mit) * dt;
+    }
+    const SV = fwd;
+    return {
+      rec, T,
+      LV: [mn((r) => r.P.LV), mx((r) => r.P.LV)], SA: [mn((r) => r.P.SA), mx((r) => r.P.SA)],
+      RV: [mn((r) => r.P.RV), mx((r) => r.P.RV)], PA: [mn((r) => r.P.PA), mx((r) => r.P.PA)],
+      LA: [mn((r) => r.P.LA), mx((r) => r.P.LA)], RA: [mn((r) => r.P.RA), mx((r) => r.P.RA)],
+      EDV, ESV, SV, EF: (EDV - ESV) / EDV, CO: (SV * 60) / T / 1000, regurg: back,
+      MAP: rec.reduce((a, r) => a + r.P.SA, 0) / rec.length,
+    };
+  }
+
+  root.HeartModel = { CH, NAME, P0, FAULTS, make, step, read, settle, activation };
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+/* Plate II: the human heart, as a double piston pump on a bench.
+   The bench is laid out as the circulation itself: veins far left, right heart, lungs behind,
+   left heart, the aortic air chamber on the right and the capillary bed across the front.
+   Static geometry is built once; pistons, fluid, levers, needles, lungs and flow marks are slots. */
+(function () {
+  "use strict";
+  const K = window.Folio, H = window.HeartModel;
+  const { box, rod, drum, ball, arcPath, radialTicks, line, faceText, pin, screw, path, f } = K;
+  const W = 1000, HT = 660;
+
+  const pts = [];
+  for (const x of [-10, 790]) for (const y of [-10, 306]) for (const z of [-44, 0]) pts.push([x, y, z]);
+  pts.push([330, 14, 214], [660, 170, 224], [110, 170, 190], [385, 50, 210]);
+  const cam = K.fit({ az: -24, el: 30 }, pts, W, HT, 20);
+
+  // Geometry
+  const RA = { x: 230, y: 170, z: 100, r: 17, h: 50, vmax: 100 };
+  const LA = { x: 530, y: 170, z: 100, r: 17, h: 50, vmax: 100 };
+  const RV = { x: 330, y: 170, z: 20, r: 24, h: 110, vmax: 180 };
+  const LV = { x: 430, y: 170, z: 20, r: 24, h: 110, vmax: 180 };
+  const VR = { x: 110, y: 170, z: 12, r: 30, h: 88 };
+  const AC = { x: 660, y: 170, z: 12, r: 26, h: 112 };
+  const GAUGE = { y: 218, z: 12, r: 11 };
+  const BODY = { a: 246, v: 284, z: 10, x0: 196, x1: 588, n: 17 };
+  const LUNG = [{ x: 285 }, { x: 395 }];
+  const LZ = 118; // height of the lung stand
+  const GMAX = { RA: 20, RV: 40, LV: 160, LA: 20, SA: 160 };
+
+  const order = [];
+  const S = (s) => order.push(s);
+  const slot = (n) => order.push({ slot: n });
+  const flowPaths = []; // {id, d, q}
+
+  /* A blood vessel: rods with elbow balls; a dashed flow line rides on top, in the same slot of the order. */
+  function vessel(points, r, kind, flowKey, o = {}) {
+    let s = "";
+    for (let i = 0; i < points.length - 1; i++) s += rod(cam, points[i], points[i + 1], r, { seg: 20, sideCls: kind, capCls: kind + "-cap", cap: false });
+    for (let i = 1; i < points.length - 1; i++) s += ball(cam, points[i], r * 1.18, { cls: kind + "-ball" });
+    if (flowKey) {
+      const id = "fl" + flowPaths.length;
+      const lift = points.map((p) => cam.p(p[0], p[1], p[2] + r * 0.55));
+      flowPaths.push({ id, q: flowKey, rev: !!o.rev });
+      s += `<path id="${id}" class="flow" d="${path(lift, false)}"/>`;
+    }
+    return s;
+  }
+
+  /* A glass cylinder with a slot for its contents. */
+  const facing = Math.atan2(cam.view[1], cam.view[0]) / (Math.PI / 180);
+  function glass(c, name, ticks = 10) {
+    S(drum(cam, c.x, c.y, c.z - 4, c.r + 4, 4, { cls: "collar" }));
+    S(rod(cam, [c.x, c.y, c.z], [c.x, c.y, c.z + c.h], c.r, { sideCls: "glass-back", capCls: "glass-back", hatch: false }));
+    slot(name);
+    let d = "";
+    for (let g = 1; g < ticks; g++) d += arcPath(cam, c.x, c.y, c.z + (c.h * g) / ticks, c.r + 0.2, facing - (g % 5 ? 12 : 22), facing + (g % 5 ? 12 : 22), 8);
+    const t = (facing + 48) * Math.PI / 180;
+    S(`<g class="sol glass">${rod(cam, [c.x, c.y, c.z], [c.x, c.y, c.z + c.h], c.r, { sideCls: "glass-front", capCls: "glass-rim", hatch: false }).replace(/^<g[^>]*>|<\/g>$/g, "")}` +
+      `<path class="ln grad" d="${d}"/><path class="ln glint-line" d="${line(cam, [c.x + c.r * Math.cos(t), c.y + c.r * Math.sin(t), c.z + 4], [c.x + c.r * Math.cos(t), c.y + c.r * Math.sin(t), c.z + c.h - 5])}"/></g>`);
+  }
+
+  /* ---------- plinth ---------- */
+  for (const [x, y] of [[10, 10], [770, 10], [10, 290], [770, 290]]) S(drum(cam, x, y, -44, 8, 8, { cls: "foot" }));
+  S(box(cam, -6, -6, -36, 792, 312, 8, { hatch: 2.6 }));
+  S(box(cam, 0, 0, -28, 780, 300, 28, { hatch: 2.2, groove: 7 }));
+  for (const [x, y] of [[16, 16], [764, 16], [16, 284], [764, 284]]) S(screw(cam, x, y, 0, 3));
+  S(box(cam, 270, 300, -22, 240, 1.4, 16, { cls: "brass" }));
+  S(faceText(cam, [390, 301.5, -11.4], [1, 0, 0], [0, 0, -1], "FOLIO · PLATE II · THE HUMAN HEART", 5.4));
+  S(faceText(cam, [390, 301.5, -17.6], [1, 0, 0], [0, 0, -1], "A DOUBLE PUMP · FOUR CHAMBERS · FOUR VALVES · TWO CIRCUITS", 3.4, { cls: "engr lo" }));
+  for (const sx of [276, 504]) { const p = cam.p(sx, 301.5, -14); S(`<circle class="dot" cx="${f(p[0])}" cy="${f(p[1])}" r="${f(1.1 * cam.k)}"/>`); }
+
+  /* ---------- behind the lungs: pulmonary artery descender, pulmonary vein riser ---------- */
+  S(vessel([[330, 14, 200], [330, 14, LZ + 3.5], [330, 25, LZ + 3.5]], 4.2, "venous", "pulv"));
+
+  /* ---------- lungs, on a stand behind the heart ---------- */
+  for (const [x, y] of [[282, 24], [498, 24], [282, 86], [498, 86]]) {
+    S(drum(cam, x, y, 0, 6, 3, { cls: "base" }));
+    S(rod(cam, [x, y, 3], [x, y, LZ - 6], 3.4, { seg: 18 }));
+  }
+  S(box(cam, 272, 18, LZ - 6, 236, 74, 6, { hatch: 2.4, groove: 3 }));
+  for (const L of LUNG) S(box(cam, L.x, 25, LZ, 90, 60, 5, { groove: 2 }));
+  slot("lungs");
+  S(vessel([[485, 55, LZ + 3.5], [LA.x, 55, LZ + 3.5], [LA.x, 55, 132], [LA.x, LA.y - LA.r + 1, 132]], 4.2, "arterial", "pv"));
+
+  /* ---------- heart band, far to near ---------- */
+  // Venous reservoir: the great veins and the blood they hold.
+  S(box(cam, VR.x - 36, VR.y - 36, 0, 72, 72, 8, { groove: 3 }));
+  glass(VR, "vr", 10);
+  S(drum(cam, VR.x, VR.y, VR.z + VR.h, VR.r + 2, 5, { cls: "capd" }));
+  // Right atrium on its stand.
+  S(box(cam, RA.x - 17, RA.y - 17, 0, 34, 34, 96, { hatch: 2.4 }));
+  glass(RA, "ra", 5);
+  S(drum(cam, RA.x, RA.y, RA.z + RA.h, RA.r + 2, 4, { cls: "capd" }));
+  // Tricuspid valve.
+  S(vessel([[RA.x + RA.r - 1, RA.y, 106], [RV.x - RV.r + 1, RV.y, 106]], 4, "venous", "tri"));
+  S(box(cam, 268, 161, 97, 16, 18, 18, { cls: "housing" }));
+  slot("vtri");
+  // Right ventricle.
+  S(box(cam, RV.x - 32, RV.y - 30, 0, 64, 60, 20, { groove: 3, hatch: 2.4 }));
+  glass(RV, "rv", 18);
+  S(drum(cam, RV.x, RV.y, RV.z + RV.h, RV.r + 2, 6, { cls: "capd" }));
+  S(box(cam, RV.x - 10, RV.y - 10, 136, 20, 20, 10, { cls: "housing" }));
+  slot("vpulv");
+  S(vessel([[RV.x, RV.y, 146], [RV.x, RV.y, 200]], 4.2, "venous", "pulv"));
+  // Left ventricle.
+  S(box(cam, LV.x - 32, LV.y - 30, 0, 64, 60, 20, { groove: 3, hatch: 2.4 }));
+  glass(LV, "lv", 18);
+  S(drum(cam, LV.x, LV.y, LV.z + LV.h, LV.r + 2, 6, { cls: "capd" }));
+  S(box(cam, LV.x - 10, LV.y - 10, 136, 20, 20, 10, { cls: "housing" }));
+  slot("vaov");
+  S(vessel([[LV.x, LV.y, 146], [LV.x, LV.y, 210]], 5, "arterial", "aov"));
+  // Mitral valve.
+  S(vessel([[LV.x + LV.r - 1, LV.y, 106], [LA.x - LA.r + 1, LA.y, 106]], 4, "arterial", "mit", { rev: true }));
+  S(box(cam, 476, 161, 97, 16, 18, 18, { cls: "housing" }));
+  slot("vmit");
+  // Left atrium on its stand.
+  S(box(cam, LA.x - 17, LA.y - 17, 0, 34, 34, 96, { hatch: 2.4 }));
+  glass(LA, "la", 5);
+  S(drum(cam, LA.x, LA.y, LA.z + LA.h, LA.r + 2, 4, { cls: "capd" }));
+  // Aortic air chamber: the elastic arteries, a windkessel.
+  S(box(cam, AC.x - 34, AC.y - 34, 0, 68, 68, 8, { groove: 3 }));
+  glass(AC, "ac", 16);
+  S(drum(cam, AC.x, AC.y, AC.z + AC.h, AC.r + 1, 4, { cls: "capd" }));
+  S(drum(cam, AC.x, AC.y, AC.z + AC.h + 4, AC.r - 6, 3));
+  S(drum(cam, AC.x, AC.y, AC.z + AC.h + 7, GAUGE.r + 2, 3));
+  S(drum(cam, AC.x, AC.y, AC.z + AC.h + 10, GAUGE.r, 2.5, { capCls: "t-face" }));
+  const acZ = AC.z + AC.h + 12.6;
+  gaugeFace(AC.x, AC.y, acZ, GMAX.SA);
+  slot("gSA");
+
+  /* ---------- high vessels: above everything in the heart band ---------- */
+  S(vessel([[VR.x, VR.y, VR.z + VR.h + 5], [VR.x, VR.y, 176], [RA.x, RA.y, 176], [RA.x, RA.y, RA.z + RA.h + 4]], 5.2, "venous", "sv"));
+  S(vessel([[RV.x, RV.y, 200], [330, 14, 200]], 4.2, "venous", "pulv"));
+  S(ball(cam, [330, 14, 200], 5, { cls: "venous-ball" }));
+  S(vessel([[LV.x, LV.y, 210], [AC.x, AC.y, 210], [AC.x, AC.y, acZ + 3]], 5.4, "arterial", "aov"));
+
+  /* ---------- gauges ---------- */
+  function gaugeFace(x, y, z, max) {
+    const ang = (v) => 180 + (v / max) * 180;
+    const mj = [], mn = [];
+    const stp = max / 8;
+    for (let v = 0; v <= max + 1e-6; v += stp / 2) (Math.round(v / stp) * stp === v ? mj : mn).push(ang(v));
+    S(`<path class="ln lo" d="${radialTicks(cam, x, y, z, 8.6, 10, mn)}"/><path class="ln mid" d="${radialTicks(cam, x, y, z, 7.4, 10, mj)}${arcPath(cam, x, y, z, 10, 180, 360, 24)}"/>`);
+  }
+  for (const [c, X] of [["RA", RA.x], ["RV", RV.x], ["LV", LV.x], ["LA", LA.x]]) {
+    S(box(cam, X - 17, GAUGE.y - 14, 0, 34, 28, 6, { groove: 2 }));
+    S(faceText(cam, [X, GAUGE.y + 14.2, 1.6], [1, 0, 0], [0, 0, -1], c + " · 0–" + GMAX[c], 3.4, { cls: "engr lo" }));
+    S(drum(cam, X, GAUGE.y, 6, GAUGE.r + 2.5, 3));
+    S(drum(cam, X, GAUGE.y, 9, GAUGE.r, 3, { capCls: "t-face" }));
+    gaugeFace(X, GAUGE.y, GAUGE.z, GMAX[c]);
+    slot("g" + c);
+  }
+
+  /* ---------- body: the capillary bed ---------- */
+  S(vessel([[VR.x, VR.y + VR.r - 2, 10], [VR.x, BODY.v, 10]], 4.6, "venous", "sys", { rev: true }));
+  S(vessel([[AC.x, AC.y + AC.r - 2, 10], [AC.x, BODY.a, 10], [BODY.x0 - 10, BODY.a, 10]], 4.6, "arterial", "sys"));
+  S(box(cam, BODY.x0 - 14, BODY.a + 6, 0, BODY.x1 - BODY.x0 + 28, BODY.v - BODY.a - 12, 3, { groove: 2.5 }));
+  for (let i = 0; i < BODY.n; i++) {
+    const x = BODY.x0 + ((BODY.x1 - BODY.x0) * i) / (BODY.n - 1), mid = (BODY.a + BODY.v) / 2;
+    S(rod(cam, [x, BODY.a, BODY.z], [x, mid, BODY.z], 1.6, { seg: 10, sideCls: "arterial", cap: false }));
+    S(rod(cam, [x, mid, BODY.z], [x, BODY.v, BODY.z], 1.6, { seg: 10, sideCls: "venous", cap: false }));
+    const id = "fl" + flowPaths.length;
+    flowPaths.push({ id, q: "sys", per: BODY.n });
+    S(`<path id="${id}" class="flow thin" d="${path([cam.p(x, BODY.a, BODY.z + 1), cam.p(x, BODY.v, BODY.z + 1)], false)}"/>`);
+  }
+  S(vessel([[VR.x, BODY.v, 10], [BODY.x1 + 10, BODY.v, 10]], 4.6, "venous", "sys", { rev: true }));
+  S(faceText(cam, [(BODY.x0 + BODY.x1) / 2, BODY.v + 4.8, 6], [1, 0, 0], [0, 0, -1], "", 3));
+
+  /* ---------- controls ---------- */
+  const CTRL = { x: 738, hr: 92, ct: 168, vs: 240 };
+  S(box(cam, CTRL.x - 26, CTRL.hr - 24, 0, 52, 48, 3, { groove: 2.5 }));
+  {
+    const tk = [], tm = [];
+    for (let b = 40; b <= 180; b += 10) ((b - 40) % 40 === 0 ? tm : tk).push(160 + ((b - 40) / 140) * 220);
+    S(`<path class="ln lo" d="${radialTicks(cam, CTRL.x, CTRL.hr, 3, 16, 18.5, tk)}"/><path class="ln mid" d="${radialTicks(cam, CTRL.x, CTRL.hr, 3, 15, 19.5, tm)}"/>`);
+    S(faceText(cam, [CTRL.x, CTRL.hr + 21, 3], [1, 0, 0], [0, 1, 0], "BEATS / MIN", 3.2, { cls: "engr lo" }));
+  }
+  slot("kHR");
+  S(box(cam, CTRL.x - 26, CTRL.ct - 24, 0, 52, 48, 3, { groove: 2.5 }));
+  {
+    const tk = [];
+    for (let i = 0; i <= 12; i++) tk.push(160 + (i / 12) * 220);
+    S(`<path class="ln lo" d="${radialTicks(cam, CTRL.x, CTRL.ct, 3, 16, 18.5, tk)}"/>`);
+    S(faceText(cam, [CTRL.x, CTRL.ct + 21, 3], [1, 0, 0], [0, 1, 0], "CONTRACTILITY", 3.2, { cls: "engr lo" }));
+  }
+  slot("kCT");
+  S(box(cam, CTRL.x - 26, CTRL.vs - 24, 0, 52, 48, 3, { groove: 2.5 }));
+  const VS_ANG = [215, 270, 325];
+  S(`<path class="ln mid" d="${radialTicks(cam, CTRL.x, CTRL.vs, 3, 15, 18.5, VS_ANG)}"/>`);
+  ["N", "AS", "MR"].forEach((l, i) => {
+    const t = (VS_ANG[i] * Math.PI) / 180;
+    S(faceText(cam, [CTRL.x + 22 * Math.cos(t), CTRL.vs + 22 * Math.sin(t) + 1.2, 3], [1, 0, 0], [0, 1, 0], l, 3.6));
+  });
+  S(faceText(cam, [CTRL.x, CTRL.vs + 21, 3], [1, 0, 0], [0, 1, 0], "VALVES", 3.2, { cls: "engr lo" }));
+  slot("kVS");
+  slot("pins");
+
+  /* ---------- live drawing ---------- */
+  function contents(c, V, kind, piston) {
+    const h = Math.max(0.5, Math.min(c.h - 0.5, (V / c.vmax) * c.h));
+    const top = c.z + c.h, zp = top - h;
+    let o = "";
+    if (piston) {
+      o += rod(cam, [c.x, c.y, c.z], [c.x, c.y, zp - 4], 2.6, { seg: 14 });
+      o += drum(cam, c.x, c.y, zp - 4, c.r - 0.8, 4, { cls: "piston", knurl: 0 });
+    }
+    o += rod(cam, [c.x, c.y, zp], [c.x, c.y, top - 0.4], c.r - 0.8, { cls: kind + "g", sideCls: kind, capCls: kind + "-top" });
+    return o;
+  }
+  function level(c, frac, kind) {
+    const h = Math.max(1, Math.min(c.h - 1, frac * c.h));
+    return rod(cam, [c.x, c.y, c.z], [c.x, c.y, c.z + h], c.r - 0.8, { cls: kind + "g", sideCls: kind, capCls: kind + "-top" });
+  }
+  function lever(cx, cy, cz, flowDir, state) {
+    // state: 1 open (along flow), 0 shut (across), -1 leaking backwards
+    const a = state === 0 ? Math.PI / 2 : 0, L = 9;
+    const dir = flowDir === "x" ? [Math.cos(a), Math.sin(a), 0] : [Math.sin(a), Math.cos(a), 0];
+    let o = rod(cam, [cx - dir[0] * L * 0.4, cy - dir[1] * L * 0.4, cz], [cx + dir[0] * L, cy + dir[1] * L, cz], 1.4, { seg: 12, cls: state === -1 ? "lever leak" : "lever" });
+    o += ball(cam, [cx, cy, cz], 2.2);
+    if (state === -1) { const p = cam.p(cx, cy, cz); o += `<circle class="leakring" cx="${f(p[0])}" cy="${f(p[1])}" r="${f(6 * cam.k)}"/>`; }
+    return o;
+  }
+  function needle(x, y, z, v, max) {
+    const t = ((180 + Math.max(0, Math.min(1.02, v / max)) * 180) * Math.PI) / 180, c = Math.cos(t), s = Math.sin(t);
+    const P = (a) => cam.p(a);
+    const tip = [x + 9.2 * c, y + 9.2 * s, z], tail = [x - 2.6 * c, y - 2.6 * s, z], w1 = [x - s, y + c, z], w2 = [x + s, y - c, z];
+    const hub = cam.p(x, y, z);
+    return `<path class="needle" d="${path([tail, w1, tip, w2].map(P))}"/><circle class="hub" cx="${f(hub[0])}" cy="${f(hub[1])}" r="${f(1.4 * cam.k)}"/>`;
+  }
+  function lungs(breath) {
+    let o = "";
+    const hgt = 24 + 12 * breath;
+    LUNG.forEach((L, li) => {
+      const n = 6, fh = hgt / n;
+      for (let i = 0; i < n; i++) {
+        const ins = i % 2 ? 4 : 1.5;
+        o += box(cam, L.x + ins, 25 + ins, LZ + 5 + i * fh, 90 - 2 * ins, 60 - 2 * ins, fh, { cls: "leather" });
+      }
+      o += box(cam, L.x, 25, LZ + 5 + hgt, 90, 60, 4, { groove: 2.5 });
+      if (li === 0) o += vessel([[375, 55, LZ + 3], [385, 55, LZ + 3]], 2.6, "venous", null) + vessel([[385, 55, LZ + 3], [395, 55, LZ + 3]], 2.6, "arterial", null);
+    });
+    const zt = LZ + 9 + hgt, zb = LZ + 62;
+    o += rod(cam, [345, 50, zt], [345, 50, zb], 3, { seg: 14 }) + rod(cam, [425, 50, zt], [425, 50, zb], 3, { seg: 14 });
+    o += rod(cam, [345, 50, zb], [425, 50, zb], 3, { seg: 14 }) + ball(cam, [345, 50, zb], 3.6) + ball(cam, [425, 50, zb], 3.6);
+    o += rod(cam, [385, 50, zb], [385, 50, zb + 20], 3.4, { seg: 14 }) + drum(cam, 385, 50, zb + 20, 7, 4) + ball(cam, [385, 50, zb], 3.8);
+    return o;
+  }
+  function knob(x, y, ang, r = 10) {
+    const t = (ang * Math.PI) / 180;
+    return drum(cam, x, y, 3, r, 11, { knurl: 14, density: 1.2 }) + drum(cam, x, y, 14, r - 3.5, 1.6) +
+      `<path class="ln hi" d="${line(cam, [x + 1.5 * Math.cos(t), y + 1.5 * Math.sin(t), 15.7], [x + (r - 0.8) * Math.cos(t), y + (r - 0.8) * Math.sin(t), 14.1])}"/>`;
+  }
+  const PINS = [
+    [1, [VR.x - 38, VR.y + 8, 70]], [2, [RA.x - 24, RA.y + 6, 136]], [3, [276, 172, 124]],
+    [4, [RV.x - 30, RV.y + 12, 60]], [5, [RV.x - 18, RV.y + 4, 152]], [6, [LUNG[0].x - 6, 78, LZ + 22]],
+    [7, [LA.x + 24, LA.y + 8, 140]], [8, [484, 172, 124]], [9, [LV.x + 32, LV.y + 6, 92]],
+    [10, [LV.x + 20, LV.y, 150]], [11, [AC.x + 34, AC.y + 6, 80]], [12, [BODY.x0 - 4, BODY.v + 10, 12]],
+  ];
+
+  const draw = {
+    vr: (r) => level(VR, (r.V.SV - H.P0.SV.V0) / 620, "venous"),
+    ra: (r) => contents(RA, r.V.RA, "venous", true),
+    rv: (r) => contents(RV, r.V.RV, "venous", true),
+    lv: (r) => contents(LV, r.V.LV, "arterial", true),
+    la: (r) => contents(LA, r.V.LA, "arterial", true),
+    ac: (r) => level(AC, 0.12 + (Math.max(0, r.P.SA) / 160) * 0.8, "arterial"),
+    vtri: (r) => lever(276, 170, 116, "x", r.valves.tri),
+    vmit: (r) => lever(484, 170, 116, "x", r.valves.mit),
+    vpulv: (r) => lever(RV.x, RV.y, 147, "y", r.valves.pulv),
+    vaov: (r) => lever(LV.x, LV.y, 147, "y", r.valves.aov),
+    gRA: (r) => needle(RA.x, GAUGE.y, GAUGE.z + 0.2, r.P.RA, GMAX.RA),
+    gRV: (r) => needle(RV.x, GAUGE.y, GAUGE.z + 0.2, r.P.RV, GMAX.RV),
+    gLV: (r) => needle(LV.x, GAUGE.y, GAUGE.z + 0.2, r.P.LV, GMAX.LV),
+    gLA: (r) => needle(LA.x, GAUGE.y, GAUGE.z + 0.2, r.P.LA, GMAX.LA),
+    gSA: (r) => needle(AC.x, AC.y, acZ + 0.2, r.P.SA, GMAX.SA),
+    lungs: (r, ui) => lungs(ui.breath),
+    kHR: (r, ui) => knob(CTRL.x, CTRL.hr, 160 + ((ui.HR - 40) / 140) * 220),
+    kCT: (r, ui) => knob(CTRL.x, CTRL.ct, 160 + ((ui.contract - 0.4) / 1.2) * 220),
+    kVS: (r, ui) => knob(CTRL.x, CTRL.vs, VS_ANG[["normal", "as", "mr"].indexOf(ui.fault)], 9),
+    pins: () => PINS.map(([n, p]) => pin(cam, p, n)).join(""),
+  };
+
+  /* ---------- mount ---------- */
+  const svg = document.getElementById("plate-svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${HT}`);
+  let html = "", run = "";
+  for (const it of order) {
+    if (typeof it === "string") run += it;
+    else { html += run; run = ""; html += `<g data-slot="${it.slot}"></g>`; }
+  }
+  svg.innerHTML = html + run;
+  const slots = {};
+  svg.querySelectorAll("[data-slot]").forEach((g) => (slots[g.dataset.slot] = g));
+  const flowEls = flowPaths.map((fp) => ({ ...fp, el: document.getElementById(fp.id), off: 0 }));
+
+  /* ---------- simulation ---------- */
+  const ui = { HR: 72, contract: 1, fault: "normal", speed: 1, playing: true, breath: 0.5 };
+  let sim = H.make(ui);
+  H.settle(sim, 12);
+  let beatRec = [], lastBeat = null, cur = H.read(sim);
+  const listeners = [];
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let visible = true, raf = 0, last = 0, tBreath = 0;
+
+  function paint() {
+    for (const k in draw) if (slots[k]) slots[k].innerHTML = draw[k](cur, ui);
+  }
+  function advance(dtReal) {
+    const dt = 0.0005;
+    let simT = dtReal * ui.speed, n = Math.round(simT / dt);
+    for (let i = 0; i < n; i++) {
+      const beat = H.step(sim, dt);
+      if (i % 8 === 0) { const r = H.read(sim); beatRec.push({ t: sim.tc, P: r.P, V: r.V, Q: r.Q, phase: r.phase }); }
+      if (beat) finishBeat();
+    }
+    cur = H.read(sim);
+    tBreath += simT;
+    ui.breath = 0.5 - 0.5 * Math.cos((2 * Math.PI * tBreath) / (60 / 14));
+    // flow marks: offset by the volume that passed, so the dashes move at the true flow speed
+    for (const fl of flowEls) {
+      const q = Math.max(-200, Math.min(600, cur.Q[fl.q] || 0)) / (fl.per || 1);
+      fl.off -= (q * simT * (fl.per ? 2.2 : 0.06)) * (fl.rev ? -1 : 1);
+      fl.el.style.strokeDashoffset = fl.off.toFixed(2);
+      fl.el.style.opacity = Math.abs(cur.Q[fl.q] || 0) > 0.5 ? 1 : 0.15;
+    }
+  }
+  function finishBeat() {
+    if (beatRec.length > 20) {
+      const T = 60 / sim.HR;
+      lastBeat = summarise(beatRec, T);
+    }
+    beatRec = [];
+  }
+  function summarise(rec, T) {
+    const mx = (g) => Math.max(...rec.map(g)), mn = (g) => Math.min(...rec.map(g));
+    let fwd = 0, back = 0;
+    for (let i = 1; i < rec.length; i++) { const d = rec[i].t - rec[i - 1].t; if (d > 0) { fwd += Math.max(0, rec[i].Q.aov) * d; back += Math.max(0, -rec[i].Q.mit) * d; } }
+    const EDV = mx((r) => r.V.LV), ESV = mn((r) => r.V.LV);
+    return { rec, T, HR: 60 / T, EDV, ESV, SV: fwd, EF: (EDV - ESV) / EDV, CO: (fwd * 60) / T / 1000, regurg: back,
+      LV: [mn((r) => r.P.LV), mx((r) => r.P.LV)], SA: [mn((r) => r.P.SA), mx((r) => r.P.SA)], RV: [mn((r) => r.P.RV), mx((r) => r.P.RV)],
+      PA: [mn((r) => r.P.PA), mx((r) => r.P.PA)], LA: [mn((r) => r.P.LA), mx((r) => r.P.LA)], RA: [mn((r) => r.P.RA), mx((r) => r.P.RA)] };
+  }
+  let lastEmit = 0;
+  function frame(now) {
+    const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
+    if (ui.playing && !document.hidden) advance(dt);
+    if (visible) paint();
+    if (now - lastEmit > 90) { lastEmit = now; listeners.forEach((fn) => fn(ui, cur, lastBeat)); }
+    raf = requestAnimationFrame(frame);
+  }
+
+  function update(patch) {
+    Object.assign(ui, patch);
+    sim.HR = ui.HR; sim.contract = ui.contract; sim.fault = ui.fault;
+    if (ui.playing && !raf) { last = 0; raf = requestAnimationFrame(frame); }
+    if (!ui.playing) { paint(); listeners.forEach((fn) => fn(ui, cur, lastBeat)); }
+  }
+  /* For a still frame: settle the circulation and stop at a chosen moment of the cycle. */
+  function stillAt(frac) {
+    const s = H.make(ui); const r = H.settle(s, 12);
+    lastBeat = { ...r, HR: ui.HR, rec: r.rec };
+    const target = frac * r.T;
+    while (Math.abs(s.tc - target) > 0.002) H.step(s, 0.0005);
+    sim = s; cur = H.read(sim);
+    paint(); listeners.forEach((fn) => fn(ui, cur, lastBeat));
+  }
+  window.Plate = {
+    ui, update, stillAt,
+    on: (fn) => { listeners.push(fn); fn(ui, cur, lastBeat); },
+    resettle: () => { sim = H.make(ui); H.settle(sim, 10); },
+  };
+
+  /* ---------- input ---------- */
+  const fig = document.getElementById("plate");
+  fig.addEventListener("keydown", (e) => {
+    const k = e.key;
+    if (k === "ArrowUp") update({ HR: Math.min(180, ui.HR + 4) });
+    else if (k === "ArrowDown") update({ HR: Math.max(40, ui.HR - 4) });
+    else if (k === "]") update({ contract: Math.min(1.6, +(ui.contract + 0.1).toFixed(2)) });
+    else if (k === "[") update({ contract: Math.max(0.4, +(ui.contract - 0.1).toFixed(2)) });
+    else if (k === "1") update({ fault: "normal" });
+    else if (k === "2") update({ fault: "as" });
+    else if (k === "3") update({ fault: "mr" });
+    else if (k === " ") update({ playing: !ui.playing });
+    else if (k === "s" || k === "S") update({ speed: ui.speed === 1 ? 0.25 : ui.speed === 0.25 ? 0.06 : 1 });
+    else return;
+    e.preventDefault();
+  });
+  new IntersectionObserver((es) => (visible = es[0].isIntersecting)).observe(fig);
+
+  if (reduce.matches) { ui.playing = false; stillAt(0.18); }
+  else { const r0 = H.settle(H.make(ui), 10); lastBeat = { ...r0, HR: ui.HR }; paint(); raf = requestAnimationFrame(frame); }
+})();
+
+</script>
+<script>
+/* Plate II wall texts: phases, ledger, vitals and the two charts. All read the bench's live model. */
+(function () {
+  "use strict";
+  const H = window.HeartModel, P = window.Plate;
+  const $ = (id) => document.getElementById(id);
+  const r0 = (v) => Math.round(v);
+  const svgNS = "http://www.w3.org/2000/svg";
+
+  const PHASES = [
+    { id: "filling", rn: "i.", name: "Filling", rule: "LA > LV · mitral open", d: "The outflow valves are shut. Blood falls from the atria into the relaxed ventricles." },
+    { id: "atrial kick", rn: "ii.", name: "Atrial kick", rule: "the atria squeeze", d: "The atria contract and top up the ventricles with their last few millilitres." },
+    { id: "isovolumic contraction", rn: "iii.", name: "Isovolumic contraction", rule: "every valve shut", d: "The ventricles squeeze with all valves closed, so pressure climbs while volume holds." },
+    { id: "ejection", rn: "iv.", name: "Ejection", rule: "LV > aorta · aortic open", d: "Ventricular pressure beats the arteries, the outflow valves open and the stroke volume leaves." },
+    { id: "isovolumic relaxation", rn: "v.", name: "Isovolumic relaxation", rule: "every valve shut", d: "The ventricles relax with all valves closed until their pressure drops below the atria." },
+  ];
+  $("phases").innerHTML = PHASES.map((p, i) => `<div class="stage" data-ph="${p.id}"><span class="rn">${p.rn}</span><h3>${p.name}</h3><div class="eq small">${p.rule}</div><p>${p.d}</p><div class="live" id="ph${i}"></div></div>`).join("");
+
+  // Controls
+  $("hr").addEventListener("input", (e) => P.update({ HR: +e.target.value }));
+  $("ct").addEventListener("input", (e) => P.update({ contract: +e.target.value }));
+  $("fseg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) P.update({ fault: b.dataset.f }); });
+  $("sseg").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    const s = +b.dataset.s; P.update(s ? { speed: s, playing: true } : { playing: false });
+  });
+
+  // Key and pins light each other.
+  const key = $("key");
+  const light = (n) => {
+    key.querySelectorAll("li").forEach((li) => li.classList.toggle("on", li.dataset.pin === n));
+    document.querySelectorAll("#plate-svg .pin").forEach((p) => p.classList.toggle("on", p.dataset.pin === n));
+  };
+  key.addEventListener("mouseover", (e) => { const li = e.target.closest("li"); if (li) light(li.dataset.pin); });
+  key.addEventListener("mouseleave", () => light(null));
+  $("plate-svg").addEventListener("mouseover", (e) => { const p = e.target.closest(".pin"); light(p ? p.dataset.pin : null); });
+
+  const LEDGER = [
+    ["SV", "venous"], ["RA", "venous"], ["RV", "venous"], ["PA", "venous"],
+    ["PV", "arterial"], ["LA", "arterial"], ["LV", "arterial"], ["SA", "arterial"],
+  ];
+  const NAME = { ...H.NAME, SV: "Systemic veins", SA: "Systemic arteries (aorta)" };
+  const range = (rec, f) => [Math.min(...rec.map(f)), Math.max(...rec.map(f))];
+
+  let drawnBeat = null;
+  function charts(beat) {
+    if (!beat || !beat.rec || beat === drawnBeat) return;
+    drawnBeat = beat;
+    const rec = beat.rec, T = beat.T;
+    // Wiggers
+    const lvMax = Math.max(...rec.map((r) => r.P.LV));
+    const ymax = Math.max(160, Math.ceil((lvMax + 5) / 20) * 20);
+    const X = (t) => 44 + (t / T) * 500, Y = (p) => 262 - (Math.max(-2, p) / ymax) * 236;
+    let g = "";
+    // phase bands
+    let segs = [], cur = null;
+    rec.forEach((r) => { if (!cur || cur.ph !== r.phase) { cur = { ph: r.phase, t0: r.t, t1: r.t }; segs.push(cur); } else cur.t1 = r.t; });
+    segs = segs.filter((s) => s.t1 > s.t0);
+    segs.forEach((s) => {
+      if (s.ph.startsWith("isovolumic") || s.ph === "atrial kick") g += `<rect class="band" x="${X(s.t0).toFixed(1)}" y="20" width="${(X(s.t1) - X(s.t0)).toFixed(1)}" height="242"/>`;
+      const short = { "filling": "fill", "atrial kick": "kick", "isovolumic contraction": "IVC", "ejection": "eject", "isovolumic relaxation": "IVR" }[s.ph];
+      if (X(s.t1) - X(s.t0) > 24) g += `<text class="bandlbl" x="${((X(s.t0) + X(s.t1)) / 2).toFixed(1)}" y="16" text-anchor="middle">${short}</text>`;
+    });
+    for (let p = 0; p <= ymax; p += 40) g += `<line class="grid" x1="44" x2="544" y1="${Y(p)}" y2="${Y(p)}"/><text x="38" y="${Y(p) + 3.5}" text-anchor="end">${p}</text>`;
+    g += `<line class="ax" x1="44" x2="544" y1="262" y2="262"/><line class="ax" x1="44" x2="44" y1="20" y2="262"/>`;
+    for (let t = 0; t <= T + 1e-6; t += 0.2) g += `<text x="${X(t)}" y="278" text-anchor="middle">${(t * 1000).toFixed(0)}</text>`;
+    g += `<text x="544" y="294" text-anchor="end">ms</text><text x="8" y="14">mmHg</text>`;
+    const line = (f, cls) => `<path class="${cls}" d="M${rec.map((r) => X(r.t).toFixed(1) + " " + Y(f(r)).toFixed(1)).join("L")}"/>`;
+    g += line((r) => r.P.LA, "la") + line((r) => r.P.SA, "ao") + line((r) => r.P.LV, "lv");
+    g += `<line class="cursor" id="wcur" x1="0" x2="0" y1="20" y2="262"/><circle class="dot" id="wdot" r="4.5" cx="-10" cy="-10"/>`;
+    $("wiggers").innerHTML = g;
+    $("wiggers").dataset.T = T; $("wiggers").dataset.ymax = ymax;
+    const ej = rec.filter((r) => r.phase === "ejection");
+    const grad = ej.length ? Math.max(...ej.map((r) => r.P.LV - r.P.SA)) : 0;
+    $("wigNote").textContent = `The aortic valve stood open for ${r0(ej.length ? (ej[ej.length - 1].t - ej[0].t) * 1000 : 0)} ms. The largest pressure drop across it was ${r0(grad)} mmHg${grad > 25 ? ": the ventricle is forcing blood through a narrow valve." : ", too small to matter in a healthy valve."}`;
+
+    // PV loop
+    const vmax = Math.max(170, Math.ceil((beat.EDV + 15) / 20) * 20);
+    const XV = (v) => 52 + (v / vmax) * 330, YV = (p) => 262 - (Math.max(-2, p) / ymax) * 236;
+    let h = "";
+    for (let p = 0; p <= ymax; p += 40) h += `<line class="grid" x1="52" x2="382" y1="${YV(p)}" y2="${YV(p)}"/><text x="46" y="${YV(p) + 3.5}" text-anchor="end">${p}</text>`;
+    for (let v = 0; v <= vmax; v += 40) h += `<text x="${XV(v)}" y="278" text-anchor="middle">${v}</text>`;
+    h += `<line class="ax" x1="52" x2="382" y1="262" y2="262"/><line class="ax" x1="52" x2="52" y1="20" y2="262"/><text x="382" y="294" text-anchor="end">mL</text><text x="8" y="14">mmHg</text>`;
+    h += `<path class="loop" d="M${rec.map((r) => XV(r.V.LV).toFixed(1) + " " + YV(r.P.LV).toFixed(1)).join("L")}Z"/>`;
+    for (const [v, l] of [[beat.ESV, "ESV"], [beat.EDV, "EDV"]]) h += `<line class="grid" x1="${XV(v)}" x2="${XV(v)}" y1="20" y2="262"/><text class="lbl" x="${XV(v)}" y="34" text-anchor="middle">${l} ${r0(v)}</text>`;
+    h += `<circle class="dot" id="pvdot" r="4.5" cx="-10" cy="-10"/>`;
+    $("pvloop").innerHTML = h;
+    $("pvloop").dataset.vmax = vmax; $("pvloop").dataset.ymax = ymax;
+    let area = 0;
+    for (let i = 0; i < rec.length; i++) { const a = rec[i], b = rec[(i + 1) % rec.length]; area += a.V.LV * b.P.LV - b.V.LV * a.P.LV; }
+    const work = (Math.abs(area) / 2) * 1.333e-4;
+    $("pvNote").textContent = `Each beat fills to ${r0(beat.EDV)} mL, empties to ${r0(beat.ESV)} mL and ejects ${r0(beat.SV)} mL forwards${beat.regurg > 1 ? `, while ${r0(beat.regurg)} mL leaks back through the mitral valve` : ""}. The loop encloses about ${work.toFixed(2)} J of work per beat.`;
+  }
+
+  function cursor(ui, cur) {
+    const w = $("wiggers"), pv = $("pvloop");
+    if (!w.dataset.T) return;
+    const T = +w.dataset.T, ymax = +w.dataset.ymax, vmax = +pv.dataset.vmax;
+    const x = 44 + (Math.min(cur.tc, T) / T) * 500, y = 262 - (Math.max(-2, cur.P.LV) / ymax) * 236;
+    const wc = $("wcur"), wd = $("wdot"), pd = $("pvdot");
+    if (wc) { wc.setAttribute("x1", x.toFixed(1)); wc.setAttribute("x2", x.toFixed(1)); wd.setAttribute("cx", x.toFixed(1)); wd.setAttribute("cy", y.toFixed(1)); }
+    if (pd) { pd.setAttribute("cx", (52 + (cur.V.LV / vmax) * 330).toFixed(1)); pd.setAttribute("cy", (262 - (Math.max(-2, cur.P.LV) / ymax) * 236).toFixed(1)); }
+  }
+
+  let lastLedger = 0;
+  P.on((ui, cur, beat) => {
+    // controls
+    $("hrv").textContent = ui.HR + " bpm";
+    $("ctv").textContent = "× " + (+ui.contract).toFixed(2);
+    if (+$("hr").value !== ui.HR) $("hr").value = ui.HR;
+    if (Math.abs(+$("ct").value - ui.contract) > 0.01) $("ct").value = ui.contract;
+    $("fseg").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.f === ui.fault));
+    $("fv").textContent = H.FAULTS[ui.fault].name;
+    $("fdesc").textContent = H.FAULTS[ui.fault].note.charAt(0).toUpperCase() + H.FAULTS[ui.fault].note.slice(1) + ".";
+    const sp = ui.playing ? String(ui.speed) : "0";
+    $("sseg").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.s === sp));
+    $("sv").textContent = ui.playing ? (ui.speed === 1 ? "real time" : ui.speed === 0.25 ? "slowed 4×" : "slowed 16×") : "paused";
+
+    // readout
+    const b = beat;
+    $("readout").innerHTML = `${ui.HR} bpm · <b>${cur.phase}</b>` + (b ? ` · ${r0(b.SA[1])}/${r0(b.SA[0])} mmHg · ${(b.CO).toFixed(1)} L/min` : "");
+
+    // phases
+    document.querySelectorAll("#phases .stage").forEach((el) => el.classList.toggle("now", el.dataset.ph === cur.phase));
+    if (b && b.rec) {
+      PHASES.forEach((p, i) => {
+        const rs = b.rec.filter((r) => r.phase === p.id);
+        const ms = (rs.length * b.T * 1000) / b.rec.length;
+        const dv = rs.length > 1 ? rs[rs.length - 1].V.LV - rs[0].V.LV : 0;
+        let s = `lasts ${r0(ms)} ms<br>LV volume ${dv >= 0 ? "+" : "−"}${Math.abs(dv).toFixed(0)} mL`;
+        if (cur.phase === p.id) s += `<br><b>now</b> LV ${r0(cur.P.LV)} · Ao ${r0(cur.P.SA)} · LA ${r0(cur.P.LA)}`;
+        if (p.id === "isovolumic contraction" && ui.fault === "mr") s += `<br>mitral leaking`;
+        $("ph" + i).innerHTML = s;
+      });
+    }
+
+    // vitals and ledger, a few times a second
+    const now = performance.now();
+    if (b && now - lastLedger > 250) {
+      lastLedger = now;
+      const tiles = [
+        ["Heart rate", `${r0(b.HR)}<small>bpm</small>`],
+        ["Blood pressure", `${r0(b.SA[1])}/${r0(b.SA[0])}<small>mmHg</small>`],
+        ["Stroke volume", `${r0(b.SV)}<small>mL</small>`],
+        ["Ejection fraction", `${r0(b.EF * 100)}<small>%</small>`],
+        ["Cardiac output", `${b.CO.toFixed(1)}<small>L/min</small>`],
+        ui.fault === "mr" ? ["Leaks back", `${r0(b.regurg)}<small>mL/beat</small>`] : ["LV peak", `${r0(b.LV[1])}<small>mmHg</small>`],
+      ];
+      $("vitals").innerHTML = tiles.map(([l, v]) => `<div><span class="label">${l}</span><b>${v}</b></div>`).join("");
+      if (b.rec) {
+        $("ledger").innerHTML = LEDGER.map(([c, kind]) => {
+          const pr = range(b.rec, (r) => r.P[c]), vr = range(b.rec, (r) => r.V[c]);
+          return `<tr><td><span class="sw" style="background:var(--${kind === "venous" ? "venous" : "fluid"})"></span></td><td class="tok">${NAME[c]}</td><td>${kind === "venous" ? "low O₂" : "high O₂"}</td>` +
+            `<td>${cur.P[c].toFixed(1)} mmHg</td><td>${r0(pr[0])} to ${r0(pr[1])}</td><td>${r0(cur.V[c])} mL</td><td>${r0(vr[0])} to ${r0(vr[1])}</td></tr>`;
+        }).join("");
+      }
+    }
+    charts(b);
+    cursor(ui, cur);
+  });
+})();
+
+</script>

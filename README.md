@@ -6,15 +6,32 @@
 
 *Explain an idea the way a museum explains a specimen.*
 
-[Install](#ii-install) · [Commission a plate](#iii-commission-a-plate) · [Anatomy of a plate](#iv-anatomy-of-a-plate) · [Make your own](#v-make-your-own)
+[The collection](#the-collection) · [Install](#ii-install) · [Commission a plate](#iii-commission-a-plate) · [Anatomy of a plate](#iv-anatomy-of-a-plate) · [Make your own](#v-make-your-own)
 
 <br>
 
-<img src="docs/plate-i.gif" alt="Plate I: an isometric assay bench computing attention. Fluid redistributes between eight glass columns as the head, query and temperature change." width="100%">
+<img src="docs/img/plate-i.gif" alt="Plate I: an isometric assay bench computing attention. Fluid redistributes between eight glass columns as the head, query and temperature change." width="100%">
 
-<sub><i>Plate I. Attention, as an assay bench. Open <code>dist/attention.html</code> to use it.</i></sub>
+<sub><i>Plate I. Attention, as an assay bench.</i></sub>
 
 </div>
+
+<br>
+
+## The collection
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="docs/attention.html"><img src="docs/img/plate-i-light.png" alt="Plate I: attention as an assay bench"></a></td>
+<td width="50%" valign="top"><a href="docs/heart.html"><img src="docs/img/plate-ii-light.png" alt="Plate II: the human heart as a double pump"></a></td>
+</tr>
+<tr>
+<td valign="top"><b>Plate I · Attention, as an assay bench</b><br><sub>Machine learning. A sealed reservoir pours one unit of attention between eight words by softmax. Four heads, a temperature knob and a causal mask.</sub></td>
+<td valign="top"><b>Plate II · The heart, as a double pump</b><br><sub>Physiology. Four piston chambers, four valves and two circuits, run by a live model of the circulation. Slow it down, speed it up, or give it a narrowed or leaking valve.</sub></td>
+</tr>
+</table>
+
+Both plates live on one website, with a cover page for the collection. It is in [`docs/`](docs/); open `docs/index.html` in a browser, or publish it with GitHub Pages (see [VI](#vi-the-website)).
 
 <br>
 
@@ -72,6 +89,7 @@ Name the idea, not the drawing:
 /folio explain backpropagation through a single neuron, for a course page
 /folio how does consistent hashing move keys when a server joins
 /folio explain the KV cache in LLM inference, dark theme
+/folio design the human heart anatomy
 ```
 
 Claude works in four phases:
@@ -105,8 +123,8 @@ Wall text I reads the formula one term at a time, pointing at pins by number. It
 </td>
 </tr>
 <tr>
-<td><img src="docs/detail.png" alt="Close-up of the glass columns, stopcocks and key dials, with numbered pins"></td>
-<td><img src="docs/wall-text.png" alt="Wall text I: Compare, Scale, Normalise, Blend, each with live numbers"></td>
+<td><img src="docs/img/detail.png" alt="Close-up of the glass columns, stopcocks and key dials, with numbered pins"></td>
+<td><img src="docs/img/wall-text.png" alt="Wall text I: Compare, Scale, Normalise, Blend, each with live numbers"></td>
 </tr>
 </table>
 
@@ -125,8 +143,8 @@ A finished plate has, top to bottom:
 
 <table>
 <tr>
-<td width="50%"><img src="docs/plate-i-light.png" alt="Plate I, light theme"></td>
-<td width="50%"><img src="docs/plate-i-dark.png" alt="Plate I, dark theme"></td>
+<td width="50%"><img src="docs/img/plate-i-light.png" alt="Plate I, light theme"></td>
+<td width="50%"><img src="docs/img/plate-i-dark.png" alt="Plate I, dark theme"></td>
 </tr>
 <tr>
 <td align="center"><sub>Gallery light</sub></td>
@@ -152,20 +170,37 @@ node scripts/capture.mjs dist/kv-cache.html shots
 
 <br>
 
-## VI. In the repository
+## VI. The website
+
+`node scripts/build-site.mjs` builds every plate and the cover page into `docs/`:
+
+```
+docs/index.html        the cover: the collection, install, the method
+docs/attention.html    Plate I
+docs/heart.html        Plate II
+docs/img/              thumbnails and README images
+```
+
+To put it online, open the repo on GitHub, go to **Settings → Pages**, and choose **Deploy from a branch → `main` → `/docs`**. The site will then be at `https://ramakm.github.io/folio-anatomy/`.
+
+To add your own plate to the site, add its name to `PLATES` in `scripts/build-site.mjs` and a card to `site/index.html`.
+
+<br>
+
+## VII. In the repository
 
 ```
 SKILL.md                 the skill: commitments, four phases, plate grammar, style, library
 kit/folio-kit.js         the drawing library: camera, engraved boxes and cylinders, glass, pins, text
-examples/attention/      Plate I
-  model.js               the attention head; every number on the page comes from here
-  plate.js               the bench: static geometry, live slots, input
-  page.html              the mount, styles and wall texts
-  page.js                key, controls, ledger and matrix
-scripts/build.mjs        inline everything into one standalone HTML file
+kit/folio-page.css       the shared exhibition styles: mount, key, wall texts, both themes
+examples/attention/      Plate I: model.js, plate.js, page.html, page.js
+examples/heart/          Plate II: a lumped-parameter model of the circulation and its bench
+site/index.html          the cover page of the website
+scripts/build.mjs        inline one plate into a standalone HTML file
+scripts/build-site.mjs   build the whole website into docs/
 scripts/capture.mjs      screenshots and checks
 scripts/new-plate.mjs    start a new plate from Plate I
-dist/attention.html      Plate I, built
+docs/                    the built website
 ```
 
 `SKILL.md` also works on its own: the drawing library is included at the end of it as an appendix.

@@ -10,6 +10,7 @@ const out = resolve(root, process.argv[3] || "dist/attention.html");
 const read = (p) => readFileSync(p, "utf8").replace(/<\/script/gi, "<\\/script");
 let html = readFileSync(join(dir, "page.html"), "utf8");
 html = html
+  .replace("/*CSS*/", () => readFileSync(join(root, "kit/folio-page.css"), "utf8"))
   .replace("/*KIT*/", () => read(join(root, "kit/folio-kit.js")))
   .replace("/*MODEL*/", () => read(join(dir, "model.js")))
   .replace("/*PLATE*/", () => read(join(dir, "plate.js")))

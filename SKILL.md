@@ -15,7 +15,10 @@ A Folio plate explains an idea the way a natural history museum explains a speci
 
 ## Getting started
 
-- The fastest start is to copy the reference plate: `node scripts/new-plate.mjs <name>` makes `examples/<name>/` from Plate I (attention as an assay bench). Then replace its model, scene and texts. Building from a working plate is quicker and safer than starting blank.
+- Two reference plates ship with the repo. **Plate I** (`examples/attention/`, attention as an assay bench) is the model for ideas made of discrete steps and a formula. **Plate II** (`examples/heart/`, the human heart as a double pump) is the model for anything that runs in time: a simulation integrated every frame, continuous flow, phases, and charts redrawn after each cycle. Open the closer one first.
+- The fastest start is to copy a reference plate: `node scripts/new-plate.mjs <name>` makes `examples/<name>/` from Plate I. Then replace its model, scene and texts. Building from a working plate is quicker and safer than starting blank.
+- Shared exhibition styles live in `kit/folio-page.css`; a plate's `page.html` puts `/*CSS*/` inside its `<style>` and adds only its own rules.
+- `node scripts/build-site.mjs` builds every plate plus the cover page (`site/index.html`) into `docs/`, a website ready for GitHub Pages. To add a plate, add its name to `PLATES` there and a card to the cover.
 - Build any plate into one standalone file with `node scripts/build.mjs examples/<name> dist/<name>.html`.
 - If only this file is installed (no repo), the appendix at the end holds the drawing library; save it as `folio-kit.js`.
 
@@ -40,6 +43,8 @@ A plate is five files:
 | Series | several plates on one shared bench, scale and palette | agree the list first, then one plate at a time |
 
 **A2. The model.** Write `model.js` before anything visual. Gather the real formula, units and magnitudes. Return plain objects: inputs in, every quantity the page will show out. Run it in Node and print a few cases. Look for edge cases now (an empty set, a masked row, a value at the limit). If anything is invented, such as toy weights or sample data, note it for the "About this specimen" wall text.
+
+**A2b. Models that run in time.** When the idea is a process (a heartbeat, a queue draining, a learning curve), write it as state plus a `step(s, dt)` function and a `read(s)` that returns everything shown. Tune parameters against known values in Node before drawing, as Plate II does for a resting adult (about 115/80 mmHg, 70 mL per beat, 5 L/min). Keep the simulation running while the drawing is off screen, and skip only the painting; otherwise changing a control further down the page freezes the numbers.
 
 **A3. The instrument and its correspondence table.** Look for an instrument from the world of laboratories, workshops, observatories or print shops. Then write the table that ties each term to a part:
 
