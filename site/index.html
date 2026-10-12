@@ -11,7 +11,7 @@ body { padding-inline: 0; font-size: 19px; line-height: 1.68; }
 .top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule); }
 .top .in { max-width: 1240px; margin: 0 auto; padding: 14px clamp(16px, 4vw, 40px); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .top .mark { font-family: var(--display); font-size: 19px; letter-spacing: .3em; text-transform: uppercase; text-decoration: none; }
-.top nav { display: flex; gap: clamp(12px, 2.4vw, 28px); font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; }
+.top nav { display: flex; align-items: center; gap: clamp(12px, 2.4vw, 28px); font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; }
 .top nav a { text-decoration: none; color: var(--ink-2); }
 .top nav a:hover { color: var(--accent); }
 
@@ -39,8 +39,9 @@ body { padding-inline: 0; font-size: 19px; line-height: 1.68; }
 .caption a { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; color: var(--ink); white-space: nowrap; }
 .caption a:hover { color: var(--accent); }
 
-.layout { max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: grid; grid-template-columns: 200px minmax(0, 680px) 260px; gap: 0 48px; justify-content: center; }
-.toc { position: sticky; top: 92px; align-self: start; padding-top: 104px; }
+.layout { max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: grid; grid-template-columns: 230px minmax(0, 680px) 230px; gap: 0 48px; justify-content: center; }
+.toc { position: sticky; top: 92px; align-self: start; padding-top: 104px; transition: opacity .25s ease; }
+.toc.away { opacity: 0; pointer-events: none; }
 .toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: t; }
 .toc li { counter-increment: t; }
 .toc a { display: grid; grid-template-columns: 26px 1fr; text-decoration: none; font-size: 14.5px; color: var(--ink-3); padding: 4px 0; line-height: 1.35; }
@@ -56,7 +57,7 @@ article p { margin: 0 0 1.05em; text-wrap: pretty; }
 article p.first::first-letter { font-family: var(--display); float: left; font-size: 4.1em; line-height: .82; padding: 6px 10px 0 0; color: var(--accent); }
 article em { font-style: italic; }
 article a { text-decoration-thickness: 1px; }
-.note { float: right; clear: right; width: 240px; margin-right: -308px; font-size: 14px; line-height: 1.55; color: var(--ink-3); position: relative; }
+.note { float: right; clear: right; width: 230px; margin-right: -278px; font-size: 14px; line-height: 1.55; color: var(--ink-3); position: relative; }
 .note sup, .nref { font-family: var(--mono); font-size: 10.5px; color: var(--accent); }
 .nref { vertical-align: super; line-height: 0; margin-left: 1px; }
 .pull { font-family: var(--display); font-size: clamp(24px, 2.8vw, 31px); line-height: 1.3; margin: 34px 0; padding: 4px 0 4px 26px; border-left: 2px solid var(--accent); text-wrap: balance; }
@@ -65,24 +66,25 @@ article a { text-decoration-thickness: 1px; }
 .commit div { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 6px 24px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
 .commit b { font-family: var(--display); font-weight: 400; font-style: italic; font-size: 21px; line-height: 1.3; }
 .commit span { font-size: 16.5px; color: var(--ink-2); }
-.wide { margin: 32px -120px; }
+/* Wide figures share the hero plate's width (1100px), centred on the reading column. */
+.wide { margin: 36px -210px; clear: both; }
 .wide .frame iframe { aspect-ratio: 1000 / 720; }
 .plates { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0 8px; }
 .plates.three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .pcard { text-decoration: none; display: grid; gap: 10px; }
 .pcard .im { background: var(--paper); outline: 1px solid var(--rule); outline-offset: -1px; padding: 8px; }
-.pcard img { display: block; width: 100%; }
+.pcard img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: contain; }
 .pcard b { font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.2; }
 .pcard span { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
 .pcard:hover b { color: var(--accent); }
-.views3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 28px -120px 12px; }
+.views3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 32px -210px 16px; clear: both; }
 .views3 figure { margin: 0; }
-.views3 img { display: block; width: 100%; background: var(--paper); outline: 1px solid var(--rule); outline-offset: -1px; }
+.views3 img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: var(--paper); outline: 1px solid var(--rule); outline-offset: -1px; }
 .views3 figcaption { font-size: 14.5px; color: var(--ink-2); margin-top: 10px; line-height: 1.5; }
 .views3 figcaption b { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; color: var(--ink); font-weight: 500; display: block; margin-bottom: 2px; }
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px -120px 12px; }
-.pair img { display: block; width: 100%; outline: 1px solid var(--rule); outline-offset: -1px; }
-.pair figure { margin: 0; } .pair figcaption { font-size: 14.5px; color: var(--ink-2); margin-top: 10px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 32px -210px 16px; clear: both; align-items: start; }
+.pair img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: var(--paper); outline: 1px solid var(--rule); outline-offset: -1px; }
+.pair figure { margin: 0; } .pair figcaption { font-size: 14.5px; color: var(--ink-2); margin-top: 10px; line-height: 1.5; }
 .phases { list-style: none; margin: 26px 0; padding: 0; border-left: 1px solid var(--rule); }
 .phases li { position: relative; padding: 0 0 22px 30px; }
 .phases li::before { content: ""; position: absolute; left: -5px; top: 10px; width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--accent); }
@@ -106,12 +108,13 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
 .colophon p { margin: 0; font-size: 15px; color: var(--ink-3); max-width: 46em; }
 .colophon .links { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; }
 .colophon .links a { text-decoration: none; color: var(--ink); } .colophon .links a:hover { color: var(--accent); }
-@media (max-width: 1240px) {
+@media (max-width: 1400px) {
   .layout { grid-template-columns: minmax(0, 680px); }
   .toc { display: none; }
   article { grid-column: 1; }
   .note { float: none; width: auto; margin: 0 0 1.1em; padding-left: 16px; border-left: 1px solid var(--rule); }
-  .wide, .views3, .pair { margin-left: 0; margin-right: 0; }
+  /* one column: wide figures still use the spare width, up to the hero plate's, never past the gutter */
+  .wide, .views3, .pair { margin-inline: min(0px, max(-210px, calc((680px - 100vw) / 2 + clamp(16px, 4vw, 40px)))); }
 }
 @media (max-width: 720px) {
   body { font-size: 18px; }
@@ -128,7 +131,7 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
   <div class="in">
     <a class="mark" href="#">Folio</a>
     <nav aria-label="Sections">
-      <a href="#plates">Plates</a><a class="opt" href="#views">Views</a><a class="opt" href="#method">Method</a><a href="#install">Install</a><a href="https://github.com/Ramakm/folio-anatomy">GitHub</a>
+      <a href="#plates">Plates</a><a class="opt" href="#views">Views</a><a class="opt" href="#method">Method</a><a href="#install">Install</a><a class="opt" href="https://github.com/Ramakm/folio-anatomy">GitHub</a><button class="theme" type="button" data-theme-toggle>Dark</button>
     </nav>
   </div>
 </header>
@@ -294,4 +297,16 @@ const io = new IntersectionObserver((es) => es.forEach((en) => {
   if (en.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id));
 }), { rootMargin: "-30% 0px -60% 0px" });
 document.querySelectorAll("article section").forEach((s) => io.observe(s));
+// The contents rail steps aside while a wide figure passes beneath it.
+const toc = document.querySelector(".toc"), bleeds = [...document.querySelectorAll(".wide, .views3, .pair")];
+let queued = false;
+const clear = () => {
+  queued = false;
+  if (getComputedStyle(toc).display === "none") return;
+  const t = toc.querySelector("ol").getBoundingClientRect(), l = toc.querySelector(".label").getBoundingClientRect();
+  const top = l.top - 12, bottom = t.bottom + 12;
+  toc.classList.toggle("away", bleeds.some((b) => { const r = b.getBoundingClientRect(); return r.left < t.right && r.top < bottom && r.bottom > top; }));
+};
+addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(clear); } }, { passive: true });
+addEventListener("resize", clear); clear();
 </script>

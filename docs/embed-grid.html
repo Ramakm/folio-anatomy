@@ -5,6 +5,43 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>/* Folio theme: light by default. Dark only when the reader chooses it; the choice is remembered
+   and shared with every Folio page and embedded plate on the same site. */
+(function () {
+  "use strict";
+  var KEY = "folio-theme", doc = document.documentElement;
+  function get() { try { return localStorage.getItem(KEY) === "dark" ? "dark" : "light"; } catch (e) { return "light"; } }
+  function label() {
+    var t = doc.dataset.theme === "dark" ? "dark" : "light";
+    document.querySelectorAll("[data-theme-toggle]").forEach(function (b) {
+      b.setAttribute("aria-pressed", t === "dark");
+      b.textContent = t === "dark" ? "Light" : "Dark";
+      b.title = t === "dark" ? "Switch to the light theme" : "Switch to the dark theme";
+    });
+  }
+  function apply(t) {
+    doc.dataset.theme = t;
+    doc.style.colorScheme = t;
+    label();
+    document.querySelectorAll("iframe").forEach(function (f) { try { f.contentWindow.postMessage({ folioTheme: t }, "*"); } catch (e) {} });
+  }
+  apply(get());
+  addEventListener("storage", function (e) { if (e.key === KEY) apply(get()); });
+  addEventListener("message", function (e) { var d = e.data; if (d && (d.folioTheme === "dark" || d.folioTheme === "light")) apply(d.folioTheme); });
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-theme-toggle]");
+    if (!b) return;
+    var t = doc.dataset.theme === "dark" ? "light" : "dark";
+    try { localStorage.setItem(KEY, t); } catch (err) {}
+    apply(t);
+  });
+  document.addEventListener("DOMContentLoaded", label);
+  // a plate embedded in this page learns the theme as soon as it loads
+  document.addEventListener("load", function (e) {
+    if (e.target && e.target.tagName === "IFRAME") try { e.target.contentWindow.postMessage({ folioTheme: doc.dataset.theme }, "*"); } catch (err) {}
+  }, true);
+})();
+</script>
 <style>
 /* Layout: a museum exhibition wall. One mounted plate, a catalogue key beside it, then wall texts below. */
 :root {
@@ -18,14 +55,7 @@
   --body: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
-  --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
-  --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
-  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
-  --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
-  --water: #3F6A7E; --water-top: #6E98AA; --water-deep: #1F3A47; --copper: #C2814F; --copper-top: #E0A97C; --copper-deep: #6A3E20; --iron: #5D6068; --lamp: #FFC657;
-  color-scheme: dark; } }
+/* Light is the default. Dark applies only when the reader chooses it (kit/folio-theme.js). */
 :root[data-theme="dark"] {
   --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
   --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
@@ -46,7 +76,10 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 /* Masthead */
 .mast { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-block: 22px 18px; border-bottom: 1px solid var(--rule); }
 .mast .mark { font-family: var(--display); font-size: 22px; letter-spacing: .32em; text-transform: uppercase; font-weight: 500; justify-self: center; }
-.mast .r { justify-self: end; text-align: right; }
+.mast .r { justify-self: end; text-align: right; display: flex; align-items: center; gap: 14px; }
+.theme { font: 500 10.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); background: transparent; border: 1px solid var(--rule); padding: 7px 10px 7px 26px; cursor: pointer; position: relative; white-space: nowrap; }
+.theme::before { content: ""; position: absolute; left: 9px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; border: 1px solid currentColor; background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+.theme:hover { border-color: var(--ink); }
 
 /* Title block */
 .title { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: 24px 64px; align-items: end; padding-block: 52px 36px; }
@@ -979,8 +1012,7 @@ float caustic(vec2 q, float t) {
   }
 
   const isDark = () => {
-    const t = document.documentElement.dataset.theme;
-    return t ? t === "dark" : root.matchMedia("(prefers-color-scheme: dark)").matches;
+    return document.documentElement.dataset.theme === "dark";
   };
   const webglOK = () => { try { return !!document.createElement("canvas").getContext("webgl"); } catch (e) { return false; } };
 

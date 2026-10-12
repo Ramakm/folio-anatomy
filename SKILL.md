@@ -160,7 +160,7 @@ Check with screenshots, not assumptions. In the repo, `node scripts/capture.mjs 
 
 ## Type and colour
 
-Use a Didone display face for headlines, plate numbers and numerals (Bodoni Moda, often italic), a readable text serif for everything people read (Source Serif 4, at 17 px), and a mono for data and engraving (IBM Plex Mono). In light mode: warm grey wall #E5E1DA, paper #F5F2ED, ink #1F1C18, red #C9381D. In dark mode: wall #151412, paper #1D1B19, a brighter red. Every colour is a CSS custom property defined on `:root` and redefined for dark mode, and every SVG class reads those properties. Copy the token block from the reference plate's `page.html`.
+Use a Didone display face for headlines, plate numbers and numerals (Bodoni Moda, often italic), a readable text serif for everything people read (Source Serif 4, at 17 px), and a mono for data and engraving (IBM Plex Mono). In light mode: warm grey wall #E5E1DA, paper #F5F2ED, ink #1F1C18, red #C9381D. In dark mode: wall #151412, paper #1D1B19, a brighter red. Every colour is a CSS custom property defined on `:root` and redefined under `:root[data-theme="dark"]`, and every SVG class reads those properties. Light is the default whatever the reader's system setting; dark applies only when the reader presses the **Dark** switch in the masthead (`<button class="theme" data-theme-toggle>`). `kit/folio-theme.js` (inlined into the head by the build) remembers the choice and passes it to every page and embedded plate on the same site. Copy the token block from the reference plate's `page.html`.
 
 A user's own brand rules override these: keep the structure and the engraving, and swap the tokens.
 
@@ -191,7 +191,7 @@ A user's own brand rules override these: keep the structure and the engraving, a
 | `inspector({fig, svg, W, H, parts, cam, live})`, `loupe({fig, svg, W, H, sceneId})` | glide in on any part with its live reading; a magnifier over the live drawing |
 | `views(host, {modes, current, onSelect})` | the SVG · WebGL · 3D switch |
 
-If the library is missing, write the two appendices below to `folio-kit.js` and `folio-live.js` exactly as given rather than recreating them.
+If the library is missing, write the three appendices below to `folio-kit.js`, `folio-live.js` and `folio-theme.js` exactly as given rather than recreating them.
 
 ## Appendix: folio-kit.js
 
@@ -820,11 +820,51 @@ float caustic(vec2 q, float t) {
   }
 
   const isDark = () => {
-    const t = document.documentElement.dataset.theme;
-    return t ? t === "dark" : root.matchMedia("(prefers-color-scheme: dark)").matches;
+    return document.documentElement.dataset.theme === "dark";
   };
   const webglOK = () => { try { return !!document.createElement("canvas").getContext("webgl"); } catch (e) { return false; } };
 
   K.live = { stage, orbit, light, views, inspector, loupe, isDark, webglOK, PRELUDE };
 })(typeof window !== "undefined" ? window : globalThis);
+```
+
+## Appendix: folio-theme.js
+
+```js
+/* Folio theme: light by default. Dark only when the reader chooses it; the choice is remembered
+   and shared with every Folio page and embedded plate on the same site. */
+(function () {
+  "use strict";
+  var KEY = "folio-theme", doc = document.documentElement;
+  function get() { try { return localStorage.getItem(KEY) === "dark" ? "dark" : "light"; } catch (e) { return "light"; } }
+  function label() {
+    var t = doc.dataset.theme === "dark" ? "dark" : "light";
+    document.querySelectorAll("[data-theme-toggle]").forEach(function (b) {
+      b.setAttribute("aria-pressed", t === "dark");
+      b.textContent = t === "dark" ? "Light" : "Dark";
+      b.title = t === "dark" ? "Switch to the light theme" : "Switch to the dark theme";
+    });
+  }
+  function apply(t) {
+    doc.dataset.theme = t;
+    doc.style.colorScheme = t;
+    label();
+    document.querySelectorAll("iframe").forEach(function (f) { try { f.contentWindow.postMessage({ folioTheme: t }, "*"); } catch (e) {} });
+  }
+  apply(get());
+  addEventListener("storage", function (e) { if (e.key === KEY) apply(get()); });
+  addEventListener("message", function (e) { var d = e.data; if (d && (d.folioTheme === "dark" || d.folioTheme === "light")) apply(d.folioTheme); });
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-theme-toggle]");
+    if (!b) return;
+    var t = doc.dataset.theme === "dark" ? "light" : "dark";
+    try { localStorage.setItem(KEY, t); } catch (err) {}
+    apply(t);
+  });
+  document.addEventListener("DOMContentLoaded", label);
+  // a plate embedded in this page learns the theme as soon as it loads
+  document.addEventListener("load", function (e) {
+    if (e.target && e.target.tagName === "IFRAME") try { e.target.contentWindow.postMessage({ folioTheme: doc.dataset.theme }, "*"); } catch (err) {}
+  }, true);
+})();
 ```

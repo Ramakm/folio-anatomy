@@ -11,7 +11,8 @@ mkdirSync(join(out, "img"), { recursive: true });
 const PLATES = ["attention", "heart", "grid"];
 for (const p of PLATES) execFileSync("node", [join(root, "scripts/build.mjs"), `examples/${p}`, `docs/${p}.html`], { stdio: "inherit" });
 const css = readFileSync(join(root, "kit/folio-page.css"), "utf8");
-const index = readFileSync(join(root, "site/index.html"), "utf8").replace("/*CSS*/", () => css);
+const theme = "<script>" + readFileSync(join(root, "kit/folio-theme.js"), "utf8") + "</script>\n";
+const index = readFileSync(join(root, "site/index.html"), "utf8").replace("<style>", () => theme + "<style>").replace("/*CSS*/", () => css);
 writeFileSync(join(out, "index.html"), "<!doctype html>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" + index);
 // Embeddable plates for the cover: the figure alone, with its own small readout.
 const EMBED = {
@@ -25,7 +26,7 @@ const EMBED = {
 const tpl = readFileSync(join(root, "site/embed.html"), "utf8");
 for (const p of PLATES) {
   const e = EMBED[p], src = (f) => readFileSync(join(root, f), "utf8").replace(/<\/script/gi, "<\\/script");
-  let h = tpl.replace("/*CSS*/", () => css)
+  let h = tpl.replace("<style>", () => theme + "<style>").replace("/*CSS*/", () => css)
     .replace("/*KIT*/", () => src("kit/folio-kit.js") + "\n" + src("kit/folio-live.js"))
     .replace("/*MODEL*/", () => src(`examples/${p}/model.js`))
     .replace("/*PLATE*/", () => src(`examples/${p}/plate.js`))

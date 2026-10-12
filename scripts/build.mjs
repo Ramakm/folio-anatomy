@@ -9,7 +9,9 @@ const dir = resolve(root, process.argv[2] || "examples/attention");
 const out = resolve(root, process.argv[3] || "dist/attention.html");
 const read = (p) => readFileSync(p, "utf8").replace(/<\/script/gi, "<\\/script");
 let html = readFileSync(join(dir, "page.html"), "utf8");
+const theme = "<script>" + read(join(root, "kit/folio-theme.js")) + "</script>\n";
 html = html
+  .replace("<style>", () => theme + "<style>")
   .replace("/*CSS*/", () => readFileSync(join(root, "kit/folio-page.css"), "utf8"))
   .replace("/*KIT*/", () => read(join(root, "kit/folio-kit.js")) + "\n" + read(join(root, "kit/folio-live.js")))
   .replace("/*MODEL*/", () => read(join(dir, "model.js")))

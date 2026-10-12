@@ -346,8 +346,7 @@ float caustic(vec2 q, float t) {
   }
 
   const isDark = () => {
-    const t = document.documentElement.dataset.theme;
-    return t ? t === "dark" : root.matchMedia("(prefers-color-scheme: dark)").matches;
+    return document.documentElement.dataset.theme === "dark";
   };
   const webglOK = () => { try { return !!document.createElement("canvas").getContext("webgl"); } catch (e) { return false; } };
 

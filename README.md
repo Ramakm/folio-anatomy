@@ -195,7 +195,7 @@ A finished plate has, top to bottom:
 </tr>
 </table>
 
-Every colour is a CSS custom property, so plates follow the reader's theme. To use your own brand, swap the token block at the top of `page.html`. The structure and the engraving stay the same.
+Every colour is a CSS custom property. Plates open in gallery light, and a **Dark** switch in the masthead turns the lights down; the choice is remembered across every page and embedded plate. To use your own brand, swap the token block at the top of `page.html`. The structure and the engraving stay the same.
 
 <br>
 
@@ -238,6 +238,7 @@ SKILL.md                 the skill: commitments, four phases, plate grammar, sty
 kit/folio-kit.js         the drawing library: camera, engraved boxes and cylinders, glass, pins, text
 kit/folio-live.js        the three views: stage, WebGL light layer, 360° orbit, inspector, loupe
 kit/folio-page.css       the shared exhibition styles: mount, key, wall texts, both themes
+kit/folio-theme.js       light by default, a remembered Dark switch shared across pages
 examples/attention/      Plate I: model.js, plate.js, page.html, page.js
 examples/heart/          Plate II: a lumped-parameter model of the circulation and its bench
 examples/grid/           Plate III: a swing-equation model of a small grid, and its bench of machines
