@@ -19,11 +19,11 @@
     const st = { cam: base, base, slots: {}, az: o.az, el: o.el, turned: false, sceneId: (o.svg.id || "plate") + "-scene" };
     o.svg.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`);
 
+    // Any other view is fitted to the frame afresh, but never closer than the default view,
+    // so the bench stays whole however it is turned.
     st.cameraAt = (az, el) => {
       if (az === o.az && el === o.el) return base;
-      const c0 = K.camera({ az, el, k: base.k * (o.orbitScale ?? 0.9) });
-      const p = c0.p(C);
-      return K.camera({ az, el, k: c0.k, ox: anchor[0] - p[0], oy: anchor[1] - p[1] });
+      return K.fit({ az, el, maxK: base.k * (o.orbitScale ?? 0.92) }, o.points, o.W, o.H, o.pad ?? 22);
     };
     st.mount = (az = st.az, el = st.el) => {
       st.az = az; st.el = el; st.turned = az !== o.az || el !== o.el;
@@ -36,6 +36,11 @@
         alongX: (list, key = (v) => v) => list.slice().sort((a, b) => cam.depth(key(a), 0, 0) - cam.depth(key(b), 0, 0)),
         farFirst: (list, pt) => list.slice().sort((a, b) => cam.depth(...pt(a)) - cam.depth(...pt(b))),
         leftIsFar: cam.depth(0, 0, 0) < cam.depth(1, 0, 0),
+        backIsFar: cam.depth(0, 0, 0) < cam.depth(0, 1, 0),
+        // Bands of the bench, each {y, draw}: drawn far to near from any side.
+        bands: (list) => list.slice().sort((a, b) => cam.depth(0, a.y, 0) - cam.depth(0, b.y, 0)).forEach((b) => b.draw()),
+        // Free-standing units, each {at:[x,y,z], draw}: drawn far to near from any angle.
+        units: (list) => list.slice().sort((a, b) => cam.depth(...a.at) - cam.depth(...b.at)).forEach((u) => u.draw()),
       };
       o.build(cam, api);
       let html = "", run = "";
@@ -56,10 +61,12 @@
     // o: { az0, el0, azRange:[a,b], elRange:[a,b], onTurn(az, el), onSettle(az, el), enabled() }
     let az = o.az0, elv = o.el0, va = 0, ve = 0, drag = null, raf = 0, last = 0;
     const clamp = (v, r) => Math.max(r[0], Math.min(r[1], v));
+    // With wrap, the bench turns all the way round; azimuth stays in [-180, 180).
+    const turnAz = (v) => (o.wrap ? ((((v + 180) % 360) + 360) % 360) - 180 : clamp(v, o.azRange));
     const tick = (now) => {
       const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
       if (!drag) {
-        az = clamp(az + va * dt, o.azRange); elv = clamp(elv + ve * dt, o.elRange);
+        az = turnAz(az + va * dt); elv = clamp(elv + ve * dt, o.elRange);
         va *= Math.exp(-dt * 5); ve *= Math.exp(-dt * 5);
         if (Math.abs(va) + Math.abs(ve) < 2) { va = ve = 0; o.onTurn(az, elv); o.onSettle?.(az, elv); raf = 0; last = 0; return; }
       }
@@ -78,7 +85,7 @@
       const now = performance.now(), dt = Math.max(1, now - drag.t) / 1000;
       const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
       const sa = -dx * 0.32, se = dy * 0.22;
-      az = clamp(az + sa, o.azRange); elv = clamp(elv + se, o.elRange);
+      az = turnAz(az + sa); elv = clamp(elv + se, o.elRange);
       va = sa / dt; ve = se / dt;
       drag = { x: e.clientX, y: e.clientY, t: now };
     });
@@ -89,7 +96,8 @@
       get: () => [az, elv],
       to(a, e) {
         // ease to a view without inertia
-        const a0 = az, e0 = elv, t0 = performance.now();
+        let a0 = az; const e0 = elv, t0 = performance.now();
+        if (o.wrap) { while (a - a0 > 180) a0 += 360; while (a0 - a > 180) a0 -= 360; }
         const step = (now) => {
           const k = Math.min(1, (now - t0) / 600), s = k * k * (3 - 2 * k);
           az = a0 + (a - a0) * s; elv = e0 + (e - e0) * s; o.onTurn(az, elv);
@@ -97,7 +105,7 @@
         };
         va = ve = 0; requestAnimationFrame(step);
       },
-      nudge(da, de) { az = clamp(az + da, o.azRange); elv = clamp(elv + de, o.elRange); o.onTurn(az, elv); o.onSettle?.(az, elv); },
+      nudge(da, de) { az = turnAz(az + da); elv = clamp(elv + de, o.elRange); o.onTurn(az, elv); o.onSettle?.(az, elv); },
     };
     return api;
   }

@@ -1,0 +1,1727 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plate III</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a museum exhibition wall. One mounted plate, a catalogue key beside it, then wall texts below. */
+:root {
+  --ground: #E5E1DA; --paper: #F5F2ED; --ink: #1F1C18; --ink-2: #554F46; --ink-3: #857E73; --rule: #C8C1B5; --accent: #C9381D; --accent-soft: rgba(201,56,29,.12);
+  --top: #FCFAF6; --s3: #ECE7DF; --s2: #DED8CE; --s1: #CFC8BB; --s0: #BCB4A6; --cyl: #E6E1D8; --line: #2B2722; --lo: #7A7266; --faint: #B3AB9D;
+  --hatch: #3F3932; --hatch-op: .5; --glass: #DDE4E3; --glass-line: #5D6A6B; --face: #FFFDF8; --brass: #DCD1BB;
+  --fluid: #C9381D; --fluid-2: #DF6A50; --fluid-3: #D24B2F; --fluid-top: #EE9078; --fluid-deep: #8E2412; --shut: #8A8276; --light-blend: normal;
+  --venous: #3E4C84; --venous-top: #7180B6; --venous-deep: #232C55;
+  --water: #8FB3C4; --water-top: #B9D3DE; --water-deep: #4D7487; --copper: #B8794A; --copper-top: #D9A47A; --copper-deep: #6E4123; --iron: #7E8188; --lamp: #F2B544;
+  --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
+  --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
+  --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
+  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
+  --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  --water: #3F6A7E; --water-top: #6E98AA; --water-deep: #1F3A47; --copper: #C2814F; --copper-top: #E0A97C; --copper-deep: #6A3E20; --iron: #5D6068; --lamp: #FFC657;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
+  --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
+  --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
+  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
+  --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  --water: #3F6A7E; --water-top: #6E98AA; --water-deep: #1F3A47; --copper: #C2814F; --copper-top: #E0A97C; --copper-deep: #6A3E20; --iron: #5D6068; --lamp: #FFC657;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; margin: 0; padding-inline: clamp(16px, 4vw, 56px); padding-block: 0 64px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1240px; margin: 0 auto; }
+.mono { font-family: var(--mono); font-feature-settings: "zero" 0; }
+.label { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Masthead */
+.mast { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-block: 22px 18px; border-bottom: 1px solid var(--rule); }
+.mast .mark { font-family: var(--display); font-size: 22px; letter-spacing: .32em; text-transform: uppercase; font-weight: 500; justify-self: center; }
+.mast .r { justify-self: end; text-align: right; }
+
+/* Title block */
+.title { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: 24px 64px; align-items: end; padding-block: 52px 36px; }
+.title h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 7.4vw, 104px); line-height: .94; letter-spacing: -.02em; margin: 14px 0 0; text-wrap: balance; }
+.title h1 em { font-style: italic; color: var(--accent); }
+.title p { margin: 0; color: var(--ink-2); font-size: 17px; max-width: 46ch; }
+.title .cat { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.title .cat dt { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.title .cat dd { margin: 0; font-family: var(--mono); font-size: 12.5px; }
+
+/* The plate */
+.exhibit { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: start; }
+.plate { background: var(--paper); position: relative; padding: 18px 18px 14px; outline: 1px solid var(--rule); outline-offset: -9px; }
+.plate .corners { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 6px 10px 0; }
+.plate .corners.b { padding: 0 10px 6px; align-items: end; }
+.plate .tl { font-family: var(--display); font-style: italic; font-size: 19px; }
+.plate .tr { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); text-align: right; align-self: center; }
+.plate .bl { font-family: var(--mono); font-size: 11px; color: var(--ink-3); max-width: 46ch; }
+.plate .br { font-family: var(--mono); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+.plate .br b { color: var(--accent); font-weight: 500; }
+.fig { position: relative; }
+#plate { display: block; cursor: default; }
+#plate:focus-visible { outline-offset: -4px; }
+#plate-svg { width: 100%; height: auto; display: block; }
+
+/* Figure tones */
+#plate-svg .f { stroke: var(--line); stroke-width: .55; stroke-linejoin: round; }
+#plate-svg .t-top { fill: var(--top); } #plate-svg .t-s3 { fill: var(--s3); } #plate-svg .t-s2 { fill: var(--s2); }
+#plate-svg .t-s1 { fill: var(--s1); } #plate-svg .t-s0 { fill: var(--s0); } #plate-svg .t-cyl { fill: var(--cyl); }
+#plate-svg .t-face { fill: var(--face); }
+#plate-svg .hatch { fill: none; stroke: var(--hatch); stroke-width: .42; opacity: var(--hatch-op); }
+#plate-svg .ln { fill: none; stroke-width: .5; stroke-linecap: round; }
+#plate-svg .ln.lo, #plate-svg .ln-lo { stroke: var(--lo); } #plate-svg .ln.mid { stroke: var(--line); stroke-width: .6; }
+#plate-svg .ln.hi { stroke: var(--line); stroke-width: 1.3; } #plate-svg .ln.faint { stroke: var(--faint); }
+#plate-svg .ln.zero { stroke: var(--accent); stroke-width: .9; }
+#plate-svg .ln-lo { stroke-width: .4; }
+#plate-svg .dot, #plate-svg .hub { fill: var(--line); }
+#plate-svg .glint { fill: var(--top); opacity: .9; }
+#plate-svg .brass .f { fill: var(--brass); }
+#plate-svg .engr { fill: var(--ink); font-family: var(--mono); letter-spacing: .06em; }
+#plate-svg .engr.lo { fill: var(--ink-3); } #plate-svg .engr.tok { font-family: var(--body); font-weight: 600; letter-spacing: .02em; }
+#plate-svg .glass-back { fill: var(--glass); opacity: .55; stroke: var(--glass-line); stroke-width: .35; }
+#plate-svg .glass-front { fill: var(--glass); fill-opacity: .14; stroke: var(--glass-line); stroke-width: .6; }
+#plate-svg .glass-rim { fill: none; stroke: var(--glass-line); stroke-width: .6; }
+#plate-svg .glass-lip { fill: var(--glass); fill-opacity: .35; stroke: var(--glass-line); stroke-width: .5; }
+#plate-svg .ln.grad { stroke: var(--glass-line); stroke-width: .45; }
+#plate-svg .ln.glint-line { stroke: var(--top); stroke-width: 1.4; opacity: .8; }
+#plate-svg .fluid { fill: var(--fluid); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .fluid-top { fill: var(--fluid-top); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .fluidg .hatch { stroke: var(--fluid-deep); opacity: .55; }
+#plate-svg .t-fluid { fill: var(--fluid); } #plate-svg .t-fluid-top { fill: var(--fluid-top); } #plate-svg .t-fluid-2 { fill: var(--fluid-2); } #plate-svg .t-fluid-3 { fill: var(--fluid-3); }
+#plate-svg .stratum .f { stroke: var(--fluid-deep); }
+#plate-svg .t-shut { fill: var(--shut); }
+#plate-svg .shutter .t-cyl { fill: var(--s1); }
+#plate-svg .needle { fill: var(--accent); stroke: var(--fluid-deep); stroke-width: .3; }
+#plate-svg .pin circle { fill: var(--ink); stroke: var(--paper); stroke-width: 1.4; transition: fill .2s; }
+#plate-svg .pin text { fill: var(--paper); font-family: var(--mono); font-size: 8.4px; font-weight: 500; }
+#plate-svg .pin.on circle { fill: var(--accent); }
+#plate-svg .hit { fill: transparent; cursor: pointer; }
+#plate-svg .hit:hover { fill: var(--accent-soft); }
+#plate-svg [data-part].lit .f { stroke: var(--accent); stroke-width: 1; }
+
+/* The key */
+.key { background: var(--paper); padding: 20px 20px 16px; }
+.key h2, .controls h2 { font-family: var(--display); font-weight: 500; font-style: italic; font-size: 22px; margin: 0 0 4px; }
+.key ol { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 2px; }
+.key li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 7px 4px; border-top: 1px solid var(--rule); cursor: default; border-radius: 2px; }
+.key li:hover, .key li.on { background: var(--accent-soft); }
+.num { display: inline-grid; place-items: center; width: 19px; height: 19px; border-radius: 50%; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 10.5px; font-weight: 500; line-height: 1; }
+.key li.on .num { background: var(--accent); }
+.key b { font-weight: 600; font-size: 14px; display: block; line-height: 1.3; }
+.key span.d { font-size: 13px; color: var(--ink-2); line-height: 1.4; display: block; }
+.key code { font-family: var(--mono); font-size: 11.5px; color: var(--ink); }
+.controls { margin-top: 18px; background: var(--paper); padding: 20px; display: grid; gap: 16px; }
+.ctl .label { display: flex; justify-content: space-between; margin-bottom: 7px; }
+.seg { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); }
+.seg.tok { grid-template-columns: repeat(4, 1fr); }
+.seg button { font: 500 12px/1 var(--mono); padding: 9px 2px; background: none; border: 0; border-left: 1px solid var(--rule); color: var(--ink-2); cursor: pointer; }
+.seg.tok button:nth-child(4n+1) { border-left: 0; } .seg.tok button:nth-child(n+5) { border-top: 1px solid var(--rule); }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg button:hover:not([aria-pressed="true"]) { background: var(--accent-soft); color: var(--ink); }
+.headname { font-size: 13px; color: var(--ink-2); margin-top: 7px; min-height: 2.8em; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13.5px; }
+.toggle button { font: 500 12px/1 var(--mono); padding: 8px 12px; border: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; min-width: 92px; }
+.toggle button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* Wall texts */
+section.wall { margin-top: 84px; }
+.sechead { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px 40px; padding-top: 14px; border-top: 1px solid var(--ink); margin-bottom: 30px; }
+.sechead .label { padding-top: 10px; }
+.sechead h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.sechead p { grid-column: 2; margin: 0; color: var(--ink-2); max-width: 64ch; }
+.stages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-left: 1px solid var(--rule); }
+.stage { padding: 4px 22px 8px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.stage .rn { font-family: var(--display); font-style: italic; font-size: 34px; line-height: 1; color: var(--accent); }
+.stage h3 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+.stage .eq { font-family: var(--display); font-size: 21px; padding: 10px 0; border-block: 1px solid var(--rule); white-space: nowrap; overflow-x: auto; }
+.stage .eq i { font-style: italic; }
+.stage p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.stage .live { font-family: var(--mono); font-size: 12px; color: var(--ink); background: var(--paper); padding: 10px 12px; font-variant-numeric: tabular-nums; line-height: 1.6; }
+.stage .live b { color: var(--accent); font-weight: 500; }
+.inl { display: inline-grid; width: 16px; height: 16px; font-size: 9.5px; vertical-align: 1px; }
+
+/* Ledger */
+.ledger-wrap { overflow-x: auto; background: var(--paper); padding: 8px 20px 18px; }
+.qline { font-family: var(--mono); font-size: 12px; padding: 12px 0 14px; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--ink-2); }
+table.ledger { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; min-width: 760px; }
+.ledger th { font-weight: 500; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); text-align: right; padding: 12px 10px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.ledger th:nth-child(-n+3), .ledger td:nth-child(-n+3) { text-align: left; }
+.ledger td { padding: 7px 10px; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
+.ledger td.tok { font-family: var(--body); font-weight: 600; font-size: 14px; }
+.ledger tr.q td { background: var(--accent-soft); }
+.ledger tr.mask td { color: var(--ink-3); }
+.ledger tr.mask td.w { background-image: repeating-linear-gradient(135deg, transparent 0 4px, var(--rule) 4px 5px); }
+.ledger tr { cursor: pointer; }
+.strip { display: inline-grid; grid-template-columns: repeat(8, 11px); gap: 2px; vertical-align: middle; }
+.strip i { height: 11px; border: 1px solid var(--rule); display: block; }
+.bar { display: grid; grid-template-columns: 1fr 50px; gap: 10px; align-items: center; min-width: 170px; }
+.bar span { height: 7px; background: var(--rule); position: relative; display: block; }
+.bar span i { position: absolute; inset: 0 auto 0 0; background: var(--accent); display: block; }
+
+/* Matrix */
+.matrix-wrap { display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr); gap: 32px 48px; align-items: start; }
+.matrix { display: grid; grid-template-columns: 74px repeat(8, 44px); gap: 3px; font-family: var(--mono); font-size: 11px; overflow-x: auto; background: var(--paper); padding: 18px; }
+.matrix .ch { writing-mode: vertical-rl; transform: rotate(180deg); text-align: left; color: var(--ink-3); padding-top: 4px; height: 64px; font-family: var(--body); font-weight: 600; font-size: 12px; }
+.matrix .rh { text-align: right; padding-right: 8px; align-self: center; font-family: var(--body); font-weight: 600; font-size: 12.5px; cursor: pointer; }
+.matrix button { height: 44px; border: 1px solid var(--rule); background: var(--paper); position: relative; padding: 0; font: 500 10px/1 var(--mono); color: var(--ink); cursor: pointer; font-variant-numeric: tabular-nums; }
+.matrix button .fill { position: absolute; inset: 0; background: var(--accent); }
+.matrix button span { position: relative; }
+.matrix button.dark { color: #fff; }
+.matrix button.mask { background-image: repeating-linear-gradient(135deg, transparent 0 4px, var(--rule) 4px 5px); color: transparent; }
+.matrix button.row { outline: 1.5px solid var(--ink); outline-offset: 0; z-index: 1; }
+.matrix-notes p { margin: 0 0 14px; color: var(--ink-2); max-width: 52ch; }
+.matrix-notes h3 { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 24px; margin: 0 0 10px; }
+.heads { display: grid; gap: 0; margin-top: 18px; border-top: 1px solid var(--rule); }
+.heads button { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; text-align: left; padding: 11px 6px; border: 0; border-bottom: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; font: inherit; align-items: baseline; }
+.heads button .rn { font-family: var(--display); font-style: italic; font-size: 19px; color: var(--ink-3); }
+.heads button b { font-weight: 600; font-size: 14.5px; } .heads button small { display: block; color: var(--ink-2); font-size: 13px; }
+.heads button .h { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+.heads button[aria-pressed="true"] { background: var(--paper); } .heads button[aria-pressed="true"] .rn { color: var(--accent); }
+
+/* Notes and colophon */
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 40px; }
+.notes div { border-top: 1px solid var(--rule); padding-top: 14px; }
+.notes h3 { font-size: 14.5px; font-weight: 600; margin: 0 0 6px; }
+.notes p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+footer { margin-top: 84px; padding-top: 16px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; gap: 16px; font-size: 13px; color: var(--ink-3); }
+footer .mark { font-family: var(--display); letter-spacing: .32em; text-transform: uppercase; color: var(--ink); }
+
+@media (max-width: 1080px) {
+  .exhibit { grid-template-columns: minmax(0, 1fr); }
+  .side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .controls { margin-top: 0; }
+  .stages { grid-template-columns: repeat(2, minmax(0, 1fr)); border-left: 0; }
+  .stage { border-right: 0; border-top: 1px solid var(--rule); padding: 18px 18px 22px 0; }
+  .matrix-wrap { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .mast { grid-template-columns: 1fr auto; } .mast .c { display: none; }
+  .title { grid-template-columns: minmax(0, 1fr); padding-block: 32px 24px; }
+  .side { grid-template-columns: minmax(0, 1fr); }
+  .plate { padding: 10px 6px 8px; outline-offset: -5px; }
+  .plate .bl { display: none; } .plate .corners.b { grid-template-columns: 1fr; }
+  .stages { grid-template-columns: minmax(0, 1fr); }
+  .sechead { grid-template-columns: minmax(0, 1fr); gap: 8px; } .sechead p { grid-column: 1; } .sechead .label { padding-top: 0; }
+  .notes { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .matrix { grid-template-columns: 56px repeat(8, minmax(26px, 1fr)); padding: 10px; gap: 2px; }
+  .matrix button { height: 32px; font-size: 0; }
+  footer { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Site navigation */
+.mast a { color: inherit; text-decoration: none; }
+.mast a:hover { color: var(--accent); }
+.mast .mark a { letter-spacing: inherit; }
+.platenav { margin-top: 84px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid var(--ink); padding-top: 16px; }
+.platenav a { text-decoration: none; display: grid; gap: 4px; padding: 14px 0; }
+.platenav a:last-child { text-align: right; }
+.platenav b { font-family: var(--display); font-weight: 400; font-size: clamp(22px, 3vw, 32px); line-height: 1.1; }
+.platenav a:hover b { color: var(--accent); }
+
+/* Blood: arterial uses the accent, venous its own indigo. Colour is the subject here. */
+#plate-svg .arterial { fill: var(--fluid); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .arterial-top, #plate-svg .arterial-cap { fill: var(--fluid-top); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .venous { fill: var(--venous); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .venous-top, #plate-svg .venous-cap { fill: var(--venous-top); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .arterial-ball .f { fill: var(--fluid); stroke: var(--fluid-deep); }
+#plate-svg .venous-ball .f { fill: var(--venous); stroke: var(--venous-deep); }
+#plate-svg .arterialg .hatch, #plate-svg .arterial-ball .hatch { stroke: var(--fluid-deep); opacity: .5; }
+#plate-svg .venousg .hatch, #plate-svg .venous-ball .hatch { stroke: var(--venous-deep); opacity: .55; }
+#plate-svg .sol > .hatch { }
+#plate-svg .flow { fill: none; stroke: var(--paper); stroke-width: 1.1; stroke-dasharray: 2.5 7; stroke-linecap: round; opacity: .9; }
+#plate-svg .flow.thin { stroke-width: .7; stroke-dasharray: 1.4 4; }
+#plate-svg .leather .f { stroke-width: .45; }
+#plate-svg .leather .t-top { fill: var(--s2); } #plate-svg .leather .t-s2, #plate-svg .leather .t-s3 { fill: var(--s1); } #plate-svg .leather .t-s1, #plate-svg .leather .t-s0 { fill: var(--s0); }
+#plate-svg .piston .t-cyl { fill: var(--s2); } #plate-svg .piston .t-top { fill: var(--s3); }
+#plate-svg .lever.leak .t-cyl { fill: var(--accent); }
+#plate-svg .leakring { fill: none; stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 2 2; }
+#plate-svg .housing .t-top { fill: var(--s3); }
+
+/* Charts in wall texts */
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
+.chart .ax { stroke: var(--rule); stroke-width: 1; fill: none; }
+.chart .grid { stroke: var(--rule); stroke-width: .6; stroke-dasharray: 2 4; }
+.chart text { fill: var(--ink-3); font-family: var(--mono); font-size: 10.5px; }
+.chart .lbl { fill: var(--ink-2); font-family: var(--body); font-size: 12px; font-weight: 600; }
+.chart .lv { stroke: var(--accent); stroke-width: 2; fill: none; }
+.chart .ao { stroke: var(--ink); stroke-width: 1.4; fill: none; }
+.chart .la { stroke: var(--ink-3); stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; }
+.chart .loop { stroke: var(--accent); stroke-width: 2; fill: var(--accent-soft); }
+.chart .cursor { stroke: var(--ink); stroke-width: 1; }
+.chart .dot { fill: var(--accent); stroke: var(--paper); stroke-width: 2; }
+.chart .band { fill: var(--ink); opacity: .045; }
+.chart .bandlbl { fill: var(--ink-3); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; }
+
+/* Three views: the switch, the light layer, the turning bench */
+.plate .tr { display: flex; align-items: center; justify-content: flex-end; gap: 16px; flex-wrap: wrap; }
+.views { display: inline-grid; grid-auto-flow: column; border: 1px solid var(--rule); }
+.views button { font: 500 10.5px/1 var(--mono); letter-spacing: .1em; padding: 7px 11px; background: none; border: 0; border-left: 1px solid var(--rule); color: var(--ink-2); cursor: pointer; }
+.views button:first-child { border-left: 0; }
+.views button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.views button:hover:not([aria-pressed="true"]):not(:disabled) { background: var(--accent-soft); color: var(--ink); }
+.views button:disabled { opacity: .4; cursor: not-allowed; }
+.fig canvas.light { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: var(--light-blend); opacity: 0; transition: opacity .5s ease; }
+.fig.mode-webgl canvas.light { opacity: 1; }
+.fig.mode-webgl #plate-svg .flow { visibility: hidden; }
+.fig.mode-3d { cursor: grab; touch-action: none; }
+.fig.mode-3d.turning { cursor: grabbing; }
+.fig.mode-3d #plate-svg .hit { cursor: pointer; }
+@media (max-width: 720px) { .plate .tr .cap { display: none; } }
+
+/* Looking closer: the inspector card and the loupe */
+.fig { position: relative; }
+#plate-svg .pin { cursor: pointer; }
+#plate-svg .pin:hover circle { fill: var(--accent); }
+.inspect { position: absolute; left: 14px; bottom: 14px; width: min(340px, calc(100% - 28px)); background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 1px 0 var(--rule); padding: 14px 16px 14px; display: grid; gap: 6px; z-index: 3; }
+.inspect[hidden] { display: none; }
+.inspect-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.inspect-nav { display: inline-flex; gap: 4px; }
+.inspect-nav button { font: 500 11px/1 var(--mono); padding: 6px 8px; border: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; }
+.inspect-nav button:hover { border-color: var(--ink); }
+.inspect b { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.1; }
+.inspect p { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.inspect-live { font-family: var(--mono); font-size: 12px; line-height: 1.6; padding-top: 8px; border-top: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+.inspect-live b { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 500; }
+.fig.inspecting canvas.light { opacity: 0 !important; }
+.loupe-layer { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; display: none; }
+.loupe-layer .loupe-bg { fill: var(--paper); }
+.loupe-layer .loupe-ring { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.loupe-layer .loupe-ring2 { fill: none; stroke: var(--brass); stroke-width: 7; opacity: .9; }
+.loupe-layer .loupe-handle { stroke: var(--ink); stroke-width: 9; stroke-linecap: round; }
+.fig.loupe-on { cursor: none; }
+.tools { display: inline-grid; grid-auto-flow: column; border: 1px solid var(--rule); }
+.tools button { font: 500 10.5px/1 var(--mono); letter-spacing: .1em; padding: 7px 11px; background: none; border: 0; color: var(--ink-2); cursor: pointer; }
+.tools button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.tools button:hover:not([aria-pressed="true"]) { background: var(--accent-soft); color: var(--ink); }
+@media (max-width: 720px) { .inspect { position: static; width: auto; margin: 8px 0 0; } }
+.key li { cursor: pointer; }
+.plate .tr { gap: 10px; }
+.fig.loupe-on #plate-svg .hit:hover { fill: transparent; }
+
+/* Moving internals */
+#plate-svg .vane { fill: var(--s2); stroke: var(--line); stroke-width: .4; }
+#plate-svg .vane.busy { fill: var(--fluid-top); stroke: var(--fluid-deep); }
+#plate-svg .lobe .f { fill: var(--accent); stroke: var(--fluid-deep); }
+#plate-svg .camdisc .t-top { fill: var(--face); }
+
+/* Plate III: water, copper, iron, fields and light */
+#plate-svg .water { fill: var(--water); stroke: var(--water-deep); stroke-width: .5; }
+#plate-svg .water-top { fill: var(--water-top); stroke: var(--water-deep); stroke-width: .5; }
+#plate-svg .waterg .hatch { stroke: var(--water-deep); opacity: .45; }
+#plate-svg .copper { fill: var(--copper); stroke: var(--copper-deep); stroke-width: .5; }
+#plate-svg .copper-top { fill: var(--copper-top); stroke: var(--copper-deep); stroke-width: .5; }
+#plate-svg .ln.turns { stroke: var(--copper-deep); stroke-width: .45; }
+#plate-svg .core .t-top { fill: var(--iron); } #plate-svg .core .t-s3, #plate-svg .core .t-s2 { fill: color-mix(in srgb, var(--iron) 80%, var(--line)); } #plate-svg .core .t-s1, #plate-svg .core .t-s0 { fill: color-mix(in srgb, var(--iron) 60%, var(--line)); }
+#plate-svg .core .hatch { stroke: var(--line); }
+#plate-svg .rotorbody .t-cyl { fill: var(--iron); } #plate-svg .rotorbody .t-top { fill: color-mix(in srgb, var(--iron) 75%, var(--paper)); }
+#plate-svg .pole-n { fill: var(--accent); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .pole-s { fill: var(--venous); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .ring { fill: none; stroke: var(--line); stroke-width: 2.4; stroke-linecap: round; }
+#plate-svg .field { fill: none; stroke: var(--accent); stroke-width: .7; stroke-dasharray: 2 3; opacity: .75; }
+#plate-svg .flux { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 6; }
+#plate-svg .insul .t-cyl { fill: var(--glass); } #plate-svg .insul .t-top { fill: color-mix(in srgb, var(--glass) 70%, var(--paper)); }
+#plate-svg .conductor { fill: var(--s1); stroke: var(--line); stroke-width: .4; }
+#plate-svg .cable { fill: var(--line); stroke: var(--line); stroke-width: .3; }
+#plate-svg .flow.energy { stroke: var(--lamp); stroke-width: 1.2; stroke-dasharray: 2 9; opacity: .95; }
+#plate-svg .ln.lattice { stroke: var(--lo); stroke-width: .45; }
+#plate-svg .ln.spoke { stroke: var(--line); stroke-width: 1; }
+#plate-svg .bucket .f { stroke-width: .45; }
+#plate-svg .flyball .t-cyl { fill: var(--brass); }
+#plate-svg .roof .t-top, #plate-svg .roof .t-s3, #plate-svg .roof .t-s2 { fill: color-mix(in srgb, var(--accent) 35%, var(--s2)); } #plate-svg .roof .t-s1, #plate-svg .roof .t-s0 { fill: color-mix(in srgb, var(--accent) 30%, var(--s0)); }
+#plate-svg .win { fill: var(--lamp); stroke: var(--line); stroke-width: .3; }
+#plate-svg .jet { fill: none; stroke: var(--water); stroke-width: 3; stroke-dasharray: 4 3; stroke-linecap: round; }
+#plate-svg .tripped .t-cyl { fill: var(--accent); }
+.fig.mode-webgl #plate-svg .flow.energy { visibility: visible; }
+
+/* A plate on its own, for embedding in the cover page. */
+html, body { background: var(--paper); }
+body { padding: 0; }
+.plate { outline-offset: -1px; padding: 14px 14px 10px; }
+</style>
+<figure class="plate" style="margin:0">
+  <div class="corners"><span class="tl">Pl. III</span><span class="tr"><span class="cap">From water to lamp</span><span class="views" id="views" role="group" aria-label="View"></span><span class="tools" id="tools" role="group" aria-label="Tools"><button type="button" data-t="loupe" aria-pressed="false">Loupe</button></span></span></div>
+  <div class="fig" id="plate" tabindex="0" role="img" aria-label="Plate III: a power grid in miniature">
+    <svg id="plate-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+  </div>
+  <div class="corners b"><span class="bl">Click a numbered pin to look closer · drag all the way round in 3D</span><span class="br" id="readout" aria-live="off"></span></div>
+</figure>
+<script>
+/* Folio kit: an orthographic isometric camera and engraved solids, drawn as SVG strings.
+   World units: x along the bench, y toward the viewer, z up. No dependencies. */
+(function (root) {
+  "use strict";
+  const D = Math.PI / 180;
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const mul = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const len = (a) => Math.hypot(a[0], a[1], a[2]);
+  const norm = (a) => mul(a, 1 / (len(a) || 1));
+  const f = (n) => (Math.round(n * 100) / 100).toString();
+
+  /* The light comes from the upper left, slightly in front. Tones are chosen by facing. */
+  const LIGHT = norm([-0.55, 0.35, 0.78]);
+
+  function camera(o = {}) {
+    const az = o.az ?? -24, el = o.el ?? 30, k = o.k ?? 1, ox = o.ox ?? 0, oy = o.oy ?? 0;
+    const a = az * D, e = el * D;
+    const ca = Math.cos(a), sa = Math.sin(a), ce = Math.cos(e), se = Math.sin(e);
+    return {
+      az, el, k, ox, oy,
+      view: [-sa * ce, ca * ce, se],
+      p(x, y, z) {
+        if (Array.isArray(x)) [x, y, z] = x;
+        const u = x * ca + y * sa, w = -x * sa + y * ca;
+        return [ox + k * u, oy + k * (w * se - z * ce)];
+      },
+      depth(x, y, z) {
+        if (Array.isArray(x)) [x, y, z] = x;
+        return -x * sa * ce + y * ca * ce + z * se;
+      },
+    };
+  }
+
+  /* Fit a camera so that the given world points fill W x H with padding. */
+  function fit(o, pts, W, H, pad = 24) {
+    const c = camera({ ...o, k: 1, ox: 0, oy: 0 });
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const p of pts) {
+      const [x, y] = c.p(p);
+      x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+    }
+    const k = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0), o.maxK ?? Infinity);
+    return camera({ ...o, k, ox: W / 2 - k * (x0 + x1) / 2, oy: H / 2 - k * (y0 + y1) / 2 });
+  }
+
+  const path = (pts, close = true) =>
+    "M" + pts.map((q) => f(q[0]) + " " + f(q[1])).join("L") + (close ? "Z" : "");
+
+  function toneOf(n) {
+    if (n[2] > 0.9) return "top";
+    if (n[2] < -0.9) return "s0";
+    const d = dot(n, LIGHT);
+    return d < -0.25 ? "s0" : d < 0 ? "s1" : d < 0.25 ? "s2" : "s3";
+  }
+
+  const attrs = (o) => {
+    let s = "";
+    if (o.id) s += ` id="${o.id}"`;
+    if (o.part) s += ` data-part="${o.part}"`;
+    return s;
+  };
+
+  /* A box from (x,y,z) with size (w,d,h). Draws only the faces turned to the viewer,
+     shaded by facing, with an optional engraved hatch on the darkest side and an inset
+     groove on the top. */
+  function box(cam, x, y, z, w, d, h, o = {}) {
+    const P = (a, b, c) => cam.p(a, b, c);
+    const X = x + w, Y = y + d, Z = z + h;
+    const faces = [
+      { n: [0, 0, 1], q: [[x, y, Z], [X, y, Z], [X, Y, Z], [x, Y, Z]] },
+      { n: [0, 1, 0], q: [[x, Y, z], [X, Y, z], [X, Y, Z], [x, Y, Z]] },
+      { n: [0, -1, 0], q: [[x, y, z], [X, y, z], [X, y, Z], [x, y, Z]] },
+      { n: [1, 0, 0], q: [[X, y, z], [X, Y, z], [X, Y, Z], [X, y, Z]] },
+      { n: [-1, 0, 0], q: [[x, y, z], [x, Y, z], [x, Y, Z], [x, y, Z]] },
+    ];
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    let darkest = null;
+    for (const fc of faces) {
+      if (dot(fc.n, cam.view) <= 1e-6) continue;
+      const t = o.tone && fc.n[2] < 0.9 ? o.tone : toneOf(fc.n);
+      s += `<path class="f t-${fc.n[2] > 0.9 ? (o.topTone || "top") : t}" d="${path(fc.q.map((v) => P(...v)))}"/>`;
+      if (fc.n[2] < 0.9 && (!darkest || dot(fc.n, LIGHT) < dot(darkest.n, LIGHT))) darkest = fc;
+    }
+    if (o.hatch && darkest && h > 2) {
+      const sp = o.hatch === true ? 3 : o.hatch;
+      const n = darkest.n, along = n[0] !== 0 ? [0, 1, 0] : [1, 0, 0];
+      const L = n[0] !== 0 ? d : w, base = darkest.q[0];
+      let lines = "";
+      for (let t = sp; t < L - sp * 0.5; t += sp) {
+        const a = add(base, mul(along, t));
+        lines += `M${f(P(...a)[0])} ${f(P(...a)[1])}L${f(P(a[0], a[1], Z)[0])} ${f(P(a[0], a[1], Z)[1])}`;
+      }
+      s += `<path class="hatch" d="${lines}"/>`;
+    }
+    if (o.groove) {
+      const g = o.groove;
+      s += `<path class="ln faint" d="${path([[x + g, y + g, Z], [X - g, y + g, Z], [X - g, Y - g, Z], [x + g, Y - g, Z]].map((v) => P(...v)))}"/>`;
+    }
+    return s + "</g>";
+  }
+
+  function basis(axis) {
+    const n = norm(axis);
+    const t = Math.abs(n[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];
+    const u = norm(cross(n, t));
+    const v = cross(n, u);
+    return [n, u, v];
+  }
+  const ringPt = (c, u, v, r, t) => add(c, add(mul(u, r * Math.cos(t)), mul(v, r * Math.sin(t))));
+
+  /* A round bar from p0 to p1 of radius r: a post, a rail, a pipe, a knob or a drum.
+     The side is engraved with hatch lines whose density follows the shade, so a
+     curved body reads as turned metal instead of a staircase of flat tones. */
+  function rod(cam, p0, p1, r, o = {}) {
+    const N = o.seg || 44;
+    const [n, u, v] = basis(sub(p1, p0));
+    const V = cam.view;
+    const phi = Math.atan2(dot(v, V), dot(u, V));
+    const t0 = phi - Math.PI / 2, t1 = phi + Math.PI / 2;
+    const side = [];
+    for (let i = 0; i <= N; i++) side.push(cam.p(ringPt(p0, u, v, r, t0 + (t1 - t0) * i / N)));
+    for (let i = N; i >= 0; i--) side.push(cam.p(ringPt(p1, u, v, r, t0 + (t1 - t0) * i / N)));
+    const capC = dot(n, V) > 0 ? p1 : p0;
+    const cap = [];
+    for (let i = 0; i < N * 2; i++) cap.push(cam.p(ringPt(capC, u, v, r, (i / (N * 2)) * Math.PI * 2)));
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    s += `<path class="f ${o.sideCls || "t-cyl"}" d="${path(side)}"/>`;
+    if (o.hatch !== false) {
+      const K = 90; let acc = 0, lines = "";
+      const dens = o.density ?? 1;
+      for (let i = 1; i < K; i++) {
+        const t = t0 + (t1 - t0) * i / K;
+        const m = add(mul(u, Math.cos(t)), mul(v, Math.sin(t)));
+        const dark = Math.pow(Math.max(0, 1 - (dot(m, LIGHT) + 1) / 1.6), 1.7);
+        acc += dark * dens * (r * cam.k) / 14;
+        if (acc >= 1) {
+          acc -= 1;
+          const a = cam.p(ringPt(p0, u, v, r, t)), b = cam.p(ringPt(p1, u, v, r, t));
+          lines += `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`;
+        }
+      }
+      if (lines) s += `<path class="hatch" d="${lines}"/>`;
+    }
+    if (o.knurl) {
+      let lines = "";
+      for (let i = 0; i < o.knurl; i++) {
+        const t = t0 + (t1 - t0) * (i + 0.5) / o.knurl;
+        const a = cam.p(ringPt(p0, u, v, r, t)), b = cam.p(ringPt(p1, u, v, r, t));
+        lines += `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`;
+      }
+      s += `<path class="ln lo" d="${lines}"/>`;
+    }
+    if (o.cap !== false) s += `<path class="f ${o.capCls || "t-top"}" d="${path(cap)}"/>`;
+    return s + "</g>";
+  }
+
+  /* A vertical drum standing on the floor plane. */
+  const drum = (cam, cx, cy, z, r, h, o) => rod(cam, [cx, cy, z], [cx, cy, z + h], r, o);
+
+  /* A ball: in an orthographic camera it projects to a circle. */
+  function ball(cam, c, r, o = {}) {
+    const [x, y] = cam.p(c);
+    const R = r * cam.k;
+    const hx = x - R * 0.35, hy = y - R * 0.4;
+    return `<g class="sol ${o.cls || ""}"${attrs(o)}><circle class="f t-cyl" cx="${f(x)}" cy="${f(y)}" r="${f(R)}"/>` +
+      `<path class="hatch" d="M${f(x + R * 0.15)} ${f(y + R * 0.92)}A${f(R)} ${f(R)} 0 0 0 ${f(x + R * 0.92)} ${f(y + R * 0.2)}"/>` +
+      `<circle class="glint" cx="${f(hx)}" cy="${f(hy)}" r="${f(R * 0.18)}"/></g>`;
+  }
+
+  /* A circle lying on a horizontal plane, as a closed path. */
+  function ringPath(cam, cx, cy, z, r, N = 48) {
+    const pts = [];
+    for (let i = 0; i < N; i++) { const t = (i / N) * Math.PI * 2; pts.push(cam.p(cx + r * Math.cos(t), cy + r * Math.sin(t), z)); }
+    return path(pts);
+  }
+
+  /* An arc on a horizontal plane, angles in degrees measured in world xy. */
+  function arcPath(cam, cx, cy, z, r, a0, a1, N = 32) {
+    const pts = [];
+    for (let i = 0; i <= N; i++) { const t = (a0 + (a1 - a0) * i / N) * D; pts.push(cam.p(cx + r * Math.cos(t), cy + r * Math.sin(t), z)); }
+    return path(pts, false);
+  }
+
+  /* Radial ticks on a horizontal plane. */
+  function radialTicks(cam, cx, cy, z, r0, r1, angles) {
+    let s = "";
+    for (const a of angles) {
+      const t = a * D;
+      const p = cam.p(cx + r0 * Math.cos(t), cy + r0 * Math.sin(t), z);
+      const q = cam.p(cx + r1 * Math.cos(t), cy + r1 * Math.sin(t), z);
+      s += `M${f(p[0])} ${f(p[1])}L${f(q[0])} ${f(q[1])}`;
+    }
+    return s;
+  }
+
+  function line(cam, a, b) {
+    const p = cam.p(a), q = cam.p(b);
+    return `M${f(p[0])} ${f(p[1])}L${f(q[0])} ${f(q[1])}`;
+  }
+
+  /* Text engraved in a plane: ax is the world direction of the baseline, ay the world
+     direction of "down" on the glyphs. Size is in world units. */
+  function faceText(cam, origin, ax, ay, str, size, o = {}) {
+    // Engraving on a face turned away from the viewer is hidden with its face.
+    if (o.cull !== false && dot(cross(ax, ay), cam.view) <= 0.02) return "";
+    const p0 = cam.p(origin);
+    const px = cam.p(add(origin, ax)), py = cam.p(add(origin, ay));
+    const a = (px[0] - p0[0]), b = (px[1] - p0[1]), c = (py[0] - p0[0]), d = (py[1] - p0[1]);
+    const esc = String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    return `<text class="${o.cls || "engr"}" text-anchor="${o.anchor || "middle"}" font-size="${size}" transform="matrix(${f(a)} ${f(b)} ${f(c)} ${f(d)} ${f(p0[0])} ${f(p0[1])})">${esc}</text>`;
+  }
+
+  /* A specimen pin: a small numbered disc set on a part, never a leader line. */
+  function pin(cam, at, num, o = {}) {
+    const [x, y] = cam.p(at);
+    return `<g class="pin" data-pin="${num}" tabindex="-1"><circle cx="${f(x)}" cy="${f(y)}" r="7.2"/>` +
+      `<text x="${f(x)}" y="${f(y + 2.9)}" text-anchor="middle">${num}</text></g>`;
+  }
+
+  /* A screw head on a horizontal plane: a ring and a slot. */
+  function screw(cam, cx, cy, z, r = 2.2) {
+    const a = cam.p(cx - r * 0.7, cy - r * 0.2, z), b = cam.p(cx + r * 0.7, cy + r * 0.2, z);
+    return `<path class="f t-s3 ln-lo" d="${ringPath(cam, cx, cy, z, r, 20)}"/><path class="ln lo" d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}"/>`;
+  }
+
+
+  /* A convex prism: a flat convex polygon (3D points, in order) swept along dir.
+     Only faces turned to the viewer are drawn, each toned by its facing. Roofs, wedges, hoppers. */
+  function prism(cam, base, dir, o = {}) {
+    const n0 = norm(cross(sub(base[1], base[0]), sub(base[2], base[0])));
+    const nb = dot(n0, dir) > 0 ? mul(n0, -1) : n0;
+    const top = base.map((p) => add(p, dir));
+    const cen = mul(base.reduce((a, p) => add(a, p), [0, 0, 0]), 1 / base.length);
+    const mid = add(cen, mul(dir, 0.5));
+    const faces = [{ n: nb, q: base }, { n: mul(nb, -1), q: top }];
+    for (let i = 0; i < base.length; i++) {
+      const a = base[i], b = base[(i + 1) % base.length];
+      let n = norm(cross(sub(b, a), dir));
+      const fc = mul(add(add(a, b), add(add(a, dir), add(b, dir))), 0.25);
+      if (dot(n, sub(fc, mid)) < 0) n = mul(n, -1);
+      faces.push({ n, q: [a, b, add(b, dir), add(a, dir)] });
+    }
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    for (const fc of faces) {
+      if (dot(fc.n, cam.view) <= 1e-6) continue;
+      const t = fc.n[2] > 0.9 ? (o.topTone || "top") : (o.tone || toneOf(fc.n));
+      s += `<path class="f t-${t}" d="${path(fc.q.map((v) => cam.p(v)))}"/>`;
+    }
+    return s + "</g>";
+  }
+
+  /* The half of a ring (a circle around an axis) that lies behind or in front of its centre,
+     for rings that wrap another part: draw the back half first and the front half last. */
+  function ringArc(cam, c, axis, r, front, N = 48) {
+    const [, u, v] = basis(axis), cd = cam.depth(c);
+    let d = "", pen = false;
+    for (let i = 0; i <= N; i++) {
+      const t = (i / N) * Math.PI * 2, p = ringPt(c, u, v, r, t);
+      const on = front ? cam.depth(p) >= cd : cam.depth(p) < cd;
+      if (on) { const q = cam.p(p); d += (pen ? "L" : "M") + f(q[0]) + " " + f(q[1]); pen = true; } else pen = false;
+    }
+    return d;
+  }
+  /* A point on a ring around an axis, at angle t: for parts that orbit a shaft. */
+  function orbitPt(c, axis, r, t) { const [, u, v] = basis(axis); return ringPt(c, u, v, r, t); }
+
+  root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, cross, LIGHT, prism, ringArc, orbitPt };
+})(typeof window !== "undefined" ? window : globalThis);
+
+/* Folio live kit: the three views of a plate.
+   - stage():  owns the camera and the painter's order; rebuilds the drawing when the camera turns.
+   - light():  a WebGL layer over the SVG. Its visibility mask is rendered from the drawing itself,
+               so light only lands on surfaces the reader can actually see.
+   - orbit():  drag to turn the bench; the scene is re-projected and re-shaded from the new view.
+   - views():  the SVG · WebGL · 3D switch on the plate's mount.
+   Requires folio-kit.js. No dependencies. */
+(function (root) {
+  "use strict";
+  const K = root.Folio;
+  const D = Math.PI / 180;
+
+  /* ---------- stage ---------- */
+  function stage(o) {
+    // o: { svg, W, H, az, el, points, center, build(cam, api) }
+    const base = K.fit({ az: o.az, el: o.el }, o.points, o.W, o.H, o.pad ?? 22);
+    const C = o.center;
+    const anchor = base.p(C);
+    const st = { cam: base, base, slots: {}, az: o.az, el: o.el, turned: false, sceneId: (o.svg.id || "plate") + "-scene" };
+    o.svg.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`);
+
+    // Any other view is fitted to the frame afresh, but never closer than the default view,
+    // so the bench stays whole however it is turned.
+    st.cameraAt = (az, el) => {
+      if (az === o.az && el === o.el) return base;
+      return K.fit({ az, el, maxK: base.k * (o.orbitScale ?? 0.92) }, o.points, o.W, o.H, o.pad ?? 22);
+    };
+    st.mount = (az = st.az, el = st.el) => {
+      st.az = az; st.el = el; st.turned = az !== o.az || el !== o.el;
+      const cam = (st.cam = st.cameraAt(az, el));
+      const order = [];
+      const api = {
+        S: (s) => order.push(s),
+        slot: (n) => order.push({ slot: n }),
+        // Units along the bench: far end first. Valid for any view from the front half.
+        alongX: (list, key = (v) => v) => list.slice().sort((a, b) => cam.depth(key(a), 0, 0) - cam.depth(key(b), 0, 0)),
+        farFirst: (list, pt) => list.slice().sort((a, b) => cam.depth(...pt(a)) - cam.depth(...pt(b))),
+        leftIsFar: cam.depth(0, 0, 0) < cam.depth(1, 0, 0),
+        backIsFar: cam.depth(0, 0, 0) < cam.depth(0, 1, 0),
+        // Bands of the bench, each {y, draw}: drawn far to near from any side.
+        bands: (list) => list.slice().sort((a, b) => cam.depth(0, a.y, 0) - cam.depth(0, b.y, 0)).forEach((b) => b.draw()),
+        // Free-standing units, each {at:[x,y,z], draw}: drawn far to near from any angle.
+        units: (list) => list.slice().sort((a, b) => cam.depth(...a.at) - cam.depth(...b.at)).forEach((u) => u.draw()),
+      };
+      o.build(cam, api);
+      let html = "", run = "";
+      for (const it of order) {
+        if (typeof it === "string") run += it;
+        else { html += run; run = ""; html += `<g data-slot="${it.slot}"></g>`; }
+      }
+      o.svg.innerHTML = `<g id="${st.sceneId}">` + html + run + "</g>";
+      st.slots = {};
+      o.svg.querySelectorAll("[data-slot]").forEach((g) => (st.slots[g.dataset.slot] = g));
+      return cam;
+    };
+    return st;
+  }
+
+  /* ---------- orbit ---------- */
+  function orbit(el, o) {
+    // o: { az0, el0, azRange:[a,b], elRange:[a,b], onTurn(az, el), onSettle(az, el), enabled() }
+    let az = o.az0, elv = o.el0, va = 0, ve = 0, drag = null, raf = 0, last = 0;
+    const clamp = (v, r) => Math.max(r[0], Math.min(r[1], v));
+    // With wrap, the bench turns all the way round; azimuth stays in [-180, 180).
+    const turnAz = (v) => (o.wrap ? ((((v + 180) % 360) + 360) % 360) - 180 : clamp(v, o.azRange));
+    const tick = (now) => {
+      const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
+      if (!drag) {
+        az = turnAz(az + va * dt); elv = clamp(elv + ve * dt, o.elRange);
+        va *= Math.exp(-dt * 5); ve *= Math.exp(-dt * 5);
+        if (Math.abs(va) + Math.abs(ve) < 2) { va = ve = 0; o.onTurn(az, elv); o.onSettle?.(az, elv); raf = 0; last = 0; return; }
+      }
+      o.onTurn(az, elv);
+      raf = requestAnimationFrame(tick);
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    el.addEventListener("pointerdown", (e) => {
+      if (!o.enabled()) return;
+      if (e.target.closest(".hit")) return;
+      drag = { x: e.clientX, y: e.clientY, t: performance.now() };
+      el.setPointerCapture(e.pointerId); el.classList.add("turning"); kick();
+    });
+    el.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      const now = performance.now(), dt = Math.max(1, now - drag.t) / 1000;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      const sa = -dx * 0.32, se = dy * 0.22;
+      az = turnAz(az + sa); elv = clamp(elv + se, o.elRange);
+      va = sa / dt; ve = se / dt;
+      drag = { x: e.clientX, y: e.clientY, t: now };
+    });
+    const end = () => { if (!drag) return; drag = null; el.classList.remove("turning"); kick(); };
+    el.addEventListener("pointerup", end); el.addEventListener("pointercancel", end);
+    el.addEventListener("dblclick", () => { if (o.enabled()) api.to(o.az0, o.el0); });
+    const api = {
+      get: () => [az, elv],
+      to(a, e) {
+        // ease to a view without inertia
+        let a0 = az; const e0 = elv, t0 = performance.now();
+        if (o.wrap) { while (a - a0 > 180) a0 += 360; while (a0 - a > 180) a0 -= 360; }
+        const step = (now) => {
+          const k = Math.min(1, (now - t0) / 600), s = k * k * (3 - 2 * k);
+          az = a0 + (a - a0) * s; elv = e0 + (e - e0) * s; o.onTurn(az, elv);
+          if (k < 1) requestAnimationFrame(step); else o.onSettle?.(az, elv);
+        };
+        va = ve = 0; requestAnimationFrame(step);
+      },
+      nudge(da, de) { az = turnAz(az + da); elv = clamp(elv + de, o.elRange); o.onTurn(az, elv); o.onSettle?.(az, elv); },
+    };
+    return api;
+  }
+
+  /* ---------- light ---------- */
+  const PRELUDE = `
+precision highp float;
+uniform vec2 uRes; uniform vec2 uVB; uniform vec3 uCam; uniform vec2 uAng;
+uniform float uTime; uniform float uDark; uniform sampler2D uMask;
+vec2 vbOf() { return vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y) / uRes * uVB; }
+vec4 maskAt() { return texture2D(uMask, gl_FragCoord.xy / uRes); }
+vec2 project(vec3 p) {
+  float ca = cos(uAng.x), sa = sin(uAng.x), ce = cos(uAng.y), se = sin(uAng.y);
+  float u = p.x * ca + p.y * sa, w = -p.x * sa + p.y * ca;
+  return vec2(uCam.x + uCam.z * u, uCam.y + uCam.z * (w * se - p.z * ce));
+}
+// The world point on the horizontal plane at height z that lands on this pixel.
+vec2 onPlane(vec2 vb, float z) {
+  float ca = cos(uAng.x), sa = sin(uAng.x), ce = cos(uAng.y), se = sin(uAng.y);
+  float u = (vb.x - uCam.x) / uCam.z;
+  float w = ((vb.y - uCam.y) / uCam.z + z * ce) / se;
+  return vec2(u * ca - w * sa, u * sa + w * ca);
+}
+float segDist(vec2 p, vec2 a, vec2 b, out float t) {
+  vec2 ab = b - a; t = clamp(dot(p - a, ab) / max(dot(ab, ab), 1e-4), 0.0, 1.0);
+  return length(p - a - ab * t);
+}
+// Where light falls: the bench is lit from a lamp behind it and to the left, so light that
+// passes through a part lands on the floor in front of it.
+const vec3 LAMP = vec3(-0.38, -0.62, 0.69);
+vec2 fall(vec3 p, float floorZ) { vec3 L = normalize(LAMP); float h = p.z - floorZ; return p.xy - L.xy * h / L.z; }
+// Accumulate premultiplied light of one colour.
+void addLight(inout vec4 acc, vec3 col, float a) { a = clamp(a, 0.0, 1.0); acc.rgb += col * a * (1.0 - acc.a); acc.a += a * (1.0 - acc.a); }
+float caustic(vec2 q, float t) {
+  float a = sin(q.x * 0.55 + t * 1.1) + sin(q.y * 0.7 - t * 0.9) + sin((q.x + q.y) * 0.4 + t * 1.6);
+  float b = sin(q.x * 0.31 - q.y * 0.52 + t * 0.7);
+  return pow(clamp(1.0 - abs(a + b) * 0.42, 0.0, 1.0), 5.0);
+}
+`;
+
+  function light(o) {
+    // o: { canvas, svg, W, H, frag, maskCss }
+    const gl = o.canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false });
+    if (!gl) return null;
+    const sh = (type, src) => {
+      const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+      return s;
+    };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, "attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }"));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, PRELUDE + o.frag));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, "p");
+    gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
+    const U = {};
+    const u = (n) => (n in U ? U[n] : (U[n] = gl.getUniformLocation(prog, n)));
+    let w = 0, h = 0, maskBusy = false;
+
+    const api = {
+      gl,
+      size() {
+        const r = Math.min(1.5, root.devicePixelRatio || 1);
+        const cw = Math.max(2, Math.round(o.canvas.clientWidth * r)), ch = Math.max(2, Math.round(o.canvas.clientHeight * r));
+        if (cw !== w || ch !== h) { w = o.canvas.width = cw; h = o.canvas.height = ch; gl.viewport(0, 0, w, h); return true; }
+        return false;
+      },
+      /* Render the drawing with flat channel colours: red = floor, green = vessels, blue = glass,
+         black = everything else, in the drawing's own painter's order. Occlusion comes for free. */
+      async mask() {
+        if (maskBusy || !w) return; maskBusy = true;
+        try {
+          const clone = o.svg.cloneNode(true);
+          clone.setAttribute("width", w); clone.setAttribute("height", h);
+          clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+          const style = document.createElementNS("http://www.w3.org/2000/svg", "style");
+          style.textContent = `* { fill: #000 !important; stroke: #000 !important; opacity: 1 !important; fill-opacity: 1 !important; stroke-opacity: 1 !important; }
+            .hit, .pin, .flow, text { display: none !important; }
+            .ln, .hatch, .leakring { fill: none !important; } ${o.maskCss}`;
+          clone.insertBefore(style, clone.firstChild);
+          const img = new Image();
+          img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(new XMLSerializer().serializeToString(clone));
+          await img.decode();
+          const c = document.createElement("canvas"); c.width = w; c.height = h;
+          const g = c.getContext("2d"); g.fillStyle = "#000"; g.fillRect(0, 0, w, h); g.drawImage(img, 0, 0, w, h);
+          api.maskCanvas = c;
+          gl.bindTexture(gl.TEXTURE_2D, tex);
+          gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c);
+        } catch (e) { /* the light layer is an extra; the drawing stays */ }
+        maskBusy = false;
+      },
+      set(name, v) {
+        const l = u(name); if (l === null) return;
+        if (typeof v === "number") gl.uniform1f(l, v);
+        else if (v instanceof Float32Array) gl.uniform1fv(l, v); // an array of floats
+        else if (v.length === 2) gl.uniform2fv(l, v);
+        else if (v.length === 3) gl.uniform3fv(l, v);
+        else if (v.length % 4 === 0) gl.uniform4fv(l, v);
+      },
+      draw(cam, t, dark) {
+        api.set("uRes", [w, h]); api.set("uVB", [o.W, o.H]); api.set("uCam", [cam.ox, cam.oy, cam.k]);
+        api.set("uAng", [cam.az * D, cam.el * D]); api.set("uTime", t); api.set("uDark", dark ? 1 : 0);
+        gl.uniform1i(u("uMask"), 0);
+        gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      },
+    };
+    return api;
+  }
+
+  /* ---------- the view switch ---------- */
+  function views(host, o) {
+    // o: { modes: [{id,label,ok}], current, onSelect(id) }
+    host.innerHTML = o.modes.map((m) => `<button type="button" data-v="${m.id}" aria-pressed="${m.id === o.current}" ${m.ok === false ? "disabled title=\"Not available in this browser\"" : ""}>${m.label}</button>`).join("");
+    host.addEventListener("click", (e) => {
+      const b = e.target.closest("button"); if (!b || b.disabled) return;
+      host.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+      o.onSelect(b.dataset.v);
+    });
+    return { set(id) { host.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.v === id)); } };
+  }
+
+
+  /* ---------- inspector: look closely at one part ---------- */
+  function inspector(o) {
+    // o: { fig, svg, W, H, parts:[{n, name, text, at:[x,y,z]}], cam(), live(n) -> html, zoom }
+    const card = document.createElement("div");
+    card.className = "inspect"; card.hidden = true; card.setAttribute("role", "dialog"); card.setAttribute("aria-live", "polite");
+    card.innerHTML = `<div class="inspect-top"><span class="label" data-k="num"></span><span class="inspect-nav">
+      <button type="button" data-a="prev" aria-label="Previous part">←</button><button type="button" data-a="next" aria-label="Next part">→</button>
+      <button type="button" data-a="close">Whole bench</button></span></div>
+      <b data-k="name"></b><p data-k="text"></p><div class="inspect-live" data-k="live"></div>`;
+    o.fig.appendChild(card);
+    const q = (k) => card.querySelector(`[data-k="${k}"]`);
+    let open = null, vb = [0, 0, o.W, o.H], anim = 0;
+    const setVB = (v) => { vb = v; o.svg.setAttribute("viewBox", v.map((x) => x.toFixed(2)).join(" ")); };
+    const animateTo = (to) => {
+      cancelAnimationFrame(anim);
+      const from = vb.slice(), t0 = performance.now(), dur = matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 650;
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / dur), e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        setVB(from.map((f, i) => f + (to[i] - f) * e));
+        if (k < 1) anim = requestAnimationFrame(step);
+      };
+      anim = requestAnimationFrame(step);
+    };
+    const lightPin = (n) => o.svg.querySelectorAll(".pin").forEach((p) => p.classList.toggle("on", String(p.dataset.pin) === String(n)));
+    const api = {
+      get open() { return open; },
+      show(n) {
+        const part = o.parts.find((p) => p.n === n); if (!part) return;
+        open = n;
+        const c = o.cam(), p = c.p(typeof part.at === "function" ? part.at() : part.at), z = o.zoom || 2.4, w = o.W / z, h = o.H / z;
+        const x = Math.max(0, Math.min(o.W - w, p[0] - w / 2)), y = Math.max(0, Math.min(o.H - h, p[1] - h * 0.42));
+        animateTo([x, y, w, h]);
+        o.fig.classList.add("inspecting");
+        q("num").textContent = `Part ${n} of ${o.parts.length}`;
+        q("name").textContent = part.name; q("text").textContent = part.text;
+        api.refresh(); card.hidden = false; lightPin(n);
+        o.onChange?.(n);
+      },
+      close() {
+        if (open === null) return;
+        open = null; animateTo([0, 0, o.W, o.H]); card.hidden = true;
+        o.fig.classList.remove("inspecting"); lightPin(null); o.onChange?.(null);
+      },
+      step(d) {
+        const i = o.parts.findIndex((p) => p.n === open);
+        api.show(o.parts[(i + d + o.parts.length) % o.parts.length].n);
+      },
+      refresh() { if (open !== null) q("live").innerHTML = o.live ? o.live(open) : ""; },
+    };
+    card.addEventListener("click", (e) => {
+      const a = e.target.closest("button")?.dataset.a;
+      if (a === "close") api.close(); else if (a === "prev") api.step(-1); else if (a === "next") api.step(1);
+      e.stopPropagation();
+    });
+    // Pins may be redrawn while they move, so act on the press rather than waiting for a click.
+    o.svg.addEventListener("pointerdown", (e) => {
+      const pinEl = e.target.closest(".pin");
+      if (pinEl) { const n = +pinEl.dataset.pin; open === n ? api.close() : api.show(n); e.stopPropagation(); e.preventDefault(); }
+    });
+    o.fig.addEventListener("keydown", (e) => {
+      if (open === null) return;
+      if (e.key === "Escape") api.close(); else if (e.key === ".") api.step(1); else if (e.key === ",") api.step(-1); else return;
+      e.preventDefault(); e.stopPropagation();
+    });
+    return api;
+  }
+
+  /* ---------- loupe: a magnifying glass over the bench ---------- */
+  function loupe(o) {
+    // o: { fig, svg, W, H, sceneId, mag, r }
+    const NS = "http://www.w3.org/2000/svg", id = o.sceneId + "-loupe";
+    const layer = document.createElementNS(NS, "svg");
+    layer.setAttribute("class", "loupe-layer"); layer.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`); layer.setAttribute("aria-hidden", "true");
+    layer.innerHTML = `<defs><clipPath id="${id}"><circle r="${o.r || 92}"/></clipPath></defs>
+      <g clip-path="url(#${id})"><rect class="loupe-bg" x="-5000" y="-5000" width="10000" height="10000"/><use href="#${o.sceneId}"/></g>
+      <circle class="loupe-ring" r="${o.r || 92}"/><circle class="loupe-ring2" r="${(o.r || 92) + 5}"/>
+      <line class="loupe-handle" x1="0" y1="0" x2="0" y2="0"/>`;
+    o.fig.appendChild(layer);
+    const clip = layer.querySelector("clipPath circle"), use = layer.querySelector("use");
+    const rings = layer.querySelectorAll(".loupe-ring, .loupe-ring2"), handle = layer.querySelector(".loupe-handle");
+    let on = false, pos = [o.W * 0.5, o.H * 0.45];
+    const r = o.r || 92, m = o.mag || 2.6;
+    const place = () => {
+      const [x, y] = pos;
+      clip.setAttribute("cx", x); clip.setAttribute("cy", y);
+      use.setAttribute("transform", `translate(${x} ${y}) scale(${m}) translate(${-x} ${-y})`);
+      rings.forEach((c) => { c.setAttribute("cx", x); c.setAttribute("cy", y); });
+      const a = Math.PI * 0.25;
+      handle.setAttribute("x1", x + (r + 5) * Math.cos(a)); handle.setAttribute("y1", y + (r + 5) * Math.sin(a));
+      handle.setAttribute("x2", x + (r + 60) * Math.cos(a)); handle.setAttribute("y2", y + (r + 60) * Math.sin(a));
+    };
+    const toVB = (e) => {
+      const b = o.svg.getBoundingClientRect(), vb = (o.svg.getAttribute("viewBox") || `0 0 ${o.W} ${o.H}`).split(/\s+/).map(Number);
+      return [vb[0] + ((e.clientX - b.left) / b.width) * vb[2], vb[1] + ((e.clientY - b.top) / b.height) * vb[3]];
+    };
+    o.fig.addEventListener("pointermove", (e) => { if (!on) return; pos = toVB(e); place(); });
+    place();
+    return {
+      get on() { return on; },
+      toggle(v = !on) { on = v; o.fig.classList.toggle("loupe-on", on); layer.style.display = on ? "block" : "none"; if (on) place(); },
+      sync() { const vb = (o.svg.getAttribute("viewBox") || "").trim(); if (vb) layer.setAttribute("viewBox", vb); },
+    };
+  }
+
+  const isDark = () => {
+    const t = document.documentElement.dataset.theme;
+    return t ? t === "dark" : root.matchMedia("(prefers-color-scheme: dark)").matches;
+  };
+  const webglOK = () => { try { return !!document.createElement("canvas").getContext("webgl"); } catch (e) { return false; } };
+
+  K.live = { stage, orbit, light, views, inspector, loupe, isDark, webglOK, PRELUDE };
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+/* The true model behind Plate III: a power grid in miniature.
+   One generator feeds one town through a step-up transformer, a three-phase line and a
+   step-down transformer. The model keeps two balances:
+   - Power: the turbine's mechanical power Pm against the electrical load Pe. Any mismatch
+     speeds or slows the spinning machine (the swing equation), which is what grid frequency is.
+   - Losses: the line's I²R heating, which falls with the square of the transmission voltage.
+   A flyball governor answers frequency within seconds (droop); slower automatic control
+   brings it back to 50 Hz. Units: MW, kV, A, Hz, s. */
+(function (root) {
+  "use strict";
+  const P0 = {
+    f0: 50, S: 150,          // nominal frequency, machine rating (MW)
+    H: 6,                    // inertia constant (s): kinetic energy at speed / rating
+    droop: 0.04,             // 4 % droop: a 2 Hz fall would open the valve fully
+    Tg: 0.9,                 // turbine and governor lag (s)
+    Pnl: 1.2,                // no-load losses at 50 Hz: friction, windage, excitation (MW)
+    overspeed: 51.2,         // above this the valves close fast
+    Ki: 0.03,                // automatic generation control, per second
+    D: 1.5,                  // load relief: % of load per Hz
+    R: 9.0,                  // line resistance per phase (ohm): about 110 km of conductor
+    Vgen: 11,                // generator terminal voltage (kV)
+    Vdist: 11,               // town distribution voltage (kV)
+    Vhome: 0.23,             // household supply (kV)
+    ufls: 48.8,              // under-frequency: the town is disconnected below this
+  };
+  const TX_KV = [33, 66, 132, 220, 400];
+
+  function make(o = {}) {
+    return {
+      t: 0, f: 50, Pm: o.demand ?? 60, Pref: o.demand ?? 60, demand: o.demand ?? 60, kv: o.kv ?? 220,
+      closed: true, tripped: false, rot: 0, ac: 0, noise: 0, ramp: 1,
+    };
+  }
+
+  /* What the line delivers for a given sending power: losses and voltage drop, unity power factor. */
+  function line(Pload, kv) {
+    // Solve Ps = Pload + Ps² R / V² for the sending power Ps (MW, kV, ohm).
+    const a = P0.R / (kv * kv); // per MW
+    const disc = 1 - 4 * a * Pload;
+    if (disc <= 0) {
+      // More than the line can carry: it delivers its maximum, V²/4R, at half the sending voltage.
+      const Ps = 1 / (2 * a), got = 1 / (4 * a);
+      return { Ps, got, loss: Ps - got, ok: false, drop: 0.5, I: (Ps / (Math.sqrt(3) * kv)) * 1000 };
+    }
+    const Ps = (1 - Math.sqrt(disc)) / (2 * a);
+    const I = (Ps / (Math.sqrt(3) * kv)) * 1000; // A
+    return { Ps, got: Pload, loss: Ps - Pload, ok: true, drop: (Ps - Pload) / Ps, I };
+  }
+
+  function step(s, dt) {
+    const f0 = P0.f0, df = s.f - f0;
+    // slowly wandering demand keeps the grid alive, as every real evening does
+    s.noise += (-s.noise * 0.3 + (Math.random() - 0.5) * 2.2) * dt;
+    // after a reconnection the town's load is picked up at about 5 MW a second, block by block
+    s.ramp = s.closed ? Math.min(1, s.ramp + (dt * 5) / Math.max(5, s.demand)) : 0;
+    const want = s.closed ? Math.max(0, (s.demand * (1 + (P0.D / 100) * df) + s.noise) * s.ramp) : 0;
+    const L = line(want, s.kv);
+    const Pe = (s.closed ? L.Ps : 0) + P0.Pnl * (s.f / f0) * (s.f / f0);
+    // swing equation: 2H/f0 · df/dt = (Pm - Pe)/S
+    s.f += ((f0 / (2 * P0.H)) * ((s.Pm - Pe) / P0.S)) * dt;
+    // governor: droop sets the target, the turbine follows with a lag
+    const target = s.Pref - (df / f0 / P0.droop) * P0.S;
+    s.Pm += ((Math.max(0, Math.min(P0.S, target)) - s.Pm) / P0.Tg) * dt;
+    if (s.f > P0.overspeed) s.Pm *= Math.exp(-dt / 0.15); // fast valving against overspeed
+    // automatic generation control: nudges the set point until 50 Hz returns
+    s.Pref = Math.max(0, Math.min(P0.S, s.Pref - P0.Ki * df * P0.S * dt));
+    // protection: a deep frequency fall disconnects the town
+    if (s.closed && s.f < P0.ufls) { s.closed = false; s.tripped = true; }
+    // the machine turns: 2 poles, so one revolution per cycle; drawn 100 times slower
+    s.rot += 2 * Math.PI * (s.f / 100) * dt;
+    s.ac += 2 * Math.PI * (s.f / 100) * dt;
+    s.t += dt;
+    s.last = { want, got: s.closed ? L.got : 0, Pe, loss: s.closed ? L.loss : 0, I: s.closed ? L.I : 0, drop: s.closed ? L.drop : 0, ok: L.ok };
+  }
+
+  function read(s) {
+    const l = s.last || { want: 0, got: 0, Pe: 0, loss: 0, I: 0, drop: 0, ok: true };
+    const Vtown = s.closed ? 1 - l.drop : 0;
+    const Igen = s.closed ? (l.Pe / (Math.sqrt(3) * P0.Vgen)) * 1000 : 0;
+    return {
+      f: s.f, Pm: s.Pm, Pe: l.Pe, load: l.got, want: l.want, loss: l.loss, I: l.I, Igen, Vtown, kv: s.kv,
+      eff: l.Pe > 0 ? l.got / Math.max(l.got + l.loss, 1e-6) : 1, short: l.want > 0 ? 1 - l.got / l.want : 0, closed: s.closed, tripped: s.tripped, ok: l.ok,
+      rot: s.rot, ac: s.ac, emf: Math.sin(s.ac), demand: s.demand, governor: Math.max(0, Math.min(1, s.Pm / P0.S)),
+      turns: s.kv / P0.Vgen, home: Vtown * P0.Vhome * 1000,
+    };
+  }
+
+  /* Losses for the current demand at every available voltage: the chart in wall text III. */
+  function lossCurve(demand) { return TX_KV.map((kv) => ({ kv, ...line(demand, kv) })); }
+
+  root.GridModel = { P0, TX_KV, make, step, read, line, lossCurve };
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+/* Plate III: a power grid in miniature.
+   Falling water turns a wheel; the shaft spins a magnet inside three coils; a flyball governor
+   holds the speed. Transformers raise the voltage for the long line and lower it for the town.
+   Every part is a unit sorted by depth, so the bench can be turned all the way round. */
+(function () {
+  "use strict";
+  const K = window.Folio, G = window.GridModel;
+  const { box, rod, drum, ball, arcPath, radialTicks, line, faceText, pin, screw, path, f, prism, ringArc, orbitPt } = K;
+  const W = 1000, H = 600;
+  const X = [1, 0, 0], Y = [0, 1, 0], Z = [0, 0, 1];
+
+  // Layout (world units, x along the bench, y toward the viewer, z up)
+  const PL = { x1: 980, y1: 330 };
+  const WHEEL = { c: [95, 150, 80], R: 40, half: 6, n: 12 };
+  const TANK = { x: 40, y: 78, z: 10, r: 22, h: 140 };
+  const SH = { y: 150, z: 80, x0: 101, x1: 318, r: 4 };
+  const GOV = { x: 140, y: 150, z0: 90, z1: 150, L: 28 };
+  const GEN = { x: 225, r: 38, x0: 178, x1: 272, rr: 24 };
+  const T1 = { x0: 340, xl: 358, xr: 422, xb: 452 };
+  const T2 = { x0: 760, xb: 772, xl: 798, xr: 862, xo: 882 };
+  const PY = [540, 700];
+  const PHASE = [118, 150, 182], BUSH = [128, 150, 172];
+  const ARMZ = 176;
+  const TOWN = { bus: 905, houses: [{ y: 60, h: 22 }, { y: 116, h: 26 }, { y: 172, h: 22 }], factory: { y: 230 } };
+  const FRONT = 285;
+  const CTRL = { demand: 650, volt: 735, brk: 820 };
+  const GAUGES = [
+    { id: "gF", x: 110, r: 15, label: "FREQUENCY · Hz", min: 48, max: 52, val: (r) => r.f },
+    { id: "gP", x: 210, r: 12, label: "GENERATOR · MW", min: 0, max: 150, val: (r) => r.Pe },
+    { id: "gI", x: 470, r: 12, label: "LINE · A", min: 0, max: 1200, val: (r) => r.I },
+    { id: "gL", x: 590, r: 12, label: "LINE LOSS · MW", min: 0, max: 40, val: (r) => r.loss },
+  ];
+
+  const pts = [];
+  for (const x of [-10, PL.x1 + 10]) for (const y of [-10, PL.y1 + 10]) for (const z of [-40, 0]) pts.push([x, y, z]);
+  for (const x of PY) pts.push([x, 150, 212]);
+  pts.push([GOV.x, GOV.y, 165], [TANK.x, TANK.y, 160]);
+  const svg = document.getElementById("plate-svg");
+  const stage = K.live.stage({ svg, W, H, az: -24, el: 30, points: pts, center: [490, 165, 60], pad: 18, build });
+  let cam = stage.base, S, slot;
+  let flowPaths = [], wires = [], flux = [];
+
+  /* A cable or conductor with a sag, as depth-sortable spans, each carrying an energy-flow line. */
+  function catenary(a, b, sag, n = 10) {
+    const out = [];
+    for (let i = 0; i <= n; i++) {
+      const t = i / n;
+      out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t - sag * 4 * t * (1 - t)]);
+    }
+    return out;
+  }
+  function conductorUnits(points, cls, key, r = 1.6) {
+    const us = [];
+    for (let i = 0; i < points.length - 1; i++) {
+      const a = points[i], b = points[i + 1];
+      us.push({ at: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2], draw() {
+        S(rod(cam, a, b, r, { seg: 10, sideCls: cls, cap: false, hatch: false }));
+        const id = "fp" + flowPaths.length;
+        flowPaths.push({ id, key });
+        wires.push({ a: cam.p(a), b: cam.p(b), key });
+        S(`<path id="${id}" class="flow energy" d="${path([cam.p(a), cam.p(b)], false)}"/>`);
+      } });
+    }
+    return us;
+  }
+  const facing = () => Math.atan2(cam.view[1], cam.view[0]) / (Math.PI / 180);
+
+  /* ---------- the scene, for any camera ---------- */
+  function build(c, api) {
+    cam = c; S = api.S; slot = api.slot; flowPaths = []; wires = []; flux = [];
+
+    // Plinth
+    for (const [x, y] of [[10, 10], [PL.x1 - 10, 10], [10, PL.y1 - 10], [PL.x1 - 10, PL.y1 - 10]]) S(drum(cam, x, y, -40, 8, 8, { cls: "foot" }));
+    S(box(cam, -6, -6, -32, PL.x1 + 12, PL.y1 + 12, 8, { hatch: 2.6 }));
+    S(box(cam, 0, 0, -24, PL.x1, PL.y1, 24, { hatch: 2.2, groove: 7, cls: "floor" }));
+    for (const [x, y] of [[16, 16], [PL.x1 - 16, 16], [16, PL.y1 - 16], [PL.x1 - 16, PL.y1 - 16]]) S(screw(cam, x, y, 0, 3));
+    if (cam.view[1] > 0) S(box(cam, 370, PL.y1, -19, 240, 1.4, 15, { cls: "brass" }));
+    S(faceText(cam, [490, PL.y1 + 1.5, -9.4], X, [0, 0, -1], "FOLIO · PLATE III · A POWER GRID IN MINIATURE", 5.2));
+    S(faceText(cam, [490, PL.y1 + 1.5, -15.4], X, [0, 0, -1], "ONE GENERATOR · TWO TRANSFORMERS · ONE LINE · ONE TOWN · 50 Hz", 3.3, { cls: "engr lo" }));
+    if (cam.view[1] < 0) S(box(cam, 370, -1.4, -19, 240, 1.4, 15, { cls: "brass" }));
+    S(faceText(cam, [490, -1.5, -9.4], [-1, 0, 0], [0, 0, -1], "FOLIO · PLATE III · THE GRID SEEN FROM BEHIND", 5.2));
+
+    const U = [];
+    // The water tank and penstock
+    U.push({ at: [TANK.x, TANK.y, 60], draw() {
+      S(drum(cam, TANK.x, TANK.y, 0, TANK.r + 5, TANK.z, { cls: "base" }));
+      S(rod(cam, [TANK.x, TANK.y, TANK.z], [TANK.x, TANK.y, TANK.z + TANK.h], TANK.r, { sideCls: "glass-back", capCls: "glass-back", hatch: false }));
+      S(rod(cam, [TANK.x, TANK.y, TANK.z], [TANK.x, TANK.y, TANK.z + TANK.h * 0.82], TANK.r - 0.8, { cls: "waterg", sideCls: "water", capCls: "water-top" }));
+      S(rod(cam, [TANK.x, TANK.y, TANK.z], [TANK.x, TANK.y, TANK.z + TANK.h], TANK.r, { sideCls: "glass-front", capCls: "glass-rim", hatch: false }));
+      S(drum(cam, TANK.x, TANK.y, TANK.z + TANK.h, TANK.r + 2, 3, { cls: "capd" }));
+    } });
+    U.push({ at: [70, 104, 22], draw() {
+      const route = [[TANK.x, TANK.y + TANK.r - 2, 20], [TANK.x, 104, 20], [WHEEL.c[0], 104, 20], [WHEEL.c[0], 104, 36], [WHEEL.c[0], 112, 36]];
+      for (let i = 0; i < route.length - 1; i++) S(rod(cam, route[i], route[i + 1], 4.5, { seg: 16, sideCls: "t-cyl" }));
+      for (const p of route.slice(1, -1)) S(ball(cam, p, 5.2));
+      S(rod(cam, [WHEEL.c[0], 112, 36], [WHEEL.c[0], 120, 36], 3, { seg: 14, cls: "nozzle" }));
+      slot("jet");
+    } });
+    // The wheel
+    U.push({ at: [WHEEL.c[0], WHEEL.c[1], WHEEL.c[2]], draw() {
+      S(box(cam, WHEEL.c[0] - 14, 124, 0, 28, 52, 8, { groove: 2.5 }));
+      for (const y of [128, 172]) S(box(cam, WHEEL.c[0] - 3, y - 3, 8, 6, 6, 70, { hatch: 2 }));
+      slot("wheel");
+    } });
+    // Shaft pieces and bearing pedestals
+    const shaftSeg = (x0, x1) => ({ at: [(x0 + x1) / 2, SH.y, SH.z], draw() { S(rod(cam, [x0, SH.y, SH.z], [x1, SH.y, SH.z], SH.r, { seg: 18 })); } });
+    U.push(shaftSeg(SH.x0, 132), shaftSeg(148, GEN.x0 - 4), shaftSeg(GEN.x1 + 2, 284), shaftSeg(298, SH.x1));
+    for (const px of [120, 310]) U.push({ at: [px, SH.y, 40], draw() {
+      S(box(cam, px - 8, SH.y - 12, 0, 16, 24, SH.z - 10, { hatch: 2.2 }));
+      S(rod(cam, [px - 6, SH.y, SH.z], [px + 6, SH.y, SH.z], 9, { seg: 24 }));
+    } });
+    // The flyball governor on its gearbox
+    U.push({ at: [GOV.x, GOV.y, 100], draw() {
+      S(box(cam, GOV.x - 8, GOV.y - 8, SH.z - 10, 16, 16, 20, { groove: 2 }));
+      slot("governor");
+    } });
+    // The generator: stator cage, coils, rotor slot
+    U.push({ at: [GEN.x, SH.y, SH.z], draw() {
+      S(box(cam, GEN.x0 - 4, 114, 0, GEN.x1 - GEN.x0 + 8, 72, 30, { hatch: 2.4, groove: 3 }));
+      for (const y of [120, 180]) S(box(cam, GEN.x - 40, y - 4, 30, 80, 8, 14, { cls: "base" }));
+      const c = [GEN.x, SH.y, SH.z];
+      const rings = [180, 202, 225, 248, 270];
+      const bars = [45, 135, 225, 315].map((a) => (a * Math.PI) / 180);
+      const coils = [80, 100, 260, 280].map((a) => (a * Math.PI) / 180);
+      const depthOf = (t, r) => cam.depth(orbitPt(c, X, r, t));
+      const cd = cam.depth(c);
+      let back = "", front = "";
+      for (const x of rings) {
+        back += `<path class="ring" d="${ringArc(cam, [x, SH.y, SH.z], X, GEN.r, false)}"/>`;
+        front += `<path class="ring" d="${ringArc(cam, [x, SH.y, SH.z], X, GEN.r, true)}"/>`;
+      }
+      const piece = (t, r, rad, cls) => rod(cam, orbitPt([GEN.x0, SH.y, SH.z], X, r, t), orbitPt([GEN.x1, SH.y, SH.z], X, r, t), rad, { seg: 10, sideCls: cls, cap: true, capCls: cls });
+      for (const t of coils) (depthOf(t, 33) < cd ? (back += piece(t, 33, 3, "copper")) : (front += piece(t, 33, 3, "copper")));
+      for (const t of bars) (depthOf(t, GEN.r) < cd ? (back += piece(t, GEN.r, 2, "t-cyl")) : (front += piece(t, GEN.r, 2, "t-cyl")));
+      S(`<g class="stator">${back}</g>`);
+      slot("rotor");
+      S(`<g class="stator">${front}</g>`);
+    } });
+    // Slip rings, brushes and the generator's three cables up to the step-up transformer
+    U.push({ at: [291, SH.y, SH.z], draw() {
+      for (const x of [286, 293]) S(rod(cam, [x - 2.5, SH.y, SH.z], [x + 2.5, SH.y, SH.z], 9, { seg: 22, sideCls: "copper", capCls: "copper" }));
+      S(box(cam, 283, SH.y - 6, SH.z + 9, 14, 12, 10, { cls: "housing" }));
+    } });
+    BUSH.forEach((yb, i) => {
+      const yc = 144 + i * 6;
+      const route = [[290, yc, SH.z + 19], [290, yc, 132], [T1.xl, yc, 132], [T1.xl, 150 + (yc - 150) * 0.4, 100]];
+      U.push(...conductorUnits(route, "cable", "gen", 1.5));
+    });
+    // Step-up transformer
+    function transformer(x0, xl, xr, flip, name) {
+      U.push({ at: [(xl + xr) / 2, 150, 60], draw() {
+        S(box(cam, x0, 108, 0, 132, 84, 10, { groove: 3, hatch: 2.4 }));
+        const limb = (x) => S(box(cam, x - 8, 142, 10, 16, 16, 110, { cls: "core" }));
+        const far = api.leftIsFar;
+        const yokeB = () => S(box(cam, xl - 8, 142, 10, xr - xl + 16, 16, 16, { cls: "core" }));
+        const yokeT = () => S(box(cam, xl - 8, 142, 104, xr - xl + 16, 16, 16, { cls: "core" }));
+        yokeB();
+        const coil = (x, r, bands, cls) => {
+          S(rod(cam, [x, 150, 30], [x, 150, 98], r, { sideCls: cls, capCls: cls + "-top" }));
+          let d = "";
+          const fc = facing();
+          for (let k = 1; k < bands; k++) d += arcPath(cam, x, 150, 30 + (68 * k) / bands, r + 0.2, fc - 80, fc + 80, 16);
+          S(`<path class="ln turns" d="${d}"/>`);
+        };
+        const lv = () => { limb(xl); coil(xl, flip ? 19 : 16, flip ? 22 : 7, "copper"); };
+        const hv = () => { limb(xr); coil(xr, flip ? 16 : 19, flip ? 7 : 22, "copper"); };
+        far ? (lv(), hv()) : (hv(), lv());
+        yokeT();
+        // flux path: a dashed loop round the core window, whose dashes swing with the alternating flux
+        const loop = [[xl, 150, 18], [xr, 150, 18], [xr, 150, 112], [xl, 150, 112]];
+        const id = "fx" + flux.length; flux.push(id);
+        S(`<path id="${id}" class="flux" d="${path(loop.map((p) => cam.p(p[0], api.backIsFar ? 158.5 : 141.5, p[2])))}"/>`);
+        S(faceText(cam, [(xl + xr) / 2, 192.2, 4], X, [0, 0, -1], name, 3.6, { cls: "engr lo" }));
+      } });
+    }
+    transformer(T1.x0, T1.xl, T1.xr, false, "STEP-UP · 11 kV TO LINE");
+    transformer(T2.x0, T2.xl, T2.xr, true, "STEP-DOWN · LINE TO 11 kV");
+    // Bushings: insulator stacks the conductors leave from
+    const bushing = (x, y, n, topZ) => ({ at: [x, y, topZ / 2], draw() {
+      S(rod(cam, [x, y, 10], [x, y, 16], 2.4, { seg: 12 }));
+      for (let k = 0; k < n; k++) S(drum(cam, x, y, 16 + k * 6, 6, 3.2, { cls: "insul" }));
+      S(rod(cam, [x, y, 16], [x, y, topZ], 1.8, { seg: 10 }));
+      S(ball(cam, [x, y, topZ], 2.4));
+    } });
+    BUSH.forEach((y) => { U.push(bushing(T1.xb, y, 6, 54)); U.push(bushing(T2.xb, y, 6, 54)); });
+    [135, 150, 165].forEach((y) => U.push(bushing(T2.xo, y, 3, 36)));
+    // Pylons
+    for (const px of PY) {
+      U.push({ at: [px, 150, 100], draw() {
+        const leg = (sx, sy) => [[px + sx * 22, 150 + sy * 22, 0], [px + sx * 6, 150 + sy * 6, 200]];
+        const legs = [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([a, b]) => leg(a, b));
+        const order = legs.map((l, i) => i).sort((a, b) => cam.depth(...legs[a][0]) - cam.depth(...legs[b][0]));
+        for (const i of order) S(drum(cam, legs[i][0][0], legs[i][0][1], -0.5, 4, 3, { cls: "base" }));
+        // bracing: an X on every face, every 40 units of height
+        let d = "";
+        const at = (l, z) => { const t = z / 200; return [l[0][0] + (l[1][0] - l[0][0]) * t, l[0][1] + (l[1][1] - l[0][1]) * t, z]; };
+        for (let i = 0; i < 4; i++) {
+          const A = legs[i], B = legs[(i + 1) % 4];
+          for (let z = 0; z < 200; z += 40) {
+            d += line(cam, at(A, z), at(B, z + 40)) + line(cam, at(B, z), at(A, z + 40)) + line(cam, at(A, z + 40), at(B, z + 40));
+          }
+        }
+        S(`<path class="ln lattice" d="${d}"/>`);
+        for (const i of order) S(rod(cam, legs[i][0], legs[i][1], 1.8, { seg: 10 }));
+        S(box(cam, px - 4, 108, 196, 8, 84, 6, { hatch: 2 }));
+        S(prism(cam, [[px - 6, 144, 200], [px + 6, 144, 200], [px, 144, 214]], [0, 12, 0]));
+        for (const y of PHASE) {
+          for (let k = 0; k < 4; k++) S(drum(cam, px, y, ARMZ + 2 + k * 4.5, 3.6, 2.4, { cls: "insul" }));
+        }
+      } });
+    }
+    // The line: three conductors, bushing to pylon to pylon to bushing
+    PHASE.forEach((yp, i) => {
+      const yb = BUSH[i];
+      const a = [T1.xb, yb, 54], p1 = [PY[0], yp, ARMZ], p2 = [PY[1], yp, ARMZ], b = [T2.xb, yb, 54];
+      U.push(...conductorUnits(catenary(a, p1, 6, 4), "conductor", "line"));
+      U.push(...conductorUnits(catenary(p1, p2, 26, 10), "conductor", "line"));
+      U.push(...conductorUnits(catenary(p2, b, 6, 4), "conductor", "line"));
+    });
+    // The town: a bus bar, three houses and a works
+    U.push({ at: [TOWN.bus, 160, 30], draw() {
+      for (const y of [56, 268]) S(rod(cam, [TOWN.bus, y, 0], [TOWN.bus, y, 48], 2.2, { seg: 12 }));
+      S(rod(cam, [TOWN.bus, 56, 48], [TOWN.bus, 268, 48], 2, { seg: 12, sideCls: "copper", capCls: "copper" }));
+    } });
+    [135, 150, 165].forEach((y) => U.push(...conductorUnits([[T2.xo, y, 36], [TOWN.bus, y, 48]], "cable", "town", 1.2)));
+    const house = (y0, h, i) => ({ at: [942, y0 + 14, h / 2], draw() {
+      const x0 = 925, w = 34, d = 28;
+      S(box(cam, x0, y0, 0, w, d, h, { cls: "house" }));
+      S(prism(cam, [[x0, y0, h], [x0, y0 + d, h], [x0, y0 + d / 2, h + 14]], [w, 0, 0], { cls: "roof" }));
+      slot("win" + i);
+    } });
+    TOWN.houses.forEach((hh, i) => {
+      U.push(house(hh.y, hh.h, i));
+      U.push(...conductorUnits([[TOWN.bus, hh.y + 14, 46], [925, hh.y + 14, hh.h - 2]], "cable", "town", 0.9));
+    });
+    U.push({ at: [945, 258, 22], draw() {
+      const x0 = 918, y0 = 232, w = 50, d = 52, h = 30;
+      S(box(cam, x0, y0, 0, w, d, h, { cls: "house" }));
+      for (let k = 0; k < 3; k++) S(prism(cam, [[x0 + k * (w / 3), y0, h], [x0 + (k + 1) * (w / 3), y0, h], [x0 + (k + 1) * (w / 3), y0, h + 10]], [0, d, 0], { cls: "roof" }));
+      S(rod(cam, [x0 + 8, y0 + 10, h], [x0 + 8, y0 + 10, h + 36], 4, { seg: 16 }));
+      slot("win3");
+    } });
+    U.push(...conductorUnits([[TOWN.bus, 258, 46], [918, 258, 28]], "cable", "town", 0.9));
+    // Gauges and controls along the front
+    for (const g of GAUGES) U.push({ at: [g.x, FRONT, 6], draw() {
+      S(box(cam, g.x - g.r - 8, FRONT - g.r - 6, 0, 2 * g.r + 16, 2 * g.r + 14, 5, { groove: 2 }));
+      S(drum(cam, g.x, FRONT, 5, g.r + 2.5, 3));
+      S(drum(cam, g.x, FRONT, 8, g.r, 3, { capCls: "t-face" }));
+      const z = 11, ang = (v) => 180 + ((v - g.min) / (g.max - g.min)) * 180;
+      const mj = [], mn = [];
+      for (let k = 0; k <= 16; k++) (k % 4 === 0 ? mj : mn).push(180 + (k / 16) * 180);
+      S(`<path class="ln lo" d="${radialTicks(cam, g.x, FRONT, z, g.r * 0.8, g.r * 0.92, mn)}"/><path class="ln mid" d="${radialTicks(cam, g.x, FRONT, z, g.r * 0.7, g.r * 0.92, mj)}${arcPath(cam, g.x, FRONT, z, g.r * 0.92, 180, 360, 24)}"/>`);
+      if (g.id === "gF") S(`<path class="ln zero" d="${arcPath(cam, g.x, FRONT, z, g.r * 0.86, ang(48), ang(G.P0.ufls), 8)}"/><path class="ln mid" d="${radialTicks(cam, g.x, FRONT, z, g.r * 0.55, g.r * 0.95, [ang(50)])}"/>`);
+      S(faceText(cam, [g.x, FRONT + g.r + 8.2, 2], X, [0, 0, -1], g.label, 3.2, { cls: "engr lo" }));
+      slot(g.id);
+    } });
+    U.push({ at: [CTRL.demand, FRONT, 6], draw() {
+      S(box(cam, CTRL.demand - 24, FRONT - 22, 0, 48, 44, 3, { groove: 2.5 }));
+      const tk = [];
+      for (let k = 0; k <= 14; k++) tk.push(160 + (k / 14) * 220);
+      S(`<path class="ln lo" d="${radialTicks(cam, CTRL.demand, FRONT, 3, 15, 17.5, tk)}"/>`);
+      S(faceText(cam, [CTRL.demand, FRONT + 22.2, 1.5], X, [0, 0, -1], "TOWN DEMAND", 3.2, { cls: "engr lo" }));
+      slot("kD");
+    } });
+    U.push({ at: [CTRL.volt, FRONT, 6], draw() {
+      S(box(cam, CTRL.volt - 26, FRONT - 22, 0, 52, 44, 3, { groove: 2.5 }));
+      G.TX_KV.forEach((kv, i) => {
+        const t = (VANG[i] * Math.PI) / 180;
+        S(faceText(cam, [CTRL.volt + 19 * Math.cos(t), FRONT + 19 * Math.sin(t) + 1.2, 3], X, Y, String(kv), 3.2));
+      });
+      S(`<path class="ln mid" d="${radialTicks(cam, CTRL.volt, FRONT, 3, 11.5, 14, VANG)}"/>`);
+      S(faceText(cam, [CTRL.volt, FRONT + 22.2, 1.5], X, [0, 0, -1], "LINE kV", 3.2, { cls: "engr lo" }));
+      slot("kV");
+    } });
+    U.push({ at: [CTRL.brk, FRONT, 8], draw() {
+      S(box(cam, CTRL.brk - 20, FRONT - 16, 0, 40, 32, 3, { groove: 2.5 }));
+      S(box(cam, CTRL.brk - 7, FRONT - 7, 3, 14, 14, 8, { cls: "housing" }));
+      S(faceText(cam, [CTRL.brk, FRONT + 16.2, 1.5], X, [0, 0, -1], "BREAKER", 3.2, { cls: "engr lo" }));
+      slot("brk");
+    } });
+
+    api.units(U);
+    slot("pins");
+  }
+  const VANG = [200, 235, 270, 305, 340];
+
+  /* ---------- live drawing ---------- */
+  function wheel(r) {
+    const c = WHEEL.c, cd = cam.depth(c);
+    const buckets = [];
+    for (let k = 0; k < WHEEL.n; k++) {
+      const t = r.rot + (k * 2 * Math.PI) / WHEEL.n;
+      const p = orbitPt(c, X, WHEEL.R + 3, t);
+      buckets.push({ p, d: cam.depth(p) });
+    }
+    const bk = (b) => box(cam, b.p[0] - 7, b.p[1] - 3.5, b.p[2] - 3.5, 14, 7, 7, { cls: "bucket" });
+    let o = "";
+    for (const b of buckets) if (b.d < cd) o += bk(b);
+    o += rod(cam, [c[0] - WHEEL.half, c[1], c[2]], [c[0] + WHEEL.half, c[1], c[2]], WHEEL.R, { seg: 40 });
+    // spokes on the face turned to us
+    const face = cam.view[0] > 0 ? c[0] + WHEEL.half : c[0] - WHEEL.half;
+    let d = "";
+    for (let k = 0; k < 6; k++) {
+      const t = r.rot + (k * Math.PI) / 3;
+      d += line(cam, orbitPt([face, c[1], c[2]], X, 6, t), orbitPt([face, c[1], c[2]], X, WHEEL.R - 4, t));
+    }
+    o += `<path class="ln spoke" d="${d}"/>` + `<path class="ln lo" d="${path(Array.from({ length: 41 }, (_, i) => cam.p(orbitPt([face, c[1], c[2]], X, WHEEL.R - 4, (i / 40) * 2 * Math.PI))))}"/>`;
+    o += rod(cam, [face, c[1], c[2]], [face + (cam.view[0] > 0 ? 3 : -3), c[1], c[2]], 6, { seg: 16 });
+    for (const b of buckets) if (b.d >= cd) o += bk(b);
+    return o;
+  }
+  function governor(r) {
+    const g = Math.max(0, Math.min(1, (r.f - 48.6) / 3.2));
+    const phi = ((26 + 38 * g) * Math.PI) / 180, top = [GOV.x, GOV.y, GOV.z1];
+    const zc = GOV.z1 - GOV.L * Math.cos(phi) * 1.2;
+    const parts = [];
+    for (let k = 0; k < 2; k++) {
+      const psi = r.rot * 1.6 + k * Math.PI;
+      const dir = [Math.sin(phi) * Math.cos(psi), Math.sin(phi) * Math.sin(psi), -Math.cos(phi)];
+      const bp = [top[0] + dir[0] * GOV.L, top[1] + dir[1] * GOV.L, top[2] + dir[2] * GOV.L];
+      const mid = [top[0] + dir[0] * GOV.L * 0.55, top[1] + dir[1] * GOV.L * 0.55, top[2] + dir[2] * GOV.L * 0.55];
+      parts.push({ d: cam.depth(bp), s: rod(cam, top, bp, 1.2, { seg: 8 }) + rod(cam, mid, [GOV.x, GOV.y, zc], 0.9, { seg: 8 }) + ball(cam, bp, 6, { cls: "flyball" }) });
+    }
+    const cd = cam.depth(GOV.x, GOV.y, zc);
+    let o = "";
+    for (const p of parts) if (p.d < cd) o += p.s;
+    o += rod(cam, [GOV.x, GOV.y, GOV.z0], [GOV.x, GOV.y, GOV.z1 + 2], 1.8, { seg: 10 });
+    o += drum(cam, GOV.x, GOV.y, zc - 2, 4.5, 4, { cls: "collar" });
+    o += ball(cam, [GOV.x, GOV.y, GOV.z1 + 3], 3);
+    for (const p of parts) if (p.d >= cd) o += p.s;
+    return o;
+  }
+  function rotor(r) {
+    const c = [GEN.x, SH.y, SH.z], cd = cam.depth(c);
+    const poles = [0, Math.PI].map((dt, k) => {
+      const t = r.rot + dt;
+      const a = orbitPt([GEN.x0 + 4, SH.y, SH.z], X, GEN.rr - 2, t), b = orbitPt([GEN.x1 - 4, SH.y, SH.z], X, GEN.rr - 2, t);
+      return { d: cam.depth(orbitPt(c, X, GEN.rr, t)), s: rod(cam, a, b, 6.5, { seg: 12, sideCls: k ? "pole-s" : "pole-n", capCls: k ? "pole-s" : "pole-n", hatch: false }) };
+    });
+    // field lines: loops leaving the north pole, crossing the gap and returning to the south pole
+    let fl = "";
+    for (const x of [GEN.x - 30, GEN.x, GEN.x + 30]) {
+      for (const sgn of [1, -1]) {
+        const p = [];
+        for (let i = 0; i <= 16; i++) {
+          const u = i / 16, t = r.rot + sgn * u * Math.PI, rad = GEN.rr + 4 + 10 * Math.sin(u * Math.PI);
+          p.push(cam.p(orbitPt([x, SH.y, SH.z], X, rad, t)));
+        }
+        fl += path(p, false);
+      }
+    }
+    let o = "";
+    for (const p of poles) if (p.d < cd) o += p.s;
+    o += rod(cam, [GEN.x0 - 2, SH.y, SH.z], [GEN.x1 + 2, SH.y, SH.z], GEN.rr, { seg: 36, cls: "rotorbody" });
+    for (const p of poles) if (p.d >= cd) o += p.s;
+    o += `<path class="field" d="${fl}"/>`;
+    return o;
+  }
+  function needle(g, r) {
+    const v = Math.max(g.min, Math.min(g.max, g.val(r)));
+    const t = ((180 + ((v - g.min) / (g.max - g.min)) * 180) * Math.PI) / 180, c = Math.cos(t), s = Math.sin(t), z = 11.2, R = g.r * 0.88;
+    const tip = [g.x + R * c, FRONT + R * s, z], tail = [g.x - 3 * c, FRONT - 3 * s, z], w1 = [g.x - 1.1 * s, FRONT + 1.1 * c, z], w2 = [g.x + 1.1 * s, FRONT - 1.1 * c, z];
+    const hub = cam.p(g.x, FRONT, z);
+    return `<path class="needle" d="${path([tail, w1, tip, w2].map((p) => cam.p(p)))}"/><circle class="hub" cx="${f(hub[0])}" cy="${f(hub[1])}" r="${f(1.4 * cam.k)}"/>`;
+  }
+  function knob(x, ang, r = 10) {
+    const t = (ang * Math.PI) / 180;
+    return drum(cam, x, FRONT, 3, r, 11, { knurl: 14, density: 1.2 }) + drum(cam, x, FRONT, 14, r - 3.5, 1.6) +
+      `<path class="ln hi" d="${line(cam, [x + 1.5 * Math.cos(t), FRONT + 1.5 * Math.sin(t), 15.7], [x + (r - 0.8) * Math.cos(t), FRONT + (r - 0.8) * Math.sin(t), 14.1])}"/>`;
+  }
+  function windows(i, r) {
+    const lit = r.closed ? Math.max(0, Math.min(1, (r.Vtown - 0.55) / 0.4)) * Math.min(1, r.load / Math.max(1, r.want || r.load || 1) + 0.15) : 0;
+    const flick = r.closed && r.Vtown < 0.9 ? 0.75 + 0.25 * Math.sin(performance.now() / 70 + i) : 1;
+    const op = (0.12 + 0.88 * lit * flick).toFixed(2);
+    const fac = i === 3;
+    const x0 = fac ? 918 : 925, w = fac ? 50 : 34, d = fac ? 52 : 28, y0 = fac ? 232 : TOWN.houses[i].y, h = fac ? 30 : TOWN.houses[i].h;
+    let o = "";
+    const quad = (pts) => `<path class="win" style="opacity:${op}" d="${path(pts.map((p) => cam.p(p)))}"/>`;
+    const n = fac ? 4 : 2;
+    for (const yFace of [y0 + d + 0.3, y0 - 0.3]) {
+      const ny = yFace > y0 ? 1 : -1;
+      if (cam.view[1] * ny <= 0.03) continue;
+      for (let k = 0; k < n; k++) {
+        const wx = x0 + ((k + 0.5) * w) / n - 3;
+        o += quad([[wx, yFace, h * 0.35], [wx + 6, yFace, h * 0.35], [wx + 6, yFace, h * 0.35 + 7], [wx, yFace, h * 0.35 + 7]]);
+      }
+    }
+    for (const xFace of [x0 + w + 0.3, x0 - 0.3]) {
+      const nx = xFace > x0 ? 1 : -1;
+      if (cam.view[0] * nx <= 0.03) continue;
+      const wy = y0 + d / 2 - 3;
+      o += quad([[xFace, wy, h * 0.35], [xFace, wy + 6, h * 0.35], [xFace, wy + 6, h * 0.35 + 7], [xFace, wy, h * 0.35 + 7]]);
+    }
+    return o;
+  }
+  const PINS = [
+    [1, [WHEEL.c[0] - 14, 150, WHEEL.c[2] + WHEEL.R + 10]], [2, [GOV.x + 12, GOV.y, GOV.z1 + 8]], [3, [GEN.x, SH.y - 4, SH.z + GEN.r + 10]],
+    [4, [GEN.x0 + 6, SH.y + GEN.r, SH.z - 18]], [5, [T1.xr + 10, 150, 128]], [6, [620, 150, ARMZ - 8]],
+    [7, [PY[0] + 12, 108, 205]], [8, [T2.xl - 12, 150, 128]], [9, [942, 100, 50]],
+    [10, [GAUGES[0].x - 24, FRONT, 10]], [11, [GAUGES[3].x - 22, FRONT, 10]], [12, [CTRL.brk + 22, FRONT, 10]],
+  ];
+  const draw = {
+    wheel, governor, rotor,
+    jet: (r) => {
+      const a = cam.p(WHEEL.c[0], 120, 36), b = cam.p(WHEEL.c[0], 146, 36);
+      return `<path class="jet" style="stroke-dashoffset:${f(-r.rot * 30)};opacity:${f(0.35 + 0.65 * r.governor)}" d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}"/>`;
+    },
+    kD: (r) => knob(CTRL.demand, 160 + ((r.demand - 10) / 130) * 220),
+    kV: (r) => knob(CTRL.volt, VANG[G.TX_KV.indexOf(r.kv)], 9),
+    brk: (r) => {
+      const a = ((r.closed ? -1 : 1) * 34 * Math.PI) / 180, base = [CTRL.brk, FRONT, 11], tip = [CTRL.brk + Math.sin(a) * 15, FRONT, 11 + Math.cos(a) * 15];
+      return rod(cam, base, tip, 1.6, { seg: 12 }) + ball(cam, tip, 3.4, { cls: r.closed ? "" : "tripped" });
+    },
+    pins: () => PINS.map(([n, p]) => pin(cam, p, n)).join(""),
+  };
+  for (const g of GAUGES) draw[g.id] = (r) => needle(g, r);
+  for (let i = 0; i < 4; i++) draw["win" + i] = (r) => windows(i, r);
+
+  /* ---------- mount ---------- */
+  let slots = {}, flowEls = [], fluxEls = [];
+  function mount(az, el) {
+    cam = stage.mount(az, el); slots = stage.slots;
+    flowEls = flowPaths.map((fp) => ({ ...fp, el: document.getElementById(fp.id) }));
+    fluxEls = flux.map((id) => document.getElementById(id));
+    if (slots.pins) slots.pins.innerHTML = draw.pins();
+  }
+  mount(-24, 30);
+
+  const r0 = (v) => Math.round(v);
+  /* ---------- simulation ---------- */
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const ui = { playing: true };
+  let sim = G.make({ demand: 60, kv: 220 });
+  for (let i = 0; i < 300; i++) G.step(sim, 0.02);
+  let cur = G.read(sim), energy = { gen: 0, line: 0, town: 0 };
+  const hist = []; let histT = 0;
+  const listeners = [];
+  let visible = true, last = 0, lastEmit = 0;
+  // Parts that change only when a control moves are redrawn only then.
+  const memo = {};
+  const keyOf = {
+    kD: (r) => r0(r.demand), kV: (r) => r.kv, brk: (r) => r.closed,
+    win0: (r) => [r.closed, (r.Vtown * 40) | 0, (r.load * 2) | 0, r.Vtown < 0.9 ? (performance.now() / 90) | 0 : 0].join(),
+  };
+  keyOf.win1 = keyOf.win2 = keyOf.win3 = keyOf.win0;
+  function paint(force) {
+    for (const k in draw) {
+      if (k === "pins" || !slots[k]) continue;
+      if (keyOf[k]) { const kk = keyOf[k](cur); if (!force && memo[k] === kk) continue; memo[k] = kk; }
+      slots[k].innerHTML = draw[k](cur);
+    }
+  }
+  function marks() {
+    // energy flows from the station to the town at a speed set by the power carried
+    for (const fl of flowEls) if (fl.el) fl.el.style.strokeDashoffset = (-energy[fl.key]).toFixed(1);
+    for (const el of fluxEls) if (el) el.style.strokeDashoffset = (Math.sin(cur.ac) * 9).toFixed(2);
+  }
+  function frame(now) {
+    const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
+    if (ui.playing && !document.hidden) {
+      let n = Math.max(1, Math.round(dt / 0.01));
+      for (let i = 0; i < n; i++) G.step(sim, dt / n);
+      cur = G.read(sim);
+      const v = (p) => Math.max(0, p) * dt * 0.35;
+      energy.gen += v(cur.Pe); energy.line += v(cur.Pe - cur.loss * 0.5); energy.town += v(cur.load);
+      histT += dt;
+      if (histT > 0.25) { histT = 0; hist.push({ t: sim.t, f: cur.f, Pe: cur.Pe, load: cur.load, Pm: cur.Pm, loss: cur.loss }); if (hist.length > 240) hist.shift(); }
+    }
+    if (visible && ui.playing) { paint(); marks(); }
+    if (now - lastEmit > 120) { lastEmit = now; listeners.forEach((fn) => fn(sim, cur, hist)); }
+    requestAnimationFrame(frame);
+  }
+  function update(patch) {
+    if ("demand" in patch) sim.demand = patch.demand;
+    if ("kv" in patch) sim.kv = patch.kv;
+    if ("closed" in patch) { sim.closed = patch.closed; if (patch.closed) sim.tripped = false; }
+    if ("playing" in patch) ui.playing = patch.playing;
+    cur = G.read(sim);
+    paint(true); marks(); listeners.forEach((fn) => fn(sim, cur, hist));
+  }
+  window.Plate = { sim: () => sim, ui, update, on: (fn) => { listeners.push(fn); fn(sim, cur, hist); } };
+
+  /* ---------- input ---------- */
+  const fig = document.getElementById("plate");
+  fig.addEventListener("keydown", (e) => {
+    const k = e.key;
+    if (e.shiftKey) return;
+    if (k === "ArrowUp") update({ demand: Math.min(140, sim.demand + 10) });
+    else if (k === "ArrowDown") update({ demand: Math.max(10, sim.demand - 10) });
+    else if (k === "ArrowRight" || k === "]") { const i = G.TX_KV.indexOf(sim.kv); update({ kv: G.TX_KV[Math.min(G.TX_KV.length - 1, i + 1)] }); }
+    else if (k === "ArrowLeft" || k === "[") { const i = G.TX_KV.indexOf(sim.kv); update({ kv: G.TX_KV[Math.max(0, i - 1)] }); }
+    else if (k === "b" || k === "B") update({ closed: !sim.closed });
+    else if (k === " ") update({ playing: !ui.playing });
+    else return;
+    e.preventDefault();
+  });
+  new IntersectionObserver((es) => (visible = es[0].isIntersecting)).observe(fig);
+
+  /* ---------- three views: SVG, WebGL, 3D ---------- */
+  const NW = 40;
+  const LIGHT_FRAG = `
+uniform vec4 uW[${NW}]; uniform float uWk[${NW}]; uniform float uNW;
+uniform float uAC; uniform float uLoad; uniform float uLoss; uniform float uLit; uniform vec4 uTown; uniform vec4 uRotor; uniform float uRot;
+void main() {
+  vec2 vb = vbOf(); vec4 m = maskAt();
+  vec4 acc = vec4(0.0);
+  bool dk = uDark > 0.5;
+  vec3 cur = dk ? vec3(0.55, 0.85, 1.0) : vec3(0.15, 0.45, 0.85);
+  vec3 heat = dk ? vec3(1.0, 0.45, 0.2) : vec3(0.88, 0.32, 0.12);
+  vec3 lamp = dk ? vec3(1.0, 0.82, 0.5) : vec3(0.98, 0.72, 0.3);
+  // Current: a glow that runs along each conductor and swings back and forth with the alternation.
+  if (m.g > 0.5) {
+    float best = 0.0; float hot = 0.0;
+    for (int i = 0; i < ${NW}; i++) {
+      if (float(i) >= uNW) break;
+      vec4 s = uW[i]; float t; float d = segDist(vb, s.xy, s.zw, t);
+      if (d < 4.0) {
+        float along = t * length(s.zw - s.xy);
+        float wave = 0.5 + 0.5 * cos(along * 0.12 - uAC * 1.0);
+        best = max(best, wave * (1.0 - d / 4.0) * clamp(uLoad / 90.0, 0.15, 1.0));
+        if (uWk[i] > 0.5) hot = max(hot, 1.0 - d / 4.0);
+      }
+    }
+    addLight(acc, cur, best * 0.8);
+    addLight(acc, heat, hot * clamp(uLoss / 12.0, 0.0, 1.0) * 0.9);
+  }
+  // Magnetism: the iron cores and the rotor glow with the alternating flux.
+  if (m.b > 0.5) {
+    float flux = abs(sin(uAC));
+    addLight(acc, cur, (0.2 + 0.6 * flux) * clamp(uLoad / 60.0, 0.2, 1.0) * 0.7);
+  }
+  // The town throws warm light onto the bench; the more power arrives, the brighter.
+  if (m.r > 0.5) {
+    vec2 p = onPlane(vb, 0.0);
+    vec2 d = (p - uTown.xy) / vec2(70.0, 140.0);
+    addLight(acc, lamp, exp(-dot(d, d) * 2.0) * uLit * (dk ? 0.75 : 0.45));
+    vec2 q = (p - uRotor.xy) / 70.0;
+    addLight(acc, cur, exp(-dot(q, q) * 3.0) * clamp(uLoad / 90.0, 0.1, 1.0) * (0.25 + 0.2 * sin(uRot * 2.0)) * (dk ? 0.9 : 0.4));
+  }
+  gl_FragColor = acc;
+}`;
+  const canvas = document.createElement("canvas");
+  canvas.className = "light"; canvas.setAttribute("aria-hidden", "true");
+  fig.appendChild(canvas);
+  let lightLayer = null, mode = "svg", lightRaf = 0;
+  const hintEl = document.querySelector(".plate .bl"), hint0 = hintEl ? hintEl.textContent : "";
+  const MASK_CSS = `.floor .t-top { fill: #f00 !important; }
+    .conductor, .cable, .copper, .copper-top { fill: #0f0 !important; stroke: #0f0 !important; }
+    .core .f, .rotorbody .f, .pole-n, .pole-s { fill: #00f !important; stroke: #00f !important; }`;
+  function lightFrame(now) {
+    lightRaf = 0;
+    if (mode !== "webgl" || !lightLayer) return;
+    if (!visible) { lightRaf = requestAnimationFrame(lightFrame); return; }
+    if (lightLayer.size()) lightLayer.mask();
+    const Wv = [], Wk = [];
+    const ws = wires.filter((w) => w.key === "line").concat(wires.filter((w) => w.key !== "line")).slice(0, NW);
+    for (let i = 0; i < NW; i++) {
+      const w = ws[i];
+      if (!w) { Wv.push(0, 0, 0, 0); Wk.push(0); continue; }
+      Wv.push(w.a[0], w.a[1], w.b[0], w.b[1]); Wk.push(w.key === "line" ? 1 : 0);
+    }
+    lightLayer.set("uW", Wv); lightLayer.set("uWk", new Float32Array(Wk)); lightLayer.set("uNW", ws.length);
+    lightLayer.set("uAC", cur.ac); lightLayer.set("uLoad", cur.load); lightLayer.set("uLoss", cur.loss);
+    lightLayer.set("uLit", cur.closed ? Math.max(0, Math.min(1, (cur.Vtown - 0.55) / 0.4)) : 0);
+    lightLayer.set("uTown", [945, 170, 0, 0]); lightLayer.set("uRotor", [GEN.x, SH.y + 60, 0, 0]); lightLayer.set("uRot", cur.rot);
+    lightLayer.draw(cam, reduce.matches ? 2 : now / 1000, K.live.isDark());
+    if (!reduce.matches) lightRaf = requestAnimationFrame(lightFrame);
+  }
+  function setMode(m) {
+    mode = m;
+    if (m === "3d") insp.close();
+    fig.classList.toggle("mode-webgl", m === "webgl");
+    fig.classList.toggle("mode-3d", m === "3d");
+    if (m !== "3d" && (stage.az !== -24 || stage.el !== 30)) { mount(-24, 30); paint(true); marks(); }
+    if (m === "webgl") {
+      try { lightLayer = lightLayer || K.live.light({ canvas, svg, W, H, frag: LIGHT_FRAG, maskCss: MASK_CSS }); } catch (e) { lightLayer = null; console.warn(e); }
+      if (lightLayer) { lightLayer.size(); lightLayer.mask().then(() => { if (!lightRaf) lightRaf = requestAnimationFrame(lightFrame); }); }
+    }
+    if (hintEl) hintEl.textContent = m === "3d" ? "Drag to turn the grid all the way round · double-click to reset · Shift + arrows to turn" : hint0;
+    views.set(m);
+  }
+  const views = K.live.views(document.getElementById("views"), {
+    modes: [{ id: "svg", label: "SVG" }, { id: "webgl", label: "WebGL", ok: K.live.webglOK() }, { id: "3d", label: "3D" }],
+    current: "svg", onSelect: setMode,
+  });
+  let turnPending = null;
+  const orb = K.live.orbit(fig, {
+    az0: -24, el0: 30, wrap: true, azRange: [-180, 180], elRange: [8, 76], enabled: () => mode === "3d",
+    onTurn(az, el) {
+      if (turnPending) { turnPending = [az, el]; return; }
+      turnPending = [az, el];
+      requestAnimationFrame(() => { const [a, e] = turnPending; turnPending = null; mount(a, e); paint(true); marks(); });
+    },
+  });
+  fig.addEventListener("keydown", (e) => {
+    if (mode !== "3d" || !e.shiftKey) return;
+    const d = { ArrowLeft: [-8, 0], ArrowRight: [8, 0], ArrowUp: [0, -4], ArrowDown: [0, 4] }[e.key];
+    if (d) { orb.nudge(...d); e.preventDefault(); }
+  }, true);
+  new ResizeObserver(() => { if (mode === "webgl" && lightLayer && lightLayer.size()) lightLayer.mask(); }).observe(fig);
+
+  /* ---------- looking closer ---------- */
+  const PARTS = [
+    [1, "Water wheel", "Water falls from the tank through the nozzle onto the buckets. The jet's strength is the turbine's mechanical power.", (r) => `mechanical power <b>${r.Pm.toFixed(1)}</b> MW · valve ${r0(r.governor * 100)} % open`],
+    [2, "Flyball governor", "Two weights spun by the shaft. Faster spin throws them out; the linkage then closes the water valve. This is droop control.", (r) => `${r.f.toFixed(3)} Hz · arms at ${r0(26 + 38 * Math.max(0, Math.min(1, (r.f - 48.6) / 3.2)))}°`],
+    [3, "Rotor", "An electromagnet with a north and a south pole, turned by the shaft. Its field sweeps through the coils around it, drawn at a hundredth of its real speed.", (r) => `${r0(r.f * 60)} rpm · field turning with the shaft`],
+    [4, "Stator coils", "Copper bars fixed around the rotor. The moving field induces a voltage in them: e = N·B·A·ω·sin(ωt).", (r) => `11 kV · ${r0(r.Igen)} A · emf now <b>${(r.emf * 100).toFixed(0)}</b> % of peak`],
+    [5, "Step-up transformer", "Few turns on the left, many on the right, sharing one iron core. Voltage rises by the turns ratio and current falls by the same ratio.", (r) => `11 → <b>${r.kv}</b> kV · ratio 1 : ${(r.kv / 11).toFixed(1)}`],
+    [6, "Line conductors", "Three aluminium conductors, one per phase. They heat by I²R, so losses fall with the square of the voltage.", (r) => `${r0(r.I)} A · loss <b>${r.loss.toFixed(2)}</b> MW (${(100 * (1 - r.eff)).toFixed(1)} %)`],
+    [7, "Pylon and insulators", "A lattice tower holds the conductors high and apart. Strings of glass discs keep the high voltage away from the steel.", (r) => `${r.kv} kV phase to phase`],
+    [8, "Step-down transformer", "The same machine reversed: many turns in, few out. It brings the line back down to the town's 11 kV.", (r) => `<b>${r.kv}</b> → 11 kV · town voltage ${(r.Vtown * 100).toFixed(0)} %`],
+    [9, "The town", "Three streets of houses and a works. Their lights dim when the voltage sags and go out when the breaker opens.", (r) => r.closed ? `drawing <b>${r.load.toFixed(1)}</b> MW · ${r0(r.home)} V at the socket` : `<b>dark</b> · breaker open`],
+    [10, "Frequency meter", "Every generator on a grid spins in step. If demand runs ahead of supply the machine slows, and the frequency falls with it.", (r) => `<b>${r.f.toFixed(3)}</b> Hz · the town is cut off below ${G.P0.ufls} Hz`],
+    [11, "Loss meter", "The power the line turns into heat. Change the line voltage and watch this needle.", (r) => `<b>${r.loss.toFixed(2)}</b> MW lost · ${(100 * r.eff).toFixed(1)} % delivered`],
+    [12, "Breaker", "Disconnects the town. The generator suddenly has nothing to push against, speeds up, and the governor closes the valve.", (r) => r.closed ? `<b>closed</b>` : `<b>open</b>${r.tripped ? " · tripped by under-frequency" : ""}`],
+  ].map(([n, name, text, live]) => ({ n, name, text, live, at: PINS.find((p) => p[0] === n)[1] }));
+  const insp = K.live.inspector({ fig, svg, W, H, parts: PARTS, cam: () => cam, live: (n) => PARTS.find((p) => p.n === n).live(cur), zoom: 2.4,
+    onChange: (n) => { if (n !== null && lens.on) toggleLens(false); } });
+  const lens = K.live.loupe({ fig, svg, W, H, sceneId: stage.sceneId, mag: 2.6, r: 88 });
+  const toolsEl = document.getElementById("tools");
+  function toggleLens(v) { lens.toggle(v); if (lens.on) insp.close(); toolsEl?.querySelector('[data-t="loupe"]')?.setAttribute("aria-pressed", lens.on); }
+  toolsEl?.addEventListener("click", (e) => { if (e.target.closest('[data-t="loupe"]')) toggleLens(); });
+  setInterval(() => insp.refresh(), 220);
+  document.addEventListener("folio:part", (e) => insp.show(e.detail));
+  Object.assign(window.Plate, {
+    view: (m) => setMode(m), turn: (az, el) => { setMode("3d"); mount(az, el); paint(true); marks(); }, light: () => lightLayer,
+    inspect: (n) => insp.show(n), closeInspect: () => insp.close(), loupe: (v) => toggleLens(v),
+  });
+
+  paint(true); marks();
+  if (reduce.matches) ui.playing = false;
+  requestAnimationFrame(frame);
+})();
+
+</script>
+<script>
+Plate.on((sim, r) => { document.getElementById("readout").innerHTML = "<b>" + r.f.toFixed(2) + " Hz</b> · " + r.Pe.toFixed(1) + " MW · loss " + r.loss.toFixed(2) + " MW"; });
+// Tell the page around us how tall we are.
+const post = () => parent !== window && parent.postMessage({ folio: "grid", h: document.documentElement.scrollHeight }, "*");
+new ResizeObserver(post).observe(document.body); addEventListener("load", post); post();
+</script>

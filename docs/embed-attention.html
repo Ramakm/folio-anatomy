@@ -13,6 +13,7 @@
   --hatch: #3F3932; --hatch-op: .5; --glass: #DDE4E3; --glass-line: #5D6A6B; --face: #FFFDF8; --brass: #DCD1BB;
   --fluid: #C9381D; --fluid-2: #DF6A50; --fluid-3: #D24B2F; --fluid-top: #EE9078; --fluid-deep: #8E2412; --shut: #8A8276; --light-blend: normal;
   --venous: #3E4C84; --venous-top: #7180B6; --venous-deep: #232C55;
+  --water: #8FB3C4; --water-top: #B9D3DE; --water-deep: #4D7487; --copper: #B8794A; --copper-top: #D9A47A; --copper-deep: #6E4123; --iron: #7E8188; --lamp: #F2B544;
   --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
   --body: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -23,6 +24,7 @@
   --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
   --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
   --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  --water: #3F6A7E; --water-top: #6E98AA; --water-deep: #1F3A47; --copper: #C2814F; --copper-top: #E0A97C; --copper-deep: #6A3E20; --iron: #5D6068; --lamp: #FFC657;
   color-scheme: dark; } }
 :root[data-theme="dark"] {
   --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
@@ -30,6 +32,7 @@
   --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
   --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
   --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  --water: #3F6A7E; --water-top: #6E98AA; --water-deep: #1F3A47; --copper: #C2814F; --copper-top: #E0A97C; --copper-deep: #6A3E20; --iron: #5D6068; --lamp: #FFC657;
   color-scheme: dark; }
 
 * { box-sizing: border-box; }
@@ -308,6 +311,41 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 .plate .tr { gap: 10px; }
 .fig.loupe-on #plate-svg .hit:hover { fill: transparent; }
 
+/* Moving internals */
+#plate-svg .vane { fill: var(--s2); stroke: var(--line); stroke-width: .4; }
+#plate-svg .vane.busy { fill: var(--fluid-top); stroke: var(--fluid-deep); }
+#plate-svg .lobe .f { fill: var(--accent); stroke: var(--fluid-deep); }
+#plate-svg .camdisc .t-top { fill: var(--face); }
+
+/* Plate III: water, copper, iron, fields and light */
+#plate-svg .water { fill: var(--water); stroke: var(--water-deep); stroke-width: .5; }
+#plate-svg .water-top { fill: var(--water-top); stroke: var(--water-deep); stroke-width: .5; }
+#plate-svg .waterg .hatch { stroke: var(--water-deep); opacity: .45; }
+#plate-svg .copper { fill: var(--copper); stroke: var(--copper-deep); stroke-width: .5; }
+#plate-svg .copper-top { fill: var(--copper-top); stroke: var(--copper-deep); stroke-width: .5; }
+#plate-svg .ln.turns { stroke: var(--copper-deep); stroke-width: .45; }
+#plate-svg .core .t-top { fill: var(--iron); } #plate-svg .core .t-s3, #plate-svg .core .t-s2 { fill: color-mix(in srgb, var(--iron) 80%, var(--line)); } #plate-svg .core .t-s1, #plate-svg .core .t-s0 { fill: color-mix(in srgb, var(--iron) 60%, var(--line)); }
+#plate-svg .core .hatch { stroke: var(--line); }
+#plate-svg .rotorbody .t-cyl { fill: var(--iron); } #plate-svg .rotorbody .t-top { fill: color-mix(in srgb, var(--iron) 75%, var(--paper)); }
+#plate-svg .pole-n { fill: var(--accent); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .pole-s { fill: var(--venous); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .ring { fill: none; stroke: var(--line); stroke-width: 2.4; stroke-linecap: round; }
+#plate-svg .field { fill: none; stroke: var(--accent); stroke-width: .7; stroke-dasharray: 2 3; opacity: .75; }
+#plate-svg .flux { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 6; }
+#plate-svg .insul .t-cyl { fill: var(--glass); } #plate-svg .insul .t-top { fill: color-mix(in srgb, var(--glass) 70%, var(--paper)); }
+#plate-svg .conductor { fill: var(--s1); stroke: var(--line); stroke-width: .4; }
+#plate-svg .cable { fill: var(--line); stroke: var(--line); stroke-width: .3; }
+#plate-svg .flow.energy { stroke: var(--lamp); stroke-width: 1.2; stroke-dasharray: 2 9; opacity: .95; }
+#plate-svg .ln.lattice { stroke: var(--lo); stroke-width: .45; }
+#plate-svg .ln.spoke { stroke: var(--line); stroke-width: 1; }
+#plate-svg .bucket .f { stroke-width: .45; }
+#plate-svg .flyball .t-cyl { fill: var(--brass); }
+#plate-svg .roof .t-top, #plate-svg .roof .t-s3, #plate-svg .roof .t-s2 { fill: color-mix(in srgb, var(--accent) 35%, var(--s2)); } #plate-svg .roof .t-s1, #plate-svg .roof .t-s0 { fill: color-mix(in srgb, var(--accent) 30%, var(--s0)); }
+#plate-svg .win { fill: var(--lamp); stroke: var(--line); stroke-width: .3; }
+#plate-svg .jet { fill: none; stroke: var(--water); stroke-width: 3; stroke-dasharray: 4 3; stroke-linecap: round; }
+#plate-svg .tripped .t-cyl { fill: var(--accent); }
+.fig.mode-webgl #plate-svg .flow.energy { visibility: visible; }
+
 /* A plate on its own, for embedding in the cover page. */
 html, body { background: var(--paper); }
 body { padding: 0; }
@@ -365,7 +403,7 @@ body { padding: 0; }
       const [x, y] = c.p(p);
       x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
     }
-    const k = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0));
+    const k = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0), o.maxK ?? Infinity);
     return camera({ ...o, k, ox: W / 2 - k * (x0 + x1) / 2, oy: H / 2 - k * (y0 + y1) / 2 });
   }
 
@@ -527,6 +565,8 @@ body { padding: 0; }
   /* Text engraved in a plane: ax is the world direction of the baseline, ay the world
      direction of "down" on the glyphs. Size is in world units. */
   function faceText(cam, origin, ax, ay, str, size, o = {}) {
+    // Engraving on a face turned away from the viewer is hidden with its face.
+    if (o.cull !== false && dot(cross(ax, ay), cam.view) <= 0.02) return "";
     const p0 = cam.p(origin);
     const px = cam.p(add(origin, ax)), py = cam.p(add(origin, ay));
     const a = (px[0] - p0[0]), b = (px[1] - p0[1]), c = (py[0] - p0[0]), d = (py[1] - p0[1]);
@@ -547,7 +587,48 @@ body { padding: 0; }
     return `<path class="f t-s3 ln-lo" d="${ringPath(cam, cx, cy, z, r, 20)}"/><path class="ln lo" d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}"/>`;
   }
 
-  root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, LIGHT };
+
+  /* A convex prism: a flat convex polygon (3D points, in order) swept along dir.
+     Only faces turned to the viewer are drawn, each toned by its facing. Roofs, wedges, hoppers. */
+  function prism(cam, base, dir, o = {}) {
+    const n0 = norm(cross(sub(base[1], base[0]), sub(base[2], base[0])));
+    const nb = dot(n0, dir) > 0 ? mul(n0, -1) : n0;
+    const top = base.map((p) => add(p, dir));
+    const cen = mul(base.reduce((a, p) => add(a, p), [0, 0, 0]), 1 / base.length);
+    const mid = add(cen, mul(dir, 0.5));
+    const faces = [{ n: nb, q: base }, { n: mul(nb, -1), q: top }];
+    for (let i = 0; i < base.length; i++) {
+      const a = base[i], b = base[(i + 1) % base.length];
+      let n = norm(cross(sub(b, a), dir));
+      const fc = mul(add(add(a, b), add(add(a, dir), add(b, dir))), 0.25);
+      if (dot(n, sub(fc, mid)) < 0) n = mul(n, -1);
+      faces.push({ n, q: [a, b, add(b, dir), add(a, dir)] });
+    }
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    for (const fc of faces) {
+      if (dot(fc.n, cam.view) <= 1e-6) continue;
+      const t = fc.n[2] > 0.9 ? (o.topTone || "top") : (o.tone || toneOf(fc.n));
+      s += `<path class="f t-${t}" d="${path(fc.q.map((v) => cam.p(v)))}"/>`;
+    }
+    return s + "</g>";
+  }
+
+  /* The half of a ring (a circle around an axis) that lies behind or in front of its centre,
+     for rings that wrap another part: draw the back half first and the front half last. */
+  function ringArc(cam, c, axis, r, front, N = 48) {
+    const [, u, v] = basis(axis), cd = cam.depth(c);
+    let d = "", pen = false;
+    for (let i = 0; i <= N; i++) {
+      const t = (i / N) * Math.PI * 2, p = ringPt(c, u, v, r, t);
+      const on = front ? cam.depth(p) >= cd : cam.depth(p) < cd;
+      if (on) { const q = cam.p(p); d += (pen ? "L" : "M") + f(q[0]) + " " + f(q[1]); pen = true; } else pen = false;
+    }
+    return d;
+  }
+  /* A point on a ring around an axis, at angle t: for parts that orbit a shaft. */
+  function orbitPt(c, axis, r, t) { const [, u, v] = basis(axis); return ringPt(c, u, v, r, t); }
+
+  root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, cross, LIGHT, prism, ringArc, orbitPt };
 })(typeof window !== "undefined" ? window : globalThis);
 
 /* Folio live kit: the three views of a plate.
@@ -571,11 +652,11 @@ body { padding: 0; }
     const st = { cam: base, base, slots: {}, az: o.az, el: o.el, turned: false, sceneId: (o.svg.id || "plate") + "-scene" };
     o.svg.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`);
 
+    // Any other view is fitted to the frame afresh, but never closer than the default view,
+    // so the bench stays whole however it is turned.
     st.cameraAt = (az, el) => {
       if (az === o.az && el === o.el) return base;
-      const c0 = K.camera({ az, el, k: base.k * (o.orbitScale ?? 0.9) });
-      const p = c0.p(C);
-      return K.camera({ az, el, k: c0.k, ox: anchor[0] - p[0], oy: anchor[1] - p[1] });
+      return K.fit({ az, el, maxK: base.k * (o.orbitScale ?? 0.92) }, o.points, o.W, o.H, o.pad ?? 22);
     };
     st.mount = (az = st.az, el = st.el) => {
       st.az = az; st.el = el; st.turned = az !== o.az || el !== o.el;
@@ -588,6 +669,11 @@ body { padding: 0; }
         alongX: (list, key = (v) => v) => list.slice().sort((a, b) => cam.depth(key(a), 0, 0) - cam.depth(key(b), 0, 0)),
         farFirst: (list, pt) => list.slice().sort((a, b) => cam.depth(...pt(a)) - cam.depth(...pt(b))),
         leftIsFar: cam.depth(0, 0, 0) < cam.depth(1, 0, 0),
+        backIsFar: cam.depth(0, 0, 0) < cam.depth(0, 1, 0),
+        // Bands of the bench, each {y, draw}: drawn far to near from any side.
+        bands: (list) => list.slice().sort((a, b) => cam.depth(0, a.y, 0) - cam.depth(0, b.y, 0)).forEach((b) => b.draw()),
+        // Free-standing units, each {at:[x,y,z], draw}: drawn far to near from any angle.
+        units: (list) => list.slice().sort((a, b) => cam.depth(...a.at) - cam.depth(...b.at)).forEach((u) => u.draw()),
       };
       o.build(cam, api);
       let html = "", run = "";
@@ -608,10 +694,12 @@ body { padding: 0; }
     // o: { az0, el0, azRange:[a,b], elRange:[a,b], onTurn(az, el), onSettle(az, el), enabled() }
     let az = o.az0, elv = o.el0, va = 0, ve = 0, drag = null, raf = 0, last = 0;
     const clamp = (v, r) => Math.max(r[0], Math.min(r[1], v));
+    // With wrap, the bench turns all the way round; azimuth stays in [-180, 180).
+    const turnAz = (v) => (o.wrap ? ((((v + 180) % 360) + 360) % 360) - 180 : clamp(v, o.azRange));
     const tick = (now) => {
       const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
       if (!drag) {
-        az = clamp(az + va * dt, o.azRange); elv = clamp(elv + ve * dt, o.elRange);
+        az = turnAz(az + va * dt); elv = clamp(elv + ve * dt, o.elRange);
         va *= Math.exp(-dt * 5); ve *= Math.exp(-dt * 5);
         if (Math.abs(va) + Math.abs(ve) < 2) { va = ve = 0; o.onTurn(az, elv); o.onSettle?.(az, elv); raf = 0; last = 0; return; }
       }
@@ -630,7 +718,7 @@ body { padding: 0; }
       const now = performance.now(), dt = Math.max(1, now - drag.t) / 1000;
       const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
       const sa = -dx * 0.32, se = dy * 0.22;
-      az = clamp(az + sa, o.azRange); elv = clamp(elv + se, o.elRange);
+      az = turnAz(az + sa); elv = clamp(elv + se, o.elRange);
       va = sa / dt; ve = se / dt;
       drag = { x: e.clientX, y: e.clientY, t: now };
     });
@@ -641,7 +729,8 @@ body { padding: 0; }
       get: () => [az, elv],
       to(a, e) {
         // ease to a view without inertia
-        const a0 = az, e0 = elv, t0 = performance.now();
+        let a0 = az; const e0 = elv, t0 = performance.now();
+        if (o.wrap) { while (a - a0 > 180) a0 += 360; while (a0 - a > 180) a0 -= 360; }
         const step = (now) => {
           const k = Math.min(1, (now - t0) / 600), s = k * k * (3 - 2 * k);
           az = a0 + (a - a0) * s; elv = e0 + (e - e0) * s; o.onTurn(az, elv);
@@ -649,7 +738,7 @@ body { padding: 0; }
         };
         va = ve = 0; requestAnimationFrame(step);
       },
-      nudge(da, de) { az = clamp(az + da, o.azRange); elv = clamp(elv + de, o.elRange); o.onTurn(az, elv); o.onSettle?.(az, elv); },
+      nudge(da, de) { az = turnAz(az + da); elv = clamp(elv + de, o.elRange); o.onTurn(az, elv); o.onSettle?.(az, elv); },
     };
     return api;
   }
@@ -1030,10 +1119,11 @@ float caustic(vec2 q, float t) {
   S(box(cam, -6, -6, -38, 732, 288, 8, { hatch: 2.6 }));
   S(box(cam, 0, 0, -30, 720, 276, 30, { hatch: 2.2, groove: 7, part: "plinth", cls: "floor" }));
   for (const [x, y] of [[16, 16], [704, 16], [16, 260], [704, 260]]) S(screw(cam, x, y, 0, 3));
-  S(box(cam, 250, 276, -24, 240, 1.4, 17, { cls: "brass" }));
+  const frontSeen = cam.view[1] > 0;
+  if (frontSeen) S(box(cam, 250, 276, -24, 240, 1.4, 17, { cls: "brass" }));
   S(faceText(cam, [370, 277.5, -12.6], [1, 0, 0], [0, 0, -1], "FOLIO · PLATE I · SCALED DOT-PRODUCT ATTENTION", 5.4));
   S(faceText(cam, [370, 277.5, -20], [1, 0, 0], [0, 0, -1], "ONE HEAD · d_model 11 · d_k 8 · EIGHT TOKENS", 3.6, { cls: "engr lo" }));
-  for (const sx of [256, 484]) {
+  for (const sx of frontSeen ? [256, 484] : []) {
     const p = cam.p(sx, 277.5, -15.5);
     S(`<circle class="dot" cx="${f(p[0])}" cy="${f(p[1])}" r="${f(1.1 * cam.k)}"/>`);
   }
@@ -1044,23 +1134,7 @@ float caustic(vec2 q, float t) {
     S(`<path class="ln lo" d="${d}${line(cam, [100, 58, 0], [600, 58, 0])}"/>`);
   }
 
-  if (!api.leftIsFar) controls();
-
-  // Query rail on two posts, behind the stations.
-  for (const x of [14, 590]) {
-    S(drum(cam, x, RAIL.y, 0, 10, 4, { cls: "base" }));
-    S(rod(cam, [x, RAIL.y, 4], [x, RAIL.y, RAIL.z + 10], 4.2));
-    S(drum(cam, x, RAIL.y, RAIL.z + 10, 6, 4));
-  }
-  S(rod(cam, [14, RAIL.y, RAIL.z], [590, RAIL.y, RAIL.z], 3.2, { seg: 30 }));
-  {
-    let d = "";
-    for (let j = 0; j < N; j++) d += line(cam, [SX(j), RAIL.y + 3.2, RAIL.z - 3], [SX(j), RAIL.y + 3.2, RAIL.z - 7]);
-    S(`<path class="ln lo" d="${d}"/>`);
-  }
-  slot("carriage");
-
-  // Pads: one per token, the reservoir's at the far end.
+  // Pads: one per token, the reservoir's at the far end. They lie flat, so they go down first.
   const pad = (x0, w, label, cls) => {
     S(box(cam, x0, 66, 0, w, 110, 10, { groove: 3, part: cls, cls: "pad" }));
     if (label) S(faceText(cam, [x0 + w / 2, 176.2, 2.6], [1, 0, 0], [0, 0, -1], label, 6.4, { cls: "engr tok" }));
@@ -1074,6 +1148,8 @@ float caustic(vec2 q, float t) {
     S(`<text class="engr lo" x="${f(p[0])}" y="${f(p[1])}" font-size="${f(4 * cam.k)}" text-anchor="end">${j}</text>`);
   }
 
+  if (!api.leftIsFar) controls();
+
   // Glass column helper: back wall, a slot for the fluid, then the front glass with graduations.
   const facing = Math.atan2(cam.view[1], cam.view[0]) / (Math.PI / 180);
   function column(x, y, z, r, h, name, opts = {}) {
@@ -1085,77 +1161,88 @@ float caustic(vec2 q, float t) {
       const zz = z + (h * g) / 10, span = g === 5 ? 26 : 14;
       d += arcPath(cam, x, y, zz, r + 0.2, facing - span, facing + span, 8);
     }
+    const t = (facing + 48) * Math.PI / 180;
     S(`<g class="sol glass">${rod(cam, [x, y, z], [x, y, z + h], r, { sideCls: "glass-front", capCls: "glass-rim", hatch: false }).replace(/^<g[^>]*>|<\/g>$/g, "")}` +
       `<path class="ln grad" d="${d}"/>` +
-      `<path class="ln glint-line" d="${line(cam, ...[[0, 0], [0, 0]].map((_, i) => {
-        const t = (facing + 48) * Math.PI / 180; return [x + r * Math.cos(t), y + r * Math.sin(t), i ? z + h - 6 : z + 4];
-      }))}"/></g>`);
+      `<path class="ln glint-line" d="${line(cam, [x + r * Math.cos(t), y + r * Math.sin(t), z + 4], [x + r * Math.cos(t), y + r * Math.sin(t), z + h - 6])}"/></g>`);
     S(drum(cam, x, y, z + h, r + 1.6, 2, { capCls: "glass-rim", sideCls: "glass-lip", hatch: false }));
   }
 
-  // The reservoir: one sealed unit of fluid, always full. Softmax shares exactly this much.
-  const reservoir = () => {
-    column(60, 98, 15, 20, 78, null, {
-      fluid: rod(cam, [60, 98, 15], [60, 98, 15 + 72], 19.2, { cls: "fluidg", sideCls: "fluid", capCls: "fluid-top" }),
-    });
-    S(drum(cam, 60, 98, 95, 12, 7, { cls: "stopper" }));
-    S(ball(cam, [60, 98, 106], 4));
-  };
-  if (api.leftIsFar) reservoir();
-  for (const j of J) {
-    column(SX(j), GL.y, GL.z, GL.r, GL.h, "fluid" + j);
-    slot("shut" + j);
-  }
-  if (!api.leftIsFar) reservoir();
-
-  // Manifold: stubs with stopcocks from the pipe to each collar, then the pipe itself.
-  S(rod(cam, [60, 122, PIPE.z], [60, PIPE.y, PIPE.z], 3, { seg: 24, cls: "pipe" }));
-  for (const j of J) {
-    S(rod(cam, [SX(j), 117, PIPE.z], [SX(j), PIPE.y, PIPE.z], 2.6, { seg: 24, cls: "pipe" }));
-    S(box(cam, SX(j) - 4.5, 119.5, 6, 9, 8, 12, { cls: "cock" }));
-    slot("cock" + j);
-  }
-  S(rod(cam, [60, PIPE.y, PIPE.z], [SX(N - 1) + 14, PIPE.y, PIPE.z], PIPE.r, { seg: 30, cls: "pipe" }));
-  S(ball(cam, [60, PIPE.y, PIPE.z], 5, { cls: "pipe" }));
-  for (const j of J) S(ball(cam, [SX(j), PIPE.y, PIPE.z], 4.6, { cls: "pipe" }));
-
-  // Key dials: one per token. The needle reads q·k / √d_k.
-  for (const j of J) {
-    const x = SX(j);
-    S(drum(cam, x, DIAL.y, 10, DIAL.r + 2.5, 3));
-    S(drum(cam, x, DIAL.y, 13, DIAL.r, 3, { capCls: "t-face" }));
-    const majors = [], minors = [];
-    for (let s = SCORE[0]; s <= SCORE[1]; s += 0.5) (Number.isInteger(s / 2) ? majors : minors).push(scoreAng(s));
-    S(`<path class="ln lo" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 9.6, 11.2, minors)}"/>` +
-      `<path class="ln mid" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 8.4, 11.2, majors)}${arcPath(cam, x, DIAL.y, DIAL.z, 11.2, 180, 360, 24)}"/>` +
-      `<path class="ln zero" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 7.6, 11.2, [scoreAng(0)])}"/>`);
-    slot("needle" + j);
-  }
-
-  // The core-sample tray: the output, laid down as strata whose lengths are the weights.
-  {
-    const { x0, x1, y0, y1, z } = TRAY;
-    S(box(cam, x0, y0, 0, x1 - x0, y1 - y0, 4, { cls: "tray" }));
-    S(box(cam, x0, y0, 4, x1 - x0, 4, z - 4, { cls: "tray" }));
-    const wl = () => S(box(cam, x0, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
-    const wr = () => S(box(cam, x1 - 4, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
-    api.leftIsFar ? wl() : wr();
-    slot("strata");
-    api.leftIsFar ? wr() : wl();
-    S(box(cam, x0, y1 - 4, 4, x1 - x0, 4, z - 4, { cls: "tray", hatch: 3 }));
-    let d = "", dm = "";
-    for (let i = 0; i <= 20; i++) {
-      const x = x0 + 4 + ((x1 - x0 - 8) * i) / 20;
-      (i % 5 === 0 ? (dm += line(cam, [x, y1 - 4, z], [x, y1 - 1.2, z])) : (d += line(cam, [x, y1 - 4, z], [x, y1 - 2.4, z])));
-    }
-    S(`<path class="ln lo" d="${d}"/><path class="ln mid" d="${dm}"/>`);
-    for (const [fr, lab] of [[0, "0"], [0.25, ".25"], [0.5, ".50"], [0.75, ".75"], [1, "1"]]) {
-      const x = x0 + 4 + (x1 - x0 - 8) * fr;
-      S(faceText(cam, [x, y1 + 0.2, z - 3], [1, 0, 0], [0, 0, -1], lab, 3.6, { cls: "engr lo" }));
-    }
-    slot("trayText");
-    for (const x of [x0 - 6, x1 + 2]) S(box(cam, x, y0 + 8, 0, 4, y1 - y0 - 16, z + 2, { cls: "clamp" }));
-  }
+  api.bands([
+    { y: RAIL.y, draw() { // the query rail on two posts
+      for (const x of far([14, 590])) {
+        S(drum(cam, x, RAIL.y, 0, 10, 4, { cls: "base" }));
+        S(rod(cam, [x, RAIL.y, 4], [x, RAIL.y, RAIL.z + 10], 4.2));
+        S(drum(cam, x, RAIL.y, RAIL.z + 10, 6, 4));
+      }
+      S(rod(cam, [14, RAIL.y, RAIL.z], [590, RAIL.y, RAIL.z], 3.2, { seg: 30 }));
+      let d = "";
+      for (let j = 0; j < N; j++) d += line(cam, [SX(j), RAIL.y + 3.2, RAIL.z - 3], [SX(j), RAIL.y + 3.2, RAIL.z - 7]);
+      S(`<path class="ln lo" d="${d}"/>`);
+      slot("carriage");
+    } },
+    { y: GL.y, draw() { // the reservoir and the eight columns
+      const reservoir = () => {
+        column(60, 98, 15, 20, 78, null, {
+          fluid: rod(cam, [60, 98, 15], [60, 98, 15 + 72], 19.2, { cls: "fluidg", sideCls: "fluid", capCls: "fluid-top" }),
+        });
+        S(drum(cam, 60, 98, 95, 12, 7, { cls: "stopper" }));
+        S(ball(cam, [60, 98, 106], 4));
+      };
+      if (api.leftIsFar) reservoir();
+      for (const j of J) { column(SX(j), GL.y, GL.z, GL.r, GL.h, "fluid" + j); slot("shut" + j); }
+      if (!api.leftIsFar) reservoir();
+    } },
+    { y: 126, draw() { // the manifold: stubs, stopcocks, the pipe and a flow wheel under each column
+      S(rod(cam, [60, 122, PIPE.z], [60, PIPE.y, PIPE.z], 3, { seg: 24, cls: "pipe" }));
+      for (const j of J) {
+        S(rod(cam, [SX(j), 117, PIPE.z], [SX(j), PIPE.y, PIPE.z], 2.6, { seg: 24, cls: "pipe" }));
+        S(box(cam, SX(j) - 4.5, 119.5, 6, 9, 8, 12, { cls: "cock" }));
+        slot("cock" + j);
+      }
+      S(rod(cam, [60, PIPE.y, PIPE.z], [SX(N - 1) + 14, PIPE.y, PIPE.z], PIPE.r, { seg: 30, cls: "pipe" }));
+      S(ball(cam, [60, PIPE.y, PIPE.z], 5, { cls: "pipe" }));
+      for (const j of J) slot("wheel" + j);
+    } },
+    { y: DIAL.y, draw() { // the key dials
+      for (const j of J) {
+        const x = SX(j);
+        S(drum(cam, x, DIAL.y, 10, DIAL.r + 2.5, 3));
+        S(drum(cam, x, DIAL.y, 13, DIAL.r, 3, { capCls: "t-face" }));
+        const majors = [], minors = [];
+        for (let s = SCORE[0]; s <= SCORE[1]; s += 0.5) (Number.isInteger(s / 2) ? majors : minors).push(scoreAng(s));
+        S(`<path class="ln lo" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 9.6, 11.2, minors)}"/>` +
+          `<path class="ln mid" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 8.4, 11.2, majors)}${arcPath(cam, x, DIAL.y, DIAL.z, 11.2, 180, 360, 24)}"/>` +
+          `<path class="ln zero" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 7.6, 11.2, [scoreAng(0)])}"/>`);
+        slot("needle" + j);
+      }
+    } },
+    { y: (TRAY.y0 + TRAY.y1) / 2, draw() { // the core-sample tray
+      const { x0, x1, y0, y1, z } = TRAY;
+      S(box(cam, x0, y0, 0, x1 - x0, y1 - y0, 4, { cls: "tray" }));
+      const wb = () => S(box(cam, x0, y0, 4, x1 - x0, 4, z - 4, { cls: "tray" }));
+      const wf = () => S(box(cam, x0, y1 - 4, 4, x1 - x0, 4, z - 4, { cls: "tray", hatch: 3 }));
+      const wl = () => S(box(cam, x0, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+      const wr = () => S(box(cam, x1 - 4, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+      api.backIsFar ? wb() : wf();
+      api.leftIsFar ? wl() : wr();
+      slot("strata");
+      api.leftIsFar ? wr() : wl();
+      api.backIsFar ? wf() : wb();
+      let d = "", dm = "";
+      for (let i = 0; i <= 20; i++) {
+        const x = x0 + 4 + ((x1 - x0 - 8) * i) / 20;
+        (i % 5 === 0 ? (dm += line(cam, [x, y1 - 4, z], [x, y1 - 1.2, z])) : (d += line(cam, [x, y1 - 4, z], [x, y1 - 2.4, z])));
+      }
+      S(`<path class="ln lo" d="${d}"/><path class="ln mid" d="${dm}"/>`);
+      for (const [fr, lab] of [[0, "0"], [0.25, ".25"], [0.5, ".50"], [0.75, ".75"], [1, "1"]]) {
+        const x = x0 + 4 + (x1 - x0 - 8) * fr;
+        S(faceText(cam, [x, y1 + 0.2, z - 3], [1, 0, 0], [0, 0, -1], lab, 3.6, { cls: "engr lo" }));
+      }
+      slot("trayText");
+      for (const x of [x0 - 6, x1 + 2]) S(box(cam, x, y0 + 8, 0, 4, y1 - y0 - 16, z + 2, { cls: "clamp" }));
+    } },
+  ]);
 
   if (api.leftIsFar) controls();
   slot("hits");
@@ -1213,6 +1300,24 @@ float caustic(vec2 q, float t) {
       return o;
     },
     fluid(s, j) { return s.a[j] > 0.0005 ? fluidCol(j, s.a[j]) : ""; },
+    // A flow wheel in a sight glass on the manifold: it turns as fluid runs into or out of column j.
+    wheel(s, j) {
+      const x = SX(j), y = PIPE.y, r = 6.4, z0 = 6, z1 = 18, spin = s.spin[j], busy = Math.min(1, Math.abs(s.flow[j]) * 30);
+      let o = drum(cam, x, y, z0 - 1.5, r + 1.6, 1.5, { cls: "collar" });
+      o += rod(cam, [x, y, z0], [x, y, z1], r, { sideCls: "glass-back", capCls: "glass-back", hatch: false });
+      const vanes = [];
+      for (let k = 0; k < 4; k++) {
+        const t = spin + (k * Math.PI) / 2, c = Math.cos(t), sn = Math.sin(t);
+        const tip = [x + (r - 1) * c, y + (r - 1) * sn];
+        vanes.push({ d: cam.depth(x + 2 * c, y + 2 * sn, 12), q: [[x, y, z0 + 1], [tip[0], tip[1], z0 + 1], [tip[0], tip[1], z1 - 1], [x, y, z1 - 1]] });
+      }
+      vanes.sort((a, b) => a.d - b.d);
+      for (const v of vanes) o += `<path class="vane${busy > 0.05 ? " busy" : ""}" style="opacity:${f(0.55 + 0.45 * busy)}" d="${path(v.q.map((p) => cam.p(p)))}"/>`;
+      o += rod(cam, [x, y, z0], [x, y, z1], 1.1, { seg: 10 });
+      o += rod(cam, [x, y, z0], [x, y, z1], r, { sideCls: "glass-front", capCls: "glass-rim", hatch: false });
+      o += drum(cam, x, y, z1, r + 1.6, 1.5, { cls: "collar" });
+      return o;
+    },
     shut(s, j) {
       const k = s.shut[j];
       if (k < 0.01) return "";
@@ -1319,7 +1424,7 @@ float caustic(vec2 q, float t) {
   /* ---------- state ---------- */
   const st = { head: 0, q: 7, T: 1, causal: true };
   let tgt = null;
-  const cur = { a: new Array(N).fill(0), sc: new Array(N).fill(SCORE[0]), shut: new Array(N).fill(0), xq: SX(7), headAng: HEAD_ANG[0], tAng: tAng(1), lever: 0, top: 0 };
+  const cur = { spin: new Array(N).fill(0), flow: new Array(N).fill(0), a: new Array(N).fill(0), sc: new Array(N).fill(SCORE[0]), shut: new Array(N).fill(0), xq: SX(7), headAng: HEAD_ANG[0], tAng: tAng(1), lever: 0, top: 0 };
   function target() {
     const r = M.attend(st.head, st.q, st.T, st.causal);
     tgt = {
@@ -1335,7 +1440,10 @@ float caustic(vec2 q, float t) {
     let moving = false;
     const ease = (a, b, kk) => { const d = b - a; if (Math.abs(d) > 1e-4) moving = true; return Math.abs(d) < 1e-4 ? b : a + d * kk; };
     for (let j = 0; j < N; j++) {
+      const before = cur.a[j];
       cur.a[j] = ease(cur.a[j], tgt.a[j], kf);
+      cur.flow[j] = dt > 0 ? (cur.a[j] - before) / dt : 0;
+      cur.spin[j] += (cur.a[j] - before) * 60;
       cur.sc[j] = ease(cur.sc[j], Math.max(SCORE[0] - 0.3, Math.min(SCORE[1] + 0.3, tgt.sc[j])), k);
       cur.shut[j] = ease(cur.shut[j], tgt.shut[j], k);
     }
@@ -1352,6 +1460,7 @@ float caustic(vec2 q, float t) {
       slots["shut" + j].innerHTML = draw.shut(cur, j);
       slots["cock" + j].innerHTML = draw.cock(cur, j);
       slots["needle" + j].innerHTML = draw.needle(cur, j);
+      slots["wheel" + j].innerHTML = draw.wheel(cur, j);
     }
     slots.strata.innerHTML = draw.strata(cur);
     slots.trayText.innerHTML = draw.trayText(cur);
@@ -1500,7 +1609,7 @@ void main() {
   });
   let turnPending = null;
   const orb = K.live.orbit(fig, {
-    az0: -24, el0: 30, azRange: [-62, 62], elRange: [12, 68], enabled: () => mode === "3d",
+    az0: -24, el0: 30, wrap: true, azRange: [-180, 180], elRange: [8, 76], enabled: () => mode === "3d",
     onTurn(az, el) {
       if (turnPending) { turnPending = [az, el]; return; }
       turnPending = [az, el];

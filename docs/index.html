@@ -14,6 +14,7 @@
   --hatch: #3F3932; --hatch-op: .5; --glass: #DDE4E3; --glass-line: #5D6A6B; --face: #FFFDF8; --brass: #DCD1BB;
   --fluid: #C9381D; --fluid-2: #DF6A50; --fluid-3: #D24B2F; --fluid-top: #EE9078; --fluid-deep: #8E2412; --shut: #8A8276; --light-blend: normal;
   --venous: #3E4C84; --venous-top: #7180B6; --venous-deep: #232C55;
+  --water: #8FB3C4; --water-top: #B9D3DE; --water-deep: #4D7487; --copper: #B8794A; --copper-top: #D9A47A; --copper-deep: #6E4123; --iron: #7E8188; --lamp: #F2B544;
   --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
   --body: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -24,6 +25,7 @@
   --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
   --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
   --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  --water: #3F6A7E; --water-top: #6E98AA; --water-deep: #1F3A47; --copper: #C2814F; --copper-top: #E0A97C; --copper-deep: #6A3E20; --iron: #5D6068; --lamp: #FFC657;
   color-scheme: dark; } }
 :root[data-theme="dark"] {
   --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
@@ -31,6 +33,7 @@
   --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
   --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
   --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  --water: #3F6A7E; --water-top: #6E98AA; --water-deep: #1F3A47; --copper: #C2814F; --copper-top: #E0A97C; --copper-deep: #6A3E20; --iron: #5D6068; --lamp: #FFC657;
   color-scheme: dark; }
 
 * { box-sizing: border-box; }
@@ -309,6 +312,41 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 .plate .tr { gap: 10px; }
 .fig.loupe-on #plate-svg .hit:hover { fill: transparent; }
 
+/* Moving internals */
+#plate-svg .vane { fill: var(--s2); stroke: var(--line); stroke-width: .4; }
+#plate-svg .vane.busy { fill: var(--fluid-top); stroke: var(--fluid-deep); }
+#plate-svg .lobe .f { fill: var(--accent); stroke: var(--fluid-deep); }
+#plate-svg .camdisc .t-top { fill: var(--face); }
+
+/* Plate III: water, copper, iron, fields and light */
+#plate-svg .water { fill: var(--water); stroke: var(--water-deep); stroke-width: .5; }
+#plate-svg .water-top { fill: var(--water-top); stroke: var(--water-deep); stroke-width: .5; }
+#plate-svg .waterg .hatch { stroke: var(--water-deep); opacity: .45; }
+#plate-svg .copper { fill: var(--copper); stroke: var(--copper-deep); stroke-width: .5; }
+#plate-svg .copper-top { fill: var(--copper-top); stroke: var(--copper-deep); stroke-width: .5; }
+#plate-svg .ln.turns { stroke: var(--copper-deep); stroke-width: .45; }
+#plate-svg .core .t-top { fill: var(--iron); } #plate-svg .core .t-s3, #plate-svg .core .t-s2 { fill: color-mix(in srgb, var(--iron) 80%, var(--line)); } #plate-svg .core .t-s1, #plate-svg .core .t-s0 { fill: color-mix(in srgb, var(--iron) 60%, var(--line)); }
+#plate-svg .core .hatch { stroke: var(--line); }
+#plate-svg .rotorbody .t-cyl { fill: var(--iron); } #plate-svg .rotorbody .t-top { fill: color-mix(in srgb, var(--iron) 75%, var(--paper)); }
+#plate-svg .pole-n { fill: var(--accent); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .pole-s { fill: var(--venous); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .ring { fill: none; stroke: var(--line); stroke-width: 2.4; stroke-linecap: round; }
+#plate-svg .field { fill: none; stroke: var(--accent); stroke-width: .7; stroke-dasharray: 2 3; opacity: .75; }
+#plate-svg .flux { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 6; }
+#plate-svg .insul .t-cyl { fill: var(--glass); } #plate-svg .insul .t-top { fill: color-mix(in srgb, var(--glass) 70%, var(--paper)); }
+#plate-svg .conductor { fill: var(--s1); stroke: var(--line); stroke-width: .4; }
+#plate-svg .cable { fill: var(--line); stroke: var(--line); stroke-width: .3; }
+#plate-svg .flow.energy { stroke: var(--lamp); stroke-width: 1.2; stroke-dasharray: 2 9; opacity: .95; }
+#plate-svg .ln.lattice { stroke: var(--lo); stroke-width: .45; }
+#plate-svg .ln.spoke { stroke: var(--line); stroke-width: 1; }
+#plate-svg .bucket .f { stroke-width: .45; }
+#plate-svg .flyball .t-cyl { fill: var(--brass); }
+#plate-svg .roof .t-top, #plate-svg .roof .t-s3, #plate-svg .roof .t-s2 { fill: color-mix(in srgb, var(--accent) 35%, var(--s2)); } #plate-svg .roof .t-s1, #plate-svg .roof .t-s0 { fill: color-mix(in srgb, var(--accent) 30%, var(--s0)); }
+#plate-svg .win { fill: var(--lamp); stroke: var(--line); stroke-width: .3; }
+#plate-svg .jet { fill: none; stroke: var(--water); stroke-width: 3; stroke-dasharray: 4 3; stroke-linecap: round; }
+#plate-svg .tripped .t-cyl { fill: var(--accent); }
+.fig.mode-webgl #plate-svg .flow.energy { visibility: visible; }
+
 /* The cover reads like a museum catalogue essay: a quiet header, one live plate, then numbered
    sections in a single reading column with margin notes, a contents rail on wide screens. */
 body { padding-inline: 0; font-size: 19px; line-height: 1.68; }
@@ -326,6 +364,9 @@ body { padding-inline: 0; font-size: 19px; line-height: 1.68; }
 .hero .lede { font-size: clamp(19px, 2.1vw, 22px); line-height: 1.6; color: var(--ink-2); margin: 0 auto; max-width: 36em; text-wrap: pretty; }
 .byline { margin-top: 30px; display: flex; justify-content: center; gap: 10px 22px; flex-wrap: wrap; font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
 .byline b { color: var(--ink); font-weight: 500; }
+.features { list-style: none; margin: 34px auto 0; padding: 0; max-width: 620px; display: grid; gap: 0; text-align: left; border-top: 1px solid var(--rule); }
+.features li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; padding: 12px 2px; border-bottom: 1px solid var(--rule); font-size: 17px; line-height: 1.45; color: var(--ink); }
+.features .fn { font-family: var(--display); font-style: italic; color: var(--accent); font-size: 19px; line-height: 1.2; }
 .cmd { margin: 30px auto 0; max-width: 560px; display: flex; align-items: center; gap: 12px; background: var(--paper); border: 1px solid var(--rule); padding: 10px 10px 10px 16px; text-align: left; }
 .cmd code { flex: 1 1 auto; min-width: 0; font-family: var(--mono); font-size: 13.5px; overflow-x: auto; white-space: nowrap; }
 .cmd code::before { content: "$ "; color: var(--ink-3); }
@@ -369,6 +410,7 @@ article a { text-decoration-thickness: 1px; }
 .wide { margin: 32px -120px; }
 .wide .frame iframe { aspect-ratio: 1000 / 720; }
 .plates { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0 8px; }
+.plates.three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .pcard { text-decoration: none; display: grid; gap: 10px; }
 .pcard .im { background: var(--paper); outline: 1px solid var(--rule); outline-offset: -1px; padding: 8px; }
 .pcard img { display: block; width: 100%; }
@@ -415,6 +457,8 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
 }
 @media (max-width: 720px) {
   body { font-size: 18px; }
+  .plates.three { grid-template-columns: minmax(0, 1fr); }
+  .features li { font-size: 16px; }
   .top nav a.opt { display: none; }
   .views3, .plates, .pair { grid-template-columns: minmax(0, 1fr); }
   .commit div { grid-template-columns: minmax(0, 1fr); }
@@ -435,7 +479,12 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
   <span class="eyebrow">A skill for Claude Code</span>
   <h1>Explain an idea the way a museum explains a <em>specimen</em>.</h1>
   <p class="lede">Name an idea, and Claude invents the instrument that performs it. It draws that instrument as a live, engraved figure, then mounts it with a numbered key and wall texts, so the reader can watch the idea work and read why.</p>
-  <div class="byline"><span>By <b>Ramakrushna Mohapatra</b></span><span>October 2026</span><span>Two plates</span><span>MIT</span></div>
+  <div class="byline"><span>By <b>Ramakrushna Mohapatra</b></span><span>October 2026</span><span>Three plates</span><span>MIT</span></div>
+  <ul class="features">
+    <li><span class="fn">i</span>Three-dimensional isometric technical drawings that you can control and inspect from every angle</li>
+    <li><span class="fn">ii</span>Live simulations of electricity, magnetism, and energy flows</li>
+    <li><span class="fn">iii</span>Internal components that actually rotate, shift, and interact, not just static visuals</li>
+  </ul>
   <div class="cmd"><code id="cmd">npx skills add Ramakm/folio-anatomy -g -a claude-code</code><button id="copy" type="button">Copy</button></div>
 </section>
 
@@ -475,17 +524,24 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
 
     <section id="plates">
       <h2><span class="no">02</span><span>The collection</span></h2>
-      <p>Two plates are on view. Both are live: the figures run on the same equations their wall texts describe, and every control you touch changes the numbers everywhere at once.</p>
+      <p>Three plates are on view. All are live: the figures run on the same equations their wall texts describe, and every control you touch changes the numbers everywhere at once.</p>
       <div class="wide">
         <div class="frame"><iframe id="f-attention" src="embed-attention.html" title="Plate I, live: attention as an assay bench" loading="eager"></iframe></div>
         <p class="caption"><span class="fig-n">Plate I</span><span>Attention as an assay bench. The query carriage walks the sentence on its own; click a column to take over.</span><a href="attention.html">Full plate →</a></p>
       </div>
-      <aside class="note"><sup>2</sup> Plate I uses one hand-set attention head with real arithmetic. Plate II is a lumped model of the circulation tuned to a resting adult: about 115/80 mmHg and 5 litres a minute.</aside>
+      <aside class="note"><sup>2</sup> Plate I uses one hand-set attention head with real arithmetic. Plate II is a lumped model of the circulation tuned to a resting adult: about 115/80 mmHg and 5 litres a minute. Plate III solves the swing equation for a 150 MW machine.</aside>
       <p>In <a href="attention.html">Plate I</a>, eight glass columns stand for eight words. A query carriage parks above the word that is asking, a dial for every word reads its score, and the reservoir pours one unit of attention between them by softmax. Four heads, a temperature knob and a causal mask are on the bench.<span class="nref">2</span></p>
-      <p>In <a href="heart.html">Plate II</a>, the bench is laid out as the circulation itself: veins, right heart, lungs on a stand, left heart, an air chamber for the aorta and a bed of capillaries. You can slow the beat to a sixteenth, change the heart rate, or give it a narrowed or leaking valve and watch the pressures respond.</p>
-      <div class="plates">
+      <p>In <a href="heart.html">Plate II</a>, the bench is laid out as the circulation itself: veins, right heart, lungs on a stand, left heart, an air chamber for the aorta and a bed of capillaries. You can slow the beat to a sixteenth, change the heart rate, or give it a narrowed or leaking valve and watch the pressures respond. A timing cam on each chamber turns once a beat.</p>
+      <div class="wide">
+        <div class="frame"><iframe id="f-grid" src="embed-grid.html" title="Plate III, live: a power grid in miniature" loading="lazy"></iframe></div>
+        <p class="caption"><span class="fig-n">Plate III</span><span>A power grid in miniature. Water turns the wheel, the rotor's field sweeps the coils, and the town's windows hold steady while the frequency does.</span><a href="grid.html">Full plate →</a></p>
+      </div>
+      <aside class="note"><sup>3</sup> Plate III's machine turns a hundred times slower on the bench than in life, so you can watch the rotor and the alternating current; the model itself runs at true speed.</aside>
+      <p>In <a href="grid.html">Plate III</a>, energy travels from falling water to a lit window. A flyball governor spins on the shaft and closes the water valve as the machine speeds up, the rotor's north and south poles sweep their field through the stator's copper, and the iron cores of two transformers carry an alternating flux. Raise the town's demand and the frequency dips; drop the line voltage and the losses climb with the square of the current; open the breaker and the machine runs away until the governor catches it.<span class="nref">3</span></p>
+      <div class="plates three">
         <a class="pcard" href="attention.html"><span class="im"><img src="img/plate-i.png" alt="Plate I"></span><b>Plate I · Attention</b><span>Machine learning. Scaled dot-product attention, four heads.</span></a>
         <a class="pcard" href="heart.html"><span class="im"><img src="img/plate-ii.png" alt="Plate II"></span><b>Plate II · The heart</b><span>Physiology. The cardiac cycle in five phases.</span></a>
+        <a class="pcard" href="grid.html"><span class="im"><img src="img/plate-iii.png" alt="Plate III"></span><b>Plate III · The grid</b><span>Electricity and magnetism. From water to lamp.</span></a>
       </div>
     </section>
 
@@ -495,10 +551,10 @@ details p { margin: 10px 0 2px; color: var(--ink-2); font-size: 17px; }
       <div class="views3">
         <figure><img src="img/view-svg.png" alt="SVG view"><figcaption><b>SVG</b>The engraved drawing. Solid parts, tones by facing, hatching that follows the shade.</figcaption></figure>
         <figure><img src="img/view-webgl.png" alt="WebGL view"><figcaption><b>WebGL</b>Light over the drawing. Pulses run at the true flow; fluid glows with its value.</figcaption></figure>
-        <figure><img src="img/view-3d.png" alt="3D view"><figcaption><b>3D</b>Drag to turn the bench. Every part is re-projected and re-shaded from the new angle.</figcaption></figure>
+        <figure><img src="img/view-3d.png" alt="3D view"><figcaption><b>3D</b>Drag to turn the bench all the way round. Every part is re-projected, re-shaded and re-ordered from the new angle.</figcaption></figure>
       </div>
-      <aside class="note"><sup>3</sup> The mask is just the drawing, recoloured by role: red for the floor, green for vessels, blue for glass. Whatever the drawing hides, the light cannot reach.</aside>
-      <p>The light in the WebGL view only lands where you can see. Folio renders the drawing once more with every surface coloured by its role and uses that picture as a mask, so a glow never leaks through a part that stands in front of it.<span class="nref">3</span> In 3D, the whole scene is rebuilt from the new viewpoint as you drag, about thirty times a second.</p>
+      <aside class="note"><sup>4</sup> The mask is just the drawing, recoloured by role: red for the floor, green for vessels, blue for glass. Whatever the drawing hides, the light cannot reach.</aside>
+      <p>The light in the WebGL view only lands where you can see. Folio renders the drawing once more with every surface coloured by its role and uses that picture as a mask, so a glow never leaks through a part that stands in front of it.<span class="nref">4</span> In 3D, the whole scene is rebuilt from the new viewpoint as you drag, about thirty times a second, all the way round: from behind, the bench shows its back, and the parts that were hidden come forward.</p>
     </section>
 
     <section id="inside">
@@ -550,6 +606,7 @@ git clone https://github.com/Ramakm/folio-anatomy.git .claude/skills/folio</pre>
       <details><summary>What does a plate need to run?</summary><p>Nothing but a browser. A plate is one HTML file with no dependencies. The WebGL view needs WebGL and falls back to the drawing without it.</p></details>
       <details><summary>Can it use my brand?</summary><p>Yes. Every colour is a design token and the fonts are three lines of CSS. Swap them and the structure and engraving stay.</p></details>
       <details><summary>Does it work on a phone?</summary><p>The plates are tested at 390 pixels wide. The view switch, the pins and the inspector all work by touch, and the 3D bench turns with a finger.</p></details>
+      <details><summary>Can the parts really move?</summary><p>Yes. Plate I's flow wheels spin as fluid pours, Plate II's pistons and timing cams run with the beat, and Plate III's water wheel, rotor, field and governor turn with the machine's true frequency, slowed so you can follow them.</p></details>
       <details><summary>What is the licence?</summary><p>MIT, for the skill and for the plates.</p></details>
     </section>
   </article>

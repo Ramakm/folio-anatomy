@@ -73,89 +73,14 @@
   S(box(cam, -6, -6, -36, 792, 312, 8, { hatch: 2.6 }));
   S(box(cam, 0, 0, -28, 780, 300, 28, { hatch: 2.2, groove: 7, cls: "floor" }));
   for (const [x, y] of [[16, 16], [764, 16], [16, 284], [764, 284]]) S(screw(cam, x, y, 0, 3));
-  S(box(cam, 270, 300, -22, 240, 1.4, 16, { cls: "brass" }));
+  const frontSeen = cam.view[1] > 0;
+  if (frontSeen) S(box(cam, 270, 300, -22, 240, 1.4, 16, { cls: "brass" }));
   S(faceText(cam, [390, 301.5, -11.4], [1, 0, 0], [0, 0, -1], "FOLIO · PLATE II · THE HUMAN HEART", 5.4));
   S(faceText(cam, [390, 301.5, -17.6], [1, 0, 0], [0, 0, -1], "A DOUBLE PUMP · FOUR CHAMBERS · FOUR VALVES · TWO CIRCUITS", 3.4, { cls: "engr lo" }));
-  for (const sx of [276, 504]) { const p = cam.p(sx, 301.5, -14); S(`<circle class="dot" cx="${f(p[0])}" cy="${f(p[1])}" r="${f(1.1 * cam.k)}"/>`); }
+  for (const sx of frontSeen ? [276, 504] : []) { const p = cam.p(sx, 301.5, -14); S(`<circle class="dot" cx="${f(p[0])}" cy="${f(p[1])}" r="${f(1.1 * cam.k)}"/>`); }
 
   if (!api.leftIsFar) controls();
 
-  /* ---------- behind the lungs: pulmonary artery descender, pulmonary vein riser ---------- */
-  S(vessel([[330, 14, 200], [330, 14, LZ + 3.5], [330, 25, LZ + 3.5]], 4.2, "venous", "pulv"));
-
-  /* ---------- lungs, on a stand behind the heart ---------- */
-  for (const [x, y] of [[282, 24], [498, 24], [282, 86], [498, 86]]) {
-    S(drum(cam, x, y, 0, 6, 3, { cls: "base" }));
-    S(rod(cam, [x, y, 3], [x, y, LZ - 6], 3.4, { seg: 18 }));
-  }
-  S(box(cam, 272, 18, LZ - 6, 236, 74, 6, { hatch: 2.4, groove: 3 }));
-  for (const L of LUNG) S(box(cam, L.x, 25, LZ, 90, 60, 5, { groove: 2 }));
-  slot("lungs");
-  S(vessel([[485, 55, LZ + 3.5], [LA.x, 55, LZ + 3.5], [LA.x, 55, 132], [LA.x, LA.y - LA.r + 1, 132]], 4.2, "arterial", "pv"));
-
-  /* ---------- heart band, far to near ---------- */
-  const units = [
-    () => { // venous reservoir: the great veins and the blood they hold
-      S(box(cam, VR.x - 36, VR.y - 36, 0, 72, 72, 8, { groove: 3 }));
-      glass(VR, "vr", 10);
-      S(drum(cam, VR.x, VR.y, VR.z + VR.h, VR.r + 2, 5, { cls: "capd" }));
-    },
-    () => { // right atrium on its stand
-      S(box(cam, RA.x - 17, RA.y - 17, 0, 34, 34, 96, { hatch: 2.4 }));
-      glass(RA, "ra", 5);
-      S(drum(cam, RA.x, RA.y, RA.z + RA.h, RA.r + 2, 4, { cls: "capd" }));
-    },
-    () => { // tricuspid valve
-      S(vessel([[RA.x + RA.r - 1, RA.y, 106], [RV.x - RV.r + 1, RV.y, 106]], 4, "venous", "tri"));
-      S(box(cam, 268, 161, 97, 16, 18, 18, { cls: "housing" }));
-      slot("vtri");
-    },
-    () => { // right ventricle
-      S(box(cam, RV.x - 32, RV.y - 30, 0, 64, 60, 20, { groove: 3, hatch: 2.4 }));
-      glass(RV, "rv", 18);
-      S(drum(cam, RV.x, RV.y, RV.z + RV.h, RV.r + 2, 6, { cls: "capd" }));
-      S(box(cam, RV.x - 10, RV.y - 10, 136, 20, 20, 10, { cls: "housing" }));
-      slot("vpulv");
-      S(vessel([[RV.x, RV.y, 146], [RV.x, RV.y, 200]], 4.2, "venous", "pulv"));
-    },
-    () => { // left ventricle
-      S(box(cam, LV.x - 32, LV.y - 30, 0, 64, 60, 20, { groove: 3, hatch: 2.4 }));
-      glass(LV, "lv", 18);
-      S(drum(cam, LV.x, LV.y, LV.z + LV.h, LV.r + 2, 6, { cls: "capd" }));
-      S(box(cam, LV.x - 10, LV.y - 10, 136, 20, 20, 10, { cls: "housing" }));
-      slot("vaov");
-      S(vessel([[LV.x, LV.y, 146], [LV.x, LV.y, 210]], 5, "arterial", "aov"));
-    },
-    () => { // mitral valve
-      S(vessel([[LV.x + LV.r - 1, LV.y, 106], [LA.x - LA.r + 1, LA.y, 106]], 4, "arterial", "mit", { rev: true }));
-      S(box(cam, 476, 161, 97, 16, 18, 18, { cls: "housing" }));
-      slot("vmit");
-    },
-    () => { // left atrium on its stand
-      S(box(cam, LA.x - 17, LA.y - 17, 0, 34, 34, 96, { hatch: 2.4 }));
-      glass(LA, "la", 5);
-      S(drum(cam, LA.x, LA.y, LA.z + LA.h, LA.r + 2, 4, { cls: "capd" }));
-    },
-    () => { // aortic air chamber: the elastic arteries, a windkessel
-      S(box(cam, AC.x - 34, AC.y - 34, 0, 68, 68, 8, { groove: 3 }));
-      glass(AC, "ac", 16);
-      S(drum(cam, AC.x, AC.y, AC.z + AC.h, AC.r + 1, 4, { cls: "capd" }));
-      S(drum(cam, AC.x, AC.y, AC.z + AC.h + 4, AC.r - 6, 3));
-      S(drum(cam, AC.x, AC.y, AC.z + AC.h + 7, GAUGE.r + 2, 3));
-      S(drum(cam, AC.x, AC.y, AC.z + AC.h + 10, GAUGE.r, 2.5, { capCls: "t-face" }));
-      gaugeFace(AC.x, AC.y, acZ, GMAX.SA);
-      slot("gSA");
-    },
-  ];
-  far(units).forEach((u) => u());
-
-  /* ---------- high vessels: above everything in the heart band ---------- */
-  S(vessel([[VR.x, VR.y, VR.z + VR.h + 5], [VR.x, VR.y, 176], [RA.x, RA.y, 176], [RA.x, RA.y, RA.z + RA.h + 4]], 5.2, "venous", "sv"));
-  S(vessel([[RV.x, RV.y, 200], [330, 14, 200]], 4.2, "venous", "pulv"));
-  S(ball(cam, [330, 14, 200], 5, { cls: "venous-ball" }));
-  S(vessel([[LV.x, LV.y, 210], [AC.x, AC.y, 210], [AC.x, AC.y, acZ + 3]], 5.4, "arterial", "aov"));
-
-  /* ---------- gauges ---------- */
   function gaugeFace(x, y, z, max) {
     const ang = (v) => 180 + (v / max) * 180;
     const mj = [], mn = [];
@@ -163,28 +88,114 @@
     for (let v = 0; v <= max + 1e-6; v += stp / 2) (Math.round(v / stp) * stp === v ? mj : mn).push(ang(v));
     S(`<path class="ln lo" d="${radialTicks(cam, x, y, z, 8.6, 10, mn)}"/><path class="ln mid" d="${radialTicks(cam, x, y, z, 7.4, 10, mj)}${arcPath(cam, x, y, z, 10, 180, 360, 24)}"/>`);
   }
-  for (const [c, X] of far([["RA", RA.x], ["RV", RV.x], ["LV", LV.x], ["LA", LA.x]])) {
-    S(box(cam, X - 17, GAUGE.y - 14, 0, 34, 28, 6, { groove: 2 }));
-    S(faceText(cam, [X, GAUGE.y + 14.2, 1.6], [1, 0, 0], [0, 0, -1], c + " · 0–" + GMAX[c], 3.4, { cls: "engr lo" }));
-    S(drum(cam, X, GAUGE.y, 6, GAUGE.r + 2.5, 3));
-    S(drum(cam, X, GAUGE.y, 9, GAUGE.r, 3, { capCls: "t-face" }));
-    gaugeFace(X, GAUGE.y, GAUGE.z, GMAX[c]);
-    slot("g" + c);
-  }
 
-  /* ---------- body: the capillary bed ---------- */
-  S(vessel([[VR.x, VR.y + VR.r - 2, 10], [VR.x, BODY.v, 10]], 4.6, "venous", "sys", { rev: true }));
-  S(vessel([[AC.x, AC.y + AC.r - 2, 10], [AC.x, BODY.a, 10], [BODY.x0 - 10, BODY.a, 10]], 4.6, "arterial", "sys"));
-  S(box(cam, BODY.x0 - 14, BODY.a + 6, 0, BODY.x1 - BODY.x0 + 28, BODY.v - BODY.a - 12, 3, { groove: 2.5 }));
-  for (const i of far([...Array(BODY.n).keys()])) {
-    const x = BODY.x0 + ((BODY.x1 - BODY.x0) * i) / (BODY.n - 1), mid = (BODY.a + BODY.v) / 2;
-    S(rod(cam, [x, BODY.a, BODY.z], [x, mid, BODY.z], 1.6, { seg: 10, sideCls: "arterial", cap: false }));
-    S(rod(cam, [x, mid, BODY.z], [x, BODY.v, BODY.z], 1.6, { seg: 10, sideCls: "venous", cap: false }));
-    const id = "fl" + flowPaths.length;
-    flowPaths.push({ id, q: "sys", per: BODY.n });
-    S(`<path id="${id}" class="flow thin" d="${path([cam.p(x, BODY.a, BODY.z + 1), cam.p(x, BODY.v, BODY.z + 1)], false)}"/>`);
-  }
-  S(vessel([[VR.x, BODY.v, 10], [BODY.x1 + 10, BODY.v, 10]], 4.6, "venous", "sys", { rev: true }));
+  api.bands([
+    { y: 14, draw() { // behind the lungs: the pulmonary artery comes down
+    S(vessel([[330, 14, 200], [330, 14, LZ + 3.5], [330, 25, LZ + 3.5]], 4.2, "venous", "pulv"));
+
+    } },
+    { y: 55, draw() { // the lungs, on a stand
+    for (const [x, y] of [[282, 24], [498, 24], [282, 86], [498, 86]]) {
+      S(drum(cam, x, y, 0, 6, 3, { cls: "base" }));
+      S(rod(cam, [x, y, 3], [x, y, LZ - 6], 3.4, { seg: 18 }));
+    }
+    S(box(cam, 272, 18, LZ - 6, 236, 74, 6, { hatch: 2.4, groove: 3 }));
+    for (const L of LUNG) S(box(cam, L.x, 25, LZ, 90, 60, 5, { groove: 2 }));
+    slot("lungs");
+    } },
+    { y: 100, draw() { // the pulmonary veins, from the lungs to the left atrium
+    S(vessel([[485, 55, LZ + 3.5], [LA.x, 55, LZ + 3.5], [LA.x, 55, 132], [LA.x, LA.y - LA.r + 1, 132]], 4.2, "arterial", "pv"));
+    } },
+    { y: 170, draw() { // the heart band: chambers and valves, far to near
+    const units = [
+      () => { // venous reservoir: the great veins and the blood they hold
+        S(box(cam, VR.x - 36, VR.y - 36, 0, 72, 72, 8, { groove: 3 }));
+        glass(VR, "vr", 10);
+        S(drum(cam, VR.x, VR.y, VR.z + VR.h, VR.r + 2, 5, { cls: "capd" }));
+      },
+      () => { // right atrium on its stand
+        S(box(cam, RA.x - 17, RA.y - 17, 0, 34, 34, 96, { hatch: 2.4 })); slot("camRA");
+        glass(RA, "ra", 5);
+        S(drum(cam, RA.x, RA.y, RA.z + RA.h, RA.r + 2, 4, { cls: "capd" }));
+      },
+      () => { // tricuspid valve
+        S(vessel([[RA.x + RA.r - 1, RA.y, 106], [RV.x - RV.r + 1, RV.y, 106]], 4, "venous", "tri"));
+        S(box(cam, 268, 161, 97, 16, 18, 18, { cls: "housing" }));
+        slot("vtri");
+      },
+      () => { // right ventricle
+        S(box(cam, RV.x - 32, RV.y - 30, 0, 64, 60, 20, { groove: 3, hatch: 2.4 })); slot("camRV");
+        glass(RV, "rv", 18);
+        S(drum(cam, RV.x, RV.y, RV.z + RV.h, RV.r + 2, 6, { cls: "capd" }));
+        S(box(cam, RV.x - 10, RV.y - 10, 136, 20, 20, 10, { cls: "housing" }));
+        slot("vpulv");
+        S(vessel([[RV.x, RV.y, 146], [RV.x, RV.y, 200]], 4.2, "venous", "pulv"));
+      },
+      () => { // left ventricle
+        S(box(cam, LV.x - 32, LV.y - 30, 0, 64, 60, 20, { groove: 3, hatch: 2.4 })); slot("camLV");
+        glass(LV, "lv", 18);
+        S(drum(cam, LV.x, LV.y, LV.z + LV.h, LV.r + 2, 6, { cls: "capd" }));
+        S(box(cam, LV.x - 10, LV.y - 10, 136, 20, 20, 10, { cls: "housing" }));
+        slot("vaov");
+        S(vessel([[LV.x, LV.y, 146], [LV.x, LV.y, 210]], 5, "arterial", "aov"));
+      },
+      () => { // mitral valve
+        S(vessel([[LV.x + LV.r - 1, LV.y, 106], [LA.x - LA.r + 1, LA.y, 106]], 4, "arterial", "mit", { rev: true }));
+        S(box(cam, 476, 161, 97, 16, 18, 18, { cls: "housing" }));
+        slot("vmit");
+      },
+      () => { // left atrium on its stand
+        S(box(cam, LA.x - 17, LA.y - 17, 0, 34, 34, 96, { hatch: 2.4 })); slot("camLA");
+        glass(LA, "la", 5);
+        S(drum(cam, LA.x, LA.y, LA.z + LA.h, LA.r + 2, 4, { cls: "capd" }));
+      },
+      () => { // aortic air chamber: the elastic arteries, a windkessel
+        S(box(cam, AC.x - 34, AC.y - 34, 0, 68, 68, 8, { groove: 3 }));
+        glass(AC, "ac", 16);
+        S(drum(cam, AC.x, AC.y, AC.z + AC.h, AC.r + 1, 4, { cls: "capd" }));
+        S(drum(cam, AC.x, AC.y, AC.z + AC.h + 4, AC.r - 6, 3));
+        S(drum(cam, AC.x, AC.y, AC.z + AC.h + 7, GAUGE.r + 2, 3));
+        S(drum(cam, AC.x, AC.y, AC.z + AC.h + 10, GAUGE.r, 2.5, { capCls: "t-face" }));
+        gaugeFace(AC.x, AC.y, acZ, GMAX.SA);
+        slot("gSA");
+      },
+    ];
+    far(units).forEach((u) => u());
+    } },
+    { y: 218, draw() { // the pressure gauges
+    for (const [c, X] of far([["RA", RA.x], ["RV", RV.x], ["LV", LV.x], ["LA", LA.x]])) {
+      S(box(cam, X - 17, GAUGE.y - 14, 0, 34, 28, 6, { groove: 2 }));
+      S(faceText(cam, [X, GAUGE.y + 14.2, 1.6], [1, 0, 0], [0, 0, -1], c + " · 0–" + GMAX[c], 3.4, { cls: "engr lo" }));
+      S(drum(cam, X, GAUGE.y, 6, GAUGE.r + 2.5, 3));
+      S(drum(cam, X, GAUGE.y, 9, GAUGE.r, 3, { capCls: "t-face" }));
+      gaugeFace(X, GAUGE.y, GAUGE.z, GMAX[c]);
+      slot("g" + c);
+    }
+
+    } },
+    { y: 265, draw() { // the body: the capillary bed
+    const vc = () => S(vessel([[VR.x, VR.y + VR.r - 2, 10], [VR.x, BODY.v, 10]], 4.6, "venous", "sys", { rev: true }));
+    const ah = () => S(vessel([[AC.x, AC.y + AC.r - 2, 10], [AC.x, BODY.a, 10], [BODY.x0 - 10, BODY.a, 10]], 4.6, "arterial", "sys"));
+    const vh = () => S(vessel([[VR.x, BODY.v, 10], [BODY.x1 + 10, BODY.v, 10]], 4.6, "venous", "sys", { rev: true }));
+    S(box(cam, BODY.x0 - 14, BODY.a + 6, 0, BODY.x1 - BODY.x0 + 28, BODY.v - BODY.a - 12, 3, { groove: 2.5 }));
+    if (api.backIsFar) { vc(); ah(); } else vh();
+    for (const i of far([...Array(BODY.n).keys()])) {
+      const x = BODY.x0 + ((BODY.x1 - BODY.x0) * i) / (BODY.n - 1), mid = (BODY.a + BODY.v) / 2;
+      S(rod(cam, [x, BODY.a, BODY.z], [x, mid, BODY.z], 1.6, { seg: 10, sideCls: "arterial", cap: false }));
+      S(rod(cam, [x, mid, BODY.z], [x, BODY.v, BODY.z], 1.6, { seg: 10, sideCls: "venous", cap: false }));
+      const id = "fl" + flowPaths.length;
+      flowPaths.push({ id, q: "sys", per: BODY.n });
+      S(`<path id="${id}" class="flow thin" d="${path([cam.p(x, BODY.a, BODY.z + 1), cam.p(x, BODY.v, BODY.z + 1)], false)}"/>`);
+    }
+    if (api.backIsFar) vh(); else { ah(); vc(); }
+    } },
+  ]);
+
+  /* ---------- high vessels: above everything in the heart band ---------- */
+  S(vessel([[VR.x, VR.y, VR.z + VR.h + 5], [VR.x, VR.y, 176], [RA.x, RA.y, 176], [RA.x, RA.y, RA.z + RA.h + 4]], 5.2, "venous", "sv"));
+  S(vessel([[RV.x, RV.y, 200], [330, 14, 200]], 4.2, "venous", "pulv"));
+  S(ball(cam, [330, 14, 200], 5, { cls: "venous-ball" }));
+  S(vessel([[LV.x, LV.y, 210], [AC.x, AC.y, 210], [AC.x, AC.y, acZ + 3]], 5.4, "arterial", "aov"));
 
   if (api.leftIsFar) controls();
   slot("pins");
@@ -268,6 +279,19 @@
     o += rod(cam, [385, 50, zb], [385, 50, zb + 20], 3.4, { seg: 14 }) + drum(cam, 385, 50, zb + 20, 7, 4) + ball(cam, [385, 50, zb], 3.8);
     return o;
   }
+  /* A timing cam on the front of each stand: one turn per beat. Its follower rises with the
+     chamber's activation, the E(t) of the model, so you can watch each chamber being told to squeeze. */
+  function timingCam(xc, yF, zc, act, r) {
+    if (cam.view[1] <= 0.05) return "";
+    const th = (2 * Math.PI * r.tc) / r.T - Math.PI / 2;
+    let o = rod(cam, [xc, yF, zc], [xc, yF + 2.6, zc], 7, { seg: 28, cls: "camdisc" });
+    o += ball(cam, [xc + 4 * Math.cos(th), yF + 3.2, zc + 4 * Math.sin(th)], 2.4, { cls: "lobe" });
+    o += ball(cam, [xc, yF + 3.2, zc], 1.2);
+    const lift = Math.max(0, Math.min(1, act)) * 5;
+    o += box(cam, xc - 2, yF + 0.2, zc + 7 + lift, 4, 2.4, 9, { cls: "follower" });
+    o += box(cam, xc - 5.5, yF, zc + 17, 11, 3, 2.6, { cls: "guide" });
+    return o;
+  }
   function knob(x, y, ang, r = 10) {
     const t = (ang * Math.PI) / 180;
     return drum(cam, x, y, 3, r, 11, { knurl: 14, density: 1.2 }) + drum(cam, x, y, 14, r - 3.5, 1.6) +
@@ -301,6 +325,10 @@
     kCT: (r, ui) => knob(CTRL.x, CTRL.ct, 160 + ((ui.contract - 0.4) / 1.2) * 220),
     kVS: (r, ui) => knob(CTRL.x, CTRL.vs, VS_ANG[["normal", "as", "mr"].indexOf(ui.fault)], 9),
     pins: () => PINS.map(([n, p]) => pin(cam, p, n)).join(""),
+    camRA: (r) => timingCam(RA.x, RA.y + 17, 66, r.act.a, r),
+    camLA: (r) => timingCam(LA.x, LA.y + 17, 66, r.act.a, r),
+    camRV: (r) => timingCam(RV.x, RV.y + 30, 9, r.act.v, r),
+    camLV: (r) => timingCam(LV.x, LV.y + 30, 9, r.act.v, r),
   };
 
   /* ---------- mount ---------- */
@@ -543,7 +571,7 @@ void main() {
   });
   let turnPending = null;
   const orb = K.live.orbit(fig, {
-    az0: -24, el0: 30, azRange: [-62, 62], elRange: [12, 68], enabled: () => mode === "3d",
+    az0: -24, el0: 30, wrap: true, azRange: [-180, 180], elRange: [8, 76], enabled: () => mode === "3d",
     onTurn(az, el) {
       if (turnPending) { turnPending = [az, el]; return; }
       turnPending = [az, el];

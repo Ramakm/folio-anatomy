@@ -1,0 +1,183 @@
+<title>Folio Plate III: The Grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/*CSS*/
+/* Plate III: five steps from water to lamp, a ledger of stations, and two charts. */
+.stages.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.stage .eq.small { font-size: 13px; font-family: var(--mono); white-space: normal; line-height: 1.4; }
+.vitals { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; background: var(--paper); margin-bottom: 18px; }
+.vitals div { padding: 16px 18px; border-left: 1px solid var(--rule); display: grid; gap: 4px; }
+.vitals div:first-child { border-left: 0; }
+.vitals b { font-family: var(--display); font-weight: 400; font-size: 32px; line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
+.vitals b small { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-left: 4px; }
+.vitals .warn b { color: var(--accent); }
+.charts { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; }
+.charts figure { margin: 0; background: var(--paper); padding: 18px 18px 12px; }
+.charts figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.charts figcaption b { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 21px; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; color: var(--ink-2); align-items: center; }
+.legend i { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--accent); vertical-align: middle; margin-right: 6px; }
+.legend i.k { border-top: 1.5px solid var(--ink); } .legend i.d { border-top: 1.5px dashed var(--ink-3); }
+.charts p { margin: 10px 0 0; font-size: 14px; color: var(--ink-2); }
+.chart .gen { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+.chart .dem { stroke: var(--ink-3); stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; }
+.chart .fr { stroke: var(--accent); stroke-width: 2; fill: none; }
+.chart .bar { fill: var(--rule); } .chart .bar.on { fill: var(--accent); } .chart .ufls { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; }
+.seg.five { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 1080px) { .stages.five { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vitals { grid-template-columns: repeat(3, minmax(0, 1fr)); } .vitals div:nth-child(4) { border-left: 0; } .charts { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 720px) { .stages.five { grid-template-columns: minmax(0, 1fr); } .vitals { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vitals div:nth-child(odd) { border-left: 0; } .vitals div:nth-child(4) { border-left: 1px solid var(--rule); } .vitals b { font-size: 26px; } }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <a class="label" href="index.html">← The collection</a>
+    <a class="mark c" href="index.html">Folio</a>
+    <span class="label r">Plate III of III</span>
+  </header>
+
+  <div class="title">
+    <div>
+      <span class="label">Plate III · Electricity, magnetism and energy</span>
+      <h1>The grid, as a <em>miniature</em>.</h1>
+    </div>
+    <div>
+      <p>Falling water turns a wheel, the wheel spins a magnet inside copper coils, and a flyball governor holds the speed. Transformers raise the voltage for the long line and lower it again for the town, where every window is lit by the same balance of supply and demand.</p>
+      <dl class="cat">
+        <dt>Object</dt><dd>Hydro station, line and town</dd>
+        <dt>Idea</dt><dd>e = NBAω sin ωt · P = 3I²R · df/dt ∝ Pm − Pe</dd>
+        <dt>Model</dt><dd>Swing equation · droop · I²R losses</dd>
+        <dt>Catalogue</dt><dd>FOL-003 · October 2026</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="exhibit">
+    <figure class="plate" style="margin:0">
+      <div class="corners"><span class="tl">Pl. III</span><span class="tr"><span class="cap">From water to lamp</span><span class="views" id="views" role="group" aria-label="View"></span><span class="tools" id="tools" role="group" aria-label="Tools"><button type="button" data-t="loupe" aria-pressed="false" title="A magnifying glass that follows the pointer">Loupe</button></span></span></div>
+      <div class="fig" id="plate" tabindex="0" role="img" aria-label="An isometric model of a power grid: a water wheel and generator, two transformers, a three-phase line on pylons, and a small town. Up and down change demand, left and right change line voltage, B opens the breaker, Space pauses.">
+        <svg id="plate-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+      </div>
+      <div class="corners b">
+        <span class="bl">Click a numbered pin to look closer · ↑ ↓ demand · ← → line voltage · B breaker · Space pause</span>
+        <span class="br" id="readout" aria-live="off"></span>
+      </div>
+    </figure>
+
+    <aside class="side">
+      <div class="key">
+        <span class="label">Key to the plate · follow the energy</span>
+        <h2>From falling water to a lit window</h2>
+        <ol id="key">
+          <li data-pin="1"><span class="num">1</span><span><b>Water wheel</b><span class="d">Water from the tank strikes the buckets. The jet is the turbine's mechanical power.</span></span></li>
+          <li data-pin="2"><span class="num">2</span><span><b>Flyball governor</b><span class="d">Spinning weights fly out as the shaft speeds up and close the water valve: droop control.</span></span></li>
+          <li data-pin="3"><span class="num">3</span><span><b>Rotor</b><span class="d">An electromagnet, north pole red and south pole blue, turned by the shaft.</span></span></li>
+          <li data-pin="4"><span class="num">4</span><span><b>Stator coils</b><span class="d">Fixed copper bars. The sweeping field induces <code>e = NBAω sin ωt</code> in them.</span></span></li>
+          <li data-pin="5"><span class="num">5</span><span><b>Step-up transformer</b><span class="d">Few turns to many on one iron core. Voltage rises, current falls by the turns ratio.</span></span></li>
+          <li data-pin="6"><span class="num">6</span><span><b>Line conductors</b><span class="d">Three phases. They heat by <code>3I²R</code>; red glow in WebGL shows the loss.</span></span></li>
+          <li data-pin="7"><span class="num">7</span><span><b>Pylon and insulators</b><span class="d">A lattice tower holds the conductors high and apart on strings of glass discs.</span></span></li>
+          <li data-pin="8"><span class="num">8</span><span><b>Step-down transformer</b><span class="d">The same machine reversed, back down to the town's 11 kV.</span></span></li>
+          <li data-pin="9"><span class="num">9</span><span><b>The town</b><span class="d">Windows dim when the voltage sags and go dark when the breaker opens.</span></span></li>
+          <li data-pin="10"><span class="num">10</span><span><b>Frequency meter</b><span class="d">The grid's speed. It falls when demand runs ahead of supply; red marks the cut-off.</span></span></li>
+          <li data-pin="11"><span class="num">11</span><span><b>Loss meter</b><span class="d">Power the line turns into heat. Watch it as you change the line voltage.</span></span></li>
+          <li data-pin="12"><span class="num">12</span><span><b>Breaker</b><span class="d">Disconnects the town. The machine overspeeds until the governor catches it.</span></span></li>
+        </ol>
+      </div>
+
+      <div class="controls">
+        <h2>At the bench</h2>
+        <div class="ctl">
+          <div class="label"><label for="dem">Town demand</label><span id="demv" class="mono"></span></div>
+          <input id="dem" type="range" min="10" max="140" step="1" value="60">
+        </div>
+        <div class="ctl">
+          <div class="label"><span>Line voltage</span><span id="kvv"></span></div>
+          <div class="seg five" id="kvseg" role="group" aria-label="Line voltage"></div>
+          <div class="headname" id="kvdesc"></div>
+        </div>
+        <div class="toggle"><span>Breaker</span><button id="brk" aria-pressed="true">Closed</button></div>
+        <div class="toggle"><span>Simulation</span><button id="play" aria-pressed="true">Running</button></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text I</span>
+      <h2>From water to lamp, in five steps</h2>
+      <p>Each step turns energy from one form into the next. The numbers in each box are read live from the bench.</p>
+    </div>
+    <div class="stages five" id="steps"></div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text II</span>
+      <h2>The ledger</h2>
+      <p>The grid's vital signs, then the voltage, current and power at each station along the way.</p>
+    </div>
+    <div class="vitals" id="vitals"></div>
+    <div class="ledger-wrap">
+      <table class="ledger">
+        <thead><tr><th>Station</th><th>Voltage</th><th>Current</th><th>Power</th><th>What happens here</th></tr></thead>
+        <tbody id="ledger"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text III</span>
+      <h2>Balance, and why the line runs high</h2>
+      <p>On the left, the last minute of the grid: generation must follow demand, and frequency is the sign of how well it does. On the right, the same demand sent at each line voltage: losses fall with the square of the voltage, which is why lines run at hundreds of kilovolts.</p>
+    </div>
+    <div class="charts">
+      <figure>
+        <figcaption><b>The last minute</b><span class="legend"><span><i></i>frequency</span><span><i class="k"></i>generation</span><span><i class="d"></i>demand</span></span></figcaption>
+        <svg class="chart" id="trend" viewBox="0 0 560 300" role="img" aria-label="Frequency, generation and demand over the last minute"></svg>
+        <p id="trendNote"></p>
+      </figure>
+      <figure>
+        <figcaption><b>Losses by line voltage</b><span class="legend"><span>at the current demand</span></span></figcaption>
+        <svg class="chart" id="losses" viewBox="0 0 400 300" role="img" aria-label="Line losses at each transmission voltage"></svg>
+        <p id="lossNote"></p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wall">
+    <div class="sechead">
+      <span class="label">Wall text IV</span>
+      <h2>About this specimen</h2>
+    </div>
+    <div class="notes">
+      <div><h3>What is exact</h3><p>The arithmetic. The swing equation sets frequency from the gap between mechanical and electrical power; a 4 % droop governor and slower automatic control answer it; the line's losses follow 3I²R with I from the power and the voltage, solved exactly, including the limit beyond which a line cannot carry more.</p></div>
+      <div><h3>What is set by hand</h3><p>The sizes: one 150 MW machine with an inertia of 6 s, a line of about 110 km at 9 Ω per phase, and a town of 10 to 140 MW. The machine turns 100 times slower on the bench than in life, and the alternation is drawn at the same slowed rate.</p></div>
+      <div><h3>What is left out</h3><p>Reactive power and power factor, line inductance, the three phases' separate waveforms, and the many other machines a real grid shares its load with. A real grid is far stiffer than one machine on its own.</p></div>
+    </div>
+  </section>
+
+  <nav class="platenav" aria-label="Plates">
+    <a href="heart.html"><span class="label">Previous · Plate II</span><b>The heart</b></a>
+    <a href="index.html"><span class="label">Back to</span><b>The collection</b></a>
+  </nav>
+
+  <footer>
+    <span><span class="mark">Folio</span> &nbsp;Plate III, drawn by Claude with the Folio skill. Set in Bodoni Moda, Source Serif 4 and IBM Plex Mono.</span>
+    <span class="mono">techwith.ram</span>
+  </footer>
+</div>
+
+<script>
+/*KIT*/
+</script>
+<script>
+/*MODEL*/
+</script>
+<script>
+/*PLATE*/
+</script>
+<script>
+/*PAGE*/
+</script>

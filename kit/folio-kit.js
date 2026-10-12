@@ -42,7 +42,7 @@
       const [x, y] = c.p(p);
       x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
     }
-    const k = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0));
+    const k = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0), o.maxK ?? Infinity);
     return camera({ ...o, k, ox: W / 2 - k * (x0 + x1) / 2, oy: H / 2 - k * (y0 + y1) / 2 });
   }
 
@@ -204,6 +204,8 @@
   /* Text engraved in a plane: ax is the world direction of the baseline, ay the world
      direction of "down" on the glyphs. Size is in world units. */
   function faceText(cam, origin, ax, ay, str, size, o = {}) {
+    // Engraving on a face turned away from the viewer is hidden with its face.
+    if (o.cull !== false && dot(cross(ax, ay), cam.view) <= 0.02) return "";
     const p0 = cam.p(origin);
     const px = cam.p(add(origin, ax)), py = cam.p(add(origin, ay));
     const a = (px[0] - p0[0]), b = (px[1] - p0[1]), c = (py[0] - p0[0]), d = (py[1] - p0[1]);
@@ -224,5 +226,46 @@
     return `<path class="f t-s3 ln-lo" d="${ringPath(cam, cx, cy, z, r, 20)}"/><path class="ln lo" d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}"/>`;
   }
 
-  root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, LIGHT };
+
+  /* A convex prism: a flat convex polygon (3D points, in order) swept along dir.
+     Only faces turned to the viewer are drawn, each toned by its facing. Roofs, wedges, hoppers. */
+  function prism(cam, base, dir, o = {}) {
+    const n0 = norm(cross(sub(base[1], base[0]), sub(base[2], base[0])));
+    const nb = dot(n0, dir) > 0 ? mul(n0, -1) : n0;
+    const top = base.map((p) => add(p, dir));
+    const cen = mul(base.reduce((a, p) => add(a, p), [0, 0, 0]), 1 / base.length);
+    const mid = add(cen, mul(dir, 0.5));
+    const faces = [{ n: nb, q: base }, { n: mul(nb, -1), q: top }];
+    for (let i = 0; i < base.length; i++) {
+      const a = base[i], b = base[(i + 1) % base.length];
+      let n = norm(cross(sub(b, a), dir));
+      const fc = mul(add(add(a, b), add(add(a, dir), add(b, dir))), 0.25);
+      if (dot(n, sub(fc, mid)) < 0) n = mul(n, -1);
+      faces.push({ n, q: [a, b, add(b, dir), add(a, dir)] });
+    }
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    for (const fc of faces) {
+      if (dot(fc.n, cam.view) <= 1e-6) continue;
+      const t = fc.n[2] > 0.9 ? (o.topTone || "top") : (o.tone || toneOf(fc.n));
+      s += `<path class="f t-${t}" d="${path(fc.q.map((v) => cam.p(v)))}"/>`;
+    }
+    return s + "</g>";
+  }
+
+  /* The half of a ring (a circle around an axis) that lies behind or in front of its centre,
+     for rings that wrap another part: draw the back half first and the front half last. */
+  function ringArc(cam, c, axis, r, front, N = 48) {
+    const [, u, v] = basis(axis), cd = cam.depth(c);
+    let d = "", pen = false;
+    for (let i = 0; i <= N; i++) {
+      const t = (i / N) * Math.PI * 2, p = ringPt(c, u, v, r, t);
+      const on = front ? cam.depth(p) >= cd : cam.depth(p) < cd;
+      if (on) { const q = cam.p(p); d += (pen ? "L" : "M") + f(q[0]) + " " + f(q[1]); pen = true; } else pen = false;
+    }
+    return d;
+  }
+  /* A point on a ring around an axis, at angle t: for parts that orbit a shaft. */
+  function orbitPt(c, axis, r, t) { const [, u, v] = basis(axis); return ringPt(c, u, v, r, t); }
+
+  root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, cross, LIGHT, prism, ringArc, orbitPt };
 })(typeof window !== "undefined" ? window : globalThis);

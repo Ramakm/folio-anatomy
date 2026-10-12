@@ -5,6 +5,7 @@
   --hatch: #3F3932; --hatch-op: .5; --glass: #DDE4E3; --glass-line: #5D6A6B; --face: #FFFDF8; --brass: #DCD1BB;
   --fluid: #C9381D; --fluid-2: #DF6A50; --fluid-3: #D24B2F; --fluid-top: #EE9078; --fluid-deep: #8E2412; --shut: #8A8276; --light-blend: normal;
   --venous: #3E4C84; --venous-top: #7180B6; --venous-deep: #232C55;
+  --water: #8FB3C4; --water-top: #B9D3DE; --water-deep: #4D7487; --copper: #B8794A; --copper-top: #D9A47A; --copper-deep: #6E4123; --iron: #7E8188; --lamp: #F2B544;
   --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
   --body: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -15,6 +16,7 @@
   --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
   --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
   --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  --water: #3F6A7E; --water-top: #6E98AA; --water-deep: #1F3A47; --copper: #C2814F; --copper-top: #E0A97C; --copper-deep: #6A3E20; --iron: #5D6068; --lamp: #FFC657;
   color-scheme: dark; } }
 :root[data-theme="dark"] {
   --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
@@ -22,6 +24,7 @@
   --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
   --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
   --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
+  --water: #3F6A7E; --water-top: #6E98AA; --water-deep: #1F3A47; --copper: #C2814F; --copper-top: #E0A97C; --copper-deep: #6A3E20; --iron: #5D6068; --lamp: #FFC657;
   color-scheme: dark; }
 
 * { box-sizing: border-box; }
@@ -299,3 +302,38 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 .key li { cursor: pointer; }
 .plate .tr { gap: 10px; }
 .fig.loupe-on #plate-svg .hit:hover { fill: transparent; }
+
+/* Moving internals */
+#plate-svg .vane { fill: var(--s2); stroke: var(--line); stroke-width: .4; }
+#plate-svg .vane.busy { fill: var(--fluid-top); stroke: var(--fluid-deep); }
+#plate-svg .lobe .f { fill: var(--accent); stroke: var(--fluid-deep); }
+#plate-svg .camdisc .t-top { fill: var(--face); }
+
+/* Plate III: water, copper, iron, fields and light */
+#plate-svg .water { fill: var(--water); stroke: var(--water-deep); stroke-width: .5; }
+#plate-svg .water-top { fill: var(--water-top); stroke: var(--water-deep); stroke-width: .5; }
+#plate-svg .waterg .hatch { stroke: var(--water-deep); opacity: .45; }
+#plate-svg .copper { fill: var(--copper); stroke: var(--copper-deep); stroke-width: .5; }
+#plate-svg .copper-top { fill: var(--copper-top); stroke: var(--copper-deep); stroke-width: .5; }
+#plate-svg .ln.turns { stroke: var(--copper-deep); stroke-width: .45; }
+#plate-svg .core .t-top { fill: var(--iron); } #plate-svg .core .t-s3, #plate-svg .core .t-s2 { fill: color-mix(in srgb, var(--iron) 80%, var(--line)); } #plate-svg .core .t-s1, #plate-svg .core .t-s0 { fill: color-mix(in srgb, var(--iron) 60%, var(--line)); }
+#plate-svg .core .hatch { stroke: var(--line); }
+#plate-svg .rotorbody .t-cyl { fill: var(--iron); } #plate-svg .rotorbody .t-top { fill: color-mix(in srgb, var(--iron) 75%, var(--paper)); }
+#plate-svg .pole-n { fill: var(--accent); stroke: var(--fluid-deep); stroke-width: .5; }
+#plate-svg .pole-s { fill: var(--venous); stroke: var(--venous-deep); stroke-width: .5; }
+#plate-svg .ring { fill: none; stroke: var(--line); stroke-width: 2.4; stroke-linecap: round; }
+#plate-svg .field { fill: none; stroke: var(--accent); stroke-width: .7; stroke-dasharray: 2 3; opacity: .75; }
+#plate-svg .flux { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 6; }
+#plate-svg .insul .t-cyl { fill: var(--glass); } #plate-svg .insul .t-top { fill: color-mix(in srgb, var(--glass) 70%, var(--paper)); }
+#plate-svg .conductor { fill: var(--s1); stroke: var(--line); stroke-width: .4; }
+#plate-svg .cable { fill: var(--line); stroke: var(--line); stroke-width: .3; }
+#plate-svg .flow.energy { stroke: var(--lamp); stroke-width: 1.2; stroke-dasharray: 2 9; opacity: .95; }
+#plate-svg .ln.lattice { stroke: var(--lo); stroke-width: .45; }
+#plate-svg .ln.spoke { stroke: var(--line); stroke-width: 1; }
+#plate-svg .bucket .f { stroke-width: .45; }
+#plate-svg .flyball .t-cyl { fill: var(--brass); }
+#plate-svg .roof .t-top, #plate-svg .roof .t-s3, #plate-svg .roof .t-s2 { fill: color-mix(in srgb, var(--accent) 35%, var(--s2)); } #plate-svg .roof .t-s1, #plate-svg .roof .t-s0 { fill: color-mix(in srgb, var(--accent) 30%, var(--s0)); }
+#plate-svg .win { fill: var(--lamp); stroke: var(--line); stroke-width: .3; }
+#plate-svg .jet { fill: none; stroke: var(--water); stroke-width: 3; stroke-dasharray: 4 3; stroke-linecap: round; }
+#plate-svg .tripped .t-cyl { fill: var(--accent); }
+.fig.mode-webgl #plate-svg .flow.energy { visibility: visible; }

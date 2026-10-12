@@ -8,7 +8,7 @@ import { execFileSync } from "node:child_process";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const out = join(root, "docs");
 mkdirSync(join(out, "img"), { recursive: true });
-const PLATES = ["attention", "heart"];
+const PLATES = ["attention", "heart", "grid"];
 for (const p of PLATES) execFileSync("node", [join(root, "scripts/build.mjs"), `examples/${p}`, `docs/${p}.html`], { stdio: "inherit" });
 const css = readFileSync(join(root, "kit/folio-page.css"), "utf8");
 const index = readFileSync(join(root, "site/index.html"), "utf8").replace("/*CSS*/", () => css);
@@ -17,6 +17,8 @@ writeFileSync(join(out, "index.html"), "<!doctype html>\n<meta charset=\"utf-8\"
 const EMBED = {
   attention: { TITLE: "Plate I", TL: "Pl. I", CAP: "The assay of a query", HINT: "Click a column or a numbered pin · drag in 3D", ARIA: "Plate I: attention as an assay bench",
     READOUT: `Plate.on((st, r) => { const T = AttnModel.TOKENS; document.getElementById("readout").innerHTML = T[st.q].w + " → <b>" + T[r.top].w + " " + r.a[r.top].toFixed(2) + "</b> · head " + AttnModel.HEADS[st.head].id; });` },
+  grid: { TITLE: "Plate III", TL: "Pl. III", CAP: "From water to lamp", HINT: "Click a numbered pin to look closer · drag all the way round in 3D", ARIA: "Plate III: a power grid in miniature",
+    READOUT: `Plate.on((sim, r) => { document.getElementById("readout").innerHTML = "<b>" + r.f.toFixed(2) + " Hz</b> · " + r.Pe.toFixed(1) + " MW · loss " + r.loss.toFixed(2) + " MW"; });` },
   heart: { TITLE: "Plate II", TL: "Pl. II", CAP: "The double pump", HINT: "Click a numbered pin to look closer · drag in 3D", ARIA: "Plate II: the human heart as a double pump",
     READOUT: `Plate.on((ui, cur, b) => { document.getElementById("readout").innerHTML = ui.HR + " bpm · <b>" + cur.phase + "</b>" + (b ? " · " + Math.round(b.SA[1]) + "/" + Math.round(b.SA[0]) + " mmHg" : ""); });` },
 };

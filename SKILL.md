@@ -1,6 +1,6 @@
 ---
 name: folio
-description: Build a museum-style exhibition plate that explains a technical idea - an invented scientific instrument drawn as a live, engraved isometric figure in three views (SVG, WebGL light, and a 3D bench you can turn), with numbered specimen pins, a catalogue key, a working model behind every number, and wall texts that walk through the formula term by term. Use for explanatory figures, interactive explainers, "how does X work" visuals, or technical illustrations for docs, courses, posts and landing pages, even when the request never mentions museums, plates or isometric drawing.
+description: Build a museum-style exhibition plate that explains a technical idea - an invented scientific instrument drawn as a live, engraved isometric figure in three views (SVG, WebGL light, and a 3D bench you can turn through 360 degrees) with internal parts that really rotate and interact, with numbered specimen pins, a catalogue key, a working model behind every number, and wall texts that walk through the formula term by term. Use for explanatory figures, interactive explainers, "how does X work" visuals, or technical illustrations for docs, courses, posts and landing pages, even when the request never mentions museums, plates or isometric drawing.
 ---
 
 # Folio
@@ -15,7 +15,7 @@ A Folio plate explains an idea the way a natural history museum explains a speci
 
 ## Getting started
 
-- Two reference plates ship with the repo. **Plate I** (`examples/attention/`, attention as an assay bench) is the model for ideas made of discrete steps and a formula. **Plate II** (`examples/heart/`, the human heart as a double pump) is the model for anything that runs in time: a simulation integrated every frame, continuous flow, phases, and charts redrawn after each cycle. Open the closer one first.
+- Three reference plates ship with the repo. **Plate I** (`examples/attention/`, attention as an assay bench) is the model for ideas made of discrete steps and a formula. **Plate II** (`examples/heart/`, the human heart as a double pump) is the model for anything that runs in time: a simulation integrated every frame, continuous flow, phases, and charts redrawn after each cycle. **Plate III** (`examples/grid/`, a power grid in miniature) is the model for electricity, magnetism and energy flows, and for a bench built from free-standing machines rather than bands: a turbine, a generator with a spinning rotor, transformers, pylons and a town. Open the closest one first.
 - The fastest start is to copy a reference plate: `node scripts/new-plate.mjs <name>` makes `examples/<name>/` from Plate I. Then replace its model, scene and texts. Building from a working plate is quicker and safer than starting blank.
 - Shared exhibition styles live in `kit/folio-page.css`; a plate's `page.html` puts `/*CSS*/` inside its `<style>` and adds only its own rules.
 - `node scripts/build-site.mjs` builds every plate plus the cover page (`site/index.html`) into `docs/`, a website ready for GitHub Pages. To add a plate, add its name to `PLATES` there and a card to the cover.
@@ -101,9 +101,29 @@ Inside the shader, `onPlane(vb, z)` turns a pixel back into a world point on a h
 
 Accumulate light as premultiplied colour (`addLight`) and pick colours per theme: pale highlights and saturated pools on paper (normal blending), brighter glows on the dark ground (screen blending, set by the `--light-blend` token). Render only while the view is on and the plate is on screen, cap the pixel ratio at 1.5, and draw one still frame under reduced motion.
 
-**3D** turns the bench. Because the whole scene is a function of the camera, `stage.mount(az, el)` simply builds it again from the new angle: every face is re-shaded by its facing, every round part re-silhouetted, every hatch re-spaced, and every engraved label re-projected. To keep the painter's order right from any angle in the front half (azimuth within about ±60°), build in depth bands from back to front as before, and inside each band list units along the bench and let `api.leftIsFar` decide the direction (`far(units).forEach(...)`). Anything that sits beside the bands, such as a control panel at one end, is drawn just after the plinth when its end is far and last when its end is near. `orbit()` turns pointer drags into azimuth and elevation with a little inertia, double-click returns to the default view, and Shift with the arrow keys turns it from the keyboard. A full rebuild of Plate II takes about 27 ms, which is smooth enough to drag; if a plate is much heavier, drop the hatching while dragging and restore it on release.
+**3D** turns the bench all the way round. Because the whole scene is a function of the camera, `stage.mount(az, el)` simply builds it again from the new angle: every face is re-shaded by its facing, every round part re-silhouetted, every hatch re-spaced, and every engraved label re-projected. The painter's order has to hold from every side, so never hard-code "back to front":
+
+- Wrap each depth band as `{ y, draw }` and hand the list to `api.bands(list)`; it sorts them far to near for the current camera. From behind, the front band is drawn first.
+- Inside a band, or for a bench of separate machines, give each unit a world position and use `api.units(list)` with `{ at: [x, y, z], draw }`. Plate III is built entirely this way.
+- Walls of an open vessel (a tray, a tank) are ordered with `api.backIsFar` and `api.leftIsFar`.
+- Anything mounted on one face of the plinth (a brass catalogue plate, a timing cam on a front panel) is drawn only when that face looks toward the reader: check the sign of `cam.view` first. `faceText` already culls itself.
+
+`orbit({ wrap: true })` lets the azimuth run past 360°, `stage` refits the scale at each angle (capped by `orbitScale`, so the bench never jumps in size), double-click returns to the default view, and Shift with the arrow keys turns it from the keyboard. Check with a grid of angles every 45° at two elevations. A full rebuild of Plate II takes about 27 ms, which is smooth enough to drag; if a plate is much heavier, memoise each slot's last output and repaint only what changed, as Plate III does.
 
 Leaving 3D returns the camera to the default view, so the WebGL light (which assumes it) always lines up.
+
+## Phase C2b: moving internals
+
+A plate should never be a still picture with numbers beside it. Find the parts that would really move and drive them from the model, at a rate the eye can follow:
+
+- **Things that turn.** A flow wheel in a sight glass turns at the true flow (Plate I's manifold), timing cams turn once per cycle and show which phase is active (Plate II), and a generator's rotor, a water wheel and a flyball governor turn with the machine's speed (Plate III). Accumulate the angle from the model (`rot += ω·dt`) rather than from the clock, so a slowing machine visibly slows.
+- **Things that shift.** Levels, pistons, valve leaflets, needles, a governor's balls flying out as speed rises, a breaker blade lifting.
+- **Things that interact.** One part's motion should cause the next: the wheel turns the shaft, the shaft turns the rotor, the rotor's field sweeps the coils, the coils feed the line, and a factory's windows dim when the line cannot keep up.
+- **Fields and flows.** Draw invisible quantities as moving marks: dashed flux loops through a transformer core whose dash offset swings with the alternating current, energy flow marks along a conductor whose speed is the power, field lines between rotor poles. In the WebGL view, add current waves along wires, heat glow by loss, and glow in iron cores.
+
+Use the helpers for round machinery: `ringArc(cam, c, axis, r, front)` draws the back or front half of a ring on any axis (draw the back half before the rotor, the front half after), `orbitPt(c, axis, r, t)` places a point on a turning wheel, and `prism()` builds a roof or a wedge.
+
+**Simulations of energy.** For electricity, magnetism and power flows, Plate III is the reference: a swing equation for frequency, a droop governor with a lag, slower automatic control back to the set point, line losses solved exactly (`P_loss = 3·I²·R`), and protection that trips when a limit is crossed. Tune it in Node against known behaviour (a sudden load step should dip the frequency a few tenths of a hertz and recover within a minute), and let the page explain a trip when it happens rather than hiding it.
 
 ## Phase C3: looking closer
 
@@ -158,14 +178,17 @@ A user's own brand rules override these: keep the structure and the engraving, a
 | `ringPath`, `arcPath`, `radialTicks`, `line` | marks on horizontal planes, and segments in space |
 | `faceText(cam, origin, xDir, downDir, text, size)` | text engraved on any plane |
 | `pin(cam, at, n)`, `screw(cam, x, y, z, r)` | specimen pins and slotted screws |
+| `prism(cam, base, dir, opts)` | a triangular prism: roofs, wedges, ramps |
+| `ringArc(cam, c, axis, r, front)`, `orbitPt(c, axis, r, t)` | half rings on any axis, drawn behind or in front of a turning part; a point on a wheel |
 
 `folio-live.js` adds `Folio.live`:
 
 | Function | Purpose |
 |---|---|
-| `stage({svg, W, H, az, el, points, center, build})` | owns the camera and painter's order; `mount(az, el)` builds the scene from any angle and returns the camera; `slots` holds the live groups |
+| `stage({svg, W, H, az, el, points, center, build})` | owns the camera and painter's order; `mount(az, el)` builds the scene from any angle and returns the camera; `slots` holds the live groups; the build gets `api.bands`, `api.units`, `api.leftIsFar`, `api.backIsFar` |
 | `light({canvas, svg, W, H, frag, maskCss})` | the WebGL layer: `size()`, `mask()`, `set(name, value)`, `draw(cam, t, dark)`; the shader gets `onPlane`, `project`, `fall`, `segDist`, `caustic`, `addLight` |
-| `orbit(el, {az0, el0, azRange, elRange, enabled, onTurn})` | drag to turn, with inertia; `to()`, `nudge()` |
+| `orbit(el, {az0, el0, wrap, azRange, elRange, enabled, onTurn, onSettle})` | drag to turn, with inertia, all the way round with `wrap`; `to()`, `nudge()` |
+| `inspector({fig, svg, W, H, parts, cam, live})`, `loupe({fig, svg, W, H, sceneId})` | glide in on any part with its live reading; a magnifier over the live drawing |
 | `views(host, {modes, current, onSelect})` | the SVG · WebGL · 3D switch |
 
 If the library is missing, write the two appendices below to `folio-kit.js` and `folio-live.js` exactly as given rather than recreating them.
@@ -217,7 +240,7 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
       const [x, y] = c.p(p);
       x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
     }
-    const k = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0));
+    const k = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0), o.maxK ?? Infinity);
     return camera({ ...o, k, ox: W / 2 - k * (x0 + x1) / 2, oy: H / 2 - k * (y0 + y1) / 2 });
   }
 
@@ -379,6 +402,8 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
   /* Text engraved in a plane: ax is the world direction of the baseline, ay the world
      direction of "down" on the glyphs. Size is in world units. */
   function faceText(cam, origin, ax, ay, str, size, o = {}) {
+    // Engraving on a face turned away from the viewer is hidden with its face.
+    if (o.cull !== false && dot(cross(ax, ay), cam.view) <= 0.02) return "";
     const p0 = cam.p(origin);
     const px = cam.p(add(origin, ax)), py = cam.p(add(origin, ay));
     const a = (px[0] - p0[0]), b = (px[1] - p0[1]), c = (py[0] - p0[0]), d = (py[1] - p0[1]);
@@ -399,7 +424,48 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
     return `<path class="f t-s3 ln-lo" d="${ringPath(cam, cx, cy, z, r, 20)}"/><path class="ln lo" d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}"/>`;
   }
 
-  root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, LIGHT };
+
+  /* A convex prism: a flat convex polygon (3D points, in order) swept along dir.
+     Only faces turned to the viewer are drawn, each toned by its facing. Roofs, wedges, hoppers. */
+  function prism(cam, base, dir, o = {}) {
+    const n0 = norm(cross(sub(base[1], base[0]), sub(base[2], base[0])));
+    const nb = dot(n0, dir) > 0 ? mul(n0, -1) : n0;
+    const top = base.map((p) => add(p, dir));
+    const cen = mul(base.reduce((a, p) => add(a, p), [0, 0, 0]), 1 / base.length);
+    const mid = add(cen, mul(dir, 0.5));
+    const faces = [{ n: nb, q: base }, { n: mul(nb, -1), q: top }];
+    for (let i = 0; i < base.length; i++) {
+      const a = base[i], b = base[(i + 1) % base.length];
+      let n = norm(cross(sub(b, a), dir));
+      const fc = mul(add(add(a, b), add(add(a, dir), add(b, dir))), 0.25);
+      if (dot(n, sub(fc, mid)) < 0) n = mul(n, -1);
+      faces.push({ n, q: [a, b, add(b, dir), add(a, dir)] });
+    }
+    let s = `<g class="sol ${o.cls || ""}"${attrs(o)}>`;
+    for (const fc of faces) {
+      if (dot(fc.n, cam.view) <= 1e-6) continue;
+      const t = fc.n[2] > 0.9 ? (o.topTone || "top") : (o.tone || toneOf(fc.n));
+      s += `<path class="f t-${t}" d="${path(fc.q.map((v) => cam.p(v)))}"/>`;
+    }
+    return s + "</g>";
+  }
+
+  /* The half of a ring (a circle around an axis) that lies behind or in front of its centre,
+     for rings that wrap another part: draw the back half first and the front half last. */
+  function ringArc(cam, c, axis, r, front, N = 48) {
+    const [, u, v] = basis(axis), cd = cam.depth(c);
+    let d = "", pen = false;
+    for (let i = 0; i <= N; i++) {
+      const t = (i / N) * Math.PI * 2, p = ringPt(c, u, v, r, t);
+      const on = front ? cam.depth(p) >= cd : cam.depth(p) < cd;
+      if (on) { const q = cam.p(p); d += (pen ? "L" : "M") + f(q[0]) + " " + f(q[1]); pen = true; } else pen = false;
+    }
+    return d;
+  }
+  /* A point on a ring around an axis, at angle t: for parts that orbit a shaft. */
+  function orbitPt(c, axis, r, t) { const [, u, v] = basis(axis); return ringPt(c, u, v, r, t); }
+
+  root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, cross, LIGHT, prism, ringArc, orbitPt };
 })(typeof window !== "undefined" ? window : globalThis);
 ```
 
@@ -427,11 +493,11 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
     const st = { cam: base, base, slots: {}, az: o.az, el: o.el, turned: false, sceneId: (o.svg.id || "plate") + "-scene" };
     o.svg.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`);
 
+    // Any other view is fitted to the frame afresh, but never closer than the default view,
+    // so the bench stays whole however it is turned.
     st.cameraAt = (az, el) => {
       if (az === o.az && el === o.el) return base;
-      const c0 = K.camera({ az, el, k: base.k * (o.orbitScale ?? 0.9) });
-      const p = c0.p(C);
-      return K.camera({ az, el, k: c0.k, ox: anchor[0] - p[0], oy: anchor[1] - p[1] });
+      return K.fit({ az, el, maxK: base.k * (o.orbitScale ?? 0.92) }, o.points, o.W, o.H, o.pad ?? 22);
     };
     st.mount = (az = st.az, el = st.el) => {
       st.az = az; st.el = el; st.turned = az !== o.az || el !== o.el;
@@ -444,6 +510,11 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
         alongX: (list, key = (v) => v) => list.slice().sort((a, b) => cam.depth(key(a), 0, 0) - cam.depth(key(b), 0, 0)),
         farFirst: (list, pt) => list.slice().sort((a, b) => cam.depth(...pt(a)) - cam.depth(...pt(b))),
         leftIsFar: cam.depth(0, 0, 0) < cam.depth(1, 0, 0),
+        backIsFar: cam.depth(0, 0, 0) < cam.depth(0, 1, 0),
+        // Bands of the bench, each {y, draw}: drawn far to near from any side.
+        bands: (list) => list.slice().sort((a, b) => cam.depth(0, a.y, 0) - cam.depth(0, b.y, 0)).forEach((b) => b.draw()),
+        // Free-standing units, each {at:[x,y,z], draw}: drawn far to near from any angle.
+        units: (list) => list.slice().sort((a, b) => cam.depth(...a.at) - cam.depth(...b.at)).forEach((u) => u.draw()),
       };
       o.build(cam, api);
       let html = "", run = "";
@@ -464,10 +535,12 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
     // o: { az0, el0, azRange:[a,b], elRange:[a,b], onTurn(az, el), onSettle(az, el), enabled() }
     let az = o.az0, elv = o.el0, va = 0, ve = 0, drag = null, raf = 0, last = 0;
     const clamp = (v, r) => Math.max(r[0], Math.min(r[1], v));
+    // With wrap, the bench turns all the way round; azimuth stays in [-180, 180).
+    const turnAz = (v) => (o.wrap ? ((((v + 180) % 360) + 360) % 360) - 180 : clamp(v, o.azRange));
     const tick = (now) => {
       const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
       if (!drag) {
-        az = clamp(az + va * dt, o.azRange); elv = clamp(elv + ve * dt, o.elRange);
+        az = turnAz(az + va * dt); elv = clamp(elv + ve * dt, o.elRange);
         va *= Math.exp(-dt * 5); ve *= Math.exp(-dt * 5);
         if (Math.abs(va) + Math.abs(ve) < 2) { va = ve = 0; o.onTurn(az, elv); o.onSettle?.(az, elv); raf = 0; last = 0; return; }
       }
@@ -486,7 +559,7 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
       const now = performance.now(), dt = Math.max(1, now - drag.t) / 1000;
       const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
       const sa = -dx * 0.32, se = dy * 0.22;
-      az = clamp(az + sa, o.azRange); elv = clamp(elv + se, o.elRange);
+      az = turnAz(az + sa); elv = clamp(elv + se, o.elRange);
       va = sa / dt; ve = se / dt;
       drag = { x: e.clientX, y: e.clientY, t: now };
     });
@@ -497,7 +570,8 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
       get: () => [az, elv],
       to(a, e) {
         // ease to a view without inertia
-        const a0 = az, e0 = elv, t0 = performance.now();
+        let a0 = az; const e0 = elv, t0 = performance.now();
+        if (o.wrap) { while (a - a0 > 180) a0 += 360; while (a0 - a > 180) a0 -= 360; }
         const step = (now) => {
           const k = Math.min(1, (now - t0) / 600), s = k * k * (3 - 2 * k);
           az = a0 + (a - a0) * s; elv = e0 + (e - e0) * s; o.onTurn(az, elv);
@@ -505,7 +579,7 @@ If the library is missing, write the two appendices below to `folio-kit.js` and 
         };
         va = ve = 0; requestAnimationFrame(step);
       },
-      nudge(da, de) { az = clamp(az + da, o.azRange); elv = clamp(elv + de, o.elRange); o.onTurn(az, elv); o.onSettle?.(az, elv); },
+      nudge(da, de) { az = turnAz(az + da); elv = clamp(elv + de, o.elRange); o.onTurn(az, elv); o.onSettle?.(az, elv); },
     };
     return api;
   }

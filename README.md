@@ -6,6 +6,10 @@
 
 *Explain an idea the way a museum explains a specimen.*
 
+Three-dimensional isometric technical drawings that you can control and inspect from every angle.<br>
+Live simulations of electricity, magnetism, and energy flows.<br>
+Internal components that actually rotate, shift, and interact, not just static visuals.
+
 [The collection](#the-collection) · [Install](#ii-install) · [Commission a plate](#iii-commission-a-plate) · [Anatomy of a plate](#iv-anatomy-of-a-plate) · [Make your own](#v-make-your-own)
 <img width="1776" height="896" alt="Untitled design" src="https://github.com/user-attachments/assets/ee106ff7-05df-4765-a7d2-03b81f1fc639" />
 
@@ -24,16 +28,18 @@
 
 <table>
 <tr>
-<td width="50%" valign="top"><a href="docs/attention.html"><img src="docs/img/plate-i-light.png" alt="Plate I: attention as an assay bench"></a></td>
-<td width="50%" valign="top"><a href="docs/heart.html"><img src="docs/img/plate-ii-light.png" alt="Plate II: the human heart as a double pump"></a></td>
+<td width="33%" valign="top"><a href="docs/attention.html"><img src="docs/img/plate-i-light.png" alt="Plate I: attention as an assay bench"></a></td>
+<td width="33%" valign="top"><a href="docs/heart.html"><img src="docs/img/plate-ii-light.png" alt="Plate II: the human heart as a double pump"></a></td>
+<td width="33%" valign="top"><a href="docs/grid.html"><img src="docs/img/plate-iii-light.png" alt="Plate III: a power grid in miniature"></a></td>
 </tr>
 <tr>
-<td valign="top"><b>Plate I · Attention, as an assay bench</b><br><sub>Machine learning. A sealed reservoir pours one unit of attention between eight words by softmax. Four heads, a temperature knob and a causal mask.</sub></td>
-<td valign="top"><b>Plate II · The heart, as a double pump</b><br><sub>Physiology. Four piston chambers, four valves and two circuits, run by a live model of the circulation. Slow it down, speed it up, or give it a narrowed or leaking valve.</sub></td>
+<td valign="top"><b>Plate I · Attention, as an assay bench</b><br><sub>Machine learning. A sealed reservoir pours one unit of attention between eight words by softmax. Flow wheels turn in the manifold as the weights shift. Four heads, a temperature knob and a causal mask.</sub></td>
+<td valign="top"><b>Plate II · The heart, as a double pump</b><br><sub>Physiology. Four piston chambers, four valves, two circuits and turning timing cams, run by a live model of the circulation. Slow it down, speed it up, or give it a narrowed or leaking valve.</sub></td>
+<td valign="top"><b>Plate III · The grid, as a miniature</b><br><sub>Electricity. Falling water turns a wheel, a rotor's field sweeps the stator coils, transformers step the voltage up and down, and a town draws the power. Frequency, governor, line losses and protection are all simulated live.</sub></td>
 </tr>
 </table>
 
-Both plates live on one website, with a cover page written as a short illustrated essay: **[ramakm.github.io/folio-anatomy/docs](https://ramakm.github.io/folio-anatomy/docs/)**. Its source is in [`site/`](site/) and the built site in [`docs/`](docs/) (see [VI](#vi-the-website)).
+All three plates live on one website, with a cover page written as a short illustrated essay: **[ramakm.github.io/folio-anatomy/docs](https://ramakm.github.io/folio-anatomy/docs/)**. Its source is in [`site/`](site/) and the built site in [`docs/`](docs/) (see [VI](#vi-the-website)).
 
 <br>
 
@@ -50,7 +56,18 @@ Each plate has a switch in its top corner: **SVG · WebGL · 3D**, plus two ways
 <tr>
 <td valign="top"><b>SVG</b><br><sub>The engraved drawing: solid parts, tones by facing, hatching that follows the shade.</sub></td>
 <td valign="top"><b>WebGL</b><br><sub>Light over the drawing. Pulses run along vessels at the true flow, fluid glows with its value, and rippled light falls across the bench. A mask rendered from the drawing keeps the light off anything hidden.</sub></td>
-<td valign="top"><b>3D</b><br><sub>Drag to turn the bench. Every part is re-projected, re-shaded and re-ordered from the new angle. Double-click to reset.</sub></td>
+<td valign="top"><b>3D</b><br><sub>Drag to turn the bench all the way round, and look at it from behind or from above. Every part is re-projected, re-shaded and re-ordered from the new angle. Double-click to reset.</sub></td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td width="50%" valign="top"><img src="docs/img/grid-webgl.png" alt="Plate III in the WebGL view, dark theme: current waves on the conductors, a glowing transformer core and lit windows in the town"></td>
+<td width="50%" valign="top"><img src="docs/img/grid-turned.png" alt="Plate III turned in 3D to show the generator and transformers from another side"></td>
+</tr>
+<tr>
+<td valign="top"><b>Energy you can see</b><br><sub>Current runs along the wires at the true power, the transformer cores glow with flux, the conductors warm with their losses, and the town's windows dim when the line cannot keep up.</sub></td>
+<td valign="top"><b>Parts that move</b><br><sub>The water wheel, shaft and rotor turn at the machine's real speed, the governor's balls fly out as it speeds up, and the breaker lifts when protection trips. Slow the grid down and you watch it slow.</sub></td>
 </tr>
 </table>
 
@@ -60,7 +77,7 @@ Each plate has a switch in its top corner: **SVG · WebGL · 3D**, plus two ways
 
 Most technical diagrams are boxes and arrows. They name the parts but leave the motion to your imagination.
 
-A Folio plate turns the idea into an instrument whose working parts carry it out, then mounts that instrument the way a museum would. You can read it as an engraving, light it with WebGL, or turn it in 3D. Each part gets a numbered pin, a catalogue key says what each pin computes, and four wall texts walk through the math with live numbers.
+A Folio plate turns the idea into an instrument whose working parts carry it out, then mounts that instrument the way a museum would. You can read it as an engraving, light it with WebGL, or turn it in 3D, and its internal parts move as the model runs. Each part gets a numbered pin, a catalogue key says what each pin computes, and four wall texts walk through the math with live numbers.
 
 In Plate I, eight glass columns stand for eight words. A sealed reservoir holds exactly one unit of fluid and shares it between the columns by softmax, so the columns always sum to one because the reservoir never holds more. The shares settle as layers in a tray, and the length of each layer is that word's attention weight.
 
@@ -111,6 +128,11 @@ Name the idea, not the drawing:
 /folio how does consistent hashing move keys when a server joins
 /folio explain the KV cache in LLM inference, dark theme
 /folio design the human heart anatomy
+```
+
+```
+/folio simulate how a power grid keeps 50 Hz
+/folio explain how an electric motor turns
 ```
 
 Claude works in four phases:
@@ -199,6 +221,7 @@ node scripts/capture.mjs dist/kv-cache.html shots
 docs/index.html        the cover: the collection, install, the method
 docs/attention.html    Plate I
 docs/heart.html        Plate II
+docs/grid.html         Plate III
 docs/img/              thumbnails and README images
 ```
 
@@ -213,10 +236,11 @@ To add your own plate to the site, add its name to `PLATES` in `scripts/build-si
 ```
 SKILL.md                 the skill: commitments, four phases, plate grammar, style, library
 kit/folio-kit.js         the drawing library: camera, engraved boxes and cylinders, glass, pins, text
-kit/folio-live.js        the three views: stage, WebGL light layer, orbit, view switch
+kit/folio-live.js        the three views: stage, WebGL light layer, 360° orbit, inspector, loupe
 kit/folio-page.css       the shared exhibition styles: mount, key, wall texts, both themes
 examples/attention/      Plate I: model.js, plate.js, page.html, page.js
 examples/heart/          Plate II: a lumped-parameter model of the circulation and its bench
+examples/grid/           Plate III: a swing-equation model of a small grid, and its bench of machines
 site/index.html          the cover page of the website
 scripts/build.mjs        inline one plate into a standalone HTML file
 scripts/build-site.mjs   build the whole website into docs/

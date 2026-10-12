@@ -39,10 +39,11 @@
   S(box(cam, -6, -6, -38, 732, 288, 8, { hatch: 2.6 }));
   S(box(cam, 0, 0, -30, 720, 276, 30, { hatch: 2.2, groove: 7, part: "plinth", cls: "floor" }));
   for (const [x, y] of [[16, 16], [704, 16], [16, 260], [704, 260]]) S(screw(cam, x, y, 0, 3));
-  S(box(cam, 250, 276, -24, 240, 1.4, 17, { cls: "brass" }));
+  const frontSeen = cam.view[1] > 0;
+  if (frontSeen) S(box(cam, 250, 276, -24, 240, 1.4, 17, { cls: "brass" }));
   S(faceText(cam, [370, 277.5, -12.6], [1, 0, 0], [0, 0, -1], "FOLIO · PLATE I · SCALED DOT-PRODUCT ATTENTION", 5.4));
   S(faceText(cam, [370, 277.5, -20], [1, 0, 0], [0, 0, -1], "ONE HEAD · d_model 11 · d_k 8 · EIGHT TOKENS", 3.6, { cls: "engr lo" }));
-  for (const sx of [256, 484]) {
+  for (const sx of frontSeen ? [256, 484] : []) {
     const p = cam.p(sx, 277.5, -15.5);
     S(`<circle class="dot" cx="${f(p[0])}" cy="${f(p[1])}" r="${f(1.1 * cam.k)}"/>`);
   }
@@ -53,23 +54,7 @@
     S(`<path class="ln lo" d="${d}${line(cam, [100, 58, 0], [600, 58, 0])}"/>`);
   }
 
-  if (!api.leftIsFar) controls();
-
-  // Query rail on two posts, behind the stations.
-  for (const x of [14, 590]) {
-    S(drum(cam, x, RAIL.y, 0, 10, 4, { cls: "base" }));
-    S(rod(cam, [x, RAIL.y, 4], [x, RAIL.y, RAIL.z + 10], 4.2));
-    S(drum(cam, x, RAIL.y, RAIL.z + 10, 6, 4));
-  }
-  S(rod(cam, [14, RAIL.y, RAIL.z], [590, RAIL.y, RAIL.z], 3.2, { seg: 30 }));
-  {
-    let d = "";
-    for (let j = 0; j < N; j++) d += line(cam, [SX(j), RAIL.y + 3.2, RAIL.z - 3], [SX(j), RAIL.y + 3.2, RAIL.z - 7]);
-    S(`<path class="ln lo" d="${d}"/>`);
-  }
-  slot("carriage");
-
-  // Pads: one per token, the reservoir's at the far end.
+  // Pads: one per token, the reservoir's at the far end. They lie flat, so they go down first.
   const pad = (x0, w, label, cls) => {
     S(box(cam, x0, 66, 0, w, 110, 10, { groove: 3, part: cls, cls: "pad" }));
     if (label) S(faceText(cam, [x0 + w / 2, 176.2, 2.6], [1, 0, 0], [0, 0, -1], label, 6.4, { cls: "engr tok" }));
@@ -83,6 +68,8 @@
     S(`<text class="engr lo" x="${f(p[0])}" y="${f(p[1])}" font-size="${f(4 * cam.k)}" text-anchor="end">${j}</text>`);
   }
 
+  if (!api.leftIsFar) controls();
+
   // Glass column helper: back wall, a slot for the fluid, then the front glass with graduations.
   const facing = Math.atan2(cam.view[1], cam.view[0]) / (Math.PI / 180);
   function column(x, y, z, r, h, name, opts = {}) {
@@ -94,77 +81,88 @@
       const zz = z + (h * g) / 10, span = g === 5 ? 26 : 14;
       d += arcPath(cam, x, y, zz, r + 0.2, facing - span, facing + span, 8);
     }
+    const t = (facing + 48) * Math.PI / 180;
     S(`<g class="sol glass">${rod(cam, [x, y, z], [x, y, z + h], r, { sideCls: "glass-front", capCls: "glass-rim", hatch: false }).replace(/^<g[^>]*>|<\/g>$/g, "")}` +
       `<path class="ln grad" d="${d}"/>` +
-      `<path class="ln glint-line" d="${line(cam, ...[[0, 0], [0, 0]].map((_, i) => {
-        const t = (facing + 48) * Math.PI / 180; return [x + r * Math.cos(t), y + r * Math.sin(t), i ? z + h - 6 : z + 4];
-      }))}"/></g>`);
+      `<path class="ln glint-line" d="${line(cam, [x + r * Math.cos(t), y + r * Math.sin(t), z + 4], [x + r * Math.cos(t), y + r * Math.sin(t), z + h - 6])}"/></g>`);
     S(drum(cam, x, y, z + h, r + 1.6, 2, { capCls: "glass-rim", sideCls: "glass-lip", hatch: false }));
   }
 
-  // The reservoir: one sealed unit of fluid, always full. Softmax shares exactly this much.
-  const reservoir = () => {
-    column(60, 98, 15, 20, 78, null, {
-      fluid: rod(cam, [60, 98, 15], [60, 98, 15 + 72], 19.2, { cls: "fluidg", sideCls: "fluid", capCls: "fluid-top" }),
-    });
-    S(drum(cam, 60, 98, 95, 12, 7, { cls: "stopper" }));
-    S(ball(cam, [60, 98, 106], 4));
-  };
-  if (api.leftIsFar) reservoir();
-  for (const j of J) {
-    column(SX(j), GL.y, GL.z, GL.r, GL.h, "fluid" + j);
-    slot("shut" + j);
-  }
-  if (!api.leftIsFar) reservoir();
-
-  // Manifold: stubs with stopcocks from the pipe to each collar, then the pipe itself.
-  S(rod(cam, [60, 122, PIPE.z], [60, PIPE.y, PIPE.z], 3, { seg: 24, cls: "pipe" }));
-  for (const j of J) {
-    S(rod(cam, [SX(j), 117, PIPE.z], [SX(j), PIPE.y, PIPE.z], 2.6, { seg: 24, cls: "pipe" }));
-    S(box(cam, SX(j) - 4.5, 119.5, 6, 9, 8, 12, { cls: "cock" }));
-    slot("cock" + j);
-  }
-  S(rod(cam, [60, PIPE.y, PIPE.z], [SX(N - 1) + 14, PIPE.y, PIPE.z], PIPE.r, { seg: 30, cls: "pipe" }));
-  S(ball(cam, [60, PIPE.y, PIPE.z], 5, { cls: "pipe" }));
-  for (const j of J) S(ball(cam, [SX(j), PIPE.y, PIPE.z], 4.6, { cls: "pipe" }));
-
-  // Key dials: one per token. The needle reads q·k / √d_k.
-  for (const j of J) {
-    const x = SX(j);
-    S(drum(cam, x, DIAL.y, 10, DIAL.r + 2.5, 3));
-    S(drum(cam, x, DIAL.y, 13, DIAL.r, 3, { capCls: "t-face" }));
-    const majors = [], minors = [];
-    for (let s = SCORE[0]; s <= SCORE[1]; s += 0.5) (Number.isInteger(s / 2) ? majors : minors).push(scoreAng(s));
-    S(`<path class="ln lo" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 9.6, 11.2, minors)}"/>` +
-      `<path class="ln mid" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 8.4, 11.2, majors)}${arcPath(cam, x, DIAL.y, DIAL.z, 11.2, 180, 360, 24)}"/>` +
-      `<path class="ln zero" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 7.6, 11.2, [scoreAng(0)])}"/>`);
-    slot("needle" + j);
-  }
-
-  // The core-sample tray: the output, laid down as strata whose lengths are the weights.
-  {
-    const { x0, x1, y0, y1, z } = TRAY;
-    S(box(cam, x0, y0, 0, x1 - x0, y1 - y0, 4, { cls: "tray" }));
-    S(box(cam, x0, y0, 4, x1 - x0, 4, z - 4, { cls: "tray" }));
-    const wl = () => S(box(cam, x0, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
-    const wr = () => S(box(cam, x1 - 4, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
-    api.leftIsFar ? wl() : wr();
-    slot("strata");
-    api.leftIsFar ? wr() : wl();
-    S(box(cam, x0, y1 - 4, 4, x1 - x0, 4, z - 4, { cls: "tray", hatch: 3 }));
-    let d = "", dm = "";
-    for (let i = 0; i <= 20; i++) {
-      const x = x0 + 4 + ((x1 - x0 - 8) * i) / 20;
-      (i % 5 === 0 ? (dm += line(cam, [x, y1 - 4, z], [x, y1 - 1.2, z])) : (d += line(cam, [x, y1 - 4, z], [x, y1 - 2.4, z])));
-    }
-    S(`<path class="ln lo" d="${d}"/><path class="ln mid" d="${dm}"/>`);
-    for (const [fr, lab] of [[0, "0"], [0.25, ".25"], [0.5, ".50"], [0.75, ".75"], [1, "1"]]) {
-      const x = x0 + 4 + (x1 - x0 - 8) * fr;
-      S(faceText(cam, [x, y1 + 0.2, z - 3], [1, 0, 0], [0, 0, -1], lab, 3.6, { cls: "engr lo" }));
-    }
-    slot("trayText");
-    for (const x of [x0 - 6, x1 + 2]) S(box(cam, x, y0 + 8, 0, 4, y1 - y0 - 16, z + 2, { cls: "clamp" }));
-  }
+  api.bands([
+    { y: RAIL.y, draw() { // the query rail on two posts
+      for (const x of far([14, 590])) {
+        S(drum(cam, x, RAIL.y, 0, 10, 4, { cls: "base" }));
+        S(rod(cam, [x, RAIL.y, 4], [x, RAIL.y, RAIL.z + 10], 4.2));
+        S(drum(cam, x, RAIL.y, RAIL.z + 10, 6, 4));
+      }
+      S(rod(cam, [14, RAIL.y, RAIL.z], [590, RAIL.y, RAIL.z], 3.2, { seg: 30 }));
+      let d = "";
+      for (let j = 0; j < N; j++) d += line(cam, [SX(j), RAIL.y + 3.2, RAIL.z - 3], [SX(j), RAIL.y + 3.2, RAIL.z - 7]);
+      S(`<path class="ln lo" d="${d}"/>`);
+      slot("carriage");
+    } },
+    { y: GL.y, draw() { // the reservoir and the eight columns
+      const reservoir = () => {
+        column(60, 98, 15, 20, 78, null, {
+          fluid: rod(cam, [60, 98, 15], [60, 98, 15 + 72], 19.2, { cls: "fluidg", sideCls: "fluid", capCls: "fluid-top" }),
+        });
+        S(drum(cam, 60, 98, 95, 12, 7, { cls: "stopper" }));
+        S(ball(cam, [60, 98, 106], 4));
+      };
+      if (api.leftIsFar) reservoir();
+      for (const j of J) { column(SX(j), GL.y, GL.z, GL.r, GL.h, "fluid" + j); slot("shut" + j); }
+      if (!api.leftIsFar) reservoir();
+    } },
+    { y: 126, draw() { // the manifold: stubs, stopcocks, the pipe and a flow wheel under each column
+      S(rod(cam, [60, 122, PIPE.z], [60, PIPE.y, PIPE.z], 3, { seg: 24, cls: "pipe" }));
+      for (const j of J) {
+        S(rod(cam, [SX(j), 117, PIPE.z], [SX(j), PIPE.y, PIPE.z], 2.6, { seg: 24, cls: "pipe" }));
+        S(box(cam, SX(j) - 4.5, 119.5, 6, 9, 8, 12, { cls: "cock" }));
+        slot("cock" + j);
+      }
+      S(rod(cam, [60, PIPE.y, PIPE.z], [SX(N - 1) + 14, PIPE.y, PIPE.z], PIPE.r, { seg: 30, cls: "pipe" }));
+      S(ball(cam, [60, PIPE.y, PIPE.z], 5, { cls: "pipe" }));
+      for (const j of J) slot("wheel" + j);
+    } },
+    { y: DIAL.y, draw() { // the key dials
+      for (const j of J) {
+        const x = SX(j);
+        S(drum(cam, x, DIAL.y, 10, DIAL.r + 2.5, 3));
+        S(drum(cam, x, DIAL.y, 13, DIAL.r, 3, { capCls: "t-face" }));
+        const majors = [], minors = [];
+        for (let s = SCORE[0]; s <= SCORE[1]; s += 0.5) (Number.isInteger(s / 2) ? majors : minors).push(scoreAng(s));
+        S(`<path class="ln lo" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 9.6, 11.2, minors)}"/>` +
+          `<path class="ln mid" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 8.4, 11.2, majors)}${arcPath(cam, x, DIAL.y, DIAL.z, 11.2, 180, 360, 24)}"/>` +
+          `<path class="ln zero" d="${radialTicks(cam, x, DIAL.y, DIAL.z, 7.6, 11.2, [scoreAng(0)])}"/>`);
+        slot("needle" + j);
+      }
+    } },
+    { y: (TRAY.y0 + TRAY.y1) / 2, draw() { // the core-sample tray
+      const { x0, x1, y0, y1, z } = TRAY;
+      S(box(cam, x0, y0, 0, x1 - x0, y1 - y0, 4, { cls: "tray" }));
+      const wb = () => S(box(cam, x0, y0, 4, x1 - x0, 4, z - 4, { cls: "tray" }));
+      const wf = () => S(box(cam, x0, y1 - 4, 4, x1 - x0, 4, z - 4, { cls: "tray", hatch: 3 }));
+      const wl = () => S(box(cam, x0, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+      const wr = () => S(box(cam, x1 - 4, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+      api.backIsFar ? wb() : wf();
+      api.leftIsFar ? wl() : wr();
+      slot("strata");
+      api.leftIsFar ? wr() : wl();
+      api.backIsFar ? wf() : wb();
+      let d = "", dm = "";
+      for (let i = 0; i <= 20; i++) {
+        const x = x0 + 4 + ((x1 - x0 - 8) * i) / 20;
+        (i % 5 === 0 ? (dm += line(cam, [x, y1 - 4, z], [x, y1 - 1.2, z])) : (d += line(cam, [x, y1 - 4, z], [x, y1 - 2.4, z])));
+      }
+      S(`<path class="ln lo" d="${d}"/><path class="ln mid" d="${dm}"/>`);
+      for (const [fr, lab] of [[0, "0"], [0.25, ".25"], [0.5, ".50"], [0.75, ".75"], [1, "1"]]) {
+        const x = x0 + 4 + (x1 - x0 - 8) * fr;
+        S(faceText(cam, [x, y1 + 0.2, z - 3], [1, 0, 0], [0, 0, -1], lab, 3.6, { cls: "engr lo" }));
+      }
+      slot("trayText");
+      for (const x of [x0 - 6, x1 + 2]) S(box(cam, x, y0 + 8, 0, 4, y1 - y0 - 16, z + 2, { cls: "clamp" }));
+    } },
+  ]);
 
   if (api.leftIsFar) controls();
   slot("hits");
@@ -222,6 +220,24 @@
       return o;
     },
     fluid(s, j) { return s.a[j] > 0.0005 ? fluidCol(j, s.a[j]) : ""; },
+    // A flow wheel in a sight glass on the manifold: it turns as fluid runs into or out of column j.
+    wheel(s, j) {
+      const x = SX(j), y = PIPE.y, r = 6.4, z0 = 6, z1 = 18, spin = s.spin[j], busy = Math.min(1, Math.abs(s.flow[j]) * 30);
+      let o = drum(cam, x, y, z0 - 1.5, r + 1.6, 1.5, { cls: "collar" });
+      o += rod(cam, [x, y, z0], [x, y, z1], r, { sideCls: "glass-back", capCls: "glass-back", hatch: false });
+      const vanes = [];
+      for (let k = 0; k < 4; k++) {
+        const t = spin + (k * Math.PI) / 2, c = Math.cos(t), sn = Math.sin(t);
+        const tip = [x + (r - 1) * c, y + (r - 1) * sn];
+        vanes.push({ d: cam.depth(x + 2 * c, y + 2 * sn, 12), q: [[x, y, z0 + 1], [tip[0], tip[1], z0 + 1], [tip[0], tip[1], z1 - 1], [x, y, z1 - 1]] });
+      }
+      vanes.sort((a, b) => a.d - b.d);
+      for (const v of vanes) o += `<path class="vane${busy > 0.05 ? " busy" : ""}" style="opacity:${f(0.55 + 0.45 * busy)}" d="${path(v.q.map((p) => cam.p(p)))}"/>`;
+      o += rod(cam, [x, y, z0], [x, y, z1], 1.1, { seg: 10 });
+      o += rod(cam, [x, y, z0], [x, y, z1], r, { sideCls: "glass-front", capCls: "glass-rim", hatch: false });
+      o += drum(cam, x, y, z1, r + 1.6, 1.5, { cls: "collar" });
+      return o;
+    },
     shut(s, j) {
       const k = s.shut[j];
       if (k < 0.01) return "";
@@ -328,7 +344,7 @@
   /* ---------- state ---------- */
   const st = { head: 0, q: 7, T: 1, causal: true };
   let tgt = null;
-  const cur = { a: new Array(N).fill(0), sc: new Array(N).fill(SCORE[0]), shut: new Array(N).fill(0), xq: SX(7), headAng: HEAD_ANG[0], tAng: tAng(1), lever: 0, top: 0 };
+  const cur = { spin: new Array(N).fill(0), flow: new Array(N).fill(0), a: new Array(N).fill(0), sc: new Array(N).fill(SCORE[0]), shut: new Array(N).fill(0), xq: SX(7), headAng: HEAD_ANG[0], tAng: tAng(1), lever: 0, top: 0 };
   function target() {
     const r = M.attend(st.head, st.q, st.T, st.causal);
     tgt = {
@@ -344,7 +360,10 @@
     let moving = false;
     const ease = (a, b, kk) => { const d = b - a; if (Math.abs(d) > 1e-4) moving = true; return Math.abs(d) < 1e-4 ? b : a + d * kk; };
     for (let j = 0; j < N; j++) {
+      const before = cur.a[j];
       cur.a[j] = ease(cur.a[j], tgt.a[j], kf);
+      cur.flow[j] = dt > 0 ? (cur.a[j] - before) / dt : 0;
+      cur.spin[j] += (cur.a[j] - before) * 60;
       cur.sc[j] = ease(cur.sc[j], Math.max(SCORE[0] - 0.3, Math.min(SCORE[1] + 0.3, tgt.sc[j])), k);
       cur.shut[j] = ease(cur.shut[j], tgt.shut[j], k);
     }
@@ -361,6 +380,7 @@
       slots["shut" + j].innerHTML = draw.shut(cur, j);
       slots["cock" + j].innerHTML = draw.cock(cur, j);
       slots["needle" + j].innerHTML = draw.needle(cur, j);
+      slots["wheel" + j].innerHTML = draw.wheel(cur, j);
     }
     slots.strata.innerHTML = draw.strata(cur);
     slots.trayText.innerHTML = draw.trayText(cur);
@@ -509,7 +529,7 @@ void main() {
   });
   let turnPending = null;
   const orb = K.live.orbit(fig, {
-    az0: -24, el0: 30, azRange: [-62, 62], elRange: [12, 68], enabled: () => mode === "3d",
+    az0: -24, el0: 30, wrap: true, azRange: [-180, 180], elRange: [8, 76], enabled: () => mode === "3d",
     onTurn(az, el) {
       if (turnPending) { turnPending = [az, el]; return; }
       turnPending = [az, el];
