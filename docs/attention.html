@@ -4,36 +4,36 @@
 <title>Folio Plate I: Attention</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: a museum exhibition wall. One mounted plate, a catalogue key beside it, then wall texts below. */
 :root {
   --ground: #E5E1DA; --paper: #F5F2ED; --ink: #1F1C18; --ink-2: #554F46; --ink-3: #857E73; --rule: #C8C1B5; --accent: #C9381D; --accent-soft: rgba(201,56,29,.12);
   --top: #FCFAF6; --s3: #ECE7DF; --s2: #DED8CE; --s1: #CFC8BB; --s0: #BCB4A6; --cyl: #E6E1D8; --line: #2B2722; --lo: #7A7266; --faint: #B3AB9D;
   --hatch: #3F3932; --hatch-op: .5; --glass: #DDE4E3; --glass-line: #5D6A6B; --face: #FFFDF8; --brass: #DCD1BB;
-  --fluid: #C9381D; --fluid-2: #DF6A50; --fluid-3: #D24B2F; --fluid-top: #EE9078; --fluid-deep: #8E2412; --shut: #8A8276;
+  --fluid: #C9381D; --fluid-2: #DF6A50; --fluid-3: #D24B2F; --fluid-top: #EE9078; --fluid-deep: #8E2412; --shut: #8A8276; --light-blend: normal;
   --venous: #3E4C84; --venous-top: #7180B6; --venous-deep: #232C55;
   --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
-  --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
   --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
   --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
-  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E;
+  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
   --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
   color-scheme: dark; } }
 :root[data-theme="dark"] {
   --ground: #151412; --paper: #1D1B19; --ink: #EDE8E0; --ink-2: #B3AB9F; --ink-3: #7F786E; --rule: #393531; --accent: #F0583C; --accent-soft: rgba(240,88,60,.16);
   --top: #3D3934; --s3: #35312D; --s2: #2D2A27; --s1: #262421; --s0: #201E1C; --cyl: #34312D; --line: #D9D2C6; --lo: #8F877B; --faint: #4F4A44;
   --hatch: #D8D0C3; --hatch-op: .26; --glass: #273032; --glass-line: #93A4A5; --face: #2D2A26; --brass: #4A4234;
-  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E;
+  --fluid: #E2482B; --fluid-2: #F07A60; --fluid-3: #E85A3D; --fluid-top: #FF9C82; --fluid-deep: #9C2A16; --shut: #5C564E; --light-blend: screen;
   --venous: #5D6FBE; --venous-top: #95A2DC; --venous-deep: #2B3466;
   color-scheme: dark; }
 
 * { box-sizing: border-box; }
-body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; margin: 0; padding-inline: clamp(16px, 4vw, 56px); padding-block: 0 64px; -webkit-font-smoothing: antialiased; }
+body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; margin: 0; padding-inline: clamp(16px, 4vw, 56px); padding-block: 0 64px; -webkit-font-smoothing: antialiased; }
 .wrap { max-width: 1240px; margin: 0 auto; }
 .mono { font-family: var(--mono); font-feature-settings: "zero" 0; }
 .label { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
@@ -262,6 +262,22 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 .chart .band { fill: var(--ink); opacity: .045; }
 .chart .bandlbl { fill: var(--ink-3); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; }
 
+/* Three views: the switch, the light layer, the turning bench */
+.plate .tr { display: flex; align-items: center; justify-content: flex-end; gap: 16px; flex-wrap: wrap; }
+.views { display: inline-grid; grid-auto-flow: column; border: 1px solid var(--rule); }
+.views button { font: 500 10.5px/1 var(--mono); letter-spacing: .1em; padding: 7px 11px; background: none; border: 0; border-left: 1px solid var(--rule); color: var(--ink-2); cursor: pointer; }
+.views button:first-child { border-left: 0; }
+.views button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.views button:hover:not([aria-pressed="true"]):not(:disabled) { background: var(--accent-soft); color: var(--ink); }
+.views button:disabled { opacity: .4; cursor: not-allowed; }
+.fig canvas.light { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: var(--light-blend); opacity: 0; transition: opacity .5s ease; }
+.fig.mode-webgl canvas.light { opacity: 1; }
+.fig.mode-webgl #plate-svg .flow { visibility: hidden; }
+.fig.mode-3d { cursor: grab; touch-action: none; }
+.fig.mode-3d.turning { cursor: grabbing; }
+.fig.mode-3d #plate-svg .hit { cursor: pointer; }
+@media (max-width: 720px) { .plate .tr .cap { display: none; } }
+
 </style>
 
 <div class="wrap">
@@ -289,7 +305,7 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 
   <div class="exhibit">
     <figure class="plate" style="margin:0">
-      <div class="corners"><span class="tl">Pl. I</span><span class="tr">The assay of a query</span></div>
+      <div class="corners"><span class="tl">Pl. I</span><span class="tr"><span class="cap">The assay of a query</span><span class="views" id="views" role="group" aria-label="View"></span></span></div>
       <div class="fig" id="plate" tabindex="0" role="img" aria-label="An isometric assay bench that computes attention. Use the arrow keys to move the query, 1 to 4 to change head, square brackets for temperature, M for the mask.">
         <svg id="plate-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
       </div>
@@ -403,7 +419,7 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
   </nav>
 
   <footer>
-    <span><span class="mark">Folio</span> &nbsp;Plate I, drawn by Claude with the Folio skill. Set in Bodoni Moda, Hanken Grotesk and IBM Plex Mono.</span>
+    <span><span class="mark">Folio</span> &nbsp;Plate I, drawn by Claude with the Folio skill. Set in Bodoni Moda, Source Serif 4 and IBM Plex Mono.</span>
     <span class="mono">techwith.ram</span>
   </footer>
 </div>
@@ -638,6 +654,249 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
   root.Folio = { camera, fit, path, box, rod, drum, ball, ringPath, arcPath, radialTicks, line, faceText, pin, screw, toneOf, f, add, sub, mul, dot, norm, LIGHT };
 })(typeof window !== "undefined" ? window : globalThis);
 
+/* Folio live kit: the three views of a plate.
+   - stage():  owns the camera and the painter's order; rebuilds the drawing when the camera turns.
+   - light():  a WebGL layer over the SVG. Its visibility mask is rendered from the drawing itself,
+               so light only lands on surfaces the reader can actually see.
+   - orbit():  drag to turn the bench; the scene is re-projected and re-shaded from the new view.
+   - views():  the SVG · WebGL · 3D switch on the plate's mount.
+   Requires folio-kit.js. No dependencies. */
+(function (root) {
+  "use strict";
+  const K = root.Folio;
+  const D = Math.PI / 180;
+
+  /* ---------- stage ---------- */
+  function stage(o) {
+    // o: { svg, W, H, az, el, points, center, build(cam, api) }
+    const base = K.fit({ az: o.az, el: o.el }, o.points, o.W, o.H, o.pad ?? 22);
+    const C = o.center;
+    const anchor = base.p(C);
+    const st = { cam: base, base, slots: {}, az: o.az, el: o.el, turned: false };
+    o.svg.setAttribute("viewBox", `0 0 ${o.W} ${o.H}`);
+
+    st.cameraAt = (az, el) => {
+      if (az === o.az && el === o.el) return base;
+      const c0 = K.camera({ az, el, k: base.k * (o.orbitScale ?? 0.9) });
+      const p = c0.p(C);
+      return K.camera({ az, el, k: c0.k, ox: anchor[0] - p[0], oy: anchor[1] - p[1] });
+    };
+    st.mount = (az = st.az, el = st.el) => {
+      st.az = az; st.el = el; st.turned = az !== o.az || el !== o.el;
+      const cam = (st.cam = st.cameraAt(az, el));
+      const order = [];
+      const api = {
+        S: (s) => order.push(s),
+        slot: (n) => order.push({ slot: n }),
+        // Units along the bench: far end first. Valid for any view from the front half.
+        alongX: (list, key = (v) => v) => list.slice().sort((a, b) => cam.depth(key(a), 0, 0) - cam.depth(key(b), 0, 0)),
+        farFirst: (list, pt) => list.slice().sort((a, b) => cam.depth(...pt(a)) - cam.depth(...pt(b))),
+        leftIsFar: cam.depth(0, 0, 0) < cam.depth(1, 0, 0),
+      };
+      o.build(cam, api);
+      let html = "", run = "";
+      for (const it of order) {
+        if (typeof it === "string") run += it;
+        else { html += run; run = ""; html += `<g data-slot="${it.slot}"></g>`; }
+      }
+      o.svg.innerHTML = html + run;
+      st.slots = {};
+      o.svg.querySelectorAll("[data-slot]").forEach((g) => (st.slots[g.dataset.slot] = g));
+      return cam;
+    };
+    return st;
+  }
+
+  /* ---------- orbit ---------- */
+  function orbit(el, o) {
+    // o: { az0, el0, azRange:[a,b], elRange:[a,b], onTurn(az, el), onSettle(az, el), enabled() }
+    let az = o.az0, elv = o.el0, va = 0, ve = 0, drag = null, raf = 0, last = 0;
+    const clamp = (v, r) => Math.max(r[0], Math.min(r[1], v));
+    const tick = (now) => {
+      const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
+      if (!drag) {
+        az = clamp(az + va * dt, o.azRange); elv = clamp(elv + ve * dt, o.elRange);
+        va *= Math.exp(-dt * 5); ve *= Math.exp(-dt * 5);
+        if (Math.abs(va) + Math.abs(ve) < 2) { va = ve = 0; o.onTurn(az, elv); o.onSettle?.(az, elv); raf = 0; last = 0; return; }
+      }
+      o.onTurn(az, elv);
+      raf = requestAnimationFrame(tick);
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    el.addEventListener("pointerdown", (e) => {
+      if (!o.enabled()) return;
+      if (e.target.closest(".hit")) return;
+      drag = { x: e.clientX, y: e.clientY, t: performance.now() };
+      el.setPointerCapture(e.pointerId); el.classList.add("turning"); kick();
+    });
+    el.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      const now = performance.now(), dt = Math.max(1, now - drag.t) / 1000;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      const sa = -dx * 0.32, se = dy * 0.22;
+      az = clamp(az + sa, o.azRange); elv = clamp(elv + se, o.elRange);
+      va = sa / dt; ve = se / dt;
+      drag = { x: e.clientX, y: e.clientY, t: now };
+    });
+    const end = () => { if (!drag) return; drag = null; el.classList.remove("turning"); kick(); };
+    el.addEventListener("pointerup", end); el.addEventListener("pointercancel", end);
+    el.addEventListener("dblclick", () => { if (o.enabled()) api.to(o.az0, o.el0); });
+    const api = {
+      get: () => [az, elv],
+      to(a, e) {
+        // ease to a view without inertia
+        const a0 = az, e0 = elv, t0 = performance.now();
+        const step = (now) => {
+          const k = Math.min(1, (now - t0) / 600), s = k * k * (3 - 2 * k);
+          az = a0 + (a - a0) * s; elv = e0 + (e - e0) * s; o.onTurn(az, elv);
+          if (k < 1) requestAnimationFrame(step); else o.onSettle?.(az, elv);
+        };
+        va = ve = 0; requestAnimationFrame(step);
+      },
+      nudge(da, de) { az = clamp(az + da, o.azRange); elv = clamp(elv + de, o.elRange); o.onTurn(az, elv); o.onSettle?.(az, elv); },
+    };
+    return api;
+  }
+
+  /* ---------- light ---------- */
+  const PRELUDE = `
+precision highp float;
+uniform vec2 uRes; uniform vec2 uVB; uniform vec3 uCam; uniform vec2 uAng;
+uniform float uTime; uniform float uDark; uniform sampler2D uMask;
+vec2 vbOf() { return vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y) / uRes * uVB; }
+vec4 maskAt() { return texture2D(uMask, gl_FragCoord.xy / uRes); }
+vec2 project(vec3 p) {
+  float ca = cos(uAng.x), sa = sin(uAng.x), ce = cos(uAng.y), se = sin(uAng.y);
+  float u = p.x * ca + p.y * sa, w = -p.x * sa + p.y * ca;
+  return vec2(uCam.x + uCam.z * u, uCam.y + uCam.z * (w * se - p.z * ce));
+}
+// The world point on the horizontal plane at height z that lands on this pixel.
+vec2 onPlane(vec2 vb, float z) {
+  float ca = cos(uAng.x), sa = sin(uAng.x), ce = cos(uAng.y), se = sin(uAng.y);
+  float u = (vb.x - uCam.x) / uCam.z;
+  float w = ((vb.y - uCam.y) / uCam.z + z * ce) / se;
+  return vec2(u * ca - w * sa, u * sa + w * ca);
+}
+float segDist(vec2 p, vec2 a, vec2 b, out float t) {
+  vec2 ab = b - a; t = clamp(dot(p - a, ab) / max(dot(ab, ab), 1e-4), 0.0, 1.0);
+  return length(p - a - ab * t);
+}
+// Where light falls: the bench is lit from a lamp behind it and to the left, so light that
+// passes through a part lands on the floor in front of it.
+const vec3 LAMP = vec3(-0.38, -0.62, 0.69);
+vec2 fall(vec3 p, float floorZ) { vec3 L = normalize(LAMP); float h = p.z - floorZ; return p.xy - L.xy * h / L.z; }
+// Accumulate premultiplied light of one colour.
+void addLight(inout vec4 acc, vec3 col, float a) { a = clamp(a, 0.0, 1.0); acc.rgb += col * a * (1.0 - acc.a); acc.a += a * (1.0 - acc.a); }
+float caustic(vec2 q, float t) {
+  float a = sin(q.x * 0.55 + t * 1.1) + sin(q.y * 0.7 - t * 0.9) + sin((q.x + q.y) * 0.4 + t * 1.6);
+  float b = sin(q.x * 0.31 - q.y * 0.52 + t * 0.7);
+  return pow(clamp(1.0 - abs(a + b) * 0.42, 0.0, 1.0), 5.0);
+}
+`;
+
+  function light(o) {
+    // o: { canvas, svg, W, H, frag, maskCss }
+    const gl = o.canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false });
+    if (!gl) return null;
+    const sh = (type, src) => {
+      const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+      return s;
+    };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, "attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }"));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, PRELUDE + o.frag));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, "p");
+    gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
+    const U = {};
+    const u = (n) => (n in U ? U[n] : (U[n] = gl.getUniformLocation(prog, n)));
+    let w = 0, h = 0, maskBusy = false;
+
+    const api = {
+      gl,
+      size() {
+        const r = Math.min(1.5, root.devicePixelRatio || 1);
+        const cw = Math.max(2, Math.round(o.canvas.clientWidth * r)), ch = Math.max(2, Math.round(o.canvas.clientHeight * r));
+        if (cw !== w || ch !== h) { w = o.canvas.width = cw; h = o.canvas.height = ch; gl.viewport(0, 0, w, h); return true; }
+        return false;
+      },
+      /* Render the drawing with flat channel colours: red = floor, green = vessels, blue = glass,
+         black = everything else, in the drawing's own painter's order. Occlusion comes for free. */
+      async mask() {
+        if (maskBusy || !w) return; maskBusy = true;
+        try {
+          const clone = o.svg.cloneNode(true);
+          clone.setAttribute("width", w); clone.setAttribute("height", h);
+          clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+          const style = document.createElementNS("http://www.w3.org/2000/svg", "style");
+          style.textContent = `* { fill: #000 !important; stroke: #000 !important; opacity: 1 !important; fill-opacity: 1 !important; stroke-opacity: 1 !important; }
+            .hit, .pin, .flow, text { display: none !important; }
+            .ln, .hatch, .leakring { fill: none !important; } ${o.maskCss}`;
+          clone.insertBefore(style, clone.firstChild);
+          const img = new Image();
+          img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(new XMLSerializer().serializeToString(clone));
+          await img.decode();
+          const c = document.createElement("canvas"); c.width = w; c.height = h;
+          const g = c.getContext("2d"); g.fillStyle = "#000"; g.fillRect(0, 0, w, h); g.drawImage(img, 0, 0, w, h);
+          api.maskCanvas = c;
+          gl.bindTexture(gl.TEXTURE_2D, tex);
+          gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c);
+        } catch (e) { /* the light layer is an extra; the drawing stays */ }
+        maskBusy = false;
+      },
+      set(name, v) {
+        const l = u(name); if (l === null) return;
+        if (typeof v === "number") gl.uniform1f(l, v);
+        else if (v instanceof Float32Array) gl.uniform1fv(l, v); // an array of floats
+        else if (v.length === 2) gl.uniform2fv(l, v);
+        else if (v.length === 3) gl.uniform3fv(l, v);
+        else if (v.length % 4 === 0) gl.uniform4fv(l, v);
+      },
+      draw(cam, t, dark) {
+        api.set("uRes", [w, h]); api.set("uVB", [o.W, o.H]); api.set("uCam", [cam.ox, cam.oy, cam.k]);
+        api.set("uAng", [cam.az * D, cam.el * D]); api.set("uTime", t); api.set("uDark", dark ? 1 : 0);
+        gl.uniform1i(u("uMask"), 0);
+        gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      },
+    };
+    return api;
+  }
+
+  /* ---------- the view switch ---------- */
+  function views(host, o) {
+    // o: { modes: [{id,label,ok}], current, onSelect(id) }
+    host.innerHTML = o.modes.map((m) => `<button type="button" data-v="${m.id}" aria-pressed="${m.id === o.current}" ${m.ok === false ? "disabled title=\"Not available in this browser\"" : ""}>${m.label}</button>`).join("");
+    host.addEventListener("click", (e) => {
+      const b = e.target.closest("button"); if (!b || b.disabled) return;
+      host.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+      o.onSelect(b.dataset.v);
+    });
+    return { set(id) { host.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.v === id)); } };
+  }
+
+  const isDark = () => {
+    const t = document.documentElement.dataset.theme;
+    return t ? t === "dark" : root.matchMedia("(prefers-color-scheme: dark)").matches;
+  };
+  const webglOK = () => { try { return !!document.createElement("canvas").getContext("webgl"); } catch (e) { return false; } };
+
+  K.live = { stage, orbit, light, views, isDark, webglOK, PRELUDE };
+})(typeof window !== "undefined" ? window : globalThis);
+
 </script>
 <script>
 /* The true model behind Plate I. One attention head of a toy transformer, d_model = 11, d_k = 8.
@@ -730,8 +989,8 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 </script>
 <script>
 /* Plate I: scaled dot-product attention, as an assay bench.
-   Scene geometry is built once; only the parts that move are redrawn, each in its own slot
-   of the painter's order. */
+   The scene is a function of the camera. In the SVG and WebGL views it is built once; in the
+   3D view it is rebuilt as the bench turns. Moving parts live in slots of the painter's order. */
 (function () {
   "use strict";
   const K = window.Folio, M = window.AttnModel;
@@ -752,17 +1011,23 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
   const pts = [];
   for (const x of [-10, 730]) for (const y of [-10, 286]) for (const z of [-46, 0]) pts.push([x, y, z]);
   pts.push([14, 34, 166], [590, 34, 166], [60, 98, 122]);
-  const cam = K.fit({ az: -24, el: 30 }, pts, W, H, 22);
+  const svg = document.getElementById("plate-svg");
+  const stage = K.live.stage({ svg, W, H, az: -24, el: 30, points: pts, center: [360, 138, 40], build });
+  let cam = stage.base, ctl = null;
+  const scoreAng = (s) => 180 + Math.max(0, Math.min(1, (s - SCORE[0]) / (SCORE[1] - SCORE[0]))) * 180;
 
   /* ---------- static parts ---------- */
-  const order = []; // strings and {slot}
-  const S = (s) => order.push(s);
-  const slot = (name) => order.push({ slot: name });
+  function build(c, api) {
+  cam = c;
+  const { S, slot } = api;
+  ctl = api;
+  const far = (arr) => (api.leftIsFar ? arr : arr.slice().reverse());
+  const J = far([...Array(N).keys()]);
 
   // Plinth: base slab, feet, body with engraved hatch, groove, screws, catalogue plate.
   for (const [x, y] of [[8, 8], [712, 8], [8, 268], [712, 268]]) S(drum(cam, x, y, -46, 8, 8, { cls: "foot" }));
   S(box(cam, -6, -6, -38, 732, 288, 8, { hatch: 2.6 }));
-  S(box(cam, 0, 0, -30, 720, 276, 30, { hatch: 2.2, groove: 7, part: "plinth" }));
+  S(box(cam, 0, 0, -30, 720, 276, 30, { hatch: 2.2, groove: 7, part: "plinth", cls: "floor" }));
   for (const [x, y] of [[16, 16], [704, 16], [16, 260], [704, 260]]) S(screw(cam, x, y, 0, 3));
   S(box(cam, 250, 276, -24, 240, 1.4, 17, { cls: "brass" }));
   S(faceText(cam, [370, 277.5, -12.6], [1, 0, 0], [0, 0, -1], "FOLIO · PLATE I · SCALED DOT-PRODUCT ATTENTION", 5.4));
@@ -777,6 +1042,8 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
     for (let x = 100; x <= 600; x += 6) d += line(cam, [x, 58, 0], [x, (x - 100) % 30 === 0 ? 52 : 55, 0]);
     S(`<path class="ln lo" d="${d}${line(cam, [100, 58, 0], [600, 58, 0])}"/>`);
   }
+
+  if (!api.leftIsFar) controls();
 
   // Query rail on two posts, behind the stations.
   for (const x of [14, 590]) {
@@ -794,12 +1061,14 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
 
   // Pads: one per token, the reservoir's at the far end.
   const pad = (x0, w, label, cls) => {
-    S(box(cam, x0, 66, 0, w, 110, 10, { groove: 3, part: cls }));
+    S(box(cam, x0, 66, 0, w, 110, 10, { groove: 3, part: cls, cls: "pad" }));
     if (label) S(faceText(cam, [x0 + w / 2, 176.2, 2.6], [1, 0, 0], [0, 0, -1], label, 6.4, { cls: "engr tok" }));
   };
-  pad(30, 60, "Σ = 1", "reservoir");
-  for (let j = 0; j < N; j++) pad(SX(j) - 27, 54, M.TOKENS[j].w, "station");
-  for (let j = 0; j < N; j++) {
+  const padRes = () => pad(30, 60, "Σ = 1", "reservoir");
+  if (api.leftIsFar) padRes();
+  for (const j of J) pad(SX(j) - 27, 54, M.TOKENS[j].w, "station");
+  if (!api.leftIsFar) padRes();
+  for (const j of J) {
     const p = cam.p(SX(j) + 22, 170, 10);
     S(`<text class="engr lo" x="${f(p[0])}" y="${f(p[1])}" font-size="${f(4 * cam.k)}" text-anchor="end">${j}</text>`);
   }
@@ -824,31 +1093,33 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
   }
 
   // The reservoir: one sealed unit of fluid, always full. Softmax shares exactly this much.
-  column(60, 98, 15, 20, 78, null, {
-    fluid: rod(cam, [60, 98, 15], [60, 98, 15 + 72], 19.2, { cls: "fluidg", sideCls: "fluid", capCls: "fluid-top" }),
-  });
-  S(drum(cam, 60, 98, 95, 12, 7, { cls: "stopper" }));
-  S(ball(cam, [60, 98, 106], 4));
-
-  for (let j = 0; j < N; j++) {
+  const reservoir = () => {
+    column(60, 98, 15, 20, 78, null, {
+      fluid: rod(cam, [60, 98, 15], [60, 98, 15 + 72], 19.2, { cls: "fluidg", sideCls: "fluid", capCls: "fluid-top" }),
+    });
+    S(drum(cam, 60, 98, 95, 12, 7, { cls: "stopper" }));
+    S(ball(cam, [60, 98, 106], 4));
+  };
+  if (api.leftIsFar) reservoir();
+  for (const j of J) {
     column(SX(j), GL.y, GL.z, GL.r, GL.h, "fluid" + j);
     slot("shut" + j);
   }
+  if (!api.leftIsFar) reservoir();
 
   // Manifold: stubs with stopcocks from the pipe to each collar, then the pipe itself.
-  S(rod(cam, [60, 122, PIPE.z], [60, PIPE.y, PIPE.z], 3, { seg: 24 }));
-  for (let j = 0; j < N; j++) {
-    S(rod(cam, [SX(j), 117, PIPE.z], [SX(j), PIPE.y, PIPE.z], 2.6, { seg: 24 }));
+  S(rod(cam, [60, 122, PIPE.z], [60, PIPE.y, PIPE.z], 3, { seg: 24, cls: "pipe" }));
+  for (const j of J) {
+    S(rod(cam, [SX(j), 117, PIPE.z], [SX(j), PIPE.y, PIPE.z], 2.6, { seg: 24, cls: "pipe" }));
     S(box(cam, SX(j) - 4.5, 119.5, 6, 9, 8, 12, { cls: "cock" }));
     slot("cock" + j);
   }
-  S(rod(cam, [60, PIPE.y, PIPE.z], [SX(N - 1) + 14, PIPE.y, PIPE.z], PIPE.r, { seg: 30 }));
-  S(ball(cam, [60, PIPE.y, PIPE.z], 5));
-  for (let j = 0; j < N; j++) S(ball(cam, [SX(j), PIPE.y, PIPE.z], 4.6));
+  S(rod(cam, [60, PIPE.y, PIPE.z], [SX(N - 1) + 14, PIPE.y, PIPE.z], PIPE.r, { seg: 30, cls: "pipe" }));
+  S(ball(cam, [60, PIPE.y, PIPE.z], 5, { cls: "pipe" }));
+  for (const j of J) S(ball(cam, [SX(j), PIPE.y, PIPE.z], 4.6, { cls: "pipe" }));
 
   // Key dials: one per token. The needle reads q·k / √d_k.
-  const scoreAng = (s) => 180 + Math.max(0, Math.min(1, (s - SCORE[0]) / (SCORE[1] - SCORE[0]))) * 180;
-  for (let j = 0; j < N; j++) {
+  for (const j of J) {
     const x = SX(j);
     S(drum(cam, x, DIAL.y, 10, DIAL.r + 2.5, 3));
     S(drum(cam, x, DIAL.y, 13, DIAL.r, 3, { capCls: "t-face" }));
@@ -865,9 +1136,11 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
     const { x0, x1, y0, y1, z } = TRAY;
     S(box(cam, x0, y0, 0, x1 - x0, y1 - y0, 4, { cls: "tray" }));
     S(box(cam, x0, y0, 4, x1 - x0, 4, z - 4, { cls: "tray" }));
-    S(box(cam, x0, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+    const wl = () => S(box(cam, x0, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+    const wr = () => S(box(cam, x1 - 4, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+    api.leftIsFar ? wl() : wr();
     slot("strata");
-    S(box(cam, x1 - 4, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+    api.leftIsFar ? wr() : wl();
     S(box(cam, x0, y1 - 4, 4, x1 - x0, 4, z - 4, { cls: "tray", hatch: 3 }));
     let d = "", dm = "";
     for (let i = 0; i <= 20; i++) {
@@ -883,8 +1156,14 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
     for (const x of [x0 - 6, x1 + 2]) S(box(cam, x, y0 + 8, 0, 4, y1 - y0 - 16, z + 2, { cls: "clamp" }));
   }
 
+  if (api.leftIsFar) controls();
+  slot("pins");
+  slot("hits");
+  }
+
   // Controls: head selector, temperature knob, mask lever.
-  {
+  function controls() {
+    const { S, slot } = ctl;
     const hx = 655, hy = 96;
     S(box(cam, hx - 30, hy - 26, 0, 60, 52, 3, { groove: 3 }));
     S(drum(cam, hx, hy, 3, 17, 5, { cls: "base" }));
@@ -914,8 +1193,6 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
     S(box(cam, mx - 6, my - 6, 3, 12, 12, 5, { cls: "cock" }));
     slot("lever");
   }
-  slot("pins");
-  slot("hits");
 
   /* ---------- live parts ---------- */
   const fluidCol = (j, lv) => {
@@ -1034,16 +1311,9 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
   }
 
   /* ---------- mount ---------- */
-  const svg = document.getElementById("plate-svg");
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  let html = "", run = "";
-  for (const it of order) {
-    if (typeof it === "string") run += it;
-    else { html += run; run = ""; html += `<g data-slot="${it.slot}"></g>`; }
-  }
-  svg.innerHTML = html + run;
-  const slots = {};
-  svg.querySelectorAll("[data-slot]").forEach((g) => (slots[g.dataset.slot] = g));
+  let slots = {};
+  function mount(az, el) { cam = stage.mount(az, el); slots = stage.slots; slots.hits.innerHTML = draw.hits(); }
+  mount(-24, 30);
 
   /* ---------- state ---------- */
   const st = { head: 0, q: 7, T: 1, causal: true };
@@ -1089,8 +1359,6 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
     slots.lever.innerHTML = draw.lever(cur);
     slots.pins.innerHTML = draw.pins(cur);
   }
-  slots.hits.innerHTML = draw.hits();
-
   const listeners = [];
   function update(patch, fromUser = true) {
     Object.assign(st, patch);
@@ -1135,6 +1403,123 @@ footer .mark { font-family: var(--display); letter-spacing: .32em; text-transfor
     if (q >= N) { q = 1; head = (head + 1) % M.HEADS.length; }
     update({ q, head }, false);
   }, 3400);
+
+  /* ---------- three views: SVG, WebGL, 3D ---------- */
+  const LIGHT_FRAG = `
+uniform vec4 uCol[8]; uniform vec4 uColS[8]; uniform vec4 uPipe; uniform float uPour;
+void main() {
+  vec2 vb = vbOf(); vec4 m = maskAt();
+  vec4 acc = vec4(0.0);
+  bool dk = uDark > 0.5;
+  vec3 pool = dk ? vec3(1.0, 0.36, 0.22) : vec3(0.86, 0.24, 0.12);
+  vec3 glow = dk ? vec3(1.0, 0.72, 0.58) : vec3(1.0, 0.88, 0.78);
+  // Light through each column pools on the bench in front of it, rippled by the fluid.
+  if (m.r > 0.25) {
+    float z = m.r > 0.75 ? 0.0 : 10.0;
+    vec2 p = onPlane(vb, z);
+    float sum = 0.0;
+    for (int j = 0; j < 8; j++) {
+      vec4 c = uCol[j];
+      if (c.w > 0.5) continue;
+      float lv = c.z;
+      // a shaft of light from the column's foot to where its fluid's top casts
+      float t;
+      vec2 a0 = vec2(c.x, c.y + 14.0), a1 = fall(vec3(c.x, c.y, 15.0 + lv * 100.0), z);
+      float d = segDist(p, a0, a1, t);
+      float r = 9.0 + 9.0 * t + lv * 6.0;
+      float shaft = exp(-d * d / (r * r)) * (1.0 - 0.55 * t);
+      vec2 q = p - a1;
+      sum += shaft * pow(lv, 0.55) * (0.35 + 1.25 * caustic(q * 0.9 + vec2(float(j) * 7.0), uTime));
+    }
+    addLight(acc, pool, sum * (dk ? 1.05 : 0.45));
+  }
+  // The fluid glows in proportion to its weight; empty glass catches a slow sweep of light.
+  if (m.b > 0.5) {
+    for (int j = 0; j < 8; j++) {
+      vec4 s = uColS[j];
+      float dx = (vb.x - s.x) / s.w;
+      if (abs(dx) < 1.05 && vb.y > s.y - s.w * 0.5) {
+        float lv = uCol[j].z;
+        float inF = smoothstep(s.z - 1.5, s.z + 1.5, vb.y);
+        float streak = pow(0.5 + 0.5 * sin(dx * 6.0 + vb.y * 0.22 - uTime * 2.4), 6.0);
+        addLight(acc, glow, inF * pow(lv, 0.75) * (0.18 + 0.5 * streak) * (1.0 - dx * dx * 0.7));
+        addLight(acc, glow, (1.0 - inF) * exp(-pow(dx - 0.6 * sin(uTime * 0.45 + float(j)), 2.0) * 16.0) * 0.35);
+      }
+    }
+  }
+  // Pulses run along the manifold from the reservoir; faster while the weights are shifting.
+  if (m.g > 0.5) {
+    float t; float d = segDist(vb, uPipe.xy, uPipe.zw, t);
+    float L = length(uPipe.zw - uPipe.xy);
+    float pu = pow(0.5 + 0.5 * cos(t * L * 0.22 - uTime * (3.0 + 6.0 * uPour)), 8.0) * (0.35 + uPour) * step(d, 10.0);
+    addLight(acc, dk ? glow : pool, pu * 0.8);
+  }
+  gl_FragColor = acc;
+}`;
+  const canvas = document.createElement("canvas");
+  canvas.className = "light"; canvas.setAttribute("aria-hidden", "true");
+  fig.appendChild(canvas);
+  let lightLayer = null, mode = "svg", lightRaf = 0;
+  const hintEl = document.querySelector(".plate .bl"), hint0 = hintEl ? hintEl.textContent : "";
+  function lightFrame(now) {
+    lightRaf = 0;
+    if (mode !== "webgl" || !lightLayer) return;
+    if (!visible) { lightRaf = requestAnimationFrame(lightFrame); return; }
+    if (lightLayer.size()) lightLayer.mask();
+    const colsW = [], colsS = [];
+    let pour = 0;
+    for (let j = 0; j < N; j++) {
+      const lv = cur.a[j];
+      colsW.push(SX(j), GL.y, lv, cur.shut[j] > 0.5 ? 1 : 0);
+      const b = cam.p(SX(j), GL.y, GL.z), t = cam.p(SX(j), GL.y, GL.z + GL.h), fl = cam.p(SX(j), GL.y, GL.z + Math.max(0.002, lv) * GL.h);
+      colsS.push(b[0], t[1], fl[1], GL.r * cam.k);
+      pour += Math.abs(cur.a[j] - (tgt ? tgt.a[j] : 0));
+    }
+    const pa = cam.p(60, PIPE.y, PIPE.z), pb = cam.p(SX(N - 1) + 14, PIPE.y, PIPE.z);
+    lightLayer.set("uCol", colsW); lightLayer.set("uColS", colsS);
+    lightLayer.set("uPipe", [pa[0], pa[1], pb[0], pb[1]]); lightLayer.set("uPour", Math.min(1, pour * 2));
+    lightLayer.draw(cam, reduce.matches ? 2 : now / 1000, K.live.isDark());
+    if (!reduce.matches) lightRaf = requestAnimationFrame(lightFrame);
+  }
+  function setMode(m) {
+    mode = m;
+    fig.classList.toggle("mode-webgl", m === "webgl");
+    fig.classList.toggle("mode-3d", m === "3d");
+    if (m !== "3d" && (stage.az !== -24 || stage.el !== 30)) { mount(-24, 30); paint(); }
+    if (m === "webgl") {
+      try { lightLayer = lightLayer || K.live.light({ canvas, svg, W, H, frag: LIGHT_FRAG, maskCss: MASK_CSS }); } catch (e) { lightLayer = null; console.warn(e); }
+      if (lightLayer) { lightLayer.size(); lightLayer.mask().then(() => { if (!lightRaf) lightRaf = requestAnimationFrame(lightFrame); }); }
+    }
+    if (hintEl) hintEl.textContent = m === "3d" ? "Drag to turn the bench · double-click to reset · Shift + arrows to turn" : hint0;
+    views.set(m);
+  }
+  const MASK_CSS = `.floor .t-top { fill: #f00 !important; } .pad .t-top { fill: #800 !important; }
+    .pipe .f { fill: #0f0 !important; stroke: #0f0 !important; }
+    .glass-back, .glass-front { fill: #00f !important; stroke: #00f !important; }`;
+  const views = K.live.views(document.getElementById("views"), {
+    modes: [{ id: "svg", label: "SVG" }, { id: "webgl", label: "WebGL", ok: K.live.webglOK() }, { id: "3d", label: "3D" }],
+    current: "svg", onSelect: setMode,
+  });
+  let turnPending = null;
+  const orb = K.live.orbit(fig, {
+    az0: -24, el0: 30, azRange: [-62, 62], elRange: [12, 68], enabled: () => mode === "3d",
+    onTurn(az, el) {
+      if (turnPending) { turnPending = [az, el]; return; }
+      turnPending = [az, el];
+      requestAnimationFrame(() => { const [a, e] = turnPending; turnPending = null; mount(a, e); paint(); });
+    },
+  });
+  fig.addEventListener("keydown", (e) => {
+    if (mode !== "3d" || !e.shiftKey) return;
+    const m = { ArrowLeft: [-6, 0], ArrowRight: [6, 0], ArrowUp: [0, -4], ArrowDown: [0, 4] }[e.key];
+    if (m) { orb.nudge(...m); e.stopImmediatePropagation(); e.preventDefault(); }
+  }, true);
+  new ResizeObserver(() => { if (mode === "webgl" && lightLayer && lightLayer.size()) lightLayer.mask(); }).observe(fig);
+  const kickLight = () => { if (mode === "webgl" && !lightRaf) lightRaf = requestAnimationFrame(lightFrame); };
+  window.Plate.view = (m) => setMode(m);
+  window.Plate.light = () => lightLayer;
+  window.Plate.turn = (az, el) => { setMode("3d"); mount(az, el); paint(); };
+  listeners.push(kickLight);
 
   target();
   if (reduce.matches) { Object.assign(cur, JSON.parse(JSON.stringify(tgt)), { a: tgt.a.slice(), sc: tgt.sc.slice(), shut: tgt.shut.slice() }); paint(); }

@@ -1,6 +1,6 @@
 /* Plate I: scaled dot-product attention, as an assay bench.
-   Scene geometry is built once; only the parts that move are redrawn, each in its own slot
-   of the painter's order. */
+   The scene is a function of the camera. In the SVG and WebGL views it is built once; in the
+   3D view it is rebuilt as the bench turns. Moving parts live in slots of the painter's order. */
 (function () {
   "use strict";
   const K = window.Folio, M = window.AttnModel;
@@ -21,17 +21,23 @@
   const pts = [];
   for (const x of [-10, 730]) for (const y of [-10, 286]) for (const z of [-46, 0]) pts.push([x, y, z]);
   pts.push([14, 34, 166], [590, 34, 166], [60, 98, 122]);
-  const cam = K.fit({ az: -24, el: 30 }, pts, W, H, 22);
+  const svg = document.getElementById("plate-svg");
+  const stage = K.live.stage({ svg, W, H, az: -24, el: 30, points: pts, center: [360, 138, 40], build });
+  let cam = stage.base, ctl = null;
+  const scoreAng = (s) => 180 + Math.max(0, Math.min(1, (s - SCORE[0]) / (SCORE[1] - SCORE[0]))) * 180;
 
   /* ---------- static parts ---------- */
-  const order = []; // strings and {slot}
-  const S = (s) => order.push(s);
-  const slot = (name) => order.push({ slot: name });
+  function build(c, api) {
+  cam = c;
+  const { S, slot } = api;
+  ctl = api;
+  const far = (arr) => (api.leftIsFar ? arr : arr.slice().reverse());
+  const J = far([...Array(N).keys()]);
 
   // Plinth: base slab, feet, body with engraved hatch, groove, screws, catalogue plate.
   for (const [x, y] of [[8, 8], [712, 8], [8, 268], [712, 268]]) S(drum(cam, x, y, -46, 8, 8, { cls: "foot" }));
   S(box(cam, -6, -6, -38, 732, 288, 8, { hatch: 2.6 }));
-  S(box(cam, 0, 0, -30, 720, 276, 30, { hatch: 2.2, groove: 7, part: "plinth" }));
+  S(box(cam, 0, 0, -30, 720, 276, 30, { hatch: 2.2, groove: 7, part: "plinth", cls: "floor" }));
   for (const [x, y] of [[16, 16], [704, 16], [16, 260], [704, 260]]) S(screw(cam, x, y, 0, 3));
   S(box(cam, 250, 276, -24, 240, 1.4, 17, { cls: "brass" }));
   S(faceText(cam, [370, 277.5, -12.6], [1, 0, 0], [0, 0, -1], "FOLIO · PLATE I · SCALED DOT-PRODUCT ATTENTION", 5.4));
@@ -46,6 +52,8 @@
     for (let x = 100; x <= 600; x += 6) d += line(cam, [x, 58, 0], [x, (x - 100) % 30 === 0 ? 52 : 55, 0]);
     S(`<path class="ln lo" d="${d}${line(cam, [100, 58, 0], [600, 58, 0])}"/>`);
   }
+
+  if (!api.leftIsFar) controls();
 
   // Query rail on two posts, behind the stations.
   for (const x of [14, 590]) {
@@ -63,12 +71,14 @@
 
   // Pads: one per token, the reservoir's at the far end.
   const pad = (x0, w, label, cls) => {
-    S(box(cam, x0, 66, 0, w, 110, 10, { groove: 3, part: cls }));
+    S(box(cam, x0, 66, 0, w, 110, 10, { groove: 3, part: cls, cls: "pad" }));
     if (label) S(faceText(cam, [x0 + w / 2, 176.2, 2.6], [1, 0, 0], [0, 0, -1], label, 6.4, { cls: "engr tok" }));
   };
-  pad(30, 60, "Σ = 1", "reservoir");
-  for (let j = 0; j < N; j++) pad(SX(j) - 27, 54, M.TOKENS[j].w, "station");
-  for (let j = 0; j < N; j++) {
+  const padRes = () => pad(30, 60, "Σ = 1", "reservoir");
+  if (api.leftIsFar) padRes();
+  for (const j of J) pad(SX(j) - 27, 54, M.TOKENS[j].w, "station");
+  if (!api.leftIsFar) padRes();
+  for (const j of J) {
     const p = cam.p(SX(j) + 22, 170, 10);
     S(`<text class="engr lo" x="${f(p[0])}" y="${f(p[1])}" font-size="${f(4 * cam.k)}" text-anchor="end">${j}</text>`);
   }
@@ -93,31 +103,33 @@
   }
 
   // The reservoir: one sealed unit of fluid, always full. Softmax shares exactly this much.
-  column(60, 98, 15, 20, 78, null, {
-    fluid: rod(cam, [60, 98, 15], [60, 98, 15 + 72], 19.2, { cls: "fluidg", sideCls: "fluid", capCls: "fluid-top" }),
-  });
-  S(drum(cam, 60, 98, 95, 12, 7, { cls: "stopper" }));
-  S(ball(cam, [60, 98, 106], 4));
-
-  for (let j = 0; j < N; j++) {
+  const reservoir = () => {
+    column(60, 98, 15, 20, 78, null, {
+      fluid: rod(cam, [60, 98, 15], [60, 98, 15 + 72], 19.2, { cls: "fluidg", sideCls: "fluid", capCls: "fluid-top" }),
+    });
+    S(drum(cam, 60, 98, 95, 12, 7, { cls: "stopper" }));
+    S(ball(cam, [60, 98, 106], 4));
+  };
+  if (api.leftIsFar) reservoir();
+  for (const j of J) {
     column(SX(j), GL.y, GL.z, GL.r, GL.h, "fluid" + j);
     slot("shut" + j);
   }
+  if (!api.leftIsFar) reservoir();
 
   // Manifold: stubs with stopcocks from the pipe to each collar, then the pipe itself.
-  S(rod(cam, [60, 122, PIPE.z], [60, PIPE.y, PIPE.z], 3, { seg: 24 }));
-  for (let j = 0; j < N; j++) {
-    S(rod(cam, [SX(j), 117, PIPE.z], [SX(j), PIPE.y, PIPE.z], 2.6, { seg: 24 }));
+  S(rod(cam, [60, 122, PIPE.z], [60, PIPE.y, PIPE.z], 3, { seg: 24, cls: "pipe" }));
+  for (const j of J) {
+    S(rod(cam, [SX(j), 117, PIPE.z], [SX(j), PIPE.y, PIPE.z], 2.6, { seg: 24, cls: "pipe" }));
     S(box(cam, SX(j) - 4.5, 119.5, 6, 9, 8, 12, { cls: "cock" }));
     slot("cock" + j);
   }
-  S(rod(cam, [60, PIPE.y, PIPE.z], [SX(N - 1) + 14, PIPE.y, PIPE.z], PIPE.r, { seg: 30 }));
-  S(ball(cam, [60, PIPE.y, PIPE.z], 5));
-  for (let j = 0; j < N; j++) S(ball(cam, [SX(j), PIPE.y, PIPE.z], 4.6));
+  S(rod(cam, [60, PIPE.y, PIPE.z], [SX(N - 1) + 14, PIPE.y, PIPE.z], PIPE.r, { seg: 30, cls: "pipe" }));
+  S(ball(cam, [60, PIPE.y, PIPE.z], 5, { cls: "pipe" }));
+  for (const j of J) S(ball(cam, [SX(j), PIPE.y, PIPE.z], 4.6, { cls: "pipe" }));
 
   // Key dials: one per token. The needle reads q·k / √d_k.
-  const scoreAng = (s) => 180 + Math.max(0, Math.min(1, (s - SCORE[0]) / (SCORE[1] - SCORE[0]))) * 180;
-  for (let j = 0; j < N; j++) {
+  for (const j of J) {
     const x = SX(j);
     S(drum(cam, x, DIAL.y, 10, DIAL.r + 2.5, 3));
     S(drum(cam, x, DIAL.y, 13, DIAL.r, 3, { capCls: "t-face" }));
@@ -134,9 +146,11 @@
     const { x0, x1, y0, y1, z } = TRAY;
     S(box(cam, x0, y0, 0, x1 - x0, y1 - y0, 4, { cls: "tray" }));
     S(box(cam, x0, y0, 4, x1 - x0, 4, z - 4, { cls: "tray" }));
-    S(box(cam, x0, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+    const wl = () => S(box(cam, x0, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+    const wr = () => S(box(cam, x1 - 4, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+    api.leftIsFar ? wl() : wr();
     slot("strata");
-    S(box(cam, x1 - 4, y0 + 4, 4, 4, y1 - y0 - 8, z - 4, { cls: "tray" }));
+    api.leftIsFar ? wr() : wl();
     S(box(cam, x0, y1 - 4, 4, x1 - x0, 4, z - 4, { cls: "tray", hatch: 3 }));
     let d = "", dm = "";
     for (let i = 0; i <= 20; i++) {
@@ -152,8 +166,14 @@
     for (const x of [x0 - 6, x1 + 2]) S(box(cam, x, y0 + 8, 0, 4, y1 - y0 - 16, z + 2, { cls: "clamp" }));
   }
 
+  if (api.leftIsFar) controls();
+  slot("pins");
+  slot("hits");
+  }
+
   // Controls: head selector, temperature knob, mask lever.
-  {
+  function controls() {
+    const { S, slot } = ctl;
     const hx = 655, hy = 96;
     S(box(cam, hx - 30, hy - 26, 0, 60, 52, 3, { groove: 3 }));
     S(drum(cam, hx, hy, 3, 17, 5, { cls: "base" }));
@@ -183,8 +203,6 @@
     S(box(cam, mx - 6, my - 6, 3, 12, 12, 5, { cls: "cock" }));
     slot("lever");
   }
-  slot("pins");
-  slot("hits");
 
   /* ---------- live parts ---------- */
   const fluidCol = (j, lv) => {
@@ -303,16 +321,9 @@
   }
 
   /* ---------- mount ---------- */
-  const svg = document.getElementById("plate-svg");
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  let html = "", run = "";
-  for (const it of order) {
-    if (typeof it === "string") run += it;
-    else { html += run; run = ""; html += `<g data-slot="${it.slot}"></g>`; }
-  }
-  svg.innerHTML = html + run;
-  const slots = {};
-  svg.querySelectorAll("[data-slot]").forEach((g) => (slots[g.dataset.slot] = g));
+  let slots = {};
+  function mount(az, el) { cam = stage.mount(az, el); slots = stage.slots; slots.hits.innerHTML = draw.hits(); }
+  mount(-24, 30);
 
   /* ---------- state ---------- */
   const st = { head: 0, q: 7, T: 1, causal: true };
@@ -358,8 +369,6 @@
     slots.lever.innerHTML = draw.lever(cur);
     slots.pins.innerHTML = draw.pins(cur);
   }
-  slots.hits.innerHTML = draw.hits();
-
   const listeners = [];
   function update(patch, fromUser = true) {
     Object.assign(st, patch);
@@ -404,6 +413,123 @@
     if (q >= N) { q = 1; head = (head + 1) % M.HEADS.length; }
     update({ q, head }, false);
   }, 3400);
+
+  /* ---------- three views: SVG, WebGL, 3D ---------- */
+  const LIGHT_FRAG = `
+uniform vec4 uCol[8]; uniform vec4 uColS[8]; uniform vec4 uPipe; uniform float uPour;
+void main() {
+  vec2 vb = vbOf(); vec4 m = maskAt();
+  vec4 acc = vec4(0.0);
+  bool dk = uDark > 0.5;
+  vec3 pool = dk ? vec3(1.0, 0.36, 0.22) : vec3(0.86, 0.24, 0.12);
+  vec3 glow = dk ? vec3(1.0, 0.72, 0.58) : vec3(1.0, 0.88, 0.78);
+  // Light through each column pools on the bench in front of it, rippled by the fluid.
+  if (m.r > 0.25) {
+    float z = m.r > 0.75 ? 0.0 : 10.0;
+    vec2 p = onPlane(vb, z);
+    float sum = 0.0;
+    for (int j = 0; j < 8; j++) {
+      vec4 c = uCol[j];
+      if (c.w > 0.5) continue;
+      float lv = c.z;
+      // a shaft of light from the column's foot to where its fluid's top casts
+      float t;
+      vec2 a0 = vec2(c.x, c.y + 14.0), a1 = fall(vec3(c.x, c.y, 15.0 + lv * 100.0), z);
+      float d = segDist(p, a0, a1, t);
+      float r = 9.0 + 9.0 * t + lv * 6.0;
+      float shaft = exp(-d * d / (r * r)) * (1.0 - 0.55 * t);
+      vec2 q = p - a1;
+      sum += shaft * pow(lv, 0.55) * (0.35 + 1.25 * caustic(q * 0.9 + vec2(float(j) * 7.0), uTime));
+    }
+    addLight(acc, pool, sum * (dk ? 1.05 : 0.45));
+  }
+  // The fluid glows in proportion to its weight; empty glass catches a slow sweep of light.
+  if (m.b > 0.5) {
+    for (int j = 0; j < 8; j++) {
+      vec4 s = uColS[j];
+      float dx = (vb.x - s.x) / s.w;
+      if (abs(dx) < 1.05 && vb.y > s.y - s.w * 0.5) {
+        float lv = uCol[j].z;
+        float inF = smoothstep(s.z - 1.5, s.z + 1.5, vb.y);
+        float streak = pow(0.5 + 0.5 * sin(dx * 6.0 + vb.y * 0.22 - uTime * 2.4), 6.0);
+        addLight(acc, glow, inF * pow(lv, 0.75) * (0.18 + 0.5 * streak) * (1.0 - dx * dx * 0.7));
+        addLight(acc, glow, (1.0 - inF) * exp(-pow(dx - 0.6 * sin(uTime * 0.45 + float(j)), 2.0) * 16.0) * 0.35);
+      }
+    }
+  }
+  // Pulses run along the manifold from the reservoir; faster while the weights are shifting.
+  if (m.g > 0.5) {
+    float t; float d = segDist(vb, uPipe.xy, uPipe.zw, t);
+    float L = length(uPipe.zw - uPipe.xy);
+    float pu = pow(0.5 + 0.5 * cos(t * L * 0.22 - uTime * (3.0 + 6.0 * uPour)), 8.0) * (0.35 + uPour) * step(d, 10.0);
+    addLight(acc, dk ? glow : pool, pu * 0.8);
+  }
+  gl_FragColor = acc;
+}`;
+  const canvas = document.createElement("canvas");
+  canvas.className = "light"; canvas.setAttribute("aria-hidden", "true");
+  fig.appendChild(canvas);
+  let lightLayer = null, mode = "svg", lightRaf = 0;
+  const hintEl = document.querySelector(".plate .bl"), hint0 = hintEl ? hintEl.textContent : "";
+  function lightFrame(now) {
+    lightRaf = 0;
+    if (mode !== "webgl" || !lightLayer) return;
+    if (!visible) { lightRaf = requestAnimationFrame(lightFrame); return; }
+    if (lightLayer.size()) lightLayer.mask();
+    const colsW = [], colsS = [];
+    let pour = 0;
+    for (let j = 0; j < N; j++) {
+      const lv = cur.a[j];
+      colsW.push(SX(j), GL.y, lv, cur.shut[j] > 0.5 ? 1 : 0);
+      const b = cam.p(SX(j), GL.y, GL.z), t = cam.p(SX(j), GL.y, GL.z + GL.h), fl = cam.p(SX(j), GL.y, GL.z + Math.max(0.002, lv) * GL.h);
+      colsS.push(b[0], t[1], fl[1], GL.r * cam.k);
+      pour += Math.abs(cur.a[j] - (tgt ? tgt.a[j] : 0));
+    }
+    const pa = cam.p(60, PIPE.y, PIPE.z), pb = cam.p(SX(N - 1) + 14, PIPE.y, PIPE.z);
+    lightLayer.set("uCol", colsW); lightLayer.set("uColS", colsS);
+    lightLayer.set("uPipe", [pa[0], pa[1], pb[0], pb[1]]); lightLayer.set("uPour", Math.min(1, pour * 2));
+    lightLayer.draw(cam, reduce.matches ? 2 : now / 1000, K.live.isDark());
+    if (!reduce.matches) lightRaf = requestAnimationFrame(lightFrame);
+  }
+  function setMode(m) {
+    mode = m;
+    fig.classList.toggle("mode-webgl", m === "webgl");
+    fig.classList.toggle("mode-3d", m === "3d");
+    if (m !== "3d" && (stage.az !== -24 || stage.el !== 30)) { mount(-24, 30); paint(); }
+    if (m === "webgl") {
+      try { lightLayer = lightLayer || K.live.light({ canvas, svg, W, H, frag: LIGHT_FRAG, maskCss: MASK_CSS }); } catch (e) { lightLayer = null; console.warn(e); }
+      if (lightLayer) { lightLayer.size(); lightLayer.mask().then(() => { if (!lightRaf) lightRaf = requestAnimationFrame(lightFrame); }); }
+    }
+    if (hintEl) hintEl.textContent = m === "3d" ? "Drag to turn the bench · double-click to reset · Shift + arrows to turn" : hint0;
+    views.set(m);
+  }
+  const MASK_CSS = `.floor .t-top { fill: #f00 !important; } .pad .t-top { fill: #800 !important; }
+    .pipe .f { fill: #0f0 !important; stroke: #0f0 !important; }
+    .glass-back, .glass-front { fill: #00f !important; stroke: #00f !important; }`;
+  const views = K.live.views(document.getElementById("views"), {
+    modes: [{ id: "svg", label: "SVG" }, { id: "webgl", label: "WebGL", ok: K.live.webglOK() }, { id: "3d", label: "3D" }],
+    current: "svg", onSelect: setMode,
+  });
+  let turnPending = null;
+  const orb = K.live.orbit(fig, {
+    az0: -24, el0: 30, azRange: [-62, 62], elRange: [12, 68], enabled: () => mode === "3d",
+    onTurn(az, el) {
+      if (turnPending) { turnPending = [az, el]; return; }
+      turnPending = [az, el];
+      requestAnimationFrame(() => { const [a, e] = turnPending; turnPending = null; mount(a, e); paint(); });
+    },
+  });
+  fig.addEventListener("keydown", (e) => {
+    if (mode !== "3d" || !e.shiftKey) return;
+    const m = { ArrowLeft: [-6, 0], ArrowRight: [6, 0], ArrowUp: [0, -4], ArrowDown: [0, 4] }[e.key];
+    if (m) { orb.nudge(...m); e.stopImmediatePropagation(); e.preventDefault(); }
+  }, true);
+  new ResizeObserver(() => { if (mode === "webgl" && lightLayer && lightLayer.size()) lightLayer.mask(); }).observe(fig);
+  const kickLight = () => { if (mode === "webgl" && !lightRaf) lightRaf = requestAnimationFrame(lightFrame); };
+  window.Plate.view = (m) => setMode(m);
+  window.Plate.light = () => lightLayer;
+  window.Plate.turn = (az, el) => { setMode("3d"); mount(az, el); paint(); };
+  listeners.push(kickLight);
 
   target();
   if (reduce.matches) { Object.assign(cur, JSON.parse(JSON.stringify(tgt)), { a: tgt.a.slice(), sc: tgt.sc.slice(), shut: tgt.shut.slice() }); paint(); }

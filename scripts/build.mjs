@@ -11,7 +11,7 @@ const read = (p) => readFileSync(p, "utf8").replace(/<\/script/gi, "<\\/script")
 let html = readFileSync(join(dir, "page.html"), "utf8");
 html = html
   .replace("/*CSS*/", () => readFileSync(join(root, "kit/folio-page.css"), "utf8"))
-  .replace("/*KIT*/", () => read(join(root, "kit/folio-kit.js")))
+  .replace("/*KIT*/", () => read(join(root, "kit/folio-kit.js")) + "\n" + read(join(root, "kit/folio-live.js")))
   .replace("/*MODEL*/", () => read(join(dir, "model.js")))
   .replace("/*PLATE*/", () => read(join(dir, "plate.js")))
   .replace("/*PAGE*/", () => read(join(dir, "page.js")));

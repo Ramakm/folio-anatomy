@@ -11,7 +11,9 @@
   const pts = [];
   for (const x of [-10, 790]) for (const y of [-10, 306]) for (const z of [-44, 0]) pts.push([x, y, z]);
   pts.push([330, 14, 214], [660, 170, 224], [110, 170, 190], [385, 50, 210]);
-  const cam = K.fit({ az: -24, el: 30 }, pts, W, HT, 20);
+  const svg = document.getElementById("plate-svg");
+  const stage = K.live.stage({ svg, W, H: HT, az: -24, el: 30, points: pts, center: [390, 150, 60], pad: 20, build });
+  let cam = stage.base;
 
   // Geometry
   const RA = { x: 230, y: 170, z: 100, r: 17, h: 50, vmax: 100 };
@@ -26,15 +28,18 @@
   const LZ = 118; // height of the lung stand
   const GMAX = { RA: 20, RV: 40, LV: 160, LA: 20, SA: 160 };
 
-  const order = [];
-  const S = (s) => order.push(s);
-  const slot = (n) => order.push({ slot: n });
-  const flowPaths = []; // {id, d, q}
+  let S, slot, flowPaths = [], segs = [], facing = 0;
+  const acZ = 12 + 112 + 12.6; // the aortic gauge face, on top of the air chamber
+  const CTRL = { x: 738, hr: 92, ct: 168, vs: 240 };
+  const VS_ANG = [215, 270, 325];
 
   /* A blood vessel: rods with elbow balls; a dashed flow line rides on top, in the same slot of the order. */
   function vessel(points, r, kind, flowKey, o = {}) {
     let s = "";
-    for (let i = 0; i < points.length - 1; i++) s += rod(cam, points[i], points[i + 1], r, { seg: 20, sideCls: kind, capCls: kind + "-cap", cap: false });
+    for (let i = 0; i < points.length - 1; i++) {
+      s += rod(cam, points[i], points[i + 1], r, { seg: 20, sideCls: kind, capCls: kind + "-cap", cap: false });
+      if (flowKey) segs.push({ a: points[i], b: points[i + 1], kind, key: flowKey, r, rev: !!o.rev, first: i === 0 });
+    }
     for (let i = 1; i < points.length - 1; i++) s += ball(cam, points[i], r * 1.18, { cls: kind + "-ball" });
     if (flowKey) {
       const id = "fl" + flowPaths.length;
@@ -46,7 +51,6 @@
   }
 
   /* A glass cylinder with a slot for its contents. */
-  const facing = Math.atan2(cam.view[1], cam.view[0]) / (Math.PI / 180);
   function glass(c, name, ticks = 10) {
     S(drum(cam, c.x, c.y, c.z - 4, c.r + 4, 4, { cls: "collar" }));
     S(rod(cam, [c.x, c.y, c.z], [c.x, c.y, c.z + c.h], c.r, { sideCls: "glass-back", capCls: "glass-back", hatch: false }));
@@ -58,15 +62,23 @@
       `<path class="ln grad" d="${d}"/><path class="ln glint-line" d="${line(cam, [c.x + c.r * Math.cos(t), c.y + c.r * Math.sin(t), c.z + 4], [c.x + c.r * Math.cos(t), c.y + c.r * Math.sin(t), c.z + c.h - 5])}"/></g>`);
   }
 
+  /* ---------- the scene, for any camera ---------- */
+  function build(c, api) {
+  cam = c; S = api.S; slot = api.slot; flowPaths = []; segs = [];
+  facing = Math.atan2(cam.view[1], cam.view[0]) / (Math.PI / 180);
+  const far = (arr) => (api.leftIsFar ? arr : arr.slice().reverse());
+
   /* ---------- plinth ---------- */
   for (const [x, y] of [[10, 10], [770, 10], [10, 290], [770, 290]]) S(drum(cam, x, y, -44, 8, 8, { cls: "foot" }));
   S(box(cam, -6, -6, -36, 792, 312, 8, { hatch: 2.6 }));
-  S(box(cam, 0, 0, -28, 780, 300, 28, { hatch: 2.2, groove: 7 }));
+  S(box(cam, 0, 0, -28, 780, 300, 28, { hatch: 2.2, groove: 7, cls: "floor" }));
   for (const [x, y] of [[16, 16], [764, 16], [16, 284], [764, 284]]) S(screw(cam, x, y, 0, 3));
   S(box(cam, 270, 300, -22, 240, 1.4, 16, { cls: "brass" }));
   S(faceText(cam, [390, 301.5, -11.4], [1, 0, 0], [0, 0, -1], "FOLIO · PLATE II · THE HUMAN HEART", 5.4));
   S(faceText(cam, [390, 301.5, -17.6], [1, 0, 0], [0, 0, -1], "A DOUBLE PUMP · FOUR CHAMBERS · FOUR VALVES · TWO CIRCUITS", 3.4, { cls: "engr lo" }));
   for (const sx of [276, 504]) { const p = cam.p(sx, 301.5, -14); S(`<circle class="dot" cx="${f(p[0])}" cy="${f(p[1])}" r="${f(1.1 * cam.k)}"/>`); }
+
+  if (!api.leftIsFar) controls();
 
   /* ---------- behind the lungs: pulmonary artery descender, pulmonary vein riser ---------- */
   S(vessel([[330, 14, 200], [330, 14, LZ + 3.5], [330, 25, LZ + 3.5]], 4.2, "venous", "pulv"));
@@ -82,50 +94,60 @@
   S(vessel([[485, 55, LZ + 3.5], [LA.x, 55, LZ + 3.5], [LA.x, 55, 132], [LA.x, LA.y - LA.r + 1, 132]], 4.2, "arterial", "pv"));
 
   /* ---------- heart band, far to near ---------- */
-  // Venous reservoir: the great veins and the blood they hold.
-  S(box(cam, VR.x - 36, VR.y - 36, 0, 72, 72, 8, { groove: 3 }));
-  glass(VR, "vr", 10);
-  S(drum(cam, VR.x, VR.y, VR.z + VR.h, VR.r + 2, 5, { cls: "capd" }));
-  // Right atrium on its stand.
-  S(box(cam, RA.x - 17, RA.y - 17, 0, 34, 34, 96, { hatch: 2.4 }));
-  glass(RA, "ra", 5);
-  S(drum(cam, RA.x, RA.y, RA.z + RA.h, RA.r + 2, 4, { cls: "capd" }));
-  // Tricuspid valve.
-  S(vessel([[RA.x + RA.r - 1, RA.y, 106], [RV.x - RV.r + 1, RV.y, 106]], 4, "venous", "tri"));
-  S(box(cam, 268, 161, 97, 16, 18, 18, { cls: "housing" }));
-  slot("vtri");
-  // Right ventricle.
-  S(box(cam, RV.x - 32, RV.y - 30, 0, 64, 60, 20, { groove: 3, hatch: 2.4 }));
-  glass(RV, "rv", 18);
-  S(drum(cam, RV.x, RV.y, RV.z + RV.h, RV.r + 2, 6, { cls: "capd" }));
-  S(box(cam, RV.x - 10, RV.y - 10, 136, 20, 20, 10, { cls: "housing" }));
-  slot("vpulv");
-  S(vessel([[RV.x, RV.y, 146], [RV.x, RV.y, 200]], 4.2, "venous", "pulv"));
-  // Left ventricle.
-  S(box(cam, LV.x - 32, LV.y - 30, 0, 64, 60, 20, { groove: 3, hatch: 2.4 }));
-  glass(LV, "lv", 18);
-  S(drum(cam, LV.x, LV.y, LV.z + LV.h, LV.r + 2, 6, { cls: "capd" }));
-  S(box(cam, LV.x - 10, LV.y - 10, 136, 20, 20, 10, { cls: "housing" }));
-  slot("vaov");
-  S(vessel([[LV.x, LV.y, 146], [LV.x, LV.y, 210]], 5, "arterial", "aov"));
-  // Mitral valve.
-  S(vessel([[LV.x + LV.r - 1, LV.y, 106], [LA.x - LA.r + 1, LA.y, 106]], 4, "arterial", "mit", { rev: true }));
-  S(box(cam, 476, 161, 97, 16, 18, 18, { cls: "housing" }));
-  slot("vmit");
-  // Left atrium on its stand.
-  S(box(cam, LA.x - 17, LA.y - 17, 0, 34, 34, 96, { hatch: 2.4 }));
-  glass(LA, "la", 5);
-  S(drum(cam, LA.x, LA.y, LA.z + LA.h, LA.r + 2, 4, { cls: "capd" }));
-  // Aortic air chamber: the elastic arteries, a windkessel.
-  S(box(cam, AC.x - 34, AC.y - 34, 0, 68, 68, 8, { groove: 3 }));
-  glass(AC, "ac", 16);
-  S(drum(cam, AC.x, AC.y, AC.z + AC.h, AC.r + 1, 4, { cls: "capd" }));
-  S(drum(cam, AC.x, AC.y, AC.z + AC.h + 4, AC.r - 6, 3));
-  S(drum(cam, AC.x, AC.y, AC.z + AC.h + 7, GAUGE.r + 2, 3));
-  S(drum(cam, AC.x, AC.y, AC.z + AC.h + 10, GAUGE.r, 2.5, { capCls: "t-face" }));
-  const acZ = AC.z + AC.h + 12.6;
-  gaugeFace(AC.x, AC.y, acZ, GMAX.SA);
-  slot("gSA");
+  const units = [
+    () => { // venous reservoir: the great veins and the blood they hold
+      S(box(cam, VR.x - 36, VR.y - 36, 0, 72, 72, 8, { groove: 3 }));
+      glass(VR, "vr", 10);
+      S(drum(cam, VR.x, VR.y, VR.z + VR.h, VR.r + 2, 5, { cls: "capd" }));
+    },
+    () => { // right atrium on its stand
+      S(box(cam, RA.x - 17, RA.y - 17, 0, 34, 34, 96, { hatch: 2.4 }));
+      glass(RA, "ra", 5);
+      S(drum(cam, RA.x, RA.y, RA.z + RA.h, RA.r + 2, 4, { cls: "capd" }));
+    },
+    () => { // tricuspid valve
+      S(vessel([[RA.x + RA.r - 1, RA.y, 106], [RV.x - RV.r + 1, RV.y, 106]], 4, "venous", "tri"));
+      S(box(cam, 268, 161, 97, 16, 18, 18, { cls: "housing" }));
+      slot("vtri");
+    },
+    () => { // right ventricle
+      S(box(cam, RV.x - 32, RV.y - 30, 0, 64, 60, 20, { groove: 3, hatch: 2.4 }));
+      glass(RV, "rv", 18);
+      S(drum(cam, RV.x, RV.y, RV.z + RV.h, RV.r + 2, 6, { cls: "capd" }));
+      S(box(cam, RV.x - 10, RV.y - 10, 136, 20, 20, 10, { cls: "housing" }));
+      slot("vpulv");
+      S(vessel([[RV.x, RV.y, 146], [RV.x, RV.y, 200]], 4.2, "venous", "pulv"));
+    },
+    () => { // left ventricle
+      S(box(cam, LV.x - 32, LV.y - 30, 0, 64, 60, 20, { groove: 3, hatch: 2.4 }));
+      glass(LV, "lv", 18);
+      S(drum(cam, LV.x, LV.y, LV.z + LV.h, LV.r + 2, 6, { cls: "capd" }));
+      S(box(cam, LV.x - 10, LV.y - 10, 136, 20, 20, 10, { cls: "housing" }));
+      slot("vaov");
+      S(vessel([[LV.x, LV.y, 146], [LV.x, LV.y, 210]], 5, "arterial", "aov"));
+    },
+    () => { // mitral valve
+      S(vessel([[LV.x + LV.r - 1, LV.y, 106], [LA.x - LA.r + 1, LA.y, 106]], 4, "arterial", "mit", { rev: true }));
+      S(box(cam, 476, 161, 97, 16, 18, 18, { cls: "housing" }));
+      slot("vmit");
+    },
+    () => { // left atrium on its stand
+      S(box(cam, LA.x - 17, LA.y - 17, 0, 34, 34, 96, { hatch: 2.4 }));
+      glass(LA, "la", 5);
+      S(drum(cam, LA.x, LA.y, LA.z + LA.h, LA.r + 2, 4, { cls: "capd" }));
+    },
+    () => { // aortic air chamber: the elastic arteries, a windkessel
+      S(box(cam, AC.x - 34, AC.y - 34, 0, 68, 68, 8, { groove: 3 }));
+      glass(AC, "ac", 16);
+      S(drum(cam, AC.x, AC.y, AC.z + AC.h, AC.r + 1, 4, { cls: "capd" }));
+      S(drum(cam, AC.x, AC.y, AC.z + AC.h + 4, AC.r - 6, 3));
+      S(drum(cam, AC.x, AC.y, AC.z + AC.h + 7, GAUGE.r + 2, 3));
+      S(drum(cam, AC.x, AC.y, AC.z + AC.h + 10, GAUGE.r, 2.5, { capCls: "t-face" }));
+      gaugeFace(AC.x, AC.y, acZ, GMAX.SA);
+      slot("gSA");
+    },
+  ];
+  far(units).forEach((u) => u());
 
   /* ---------- high vessels: above everything in the heart band ---------- */
   S(vessel([[VR.x, VR.y, VR.z + VR.h + 5], [VR.x, VR.y, 176], [RA.x, RA.y, 176], [RA.x, RA.y, RA.z + RA.h + 4]], 5.2, "venous", "sv"));
@@ -141,7 +163,7 @@
     for (let v = 0; v <= max + 1e-6; v += stp / 2) (Math.round(v / stp) * stp === v ? mj : mn).push(ang(v));
     S(`<path class="ln lo" d="${radialTicks(cam, x, y, z, 8.6, 10, mn)}"/><path class="ln mid" d="${radialTicks(cam, x, y, z, 7.4, 10, mj)}${arcPath(cam, x, y, z, 10, 180, 360, 24)}"/>`);
   }
-  for (const [c, X] of [["RA", RA.x], ["RV", RV.x], ["LV", LV.x], ["LA", LA.x]]) {
+  for (const [c, X] of far([["RA", RA.x], ["RV", RV.x], ["LV", LV.x], ["LA", LA.x]])) {
     S(box(cam, X - 17, GAUGE.y - 14, 0, 34, 28, 6, { groove: 2 }));
     S(faceText(cam, [X, GAUGE.y + 14.2, 1.6], [1, 0, 0], [0, 0, -1], c + " · 0–" + GMAX[c], 3.4, { cls: "engr lo" }));
     S(drum(cam, X, GAUGE.y, 6, GAUGE.r + 2.5, 3));
@@ -154,7 +176,7 @@
   S(vessel([[VR.x, VR.y + VR.r - 2, 10], [VR.x, BODY.v, 10]], 4.6, "venous", "sys", { rev: true }));
   S(vessel([[AC.x, AC.y + AC.r - 2, 10], [AC.x, BODY.a, 10], [BODY.x0 - 10, BODY.a, 10]], 4.6, "arterial", "sys"));
   S(box(cam, BODY.x0 - 14, BODY.a + 6, 0, BODY.x1 - BODY.x0 + 28, BODY.v - BODY.a - 12, 3, { groove: 2.5 }));
-  for (let i = 0; i < BODY.n; i++) {
+  for (const i of far([...Array(BODY.n).keys()])) {
     const x = BODY.x0 + ((BODY.x1 - BODY.x0) * i) / (BODY.n - 1), mid = (BODY.a + BODY.v) / 2;
     S(rod(cam, [x, BODY.a, BODY.z], [x, mid, BODY.z], 1.6, { seg: 10, sideCls: "arterial", cap: false }));
     S(rod(cam, [x, mid, BODY.z], [x, BODY.v, BODY.z], 1.6, { seg: 10, sideCls: "venous", cap: false }));
@@ -163,10 +185,13 @@
     S(`<path id="${id}" class="flow thin" d="${path([cam.p(x, BODY.a, BODY.z + 1), cam.p(x, BODY.v, BODY.z + 1)], false)}"/>`);
   }
   S(vessel([[VR.x, BODY.v, 10], [BODY.x1 + 10, BODY.v, 10]], 4.6, "venous", "sys", { rev: true }));
-  S(faceText(cam, [(BODY.x0 + BODY.x1) / 2, BODY.v + 4.8, 6], [1, 0, 0], [0, 0, -1], "", 3));
+
+  if (api.leftIsFar) controls();
+  slot("pins");
+  }
 
   /* ---------- controls ---------- */
-  const CTRL = { x: 738, hr: 92, ct: 168, vs: 240 };
+  function controls() {
   S(box(cam, CTRL.x - 26, CTRL.hr - 24, 0, 52, 48, 3, { groove: 2.5 }));
   {
     const tk = [], tm = [];
@@ -184,7 +209,6 @@
   }
   slot("kCT");
   S(box(cam, CTRL.x - 26, CTRL.vs - 24, 0, 52, 48, 3, { groove: 2.5 }));
-  const VS_ANG = [215, 270, 325];
   S(`<path class="ln mid" d="${radialTicks(cam, CTRL.x, CTRL.vs, 3, 15, 18.5, VS_ANG)}"/>`);
   ["N", "AS", "MR"].forEach((l, i) => {
     const t = (VS_ANG[i] * Math.PI) / 180;
@@ -192,7 +216,7 @@
   });
   S(faceText(cam, [CTRL.x, CTRL.vs + 21, 3], [1, 0, 0], [0, 1, 0], "VALVES", 3.2, { cls: "engr lo" }));
   slot("kVS");
-  slot("pins");
+  }
 
   /* ---------- live drawing ---------- */
   function contents(c, V, kind, piston) {
@@ -280,17 +304,21 @@
   };
 
   /* ---------- mount ---------- */
-  const svg = document.getElementById("plate-svg");
-  svg.setAttribute("viewBox", `0 0 ${W} ${HT}`);
-  let html = "", run = "";
-  for (const it of order) {
-    if (typeof it === "string") run += it;
-    else { html += run; run = ""; html += `<g data-slot="${it.slot}"></g>`; }
+  let slots = {}, flowEls = [], segScreen = [];
+  const keyOff = {};
+  function mount(az, el) {
+    cam = stage.mount(az, el); slots = stage.slots;
+    flowEls = flowPaths.map((fp) => ({ ...fp, el: document.getElementById(fp.id) }));
+    // vessel segments on screen, each with its distance along its vessel, for the light layer
+    let run = 0;
+    segScreen = segs.map((g) => {
+      const a = cam.p(g.a), b = cam.p(g.b), len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      if (g.first) run = 0;
+      const o = { a, b, start: run, len, kind: g.kind === "arterial" ? 1 : 0, key: g.key, r: g.r * cam.k + 1.2, rev: g.rev };
+      run += len; return o;
+    });
   }
-  svg.innerHTML = html + run;
-  const slots = {};
-  svg.querySelectorAll("[data-slot]").forEach((g) => (slots[g.dataset.slot] = g));
-  const flowEls = flowPaths.map((fp) => ({ ...fp, el: document.getElementById(fp.id), off: 0 }));
+  mount(-24, 30);
 
   /* ---------- simulation ---------- */
   const ui = { HR: 72, contract: 1, fault: "normal", speed: 1, playing: true, breath: 0.5 };
@@ -301,6 +329,14 @@
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   let visible = true, raf = 0, last = 0, tBreath = 0;
 
+  function dashes() {
+    for (const fl of flowEls) {
+      if (!fl.el) continue;
+      const off = (keyOff[fl.q] || 0) * (fl.per ? 2.2 / fl.per : 0.06) * (fl.rev ? -1 : 1);
+      fl.el.style.strokeDashoffset = off.toFixed(2);
+      fl.el.style.opacity = Math.abs(cur.Q[fl.q] || 0) > 0.5 ? 1 : 0.15;
+    }
+  }
   function paint() {
     for (const k in draw) if (slots[k]) slots[k].innerHTML = draw[k](cur, ui);
   }
@@ -316,12 +352,8 @@
     tBreath += simT;
     ui.breath = 0.5 - 0.5 * Math.cos((2 * Math.PI * tBreath) / (60 / 14));
     // flow marks: offset by the volume that passed, so the dashes move at the true flow speed
-    for (const fl of flowEls) {
-      const q = Math.max(-200, Math.min(600, cur.Q[fl.q] || 0)) / (fl.per || 1);
-      fl.off -= (q * simT * (fl.per ? 2.2 : 0.06)) * (fl.rev ? -1 : 1);
-      fl.el.style.strokeDashoffset = fl.off.toFixed(2);
-      fl.el.style.opacity = Math.abs(cur.Q[fl.q] || 0) > 0.5 ? 1 : 0.15;
-    }
+    for (const k of ["sv", "tri", "pulv", "pv", "mit", "aov", "sys"]) keyOff[k] = (keyOff[k] || 0) - Math.max(-200, Math.min(600, cur.Q[k] || 0)) * simT;
+    dashes();
   }
   function finishBeat() {
     if (beatRec.length > 20) {
@@ -386,6 +418,147 @@
     e.preventDefault();
   });
   new IntersectionObserver((es) => (visible = es[0].isIntersecting)).observe(fig);
+
+  /* ---------- three views: SVG, WebGL, 3D ---------- */
+  const NSEG = 28;
+  const LIGHT_FRAG = `
+uniform vec4 uSegA[${NSEG}]; uniform vec4 uSegB[${NSEG}]; uniform float uSegShift[${NSEG}]; uniform float uNSeg;
+uniform vec4 uCh[6]; uniform vec4 uChS[6]; uniform float uChE[6];
+void main() {
+  vec2 vb = vbOf(); vec4 m = maskAt();
+  vec4 acc = vec4(0.0);
+  bool dk = uDark > 0.5;
+  vec3 art = dk ? vec3(1.0, 0.42, 0.30) : vec3(0.86, 0.26, 0.14);
+  vec3 ven = dk ? vec3(0.50, 0.58, 1.0) : vec3(0.28, 0.33, 0.62);
+  vec3 hiA = dk ? vec3(1.0, 0.78, 0.66) : vec3(1.0, 0.86, 0.8);
+  vec3 hiV = dk ? vec3(0.80, 0.85, 1.0) : vec3(0.88, 0.9, 1.0);
+  // Blood pulses travel along the vessels at the true flow.
+  if (m.g > 0.5) {
+    float best = 0.0; float kind = 0.0;
+    for (int i = 0; i < ${NSEG}; i++) {
+      if (float(i) >= uNSeg) break;
+      vec4 A = uSegA[i], B = uSegB[i];
+      float t; float d = segDist(vb, A.xy, A.zw, t);
+      if (d < B.w) {
+        float along = B.x + t * B.y + uSegShift[i];
+        float pu = pow(0.5 + 0.5 * cos(along * 0.36), 10.0) * (1.0 - d / B.w * 0.6);
+        if (pu > best) { best = pu; kind = B.z; }
+      }
+    }
+    addLight(acc, kind > 0.5 ? hiA : hiV, best * (dk ? 0.85 : 0.75));
+  }
+  // Each chamber throws light of its blood's colour onto the bench in front of it.
+  if (m.r > 0.5) {
+    vec2 p = onPlane(vb, 0.0);
+    for (int j = 0; j < 6; j++) {
+      vec4 c = uCh[j];
+      float t;
+      float d = segDist(p, c.xy + vec2(0.0, 12.0), fall(vec3(c.x, c.y, c.z), 0.0), t);
+      float r = 12.0 + 12.0 * t;
+      float e = uChE[j];
+      float sh = exp(-d * d / (r * r)) * (1.0 - 0.5 * t) * e;
+      vec2 q = p - c.xy;
+      float cs = 0.35 + 1.2 * caustic(q * 0.8 + vec2(float(j) * 5.0), uTime);
+      addLight(acc, c.w > 0.5 ? art : ven, sh * cs * (dk ? 0.9 : 0.4));
+    }
+  }
+  // Glass glows with its contents; the ventricles flare as they squeeze.
+  if (m.b > 0.5) {
+    for (int j = 0; j < 6; j++) {
+      vec4 s = uChS[j];
+      float dx = (vb.x - s.x) / s.w;
+      if (abs(dx) < 1.05 && vb.y > s.y - s.w * 0.5) {
+        float inF = uCh[j].z > 0.0 ? 1.0 : 0.0;
+        float streak = pow(0.5 + 0.5 * sin(dx * 5.0 + vb.y * 0.2 - uTime * 2.0), 6.0);
+        float within = s.z > 0.0 ? smoothstep(s.z + 1.5, s.z - 1.5, vb.y) : smoothstep(-s.z - 1.5, -s.z + 1.5, vb.y);
+        addLight(acc, uCh[j].w > 0.5 ? hiA : hiV, within * (0.12 + 0.35 * streak + 0.5 * uChE[j]) * (1.0 - dx * dx * 0.7) * inF);
+      }
+    }
+  }
+  gl_FragColor = acc;
+}`;
+  const canvas = document.createElement("canvas");
+  canvas.className = "light"; canvas.setAttribute("aria-hidden", "true");
+  fig.appendChild(canvas);
+  let lightLayer = null, mode = "svg", lightRaf = 0;
+  const hintEl = document.querySelector(".plate .bl"), hint0 = hintEl ? hintEl.textContent : "";
+  const CHAMBERS = [
+    { c: VR, kind: 0, level: (r) => (r.V.SV - H.P0.SV.V0) / 620, piston: false },
+    { c: RA, kind: 0, level: (r) => r.V.RA / RA.vmax, piston: true, act: "a" },
+    { c: RV, kind: 0, level: (r) => r.V.RV / RV.vmax, piston: true, act: "v" },
+    { c: LV, kind: 1, level: (r) => r.V.LV / LV.vmax, piston: true, act: "v" },
+    { c: LA, kind: 1, level: (r) => r.V.LA / LA.vmax, piston: true, act: "a" },
+    { c: AC, kind: 1, level: (r) => 0.12 + (Math.max(0, r.P.SA) / 160) * 0.8, piston: false },
+  ];
+  function lightFrame(now) {
+    lightRaf = 0;
+    if (mode !== "webgl" || !lightLayer) return;
+    if (!visible) { lightRaf = requestAnimationFrame(lightFrame); return; }
+    if (lightLayer.size()) lightLayer.mask();
+    const A = [], B = [], Sh = [];
+    for (let i = 0; i < NSEG; i++) {
+      const g = segScreen[i];
+      if (!g) { A.push(0, 0, 0, 0); B.push(0, 0, 0, 0); Sh.push(0); continue; }
+      A.push(g.a[0], g.a[1], g.b[0], g.b[1]); B.push(g.start, g.len, g.kind, g.r);
+      Sh.push((keyOff[g.key] || 0) * 0.06 * (g.rev ? -1 : 1));
+    }
+    const ch = [], chS = [], chE = [];
+    const act = cur.act || { v: 0, a: 0 };
+    for (const k of CHAMBERS) {
+      const c = k.c, lv = Math.max(0, Math.min(1, k.level(cur)));
+      const top = c.z + c.h, zF = k.piston ? top - lv * c.h : c.z + lv * c.h;
+      ch.push(c.x, c.y, (k.piston ? top : zF) + 0.0001, k.kind);
+      const b = cam.p(c.x, c.y, c.z), t = cam.p(c.x, c.y, top), f = cam.p(c.x, c.y, zF);
+      chS.push(b[0], t[1], k.piston ? f[1] : -f[1], c.r * cam.k);
+      chE.push(Math.min(1, 0.35 + 0.65 * lv + (k.act ? act[k.act] * 0.6 : 0)));
+    }
+    lightLayer.set("uSegA", A); lightLayer.set("uSegB", B);
+    lightLayer.set("uSegShift", new Float32Array(Sh));
+    lightLayer.set("uNSeg", Math.min(NSEG, segScreen.length));
+    lightLayer.set("uCh", ch); lightLayer.set("uChS", chS);
+    lightLayer.set("uChE", new Float32Array(chE));
+    lightLayer.draw(cam, reduce.matches ? 2 : now / 1000, K.live.isDark());
+    if (!reduce.matches) lightRaf = requestAnimationFrame(lightFrame);
+  }
+  const MASK_CSS = `.floor .t-top { fill: #f00 !important; }
+    .arterial, .venous, .arterial-ball .f, .venous-ball .f, .arterial-cap, .venous-cap { fill: #0f0 !important; stroke: #0f0 !important; }
+    .glass-back, .glass-front { fill: #00f !important; stroke: #00f !important; }`;
+  function setMode(m) {
+    mode = m;
+    fig.classList.toggle("mode-webgl", m === "webgl");
+    fig.classList.toggle("mode-3d", m === "3d");
+    if (m !== "3d" && (stage.az !== -24 || stage.el !== 30)) { mount(-24, 30); paint(); }
+    if (m === "webgl") {
+      try { lightLayer = lightLayer || K.live.light({ canvas, svg, W, H: HT, frag: LIGHT_FRAG, maskCss: MASK_CSS }); } catch (e) { lightLayer = null; console.warn(e); }
+      if (lightLayer) { lightLayer.size(); lightLayer.mask().then(() => { if (!lightRaf) lightRaf = requestAnimationFrame(lightFrame); }); }
+    }
+    if (hintEl) hintEl.textContent = m === "3d" ? "Drag to turn the bench · double-click to reset · Shift + arrows to turn" : hint0;
+    views.set(m);
+  }
+  const views = K.live.views(document.getElementById("views"), {
+    modes: [{ id: "svg", label: "SVG" }, { id: "webgl", label: "WebGL", ok: K.live.webglOK() }, { id: "3d", label: "3D" }],
+    current: "svg", onSelect: setMode,
+  });
+  let turnPending = null;
+  const orb = K.live.orbit(fig, {
+    az0: -24, el0: 30, azRange: [-62, 62], elRange: [12, 68], enabled: () => mode === "3d",
+    onTurn(az, el) {
+      if (turnPending) { turnPending = [az, el]; return; }
+      turnPending = [az, el];
+      requestAnimationFrame(() => { const [a, e] = turnPending; turnPending = null; mount(a, e); paint(); dashes(); });
+    },
+  });
+  fig.addEventListener("keydown", (e) => {
+    if (mode !== "3d" || !e.shiftKey) return;
+    const d = { ArrowLeft: [-6, 0], ArrowRight: [6, 0], ArrowUp: [0, -4], ArrowDown: [0, 4] }[e.key];
+    if (d) { orb.nudge(...d); e.stopImmediatePropagation(); e.preventDefault(); }
+  }, true);
+  new ResizeObserver(() => { if (mode === "webgl" && lightLayer && lightLayer.size()) lightLayer.mask(); }).observe(fig);
+  Object.assign(window.Plate, {
+    view: (m) => setMode(m),
+    turn: (az, el) => { setMode("3d"); mount(az, el); paint(); dashes(); },
+    light: () => lightLayer,
+  });
 
   if (reduce.matches) { ui.playing = false; stillAt(0.18); }
   else { const r0 = H.settle(H.make(ui), 10); lastBeat = { ...r0, HR: ui.HR }; paint(); raf = requestAnimationFrame(frame); }

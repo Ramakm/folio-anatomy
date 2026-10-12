@@ -35,11 +35,30 @@ Both plates live on one website, with a cover page for the collection. It is in 
 
 <br>
 
+## Three views of every plate
+
+Each plate has a switch in its top corner: **SVG · WebGL · 3D**.
+
+<table>
+<tr>
+<td width="33%" valign="top"><img src="docs/img/view-svg.png" alt="Plate II in the SVG view"></td>
+<td width="33%" valign="top"><img src="docs/img/view-webgl.png" alt="Plate II in the WebGL view, dark theme, with glowing vessels and light on the bench"></td>
+<td width="33%" valign="top"><img src="docs/img/view-3d.png" alt="Plate I in the 3D view, turned to show the bench from the left"></td>
+</tr>
+<tr>
+<td valign="top"><b>SVG</b><br><sub>The engraved drawing: solid parts, tones by facing, hatching that follows the shade.</sub></td>
+<td valign="top"><b>WebGL</b><br><sub>Light over the drawing. Pulses run along vessels at the true flow, fluid glows with its value, and rippled light falls across the bench. A mask rendered from the drawing keeps the light off anything hidden.</sub></td>
+<td valign="top"><b>3D</b><br><sub>Drag to turn the bench. Every part is re-projected, re-shaded and re-ordered from the new angle. Double-click to reset.</sub></td>
+</tr>
+</table>
+
+<br>
+
 ## I. The idea
 
 Most technical diagrams are boxes and arrows. They name the parts but leave the motion to your imagination.
 
-A Folio plate turns the idea into an instrument whose working parts carry it out, then mounts that instrument the way a museum would. Each part gets a numbered pin, a catalogue key says what each pin computes, and four wall texts walk through the math with live numbers.
+A Folio plate turns the idea into an instrument whose working parts carry it out, then mounts that instrument the way a museum would. You can read it as an engraving, light it with WebGL, or turn it in 3D. Each part gets a numbered pin, a catalogue key says what each pin computes, and four wall texts walk through the math with live numbers.
 
 In Plate I, eight glass columns stand for eight words. A sealed reservoir holds exactly one unit of fluid and shares it between the columns by softmax, so the columns always sum to one because the reservoir never holds more. The shares settle as layers in a tray, and the length of each layer is that word's attention weight.
 
@@ -192,6 +211,7 @@ To add your own plate to the site, add its name to `PLATES` in `scripts/build-si
 ```
 SKILL.md                 the skill: commitments, four phases, plate grammar, style, library
 kit/folio-kit.js         the drawing library: camera, engraved boxes and cylinders, glass, pins, text
+kit/folio-live.js        the three views: stage, WebGL light layer, orbit, view switch
 kit/folio-page.css       the shared exhibition styles: mount, key, wall texts, both themes
 examples/attention/      Plate I: model.js, plate.js, page.html, page.js
 examples/heart/          Plate II: a lumped-parameter model of the circulation and its bench
