@@ -15,28 +15,9 @@ Internal components that actually rotate, shift, and interact, not just static v
 
 <br>
 
-## The collection
+## The Results
 
-<table>
-<tr>
-<td width="50%" valign="top"><a href="docs/attention.html"><img src="docs/img/plate-i-light.png" alt="Plate I: attention as an assay bench"></a></td>
-<td width="50%" valign="top"><a href="docs/heart.html"><img src="docs/img/plate-ii-light.png" alt="Plate II: the human heart as a double pump"></a></td>
-</tr>
-<tr>
-<td valign="top"><b>Plate I · Attention, as an assay bench</b><br><sub>Machine learning. A sealed reservoir pours one unit of attention between eight words by softmax. Flow wheels turn in the manifold as the weights shift. Four heads, a temperature knob and a causal mask.</sub></td>
-<td valign="top"><b>Plate II · The heart, as a double pump</b><br><sub>Physiology. Four piston chambers, four valves, two circuits and turning timing cams, run by a live model of the circulation. Slow it down, speed it up, or give it a narrowed or leaking valve.</sub></td>
-</tr>
-<tr>
-<td width="50%" valign="top"><a href="docs/grid.html"><img src="docs/img/plate-iii-light.png" alt="Plate III: a power grid in miniature"></a></td>
-<td width="50%" valign="top"><a href="docs/hashmap.html"><img src="docs/img/plate-iv-light.png" alt="Plate IV: a hash map as a sorting office, with a lookup card following its red probe trail"></a></td>
-</tr>
-<tr>
-<td valign="top"><b>Plate III · The grid, as a miniature</b><br><sub>Electricity. Falling water turns a wheel, a rotor's field sweeps the stator coils, transformers step the voltage up and down, and a town draws the power. Frequency, governor, line losses and protection are all simulated live.</sub></td>
-<td valign="top"><b>Plate IV · The hash map, as a sorting office</b><br><sub>Data structures. Keys are hashed with Java's own <code>hashCode</code>, folded to a bin by their low bits, and filed by a carriage on a rail. Collisions are settled by chaining, linear or quadratic probing, and the table doubles past a load of 0.75.</sub></td>
-</tr>
-</table>
-
-All four plates live on one website, with a cover page written as a short illustrated essay: **[ramakm.github.io/folio-anatomy/docs](https://ramakm.github.io/folio-anatomy/docs/)**. Its source is in [`site/`](site/) and the built site in [`docs/`](docs/) (see [VI](#vi-the-website)).
+<img width="600" height="468" alt="folio-plates" src="https://github.com/user-attachments/assets/0dab0a23-f2fc-4230-8ef8-5bef5288fd94" />
 
 <br>
 
