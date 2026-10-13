@@ -13,15 +13,6 @@ Internal components that actually rotate, shift, and interact, not just static v
 [The collection](#the-collection) · [Install](#ii-install) · [Commission a plate](#iii-commission-a-plate) · [Anatomy of a plate](#iv-anatomy-of-a-plate) · [Make your own](#v-make-your-own)
 <img width="1776" height="896" alt="Untitled design" src="https://github.com/user-attachments/assets/ee106ff7-05df-4765-a7d2-03b81f1fc639" />
 
-
-<br>
-
-<img src="docs/img/plate-i.gif" alt="Plate I: an isometric assay bench computing attention. Fluid redistributes between eight glass columns as the head, query and temperature change." width="100%">
-
-<sub><i>Plate I. Attention, as an assay bench.</i></sub>
-
-</div>
-
 <br>
 
 ## The collection
