@@ -219,51 +219,6 @@ node scripts/capture.mjs dist/kv-cache.html shots
 
 <br>
 
-## VI. The website
-
-`node scripts/build-site.mjs` builds every plate and the cover page into `docs/`:
-
-```
-docs/index.html        the cover: the collection, install, the method
-docs/attention.html    Plate I
-docs/heart.html        Plate II
-docs/grid.html         Plate III
-docs/hashmap.html      Plate IV
-docs/img/              thumbnails and README images
-```
-
-To put it online, open the repo on GitHub, go to **Settings → Pages**, and choose **Deploy from a branch → `main` → `/docs`**. The site will then be at `https://ramakm.github.io/folio-anatomy/`.
-
-To add your own plate to the site, add its name to `PLATES` in `scripts/build-site.mjs` and a card to `site/index.html`.
-
-<br>
-
-## VII. In the repository
-
-```
-SKILL.md                 the skill: commitments, four phases, plate grammar, style, library
-kit/folio-kit.js         the drawing library: camera, engraved boxes and cylinders, glass, pins, text
-kit/folio-live.js        the three views: stage, WebGL light layer, 360° orbit, inspector, loupe
-kit/folio-page.css       the shared exhibition styles: mount, key, wall texts, both themes
-kit/folio-theme.js       light by default, a remembered Dark switch shared across pages
-examples/attention/      Plate I: model.js, plate.js, page.html, page.js
-examples/heart/          Plate II: a lumped-parameter model of the circulation and its bench
-examples/grid/           Plate III: a swing-equation model of a small grid, and its bench of machines
-examples/hashmap/        Plate IV: a hash map with three ways to resolve collisions, and its sorting office
-site/index.html          the cover page of the website
-scripts/build.mjs        inline one plate into a standalone HTML file
-scripts/build-site.mjs   build the whole website into docs/
-scripts/capture.mjs      screenshots and checks
-scripts/new-plate.mjs    start a new plate from Plate I
-docs/                    the built website
-```
-
-`SKILL.md` also works on its own: the drawing library is included at the end of it as an appendix.
-
-**Requirements.** Claude Code, or any agent that reads Agent Skills. Node.js 20 or later. Playwright with Chromium, only for the screenshot checks. The drawing library has no dependencies.
-
-<br>
-
 ## Acknowledgement
 
 Folio was inspired by [Anatomy](https://github.com/wheresryan22/anatomy) by Ryan, which first showed that Claude can draw an idea as a working isometric machine. Folio is an independent project. Its code, drawing library, skill text and plates were all written from scratch, with a different focus: museum-style curation, a numbered key and wall texts, engraved shading, and a written account of what each plate simplifies.
